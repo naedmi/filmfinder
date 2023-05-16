@@ -21,6 +21,11 @@ final GoRouter _router = GoRouter(
         pageBuilder: (context, state) {
           return customPageBuilder(const ListPage(), context, state);
         }),
+    GoRoute(
+        path: routeSwipe,
+        pageBuilder: (context, state) {
+          return customPageBuilder(const Placeholder(), context, state);
+        }),
   ],
 );
 

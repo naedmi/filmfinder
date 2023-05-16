@@ -1,34 +1,46 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:remixicon/remixicon.dart';
 
+import 'common/constants.dart';
 import 'common/navigation_widget.dart';
 
+final ScrollController _controller = ScrollController();
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MainBottomBarScaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-                onPressed: () {}, icon: const Icon(CupertinoIcons.search)),
-            IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.gear)),
-          ],
-        ),
+      controller: _controller,
         body: ListView(
-          padding: const EdgeInsets.all(10),
-          shrinkWrap: true,
-          children: const [
-            OverviewScrollWidget(title: 'Neu'),
-            OverviewScrollWidget(title: 'Beliebt'),
-            OverviewScrollWidget(title: 'Empfehlungen'),
-            OverviewScrollWidget(title: 'Anti-Empfehlungen'),
-            OverviewScrollWidget(title: 'Gesehen'),
-            OverviewScrollWidget(title: 'Gehört'),
-          ],
-        ));
+          controller: _controller,
+      padding: const EdgeInsets.all(10),
+      shrinkWrap: true,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: padding),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Remix.search_line,
+                  )),
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Remix.settings_line)),
+            ],
+          ),
+        ),
+        const OverviewScrollWidget(title: 'Neu'),
+        const OverviewScrollWidget(title: 'Beliebt'),
+        const OverviewScrollWidget(title: 'Empfehlungen'),
+        const OverviewScrollWidget(title: 'Anti-Empfehlungen'),
+        const OverviewScrollWidget(title: 'Gesehen'),
+        const OverviewScrollWidget(title: 'Gehört'),
+      ],
+    ));
   }
 }
 

@@ -1,10 +1,13 @@
 import 'package:filmfinder/view/common/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
+import 'package:remixicon/remixicon.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
-  const BottomNavigationWidget({Key? key}) : super(key: key);
+  final ScrollController? controller;
+
+  const BottomNavigationWidget({Key? key, this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class BottomNavigationWidget extends StatelessWidget {
     return BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: paddingSmall,
-        elevation: paddingSmall,
+        elevation: elevation,
         surfaceTintColor: Theme.of(context).canvasColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -22,11 +25,15 @@ class BottomNavigationWidget extends StatelessWidget {
               onPressed: () {
                 if (!isHome) {
                   context.push(routeHome);
+                } else {
+                  controller?.animateTo(0,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOut);
                 }
               },
               icon: Icon(
-                isHome ? Icons.home : Icons.home_outlined,
-                size: paddingBig,
+                isHome ? Remix.home_fill : Remix.home_line,
+                size: padding + paddingTiny,
               ),
             ),
             const SizedBox(width: padding),
@@ -37,8 +44,8 @@ class BottomNavigationWidget extends StatelessWidget {
                   }
                 },
                 icon: Icon(
-                  isList ? Icons.bookmark : Icons.bookmark_outline,
-                  size: paddingBig,
+                  isList ? Remix.bookmark_fill : Remix.bookmark_line,
+                  size: padding + paddingTiny,
                 )),
           ],
         ));
@@ -47,10 +54,11 @@ class BottomNavigationWidget extends StatelessWidget {
 
 class MainBottomBarScaffold extends StatelessWidget {
   final Widget body;
-  final AppBar appBar;
+  final AppBar? appBar;
+  final ScrollController? controller;
 
   const MainBottomBarScaffold(
-      {super.key, required this.body, required this.appBar});
+      {super.key, required this.body, this.appBar, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -74,28 +82,31 @@ class MainBottomBarScaffold extends StatelessWidget {
             width: mainActionButtonWidth,
             height: mainActionButtonWidth,
             child: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                context.push(routeSwipe);
+              },
+              backgroundColor: Colors.transparent,
               elevation: paddingSmall,
               shape: const CircleBorder(),
-              child: GradientDecoration(
-                width: mainActionButtonWidth,
-                height: mainActionButtonWidth,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Padding(
-                    padding: EdgeInsets.only(left: paddingSmall / 2),
-                    child: Icon(
-                      CupertinoIcons.play_arrow_solid,
-                      size: mainActionButtonWidth - paddingBig,
-                    ),
+              child: Animate(
+                effects: const [
+                  ShimmerEffect(
+                    delay: Duration(milliseconds: 250),
+                    duration: Duration(milliseconds: 500),
                   ),
+                ],
+                child: const GradientDecoration(
+                  width: mainActionButtonWidth,
+                  height: mainActionButtonWidth,
+                  child: Icon(Remix.play_fill,
+                      size: mainActionButtonWidth - padding - paddingSmall),
                 ),
               ),
             ),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          bottomNavigationBar: const BottomNavigationWidget(),
+          bottomNavigationBar: BottomNavigationWidget(controller: controller),
           body: body),
     );
   }

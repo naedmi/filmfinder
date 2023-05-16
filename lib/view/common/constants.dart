@@ -2,26 +2,29 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const borderRadiusBig = 20.0;
-const borderRadius = 10.0;
-const borderRadiusSmall = 5.0;
+const borderRadiusBig = 24.0;
+const borderRadius = 12.0;
+const borderRadiusSmall = 6.0;
 const routes = [
   '/',
   '/list',
+  '/swipe',
 ];
 
 final routeHome = routes[0];
 final routeList = routes[1];
+final routeSwipe = routes[2];
 
-const mainActionButtonHeight = 100.0;
-const mainActionButtonWidth = 100.0;
+const mainActionButtonHeight = 96.0;
+const mainActionButtonWidth = 96.0;
 
-const paddingBig = 40.0;
-const paddingMedium = 20.0;
-const paddingSmall = 10.0;
-const paddingTiny = 5.0;
+const paddingBig = 48.0;
+const paddingMedium = 24.0;
+const paddingSmall = 12.0;
+const paddingTiny = 6.0;
 const padding = paddingMedium;
 
+const elevation = paddingSmall;
 
 final theme = FlexThemeData.light(
   scheme: FlexScheme.deepBlue,
