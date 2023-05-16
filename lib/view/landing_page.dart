@@ -1,27 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'common/navigation_widget.dart';
+
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MainBottomBarScaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           actions: [
             IconButton(
                 onPressed: () {}, icon: const Icon(CupertinoIcons.search)),
             IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.gear)),
-          ],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.home), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.book), label: 'Bibliothek'),
-            BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.person), label: 'Profil'),
           ],
         ),
         body: ListView(
