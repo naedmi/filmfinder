@@ -9,11 +9,13 @@ const routes = [
   '/',
   '/list',
   '/swipe',
+  '/search',
 ];
 
 final routeHome = routes[0];
 final routeList = routes[1];
 final routeSwipe = routes[2];
+final routeSearch = routes[3];
 
 const mainActionButtonHeight = 96.0;
 const mainActionButtonWidth = 96.0;

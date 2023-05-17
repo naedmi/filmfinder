@@ -1,46 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:remixicon/remixicon.dart';
 
 import 'common/constants.dart';
 import 'common/navigation_widget.dart';
 
 final ScrollController _controller = ScrollController();
+
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MainBottomBarScaffold(
-      controller: _controller,
+        controller: _controller,
         body: ListView(
           controller: _controller,
-      padding: const EdgeInsets.all(10),
-      shrinkWrap: true,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: padding),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Remix.search_line,
-                  )),
-              IconButton(
-                  onPressed: () {}, icon: const Icon(Remix.settings_line)),
-            ],
-          ),
-        ),
-        const OverviewScrollWidget(title: 'Neu'),
-        const OverviewScrollWidget(title: 'Beliebt'),
-        const OverviewScrollWidget(title: 'Empfehlungen'),
-        const OverviewScrollWidget(title: 'Anti-Empfehlungen'),
-        const OverviewScrollWidget(title: 'Gesehen'),
-        const OverviewScrollWidget(title: 'Gehört'),
-      ],
-    ));
+          padding: const EdgeInsets.all(10),
+          shrinkWrap: true,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: padding),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        context.push(routeSearch);
+                      },
+                      icon: const Icon(
+                        Remix.search_line,
+                      )),
+                  IconButton(
+                      onPressed: () {}, icon: const Icon(Remix.settings_line)),
+                ],
+              ),
+            ),
+            const OverviewScrollWidget(title: 'Neu'),
+            const OverviewScrollWidget(title: 'Beliebt'),
+            const OverviewScrollWidget(title: 'Empfehlungen'),
+            const OverviewScrollWidget(title: 'Anti-Empfehlungen'),
+            const OverviewScrollWidget(title: 'Gesehen'),
+            const OverviewScrollWidget(title: 'Gehört'),
+          ],
+        ));
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:filmfinder/view/common/constants.dart';
 import 'package:filmfinder/view/common/navigation_widget.dart';
 import 'package:filmfinder/view/landing_page.dart';
 import 'package:filmfinder/view/list_page.dart';
+import 'package:filmfinder/view/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,6 +26,11 @@ final GoRouter _router = GoRouter(
         path: routeSwipe,
         pageBuilder: (context, state) {
           return customPageBuilder(const Placeholder(), context, state);
+        }),
+    GoRoute(
+        path: routeSearch,
+        pageBuilder: (context, state) {
+          return customPageBuilder(const SearchPage(), context, state);
         }),
   ],
 );
