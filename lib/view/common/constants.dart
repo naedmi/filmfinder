@@ -17,8 +17,8 @@ final routeList = routes[1];
 final routeSwipe = routes[2];
 final routeSearch = routes[3];
 
-const mainActionButtonHeight = 96.0;
-const mainActionButtonWidth = 96.0;
+const mainActionButtonHeight = 84.0;
+const mainActionButtonWidth = 84.0;
 
 const paddingBig = 48.0;
 const paddingMedium = 24.0;
