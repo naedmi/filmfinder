@@ -6,7 +6,7 @@ part of 'search_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchSearchResultHash() => r'efb199c562ace55672aa3b4a12fa03e30c112cd5';
+String _$fetchSearchResultHash() => r'a1563b3f9d6cf32cd4924e8174b41c3fb581b146';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -43,17 +43,9 @@ class FetchSearchResultFamily extends Family<AsyncValue<SearchResponse>> {
   /// See also [fetchSearchResult].
   FetchSearchResultProvider call({
     required String query,
-    String type = 'movie',
-    bool adult = false,
-    String language = 'en-US',
-    int page = 1,
   }) {
     return FetchSearchResultProvider(
       query: query,
-      type: type,
-      adult: adult,
-      language: language,
-      page: page,
     );
   }
 
@@ -63,10 +55,6 @@ class FetchSearchResultFamily extends Family<AsyncValue<SearchResponse>> {
   ) {
     return call(
       query: provider.query,
-      type: provider.type,
-      adult: provider.adult,
-      language: provider.language,
-      page: provider.page,
     );
   }
 
@@ -91,18 +79,10 @@ class FetchSearchResultProvider
   /// See also [fetchSearchResult].
   FetchSearchResultProvider({
     required this.query,
-    this.type = 'movie',
-    this.adult = false,
-    this.language = 'en-US',
-    this.page = 1,
   }) : super.internal(
           (ref) => fetchSearchResult(
             ref,
             query: query,
-            type: type,
-            adult: adult,
-            language: language,
-            page: page,
           ),
           from: fetchSearchResultProvider,
           name: r'fetchSearchResultProvider',
@@ -116,31 +96,33 @@ class FetchSearchResultProvider
         );
 
   final String query;
-  final String type;
-  final bool adult;
-  final String language;
-  final int page;
 
   @override
   bool operator ==(Object other) {
-    return other is FetchSearchResultProvider &&
-        other.query == query &&
-        other.type == type &&
-        other.adult == adult &&
-        other.language == language &&
-        other.page == page;
+    return other is FetchSearchResultProvider && other.query == query;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, query.hashCode);
-    hash = _SystemHash.combine(hash, type.hashCode);
-    hash = _SystemHash.combine(hash, adult.hashCode);
-    hash = _SystemHash.combine(hash, language.hashCode);
-    hash = _SystemHash.combine(hash, page.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
+
+String _$filterHash() => r'ca65384c5c7c11eef7d3c70ac1a7b824048fc79d';
+
+/// See also [Filter].
+@ProviderFor(Filter)
+final filterProvider = AutoDisposeNotifierProvider<Filter, Filter>.internal(
+  Filter.new,
+  name: r'filterProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$filterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Filter = AutoDisposeNotifier<Filter>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

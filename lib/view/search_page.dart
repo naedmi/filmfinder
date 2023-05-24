@@ -19,10 +19,17 @@ class SearchPageState extends ConsumerState<SearchPage> {
 
   AsyncValue<SearchResponse> searchResponse = const AsyncValue.loading();
   String query = '';
+  Filter filter = Filter();
+
+  @override
+  void setState(VoidCallback fn) {
+    super.setState(fn);
+  }
 
   @override
   Widget build(BuildContext context) {
     searchResponse = ref.watch(fetchSearchResultProvider(query: query));
+    filter = ref.watch(filterProvider);
     return MainBottomBarScaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -64,85 +71,55 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     height: paddingBig,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.only(top: paddingTiny),
                       children: [
+                        InputChip(
+                            label: Text(capitalise(filter.type)),
+                            shape: chipShape,
+                            side: chipSite,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.surfaceVariant,
+                            onPressed: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return ListView.separated(
+                                      shrinkWrap: true,
+                                      padding: const EdgeInsets.all(padding),
+                                      itemCount: SearchType.values.length,
+                                      itemBuilder: (context, index) => ListTile(
+                                        horizontalTitleGap: padding,
+                                        trailing: filter.type ==
+                                                SearchType.values[index].name
+                                            ? const Icon(Remix.check_line)
+                                            : null,
+                                        title: Text(capitalise(
+                                            SearchType.values[index].name)),
+                                        onTap: () {
+                                          ref
+                                              .read(filterProvider.notifier)
+                                              .setType(SearchType
+                                                  .values[index].name);
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      separatorBuilder:
+                                          (BuildContext context, int index) =>
+                                              const Divider(),
+                                    );
+                                  });
+                            }),
+                        const Divider(indent: paddingTiny),
                         FilterChip(
-                          label: const Text('Genre'),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(borderRadiusBig),
-                            ),
-                          ),
-                          avatar: const Icon(Remix.film_line),
-                          side: const BorderSide(
-                            color: Colors.transparent,
-                          ),
+                          label: const Text('Adult'),
+                          shape: chipShape,
+                          side: chipSite,
                           backgroundColor:
                               Theme.of(context).colorScheme.surfaceVariant,
+                          selected: filter.adult,
                           onSelected: (bool value) {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: const Text('Genre'),
-                                    content: const Text('Genre'),
-                                    actions: [
-                                      TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text('OK'))
-                                    ],
-                                  );
-                                });
+                            ref.read(filterProvider.notifier).setAdult(value);
                           },
-                        ),
-                        const SizedBox(width: paddingTiny),
-                        FilterChip(
-                          label: const Text('Blabla'),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(borderRadiusBig),
-                            ),
-                          ),
-                          avatar: const Icon(Remix.blaze_line),
-                          side: const BorderSide(
-                            color: Colors.transparent,
-                          ),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.surfaceVariant,
-                          onSelected: (bool value) {},
-                        ),
-                        const SizedBox(width: paddingTiny),
-                        FilterChip(
-                          label: const Text('Age'),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(borderRadiusBig),
-                            ),
-                          ),
-                          avatar: const Icon(Remix.a_b),
-                          side: const BorderSide(
-                            color: Colors.transparent,
-                          ),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.surfaceVariant,
-                          onSelected: (bool value) {},
-                        ),
-                        const SizedBox(width: paddingTiny),
-                        FilterChip(
-                          label: const Text('Service'),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(borderRadiusBig),
-                            ),
-                          ),
-                          avatar: const Icon(Remix.amazon_line),
-                          side: const BorderSide(
-                            color: Colors.transparent,
-                          ),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.surfaceVariant,
-                          onSelected: (bool value) {},
                         ),
                       ],
                     ),
@@ -153,15 +130,14 @@ class SearchPageState extends ConsumerState<SearchPage> {
           )),
       body: searchResponse.when(
           data: (res) => res.results.isNotEmpty
-              ? ListView(
+              ? ListView.separated(
                   padding: const EdgeInsets.only(
-                      left: padding,
-                      top: padding,
-                      right: padding,
-                      bottom: paddingBig * 2),
-                  children: res.results
-                      .map((e) => SearchResultWidget(res: e))
-                      .toList(),
+                      left: padding, right: padding, bottom: paddingBig * 2),
+                  itemBuilder: (context, index) =>
+                      SearchResultWidget(res: res.results[index]),
+                  itemCount: res.results.length,
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const Divider(),
                 )
               : query.isNotEmpty
                   ? const Align(
@@ -217,6 +193,10 @@ class SearchPageState extends ConsumerState<SearchPage> {
   }
 }
 
+capitalise(String s) {
+  return s[0].toUpperCase() + s.substring(1);
+}
+
 final OutlineInputBorder searchBarInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(borderRadiusBig),
   borderSide: const BorderSide(
@@ -259,13 +239,13 @@ class SearchResultWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        res.title!,
+                        res.title ?? res.originalTitle ?? '',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        res.releaseDate!.isNotEmpty
+                        res.releaseDate?.isNotEmpty ?? false
                             ? DateTime.parse(res.releaseDate!).year.toString()
                             : '',
                       ),
@@ -295,7 +275,7 @@ class SearchResultWidget extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(borderRadiusBig),
             child: CachedNetworkImage(
-              imageUrl: 'https://image.tmdb.org/t/p/w500/${res.posterPath}',
+              imageUrl: poster(path: res.posterPath ?? ''),
               fit: BoxFit.cover,
               width: MediaQuery.of(context).size.width / 3 + paddingSmall,
               height: MediaQuery.of(context).size.width / 3 + paddingBig * 2,

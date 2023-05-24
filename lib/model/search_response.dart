@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'search_response.freezed.dart';
 part 'search_response.g.dart';
 
+// TODO: Find smart way to implement tv/person/movie responses in one class
 @freezed
 class SearchResponse with _$SearchResponse {
   // ignore: invalid_annotation_target
