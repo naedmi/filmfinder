@@ -22,6 +22,8 @@ SearchResponse _$SearchResponseFromJson(Map<String, dynamic> json) {
 mixin _$SearchResponse {
   int get page => throw _privateConstructorUsedError;
   List<SearchResult> get results => throw _privateConstructorUsedError;
+  int get totalPages => throw _privateConstructorUsedError;
+  int get totalResults => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +37,8 @@ abstract class $SearchResponseCopyWith<$Res> {
           SearchResponse value, $Res Function(SearchResponse) then) =
       _$SearchResponseCopyWithImpl<$Res, SearchResponse>;
   @useResult
-  $Res call({int page, List<SearchResult> results});
+  $Res call(
+      {int page, List<SearchResult> results, int totalPages, int totalResults});
 }
 
 /// @nodoc
@@ -53,6 +56,8 @@ class _$SearchResponseCopyWithImpl<$Res, $Val extends SearchResponse>
   $Res call({
     Object? page = null,
     Object? results = null,
+    Object? totalPages = null,
+    Object? totalResults = null,
   }) {
     return _then(_value.copyWith(
       page: null == page
@@ -63,6 +68,14 @@ class _$SearchResponseCopyWithImpl<$Res, $Val extends SearchResponse>
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<SearchResult>,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalResults: null == totalResults
+          ? _value.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -75,7 +88,8 @@ abstract class _$$_SearchResponseCopyWith<$Res>
       __$$_SearchResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int page, List<SearchResult> results});
+  $Res call(
+      {int page, List<SearchResult> results, int totalPages, int totalResults});
 }
 
 /// @nodoc
@@ -91,6 +105,8 @@ class __$$_SearchResponseCopyWithImpl<$Res>
   $Res call({
     Object? page = null,
     Object? results = null,
+    Object? totalPages = null,
+    Object? totalResults = null,
   }) {
     return _then(_$_SearchResponse(
       page: null == page
@@ -101,6 +117,14 @@ class __$$_SearchResponseCopyWithImpl<$Res>
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
               as List<SearchResult>,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalResults: null == totalResults
+          ? _value.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -110,7 +134,10 @@ class __$$_SearchResponseCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_SearchResponse implements _SearchResponse {
   const _$_SearchResponse(
-      {required this.page, required final List<SearchResult> results})
+      {required this.page,
+      required final List<SearchResult> results,
+      required this.totalPages,
+      required this.totalResults})
       : _results = results;
 
   factory _$_SearchResponse.fromJson(Map<String, dynamic> json) =>
@@ -127,8 +154,13 @@ class _$_SearchResponse implements _SearchResponse {
   }
 
   @override
+  final int totalPages;
+  @override
+  final int totalResults;
+
+  @override
   String toString() {
-    return 'SearchResponse(page: $page, results: $results)';
+    return 'SearchResponse(page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
   }
 
   @override
@@ -137,13 +169,17 @@ class _$_SearchResponse implements _SearchResponse {
         (other.runtimeType == runtimeType &&
             other is _$_SearchResponse &&
             (identical(other.page, page) || other.page == page) &&
-            const DeepCollectionEquality().equals(other._results, _results));
+            const DeepCollectionEquality().equals(other._results, _results) &&
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
+            (identical(other.totalResults, totalResults) ||
+                other.totalResults == totalResults));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, page, const DeepCollectionEquality().hash(_results));
+  int get hashCode => Object.hash(runtimeType, page,
+      const DeepCollectionEquality().hash(_results), totalPages, totalResults);
 
   @JsonKey(ignore: true)
   @override
@@ -162,7 +198,9 @@ class _$_SearchResponse implements _SearchResponse {
 abstract class _SearchResponse implements SearchResponse {
   const factory _SearchResponse(
       {required final int page,
-      required final List<SearchResult> results}) = _$_SearchResponse;
+      required final List<SearchResult> results,
+      required final int totalPages,
+      required final int totalResults}) = _$_SearchResponse;
 
   factory _SearchResponse.fromJson(Map<String, dynamic> json) =
       _$_SearchResponse.fromJson;
@@ -171,6 +209,10 @@ abstract class _SearchResponse implements SearchResponse {
   int get page;
   @override
   List<SearchResult> get results;
+  @override
+  int get totalPages;
+  @override
+  int get totalResults;
   @override
   @JsonKey(ignore: true)
   _$$_SearchResponseCopyWith<_$_SearchResponse> get copyWith =>

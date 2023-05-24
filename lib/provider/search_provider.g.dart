@@ -6,7 +6,7 @@ part of 'search_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchSearchResultHash() => r'b07fbcc7048cde566ef9dfaf349b6a381a75bb47';
+String _$fetchSearchResultHash() => r'efb199c562ace55672aa3b4a12fa03e30c112cd5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -41,11 +41,19 @@ class FetchSearchResultFamily extends Family<AsyncValue<SearchResponse>> {
   const FetchSearchResultFamily();
 
   /// See also [fetchSearchResult].
-  FetchSearchResultProvider call(
-    String search,
-  ) {
+  FetchSearchResultProvider call({
+    required String query,
+    String type = 'movie',
+    bool adult = false,
+    String language = 'en-US',
+    int page = 1,
+  }) {
     return FetchSearchResultProvider(
-      search,
+      query: query,
+      type: type,
+      adult: adult,
+      language: language,
+      page: page,
     );
   }
 
@@ -54,7 +62,11 @@ class FetchSearchResultFamily extends Family<AsyncValue<SearchResponse>> {
     covariant FetchSearchResultProvider provider,
   ) {
     return call(
-      provider.search,
+      query: provider.query,
+      type: provider.type,
+      adult: provider.adult,
+      language: provider.language,
+      page: provider.page,
     );
   }
 
@@ -77,12 +89,20 @@ class FetchSearchResultFamily extends Family<AsyncValue<SearchResponse>> {
 class FetchSearchResultProvider
     extends AutoDisposeFutureProvider<SearchResponse> {
   /// See also [fetchSearchResult].
-  FetchSearchResultProvider(
-    this.search,
-  ) : super.internal(
+  FetchSearchResultProvider({
+    required this.query,
+    this.type = 'movie',
+    this.adult = false,
+    this.language = 'en-US',
+    this.page = 1,
+  }) : super.internal(
           (ref) => fetchSearchResult(
             ref,
-            search,
+            query: query,
+            type: type,
+            adult: adult,
+            language: language,
+            page: page,
           ),
           from: fetchSearchResultProvider,
           name: r'fetchSearchResultProvider',
@@ -95,17 +115,30 @@ class FetchSearchResultProvider
               FetchSearchResultFamily._allTransitiveDependencies,
         );
 
-  final String search;
+  final String query;
+  final String type;
+  final bool adult;
+  final String language;
+  final int page;
 
   @override
   bool operator ==(Object other) {
-    return other is FetchSearchResultProvider && other.search == search;
+    return other is FetchSearchResultProvider &&
+        other.query == query &&
+        other.type == type &&
+        other.adult == adult &&
+        other.language == language &&
+        other.page == page;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, search.hashCode);
+    hash = _SystemHash.combine(hash, query.hashCode);
+    hash = _SystemHash.combine(hash, type.hashCode);
+    hash = _SystemHash.combine(hash, adult.hashCode);
+    hash = _SystemHash.combine(hash, language.hashCode);
+    hash = _SystemHash.combine(hash, page.hashCode);
 
     return _SystemHash.finish(hash);
   }

@@ -5,10 +5,13 @@ part 'search_response.g.dart';
 
 @freezed
 class SearchResponse with _$SearchResponse {
+  // ignore: invalid_annotation_target
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory SearchResponse({
     required int page,
     required List<SearchResult> results,
+    required int totalPages,
+    required int totalResults,
   }) = _SearchResponse;
 
   factory SearchResponse.fromJson(Map<String, dynamic> json) =>
@@ -17,6 +20,7 @@ class SearchResponse with _$SearchResponse {
 
 @freezed
 class SearchResult with _$SearchResult {
+  // ignore: invalid_annotation_target
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory SearchResult({
     required bool? adult,

@@ -1,11 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:filmfinder/model/search_response.dart';
 import 'package:filmfinder/provider/search_provider.dart';
 import 'package:filmfinder/view/common/constants.dart';
+import 'package:filmfinder/view/common/navigation_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
-
-import 'common/navigation_widget.dart';
 
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    searchResponse = ref.watch(fetchSearchResultProvider(query));
+    searchResponse = ref.watch(fetchSearchResultProvider(query: query));
     return MainBottomBarScaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -233,57 +233,80 @@ class SearchResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(paddingTiny),
-      child: Card(
+      child: Stack(alignment: AlignmentDirectional.centerStart, children: [
+        Card(
           child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.width / 3 +
-                paddingBig +
-                paddingSmall,
-            width: MediaQuery.of(context).size.width / 3,
-            child: res.posterPath != null
-                ? Image.network(
-                    'https://image.tmdb.org/t/p/w500/${res.posterPath}',
-                    fit: BoxFit.cover,
-                  )
-                : const Icon(Remix.image_2_line, size: 100),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(paddingSmall),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.width / 3 +
-                  paddingBig -
-                  paddingSmall * 2,
-              width: MediaQuery.of(context).size.width / 3 * 2 -
-                  paddingBig * 2 -
-                  paddingSmall * 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    res.title!,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    res.releaseDate!,
-                  ),
-                  const Spacer(),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Icon(
-                      Remix.heart_line,
-                    ),
-                  ),
-                ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.width / 3 +
+                    paddingBig +
+                    paddingSmall,
+                width: MediaQuery.of(context).size.width / 3,
+                child: const SizedBox(),
               ),
+              Padding(
+                padding: const EdgeInsets.all(paddingSmall),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.width / 3 +
+                      paddingBig -
+                      paddingSmall * 2,
+                  width: MediaQuery.of(context).size.width / 3 * 2 -
+                      paddingBig * 2 -
+                      paddingSmall * 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        res.title!,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        res.releaseDate!.isNotEmpty
+                            ? DateTime.parse(res.releaseDate!).year.toString()
+                            : '',
+                      ),
+                      const Spacer(),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Remix.heart_line,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Material(
+          elevation: elevation,
+          borderRadius: BorderRadius.circular(borderRadiusBig),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(borderRadiusBig),
+            child: CachedNetworkImage(
+              imageUrl: 'https://image.tmdb.org/t/p/w500/${res.posterPath}',
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width / 3 + paddingSmall,
+              height: MediaQuery.of(context).size.width / 3 + paddingBig * 2,
+              placeholder: (context, url) =>
+                  const Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) =>
+                  const Icon(Remix.image_2_line, size: 100),
             ),
           ),
-        ],
-      )),
+        ),
+      ]),
     );
   }
 }
