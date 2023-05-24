@@ -1,15 +1,31 @@
+import 'package:filmfinder/model/search_response.dart';
 import 'package:filmfinder/view/common/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../main.dart';
 import 'common/navigation_widget.dart';
 
-class SearchPage extends StatelessWidget {
+part 'search_page.g.dart';
+
+class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
   @override
+  ConsumerState<SearchPage> createState() => SearchPageState();
+}
+
+class SearchPageState extends ConsumerState<SearchPage> {
+  final textController = TextEditingController();
+
+  AsyncValue<SearchResponse> searchResponse = const AsyncValue.loading();
+  String query = '';
+
+  @override
   Widget build(BuildContext context) {
-    final textController = TextEditingController();
+    searchResponse = ref.watch(fetchSearchResultProvider(query));
     return MainBottomBarScaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -23,10 +39,21 @@ class SearchPage extends StatelessWidget {
                 children: [
                   TextField(
                     controller: textController,
+                    autofocus: true,
+                    onSubmitted: (String value) {
+                      setState(() {
+                        query = textController.text;
+                      });
+                    },
                     decoration: InputDecoration(
                       hintText: 'Search',
                       suffixIcon: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                          setState(() {
+                            query = textController.text;
+                          });
+                        },
                         icon: const Icon(Remix.search_line),
                       ),
                       contentPadding:
@@ -127,28 +154,68 @@ class SearchPage extends StatelessWidget {
               ),
             ),
           )),
-      body: ListView(
-        padding: const EdgeInsets.all(padding),
-        children: const [
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SearchResultWidget(),
-          SizedBox(height: paddingBig * 2)
-        ],
-      ),
+      body: searchResponse.when(
+          data: (res) => res.results.isNotEmpty
+              ? ListView(
+                  padding: const EdgeInsets.only(
+                      left: padding,
+                      top: padding,
+                      right: padding,
+                      bottom: paddingBig * 2),
+                  children: res.results
+                      .map((e) => SearchResultWidget(res: e))
+                      .toList(),
+                )
+              : query.isNotEmpty
+                  ? const Align(
+                      alignment: Alignment.topCenter,
+                      child: Card(
+                        child: Padding(
+                          padding: EdgeInsets.all(padding),
+                          child: Text('No results found'),
+                        ),
+                      ),
+                    )
+                  : const Align(
+                      alignment: Alignment.topCenter,
+                      child: Card(
+                        child: SizedBox(
+                          height: paddingBig * 4,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(Remix.search_eye_line,
+                                  size: paddingBig + padding),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: paddingBig,
+                                    right: paddingBig,
+                                    top: padding),
+                                child: Text('Enter something to search...'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+          error: (err, stack) => Align(
+                alignment: Alignment.topCenter,
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(padding),
+                    child: Text('Could not load data: ${err.toString()}'),
+                  ),
+                ),
+              ),
+          loading: () => const Align(
+                alignment: Alignment.topCenter,
+                child: Card(
+                    child: Padding(
+                  padding: EdgeInsets.all(padding),
+                  child: CircularProgressIndicator(),
+                )),
+              )),
     );
   }
 }
@@ -161,7 +228,9 @@ final OutlineInputBorder searchBarInputBorder = OutlineInputBorder(
 );
 
 class SearchResultWidget extends StatelessWidget {
-  const SearchResultWidget({Key? key}) : super(key: key);
+  final SearchResult res;
+
+  const SearchResultWidget({Key? key, required this.res}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -172,12 +241,16 @@ class SearchResultWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.width / 3 + paddingBig,
+            height: MediaQuery.of(context).size.width / 3 +
+                paddingBig +
+                paddingSmall,
             width: MediaQuery.of(context).size.width / 3,
-            child: Image.network(
-              'https://image.tmdb.org/t/p/w500/6KErczPBROQty7QoIsaa6wJYXZi.jpg',
-              fit: BoxFit.cover,
-            ),
+            child: res.posterPath != null
+                ? Image.network(
+                    'https://image.tmdb.org/t/p/w500/${res.posterPath}',
+                    fit: BoxFit.cover,
+                  )
+                : const Icon(Remix.image_2_line, size: 100),
           ),
           Padding(
             padding: const EdgeInsets.all(paddingSmall),
@@ -192,15 +265,14 @@ class SearchResultWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Movie Title',
-                    style: TextStyle(
+                  Text(
+                    res.title!,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
-                    'Movie Description',
-                    style: TextStyle(),
+                  Text(
+                    res.releaseDate!,
                   ),
                   const Spacer(),
                   ElevatedButton(
@@ -217,4 +289,16 @@ class SearchResultWidget extends StatelessWidget {
       )),
     );
   }
+}
+
+@riverpod
+Future<SearchResponse> fetchSearchResult(
+    FetchSearchResultRef ref, String search) async {
+  if (search.isEmpty) return const SearchResponse(results: [], page: 0);
+
+  dynamic currentSearch = await ref.watch(dioProvider).get(
+        'https://api.themoviedb.org/3/search/movie?query=$search&include_adult=false&language=en-US&page=1',
+      );
+
+  return SearchResponse.fromJson(currentSearch.data);
 }
