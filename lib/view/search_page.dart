@@ -1,14 +1,11 @@
 import 'package:filmfinder/model/search_response.dart';
+import 'package:filmfinder/provider/search_provider.dart';
 import 'package:filmfinder/view/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../main.dart';
 import 'common/navigation_widget.dart';
-
-part 'search_page.g.dart';
 
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -289,16 +286,4 @@ class SearchResultWidget extends StatelessWidget {
       )),
     );
   }
-}
-
-@riverpod
-Future<SearchResponse> fetchSearchResult(
-    FetchSearchResultRef ref, String search) async {
-  if (search.isEmpty) return const SearchResponse(results: [], page: 0);
-
-  dynamic currentSearch = await ref.watch(dioProvider).get(
-        'https://api.themoviedb.org/3/search/movie?query=$search&include_adult=false&language=en-US&page=1',
-      );
-
-  return SearchResponse.fromJson(currentSearch.data);
 }

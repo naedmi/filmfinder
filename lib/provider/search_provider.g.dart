@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'search_page.dart';
+part of 'search_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchSearchResultHash() => r'11624d774fbfb0b0254760d4a4e581e3a56f9a12';
+String _$fetchSearchResultHash() => r'b07fbcc7048cde566ef9dfaf349b6a381a75bb47';
 
 /// Copied from Dart SDK
 class _SystemHash {
