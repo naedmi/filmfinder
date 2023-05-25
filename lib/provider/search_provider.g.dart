@@ -111,7 +111,7 @@ class FetchSearchResultProvider
   }
 }
 
-String _$filterHash() => r'ca65384c5c7c11eef7d3c70ac1a7b824048fc79d';
+String _$filterHash() => r'ca2f900e9d887440a24571749807b27e1e66c55c';
 
 /// See also [Filter].
 @ProviderFor(Filter)

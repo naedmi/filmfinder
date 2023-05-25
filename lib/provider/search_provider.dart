@@ -46,35 +46,35 @@ class Filter extends _$Filter {
   void setAdult(bool value) {
     state = Filter(
       adult: value,
-      language: language,
-      page: page,
-      type: type,
+      language: state.language,
+      page: state.page,
+      type: state.type,
     );
   }
 
   void setLanguage(String value) {
     state = Filter(
-      adult: adult,
+      adult: state.adult,
       language: value,
-      page: page,
-      type: type,
+      page: state.page,
+      type: state.type,
     );
   }
 
   void setPage(int value) {
     state = Filter(
-      adult: adult,
-      language: language,
+      adult: state.adult,
+      language: state.language,
       page: value,
-      type: type,
+      type: state.type,
     );
   }
 
   void setType(String value) {
     state = Filter(
-      adult: adult,
-      language: language,
-      page: page,
+      adult: state.adult,
+      language: state.language,
+      page: state.page,
       type: value,
     );
   }

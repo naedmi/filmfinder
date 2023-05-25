@@ -51,6 +51,17 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     },
                     decoration: InputDecoration(
                       hintText: 'Search',
+                      prefixIcon: query.isNotEmpty
+                          ? IconButton(
+                              icon: const Icon(Remix.close_line),
+                              onPressed: () {
+                                textController.clear();
+                                setState(() {
+                                  query = textController.text;
+                                });
+                              },
+                            )
+                          : null,
                       suffixIcon: IconButton(
                         onPressed: () {
                           FocusScope.of(context).unfocus();
@@ -77,6 +88,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                             label: Text(capitalise(filter.type)),
                             shape: chipShape,
                             side: chipSite,
+                            avatar: const Icon(Remix.list_check),
                             backgroundColor:
                                 Theme.of(context).colorScheme.surfaceVariant,
                             onPressed: () {
@@ -100,6 +112,47 @@ class SearchPageState extends ConsumerState<SearchPage> {
                                               .read(filterProvider.notifier)
                                               .setType(SearchType
                                                   .values[index].name);
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      separatorBuilder:
+                                          (BuildContext context, int index) =>
+                                              const Divider(),
+                                    );
+                                  });
+                            }),
+                        const Divider(indent: paddingTiny),
+                        InputChip(
+                            label: Text(
+                                capitalise(searchLanguages[filter.language]!)),
+                            shape: chipShape,
+                            side: chipSite,
+                            avatar: const Icon(Remix.translate_2),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.surfaceVariant,
+                            onPressed: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return ListView.separated(
+                                      shrinkWrap: true,
+                                      padding: const EdgeInsets.all(padding),
+                                      itemCount: searchLanguages.values.length,
+                                      itemBuilder: (context, index) => ListTile(
+                                        horizontalTitleGap: padding,
+                                        trailing: filter.language ==
+                                                searchLanguages.keys
+                                                    .elementAt(index)
+                                            ? const Icon(Remix.check_line)
+                                            : null,
+                                        title: Text(capitalise(searchLanguages
+                                            .values
+                                            .elementAt(index))),
+                                        onTap: () {
+                                          ref
+                                              .read(filterProvider.notifier)
+                                              .setLanguage(searchLanguages.keys
+                                                  .elementAt(index));
                                           Navigator.pop(context);
                                         },
                                       ),

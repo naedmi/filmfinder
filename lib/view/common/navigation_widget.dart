@@ -135,7 +135,7 @@ customPageBuilder(Widget child, context, state) {
     child: child,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       return FadeTransition(
-        opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+        opacity: CurveTween(curve: Curves.linear).animate(animation),
         child: child,
       );
     },

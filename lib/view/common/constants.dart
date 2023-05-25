@@ -28,6 +28,15 @@ enum SearchType {
   multi,
 }
 
+const searchLanguages = {
+  "en-US": 'English',
+  "de-DE": 'German',
+  "fr-FR": 'French',
+  "es-ES": 'Spanish',
+  "it-IT": 'Italian',
+  "ja-JP": 'Japanese',
+};
+
 /// **************************************************************************
 
 /// Search *******************************************************************
