@@ -18,7 +18,7 @@ final routeSearch = routes[3];
 
 /// tmdb **********************************************************************
 
-poster({required String path, int width = 500}) =>
+poster({required String path, int width = 185}) =>
     'https://image.tmdb.org/t/p/w$width/$path';
 
 enum SearchType {
