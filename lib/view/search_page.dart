@@ -23,6 +23,63 @@ class SearchPageState extends ConsumerState<SearchPage> {
   Filter filter = Filter();
   DateTime _selectedDate = DateTime.now();
 
+  final OutlineInputBorder searchBarInputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(borderRadiusBig),
+    borderSide: const BorderSide(
+      color: Colors.transparent,
+    ),
+  );
+
+  _showNavigationSnackbar(
+      {required BuildContext context,
+      required SearchResponse res,
+      required bool disablePrevious,
+      required bool disableNext}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadiusBig)),
+        backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              height: padding,
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: disablePrevious
+                    ? null
+                    : () {
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        ref.read(filterProvider.notifier).setPage(res.page - 1);
+                      },
+                icon: const Icon(Remix.arrow_left_s_line),
+              ),
+            ),
+            Text(
+              'Page ${res.page} of ${res.totalPages}',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            SizedBox(
+              height: padding,
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: disableNext
+                    ? null
+                    : () {
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        ref.read(filterProvider.notifier).setPage(res.page + 1);
+                      },
+                icon: const Icon(Remix.arrow_right_s_line),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   void setState(VoidCallback fn) {
     super.setState(fn);
@@ -240,9 +297,8 @@ class SearchPageState extends ConsumerState<SearchPage> {
               ? NotificationListener<ScrollEndNotification>(
                   onNotification: (scrollEnd) {
                     if (scrollEnd.metrics.atEdge) {
-                      showNavigationSnackbar(
+                      _showNavigationSnackbar(
                         context: context,
-                        ref: ref,
                         res: res,
                         disablePrevious: res.page == 1,
                         disableNext: res.page == res.totalPages,
@@ -313,17 +369,6 @@ class SearchPageState extends ConsumerState<SearchPage> {
     );
   }
 }
-
-capitalise(String s) {
-  return s[0].toUpperCase() + s.substring(1);
-}
-
-final OutlineInputBorder searchBarInputBorder = OutlineInputBorder(
-  borderRadius: BorderRadius.circular(borderRadiusBig),
-  borderSide: const BorderSide(
-    color: Colors.transparent,
-  ),
-);
 
 class SearchResultWidget extends StatelessWidget {
   final SearchResult res;
@@ -455,50 +500,4 @@ class SearchResultWidget extends StatelessWidget {
       ]),
     );
   }
-}
-
-showNavigationSnackbar({context, ref, res, disablePrevious, disableNext}) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadiusBig)),
-      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            height: padding,
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: disablePrevious
-                  ? null
-                  : () {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      ref.read(filterProvider.notifier).setPage(res.page - 1);
-                    },
-              icon: const Icon(Remix.arrow_left_s_line),
-            ),
-          ),
-          Text(
-            'Page ${res.page} of ${res.totalPages}',
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          SizedBox(
-            height: padding,
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: disableNext
-                  ? null
-                  : () {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      ref.read(filterProvider.notifier).setPage(res.page + 1);
-                    },
-              icon: const Icon(Remix.arrow_right_s_line),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
 }

@@ -18,8 +18,10 @@ final routeSearch = routes[3];
 
 /// tmdb **********************************************************************
 
-poster({required String path, int width = 185}) =>
-    'https://image.tmdb.org/t/p/w$width/$path';
+const posterSizes = ["w92", "w154", "w185", "w342", "w500", "w780", "original"];
+
+poster({required String path, dynamic width = "w342"}) =>
+    'https://image.tmdb.org/t/p/${width is num ? 'w$width' : width}/$path';
 
 enum SearchType {
   movie,
@@ -41,6 +43,10 @@ const searchLanguages = {
 /// **************************************************************************
 
 /// Search *******************************************************************
+
+capitalise(String s) {
+  return s[0].toUpperCase() + s.substring(1);
+}
 
 const chipShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.all(
