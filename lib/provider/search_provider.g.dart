@@ -6,7 +6,7 @@ part of 'search_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchSearchResultHash() => r'a1563b3f9d6cf32cd4924e8174b41c3fb581b146';
+String _$fetchSearchResultHash() => r'430ae1744028544032cc09c711c0173bfc9528c2';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -111,7 +111,7 @@ class FetchSearchResultProvider
   }
 }
 
-String _$filterHash() => r'ca2f900e9d887440a24571749807b27e1e66c55c';
+String _$filterHash() => r'bae056ce51229ddb2514f5af103c77304262203c';
 
 /// See also [Filter].
 @ProviderFor(Filter)

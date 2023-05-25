@@ -21,6 +21,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
   AsyncValue<SearchResponse> searchResponse = const AsyncValue.loading();
   String query = '';
   Filter filter = Filter();
+  DateTime _selectedDate = DateTime.now();
 
   @override
   void setState(VoidCallback fn) {
@@ -164,6 +165,58 @@ class SearchPageState extends ConsumerState<SearchPage> {
                                   });
                             }),
                         const Divider(indent: paddingTiny),
+                        InputChip(
+                            label: Text((filter.year ?? 'Year').toString()),
+                            shape: chipShape,
+                            side: chipSite,
+                            avatar: const Icon(Remix.calendar_line),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.surfaceVariant,
+                            showCheckmark: false,
+                            selected: filter.year != null,
+                            deleteIcon: const Icon(
+                              Remix.close_line,
+                              size: paddingSmall * 1.5,
+                            ),
+                            onDeleted: filter.year != null
+                                ? () {
+                                    _selectedDate = DateTime.now();
+                                    ref
+                                        .read(filterProvider.notifier)
+                                        .setYear(null);
+                                  }
+                                : null,
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text("Select Year"),
+                                    content: SizedBox(
+                                      // Need to use container to add size constraint.
+                                      width: 300,
+                                      height: 300,
+                                      child: YearPicker(
+                                        firstDate: DateTime(1950),
+                                        lastDate: DateTime.now(),
+                                        initialDate: DateTime.now(),
+                                        selectedDate: _selectedDate,
+                                        onChanged: (DateTime dateTime) {
+                                          Navigator.pop(context);
+                                          setState(() {
+                                            _selectedDate = dateTime;
+                                            ref
+                                                .read(filterProvider.notifier)
+                                                .setYear(dateTime.year);
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            }),
+                        const Divider(indent: paddingTiny),
                         FilterChip(
                           label: const Text('Adult'),
                           shape: chipShape,
@@ -177,22 +230,36 @@ class SearchPageState extends ConsumerState<SearchPage> {
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
           )),
       body: searchResponse.when(
           data: (res) => res.results.isNotEmpty
-              ? ListView.separated(
-                  padding: const EdgeInsets.only(
-                      left: padding, right: padding, bottom: paddingBig * 2),
-                  itemBuilder: (context, index) =>
-                      SearchResultWidget(res: res.results[index]),
-                  itemCount: res.results.length,
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(),
-                )
+              ? NotificationListener<ScrollEndNotification>(
+                  onNotification: (scrollEnd) {
+                    if (scrollEnd.metrics.atEdge) {
+                      showNavigationSnackbar(
+                        context: context,
+                        ref: ref,
+                        res: res,
+                        disablePrevious: res.page == 1,
+                        disableNext: res.page == res.totalPages,
+                      );
+                    }
+                    return true;
+                  },
+                  child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.only(
+                        left: padding, right: padding, bottom: paddingBig * 2),
+                    itemBuilder: (context, index) =>
+                        SearchResultWidget(res: res.results[index]),
+                    itemCount: res.results.length,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
+                  ))
               : query.isNotEmpty
                   ? const Align(
                       alignment: Alignment.topCenter,
@@ -329,7 +396,9 @@ class SearchResultWidget extends StatelessWidget {
                               color:
                                   Theme.of(context).colorScheme.surfaceVariant,
                             ),
-                            padding: const EdgeInsets.all(paddingTiny),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: paddingSmall,
+                                horizontal: paddingSmall + paddingTiny),
                             child: Text(
                               res.releaseDate?.isNotEmpty ?? false
                                   ? DateTime.parse(res.releaseDate!)
@@ -386,4 +455,50 @@ class SearchResultWidget extends StatelessWidget {
       ]),
     );
   }
+}
+
+showNavigationSnackbar({context, ref, res, disablePrevious, disableNext}) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadiusBig)),
+      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(
+            height: padding,
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              onPressed: disablePrevious
+                  ? null
+                  : () {
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      ref.read(filterProvider.notifier).setPage(res.page - 1);
+                    },
+              icon: const Icon(Remix.arrow_left_s_line),
+            ),
+          ),
+          Text(
+            'Page ${res.page} of ${res.totalPages}',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          SizedBox(
+            height: padding,
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              onPressed: disableNext
+                  ? null
+                  : () {
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      ref.read(filterProvider.notifier).setPage(res.page + 1);
+                    },
+              icon: const Icon(Remix.arrow_right_s_line),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

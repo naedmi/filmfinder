@@ -23,9 +23,10 @@ poster({required String path, int width = 185}) =>
 
 enum SearchType {
   movie,
-  tv,
-  person,
-  multi,
+  // TODO: implement different model provider for each type
+  //tv,
+  //person,
+  //multi,
 }
 
 const searchLanguages = {
