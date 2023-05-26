@@ -14,12 +14,13 @@ class BottomNavigationWidget extends StatelessWidget {
     final isHome = GoRouter.of(context).location == routeHome;
     final isList = GoRouter.of(context).location == routeList;
     return BottomAppBar(
+        height: mainActionButtonHeight / 2 + padding,
         shape: const CircularNotchedRectangle(),
         notchMargin: paddingSmall,
         elevation: elevation,
         surfaceTintColor: Theme.of(context).canvasColor,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
               onPressed: () {
@@ -33,10 +34,9 @@ class BottomNavigationWidget extends StatelessWidget {
               },
               icon: Icon(
                 isHome ? Remix.home_fill : Remix.home_line,
-                size: padding + paddingTiny,
               ),
             ),
-            const SizedBox(width: padding),
+            const SizedBox(width: mainActionButtonWidth * 2),
             IconButton(
                 onPressed: () {
                   if (!isList) {
@@ -45,7 +45,6 @@ class BottomNavigationWidget extends StatelessWidget {
                 },
                 icon: Icon(
                   isList ? Remix.bookmark_fill : Remix.bookmark_line,
-                  size: padding + paddingTiny,
                 )),
           ],
         ));
@@ -104,6 +103,7 @@ class MainBottomBarScaffold extends StatelessWidget {
               ),
             ),
           ),
+          resizeToAvoidBottomInset: false,
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: BottomNavigationWidget(controller: controller),
@@ -135,7 +135,7 @@ customPageBuilder(Widget child, context, state) {
     child: child,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       return FadeTransition(
-        opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+        opacity: CurveTween(curve: Curves.linear).animate(animation),
         child: child,
       );
     },
