@@ -40,7 +40,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
         path: routeSearch,
         pageBuilder: (context, state) {
-          return customPageBuilder(const SearchPage(), context, state);
+          return customPageBuilder(SearchPage(), context, state);
         }),
   ],
 );

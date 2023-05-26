@@ -6,112 +6,23 @@ part of 'search_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchSearchResultHash() => r'430ae1744028544032cc09c711c0173bfc9528c2';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-typedef FetchSearchResultRef = AutoDisposeFutureProviderRef<SearchResponse>;
+String _$fetchSearchResultHash() => r'ea361c934df8d0d47b64c3bfb499374f49eba38b';
 
 /// See also [fetchSearchResult].
 @ProviderFor(fetchSearchResult)
-const fetchSearchResultProvider = FetchSearchResultFamily();
+final fetchSearchResultProvider =
+    AutoDisposeFutureProvider<SearchResponse>.internal(
+  fetchSearchResult,
+  name: r'fetchSearchResultProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$fetchSearchResultHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
-/// See also [fetchSearchResult].
-class FetchSearchResultFamily extends Family<AsyncValue<SearchResponse>> {
-  /// See also [fetchSearchResult].
-  const FetchSearchResultFamily();
-
-  /// See also [fetchSearchResult].
-  FetchSearchResultProvider call({
-    required String query,
-  }) {
-    return FetchSearchResultProvider(
-      query: query,
-    );
-  }
-
-  @override
-  FetchSearchResultProvider getProviderOverride(
-    covariant FetchSearchResultProvider provider,
-  ) {
-    return call(
-      query: provider.query,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchSearchResultProvider';
-}
-
-/// See also [fetchSearchResult].
-class FetchSearchResultProvider
-    extends AutoDisposeFutureProvider<SearchResponse> {
-  /// See also [fetchSearchResult].
-  FetchSearchResultProvider({
-    required this.query,
-  }) : super.internal(
-          (ref) => fetchSearchResult(
-            ref,
-            query: query,
-          ),
-          from: fetchSearchResultProvider,
-          name: r'fetchSearchResultProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$fetchSearchResultHash,
-          dependencies: FetchSearchResultFamily._dependencies,
-          allTransitiveDependencies:
-              FetchSearchResultFamily._allTransitiveDependencies,
-        );
-
-  final String query;
-
-  @override
-  bool operator ==(Object other) {
-    return other is FetchSearchResultProvider && other.query == query;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, query.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-String _$filterHash() => r'bae056ce51229ddb2514f5af103c77304262203c';
+typedef FetchSearchResultRef = AutoDisposeFutureProviderRef<SearchResponse>;
+String _$filterHash() => r'81e82680af4e4c387d1a6fab19bfa44be9a7ef61';
 
 /// See also [Filter].
 @ProviderFor(Filter)

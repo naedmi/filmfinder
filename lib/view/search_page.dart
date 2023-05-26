@@ -8,20 +8,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
 
-class SearchPage extends ConsumerStatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
-
-  @override
-  ConsumerState<SearchPage> createState() => SearchPageState();
-}
-
-class SearchPageState extends ConsumerState<SearchPage> {
-  final textController = TextEditingController();
-
-  AsyncValue<SearchResponse> searchResponse = const AsyncValue.loading();
-  String query = '';
-  Filter filter = Filter();
-  DateTime _selectedDate = DateTime.now();
+class SearchPage extends ConsumerWidget {
 
   final OutlineInputBorder searchBarInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(borderRadiusBig),
@@ -33,6 +20,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
   _showNavigationSnackbar(
       {required BuildContext context,
       required SearchResponse res,
+        required WidgetRef ref,
       required bool disablePrevious,
       required bool disableNext}) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -79,16 +67,12 @@ class SearchPageState extends ConsumerState<SearchPage> {
       ),
     );
   }
-
   @override
-  void setState(VoidCallback fn) {
-    super.setState(fn);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    searchResponse = ref.watch(fetchSearchResultProvider(query: query));
-    filter = ref.watch(filterProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final searchResponse = ref.watch(fetchSearchResultProvider);
+    final filter = ref.watch(filterProvider);
+    final filterNotifier = ref.read(filterProvider.notifier);
+    final textController = TextEditingController(text: filter.query);
     return MainBottomBarScaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -104,29 +88,23 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     controller: textController,
                     autofocus: true,
                     onSubmitted: (String value) {
-                      setState(() {
-                        query = textController.text;
-                      });
+                      filterNotifier.setQuery(textController.text);
                     },
                     decoration: InputDecoration(
                       hintText: 'Search',
-                      prefixIcon: query.isNotEmpty
+                      prefixIcon: filter.query.isNotEmpty
                           ? IconButton(
                               icon: const Icon(Remix.close_line),
                               onPressed: () {
                                 textController.clear();
-                                setState(() {
-                                  query = textController.text;
-                                });
+                                filterNotifier.setQuery(textController.text);
                               },
                             )
                           : null,
                       suffixIcon: IconButton(
                         onPressed: () {
                           FocusScope.of(context).unfocus();
-                          setState(() {
-                            query = textController.text;
-                          });
+                          filterNotifier.setQuery(textController.text);
                         },
                         icon: const Icon(Remix.search_line),
                       ),
@@ -167,8 +145,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                                         title: Text(capitalise(
                                             SearchType.values[index].name)),
                                         onTap: () {
-                                          ref
-                                              .read(filterProvider.notifier)
+                                          filterNotifier
                                               .setType(SearchType
                                                   .values[index].name);
                                           Navigator.pop(context);
@@ -208,8 +185,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                                             .values
                                             .elementAt(index))),
                                         onTap: () {
-                                          ref
-                                              .read(filterProvider.notifier)
+                                          filterNotifier
                                               .setLanguage(searchLanguages.keys
                                                   .elementAt(index));
                                           Navigator.pop(context);
@@ -237,9 +213,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                             ),
                             onDeleted: filter.year != null
                                 ? () {
-                                    _selectedDate = DateTime.now();
-                                    ref
-                                        .read(filterProvider.notifier)
+                                    filterNotifier
                                         .setYear(null);
                                   }
                                 : null,
@@ -257,15 +231,13 @@ class SearchPageState extends ConsumerState<SearchPage> {
                                         firstDate: DateTime(1950),
                                         lastDate: DateTime.now(),
                                         initialDate: DateTime.now(),
-                                        selectedDate: _selectedDate,
+                                        selectedDate: filter.year != null
+                                            ? DateTime(filter.year!)
+                                            : DateTime.now(),
                                         onChanged: (DateTime dateTime) {
                                           Navigator.pop(context);
-                                          setState(() {
-                                            _selectedDate = dateTime;
-                                            ref
-                                                .read(filterProvider.notifier)
+                                          filterNotifier
                                                 .setYear(dateTime.year);
-                                          });
                                         },
                                       ),
                                     ),
@@ -282,7 +254,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                               Theme.of(context).colorScheme.surfaceVariant,
                           selected: filter.adult,
                           onSelected: (bool value) {
-                            ref.read(filterProvider.notifier).setAdult(value);
+                            filterNotifier.setAdult(value);
                           },
                         ),
                       ],
@@ -300,6 +272,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                       _showNavigationSnackbar(
                         context: context,
                         res: res,
+                        ref: ref,
                         disablePrevious: res.page == 1,
                         disableNext: res.page == res.totalPages,
                       );
@@ -316,7 +289,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(),
                   ))
-              : query.isNotEmpty
+              : filter.query.isNotEmpty
                   ? const Align(
                       alignment: Alignment.topCenter,
                       child: Card(
