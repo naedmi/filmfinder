@@ -8,12 +8,13 @@ part of 'search_response.dart';
 
 _$_SearchResponse _$$_SearchResponseFromJson(Map<String, dynamic> json) =>
     _$_SearchResponse(
-      page: json['page'] as int,
-      results: (json['results'] as List<dynamic>)
-          .map((e) => SearchResult.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      totalPages: json['total_pages'] as int,
-      totalResults: json['total_results'] as int,
+      page: json['page'] as int? ?? 1,
+      results: (json['results'] as List<dynamic>?)
+              ?.map((e) => SearchResult.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      totalPages: json['total_pages'] as int? ?? 1,
+      totalResults: json['total_results'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_SearchResponseToJson(_$_SearchResponse instance) =>

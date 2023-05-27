@@ -134,19 +134,21 @@ class __$$_SearchResponseCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_SearchResponse implements _SearchResponse {
   const _$_SearchResponse(
-      {required this.page,
-      required final List<SearchResult> results,
-      required this.totalPages,
-      required this.totalResults})
+      {this.page = 1,
+      final List<SearchResult> results = const [],
+      this.totalPages = 1,
+      this.totalResults = 0})
       : _results = results;
 
   factory _$_SearchResponse.fromJson(Map<String, dynamic> json) =>
       _$$_SearchResponseFromJson(json);
 
   @override
+  @JsonKey()
   final int page;
   final List<SearchResult> _results;
   @override
+  @JsonKey()
   List<SearchResult> get results {
     if (_results is EqualUnmodifiableListView) return _results;
     // ignore: implicit_dynamic_type
@@ -154,8 +156,10 @@ class _$_SearchResponse implements _SearchResponse {
   }
 
   @override
+  @JsonKey()
   final int totalPages;
   @override
+  @JsonKey()
   final int totalResults;
 
   @override
@@ -197,10 +201,10 @@ class _$_SearchResponse implements _SearchResponse {
 
 abstract class _SearchResponse implements SearchResponse {
   const factory _SearchResponse(
-      {required final int page,
-      required final List<SearchResult> results,
-      required final int totalPages,
-      required final int totalResults}) = _$_SearchResponse;
+      {final int page,
+      final List<SearchResult> results,
+      final int totalPages,
+      final int totalResults}) = _$_SearchResponse;
 
   factory _SearchResponse.fromJson(Map<String, dynamic> json) =
       _$_SearchResponse.fromJson;

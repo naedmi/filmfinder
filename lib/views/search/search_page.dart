@@ -1,14 +1,15 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filmfinder/model/search_response.dart';
-import 'package:filmfinder/provider/search_provider.dart';
-import 'package:filmfinder/view/common/constants.dart';
-import 'package:filmfinder/view/common/navigation_widget.dart';
+import 'package:filmfinder/controllers/search/search_providers.dart';
+import 'package:filmfinder/models/search/search_response.dart';
+import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
 
+import 'search_result_widget.dart';
+
 class SearchPage extends ConsumerWidget {
+  SearchPage({super.key});
 
   final OutlineInputBorder searchBarInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(borderRadiusBig),
@@ -20,7 +21,7 @@ class SearchPage extends ConsumerWidget {
   _showNavigationSnackbar(
       {required BuildContext context,
       required SearchResponse res,
-        required WidgetRef ref,
+      required WidgetRef ref,
       required bool disablePrevious,
       required bool disableNext}) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -40,7 +41,9 @@ class SearchPage extends ConsumerWidget {
                     ? null
                     : () {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        ref.read(filterProvider.notifier).setPage(res.page - 1);
+                        ref
+                            .read(searchControllerProvider)
+                            .setPage(res.page - 1);
                       },
                 icon: const Icon(Remix.arrow_left_s_line),
               ),
@@ -57,7 +60,9 @@ class SearchPage extends ConsumerWidget {
                     ? null
                     : () {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        ref.read(filterProvider.notifier).setPage(res.page + 1);
+                        ref
+                            .read(searchControllerProvider)
+                            .setPage(res.page + 1);
                       },
                 icon: const Icon(Remix.arrow_right_s_line),
               ),
@@ -67,12 +72,12 @@ class SearchPage extends ConsumerWidget {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchResponse = ref.watch(fetchSearchResultProvider);
-    final filter = ref.watch(filterProvider);
-    final filterNotifier = ref.read(filterProvider.notifier);
-    final textController = TextEditingController(text: filter.query);
+    final searchController = ref.watch(searchControllerProvider);
+    final textController =
+        TextEditingController(text: searchController.filter.query);
     return MainBottomBarScaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -88,23 +93,23 @@ class SearchPage extends ConsumerWidget {
                     controller: textController,
                     autofocus: true,
                     onSubmitted: (String value) {
-                      filterNotifier.setQuery(textController.text);
+                      searchController.setQuery(value);
                     },
                     decoration: InputDecoration(
                       hintText: 'Search',
-                      prefixIcon: filter.query.isNotEmpty
+                      prefixIcon: searchController.filter.query.isNotEmpty
                           ? IconButton(
                               icon: const Icon(Remix.close_line),
                               onPressed: () {
                                 textController.clear();
-                                filterNotifier.setQuery(textController.text);
+                                searchController.setQuery(textController.text);
                               },
                             )
                           : null,
                       suffixIcon: IconButton(
                         onPressed: () {
                           FocusScope.of(context).unfocus();
-                          filterNotifier.setQuery(textController.text);
+                          searchController.setQuery(textController.text);
                         },
                         icon: const Icon(Remix.search_line),
                       ),
@@ -122,7 +127,8 @@ class SearchPage extends ConsumerWidget {
                       padding: const EdgeInsets.only(top: paddingTiny),
                       children: [
                         InputChip(
-                            label: Text(capitalise(filter.type)),
+                            label:
+                                Text(capitalise(searchController.filter.type)),
                             shape: chipShape,
                             side: chipSite,
                             avatar: const Icon(Remix.list_check),
@@ -138,16 +144,16 @@ class SearchPage extends ConsumerWidget {
                                       itemCount: SearchType.values.length,
                                       itemBuilder: (context, index) => ListTile(
                                         horizontalTitleGap: padding,
-                                        trailing: filter.type ==
+                                        trailing: searchController
+                                                    .filter.type ==
                                                 SearchType.values[index].name
                                             ? const Icon(Remix.check_line)
                                             : null,
                                         title: Text(capitalise(
                                             SearchType.values[index].name)),
                                         onTap: () {
-                                          filterNotifier
-                                              .setType(SearchType
-                                                  .values[index].name);
+                                          searchController.setType(
+                                              SearchType.values[index].name);
                                           Navigator.pop(context);
                                         },
                                       ),
@@ -159,8 +165,8 @@ class SearchPage extends ConsumerWidget {
                             }),
                         const Divider(indent: paddingTiny),
                         InputChip(
-                            label: Text(
-                                capitalise(searchLanguages[filter.language]!)),
+                            label: Text(capitalise(searchLanguages[
+                                searchController.filter.language]!)),
                             shape: chipShape,
                             side: chipSite,
                             avatar: const Icon(Remix.translate_2),
@@ -176,17 +182,18 @@ class SearchPage extends ConsumerWidget {
                                       itemCount: searchLanguages.values.length,
                                       itemBuilder: (context, index) => ListTile(
                                         horizontalTitleGap: padding,
-                                        trailing: filter.language ==
-                                                searchLanguages.keys
-                                                    .elementAt(index)
-                                            ? const Icon(Remix.check_line)
-                                            : null,
+                                        trailing:
+                                            searchController.filter.language ==
+                                                    searchLanguages.keys
+                                                        .elementAt(index)
+                                                ? const Icon(Remix.check_line)
+                                                : null,
                                         title: Text(capitalise(searchLanguages
                                             .values
                                             .elementAt(index))),
                                         onTap: () {
-                                          filterNotifier
-                                              .setLanguage(searchLanguages.keys
+                                          searchController.setLanguage(
+                                              searchLanguages.keys
                                                   .elementAt(index));
                                           Navigator.pop(context);
                                         },
@@ -199,22 +206,22 @@ class SearchPage extends ConsumerWidget {
                             }),
                         const Divider(indent: paddingTiny),
                         InputChip(
-                            label: Text((filter.year ?? 'Year').toString()),
+                            label: Text((searchController.filter.year ?? 'Year')
+                                .toString()),
                             shape: chipShape,
                             side: chipSite,
                             avatar: const Icon(Remix.calendar_line),
                             backgroundColor:
                                 Theme.of(context).colorScheme.surfaceVariant,
                             showCheckmark: false,
-                            selected: filter.year != null,
+                            selected: searchController.filter.year != null,
                             deleteIcon: const Icon(
                               Remix.close_line,
                               size: paddingSmall * 1.5,
                             ),
-                            onDeleted: filter.year != null
+                            onDeleted: searchController.filter.year != null
                                 ? () {
-                                    filterNotifier
-                                        .setYear(null);
+                                    searchController.setYear(null);
                                   }
                                 : null,
                             onPressed: () {
@@ -231,13 +238,16 @@ class SearchPage extends ConsumerWidget {
                                         firstDate: DateTime(1950),
                                         lastDate: DateTime.now(),
                                         initialDate: DateTime.now(),
-                                        selectedDate: filter.year != null
-                                            ? DateTime(filter.year!)
+                                        selectedDate: searchController
+                                                    .filter.year !=
+                                                null
+                                            ? DateTime(
+                                                searchController.filter.year!)
                                             : DateTime.now(),
                                         onChanged: (DateTime dateTime) {
                                           Navigator.pop(context);
-                                          filterNotifier
-                                                .setYear(dateTime.year);
+                                          searchController
+                                              .setYear(dateTime.year);
                                         },
                                       ),
                                     ),
@@ -252,9 +262,9 @@ class SearchPage extends ConsumerWidget {
                           side: chipSite,
                           backgroundColor:
                               Theme.of(context).colorScheme.surfaceVariant,
-                          selected: filter.adult,
+                          selected: searchController.filter.adult,
                           onSelected: (bool value) {
-                            filterNotifier.setAdult(value);
+                            searchController.setAdult(value);
                           },
                         ),
                       ],
@@ -264,7 +274,7 @@ class SearchPage extends ConsumerWidget {
               ),
             ),
           )),
-      body: searchResponse.when(
+      body: searchController.searchResponse.when(
           data: (res) => res.results.isNotEmpty
               ? NotificationListener<ScrollEndNotification>(
                   onNotification: (scrollEnd) {
@@ -289,7 +299,7 @@ class SearchPage extends ConsumerWidget {
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(),
                   ))
-              : filter.query.isNotEmpty
+              : searchController.filter.query.isNotEmpty
                   ? const Align(
                       alignment: Alignment.topCenter,
                       child: Card(
@@ -339,138 +349,6 @@ class SearchPage extends ConsumerWidget {
                   child: CircularProgressIndicator(),
                 )),
               )),
-    );
-  }
-}
-
-class SearchResultWidget extends StatelessWidget {
-  final SearchResult res;
-
-  const SearchResultWidget({Key? key, required this.res}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(paddingTiny),
-      child: Stack(alignment: AlignmentDirectional.centerStart, children: [
-        Card(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(paddingSmall),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.width / 3 +
-                      paddingBig -
-                      paddingSmall * 2,
-                  width: MediaQuery.of(context).size.width / 3 * 2 -
-                      paddingBig * 2 -
-                      paddingSmall,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Tooltip(
-                        message: res.title ?? '',
-                        child: Text(
-                          res.title ?? res.originalTitle ?? '',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      const Divider(),
-                      Wrap(spacing: paddingTiny, children: [
-                        Tooltip(
-                          message: '${res.voteAverage.toString()} / 10 stars',
-                          child: RatingBarIndicator(
-                            itemSize: padding,
-                            rating: (res.voteAverage ?? 0) / 2,
-                            itemCount: 5,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Icon(
-                                Remix.star_fill,
-                                color: Theme.of(context).colorScheme.primary,
-                              );
-                            },
-                          ),
-                        ),
-                        Text(
-                          '${res.voteCount} votes',
-                          style: const TextStyle(fontSize: paddingSmall),
-                        ),
-                      ]),
-                      const Spacer(),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(borderRadiusBig),
-                              color:
-                                  Theme.of(context).colorScheme.surfaceVariant,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: paddingSmall,
-                                horizontal: paddingSmall + paddingTiny),
-                            child: Text(
-                              res.releaseDate?.isNotEmpty ?? false
-                                  ? DateTime.parse(res.releaseDate!)
-                                      .year
-                                      .toString()
-                                  : '',
-                            ),
-                          ),
-                          const Spacer(),
-                          Tooltip(
-                            message: 'Add to list',
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: const Icon(
-                                Remix.heart_line,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            // TODO: Add navigation when detail page is ready
-            //context.pushNamed(
-            //  '/details',
-            //  pathParameters: {'id': res.id.toString()},
-            //);
-          },
-          child: Material(
-            elevation: elevation,
-            borderRadius: BorderRadius.circular(borderRadiusBig),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(borderRadiusBig),
-              child: CachedNetworkImage(
-                imageUrl: poster(path: res.posterPath ?? ''),
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width / 3 + paddingSmall,
-                height: MediaQuery.of(context).size.width / 3 + paddingBig * 2,
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) =>
-                    const Icon(Remix.image_2_line, size: 100),
-              ),
-            ),
-          ),
-        ),
-      ]),
     );
   }
 }

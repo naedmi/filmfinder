@@ -9,10 +9,10 @@ class SearchResponse with _$SearchResponse {
   // ignore: invalid_annotation_target
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory SearchResponse({
-    required int page,
-    required List<SearchResult> results,
-    required int totalPages,
-    required int totalResults,
+    @Default(1) int page,
+    @Default([]) List<SearchResult> results,
+    @Default(1) int totalPages,
+    @Default(0) int totalResults,
   }) = _SearchResponse;
 
   factory SearchResponse.fromJson(Map<String, dynamic> json) =>
