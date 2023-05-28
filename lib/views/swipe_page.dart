@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'common/navigation_widget_simple.dart';
+import 'common/navigation_widget_main_details.dart';
 
 class SwipePage extends StatelessWidget {
   const SwipePage({super.key});
