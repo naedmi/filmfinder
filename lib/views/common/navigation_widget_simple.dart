@@ -29,7 +29,7 @@ class BottomNavigationWidget extends StatelessWidget {
                 } else {
                   //was das? keinen unterschied zu ein oder auskommentiert?
                   controller?.animateTo(0,
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: animationDuration),
                       curve: Curves.easeInOut);
                 }
               },

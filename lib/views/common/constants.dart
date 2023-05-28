@@ -170,3 +170,6 @@ final ThemeData darkTheme = FlexThemeData.dark(
 );
 
 /// **************************************************************************
+/// Animation ****************************************************************
+const int animationDuration = 500;
+const int animationDelay = 250;
