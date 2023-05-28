@@ -8,11 +8,15 @@ const List<String> routes = <String>[
   '/list',
   '/swipe',
   '/search',
+  '/settings',
+  '/details',
 ];
 final String routeHome = routes[0];
 final String routeList = routes[1];
 final String routeSwipe = routes[2];
 final String routeSearch = routes[3];
+final String routeSettings = routes[4];
+final String routeDetails = routes[5];
 
 /// ***************************************************************************
 
