@@ -46,14 +46,9 @@ class SearchResponse with _$SearchResponse {
 
 ### riverpod
 
-Use the ```@riverpod``` annotation for providers  
-and add ```part 'filename.g.dart';``` to the file.
-
-Similar to freezed, using  
-```flutter pub run build_runner watch -d```  
-will generate the files on save.
-
-For further information consult the (new) [riverpod documentation](https://docs-v2.riverpod.dev/docs/introduction).
+Riverpod annotations are too new...  
+Use normal providers and  
+consult the (new) [riverpod documentation](https://docs-v2.riverpod.dev/docs/introduction) for more information
 
 ### branch names
 

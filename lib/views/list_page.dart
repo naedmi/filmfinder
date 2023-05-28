@@ -1,4 +1,4 @@
-import 'package:filmfinder/view/common/navigation_widget.dart';
+import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:flutter/material.dart';
 
 class ListPage extends StatelessWidget {
