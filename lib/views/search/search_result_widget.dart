@@ -14,11 +14,12 @@ class SearchResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(paddingTiny),
-      child: Stack(alignment: AlignmentDirectional.centerStart, children: [
+      child:
+          Stack(alignment: AlignmentDirectional.centerStart, children: <Widget>[
         Card(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+            children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(paddingSmall),
                 child: SizedBox(
@@ -31,7 +32,7 @@ class SearchResultWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: <Widget>[
                       Tooltip(
                         message: res.title ?? '',
                         child: Text(
@@ -44,7 +45,7 @@ class SearchResultWidget extends StatelessWidget {
                         ),
                       ),
                       const Divider(),
-                      Wrap(spacing: paddingTiny, children: [
+                      Wrap(spacing: paddingTiny, children: <Widget>[
                         Tooltip(
                           message: '${res.voteAverage.toString()} / 10 stars',
                           child: RatingBarIndicator(
@@ -68,7 +69,7 @@ class SearchResultWidget extends StatelessWidget {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
+                        children: <Widget>[
                           Container(
                             decoration: BoxDecoration(
                               borderRadius:
@@ -124,9 +125,9 @@ class SearchResultWidget extends StatelessWidget {
                 fit: BoxFit.cover,
                 width: MediaQuery.of(context).size.width / 3 + paddingSmall,
                 height: MediaQuery.of(context).size.width / 3 + paddingBig * 2,
-                placeholder: (context, url) =>
+                placeholder: (BuildContext context, String url) =>
                     const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) =>
+                errorWidget: (BuildContext context, String url, _) =>
                     const Icon(Remix.image_2_line, size: 100),
               ),
             ),

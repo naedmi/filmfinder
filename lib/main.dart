@@ -9,9 +9,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-Future main() async {
+Future<void> main() async {
   await dotenv.load();
-  runApp(ProviderScope(observers: [LoggerService()], child: const MyApp()));
+  runApp(ProviderScope(
+      observers: <ProviderObserver>[LoggerService()], child: const MyApp()));
 }
 
 /// The route configuration.
@@ -20,22 +21,22 @@ final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
         path: routeHome,
-        pageBuilder: (context, state) {
+        pageBuilder: (BuildContext context, GoRouterState state) {
           return customPageBuilder(const LandingPage(), context, state);
         }),
     GoRoute(
         path: routeList,
-        pageBuilder: (context, state) {
+        pageBuilder: (BuildContext context, GoRouterState state) {
           return customPageBuilder(const ListPage(), context, state);
         }),
     GoRoute(
         path: routeSwipe,
-        pageBuilder: (context, state) {
+        pageBuilder: (BuildContext context, GoRouterState state) {
           return customPageBuilder(const Placeholder(), context, state);
         }),
     GoRoute(
         path: routeSearch,
-        pageBuilder: (context, state) {
+        pageBuilder: (BuildContext context, GoRouterState state) {
           return customPageBuilder(SearchPage(), context, state);
         }),
   ],

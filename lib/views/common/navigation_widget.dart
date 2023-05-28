@@ -11,8 +11,8 @@ class BottomNavigationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isHome = GoRouter.of(context).location == routeHome;
-    final isList = GoRouter.of(context).location == routeList;
+    final bool isHome = GoRouter.of(context).location == routeHome;
+    final bool isList = GoRouter.of(context).location == routeList;
     return BottomAppBar(
         height: mainActionButtonHeight / 2 + padding,
         shape: const CircularNotchedRectangle(),
@@ -21,7 +21,7 @@ class BottomNavigationWidget extends StatelessWidget {
         surfaceTintColor: Theme.of(context).canvasColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             IconButton(
               onPressed: () {
                 if (!isHome) {
@@ -69,7 +69,7 @@ class MainBottomBarScaffold extends StatelessWidget {
         } else {
           bool? exitResult = await showDialog(
             context: context,
-            builder: (context) => _buildExitDialog(context),
+            builder: (BuildContext context) => _buildExitDialog(context),
           );
           return exitResult ?? false;
         }
@@ -88,7 +88,7 @@ class MainBottomBarScaffold extends StatelessWidget {
               elevation: paddingSmall,
               shape: const CircleBorder(),
               child: Animate(
-                effects: const [
+                effects: const <ShimmerEffect>[
                   ShimmerEffect(
                     delay: Duration(milliseconds: 250),
                     duration: Duration(milliseconds: 500),
@@ -129,11 +129,13 @@ class MainBottomBarScaffold extends StatelessWidget {
   }
 }
 
-customPageBuilder(Widget child, context, state) {
-  return CustomTransitionPage(
+CustomTransitionPage<FadeTransition> customPageBuilder(
+    Widget child, BuildContext context, GoRouterState state) {
+  return CustomTransitionPage<FadeTransition>(
     key: state.pageKey,
     child: child,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    transitionsBuilder: (BuildContext context, Animation<double> animation,
+        Animation<double> secondaryAnimation, Widget child) {
       return FadeTransition(
         opacity: CurveTween(curve: Curves.linear).animate(animation),
         child: child,
@@ -161,7 +163,7 @@ class GradientDecoration extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
+              colors: <Color>[
                 Theme.of(context).canvasColor,
                 Theme.of(context).primaryColorLight,
               ])),

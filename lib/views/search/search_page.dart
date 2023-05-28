@@ -1,3 +1,5 @@
+import 'package:filmfinder/controllers/search/search_controller.dart'
+    as search_controller;
 import 'package:filmfinder/controllers/search/search_providers.dart';
 import 'package:filmfinder/models/search/search_response.dart';
 import 'package:filmfinder/views/common/constants.dart';
@@ -18,12 +20,13 @@ class SearchPage extends ConsumerWidget {
     ),
   );
 
-  _showNavigationSnackbar(
+  void _showNavigationSnackbar(
       {required BuildContext context,
       required SearchResponse res,
-      required WidgetRef ref,
+      required search_controller.SearchController controller,
       required bool disablePrevious,
       required bool disableNext}) {
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,
@@ -32,7 +35,7 @@ class SearchPage extends ConsumerWidget {
         backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
         content: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: <Widget>[
             SizedBox(
               height: padding,
               child: IconButton(
@@ -41,9 +44,7 @@ class SearchPage extends ConsumerWidget {
                     ? null
                     : () {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        ref
-                            .read(searchControllerProvider)
-                            .setPage(res.page - 1);
+                        controller.setPage(res.page - 1);
                       },
                 icon: const Icon(Remix.arrow_left_s_line),
               ),
@@ -60,9 +61,7 @@ class SearchPage extends ConsumerWidget {
                     ? null
                     : () {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        ref
-                            .read(searchControllerProvider)
-                            .setPage(res.page + 1);
+                        controller.setPage(res.page + 1);
                       },
                 icon: const Icon(Remix.arrow_right_s_line),
               ),
@@ -75,8 +74,9 @@ class SearchPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchController = ref.watch(searchControllerProvider);
-    final textController =
+    final search_controller.SearchController searchController =
+        ref.watch(searchControllerProvider);
+    final TextEditingController textController =
         TextEditingController(text: searchController.filter.query);
     return MainBottomBarScaffold(
       appBar: AppBar(
@@ -88,7 +88,7 @@ class SearchPage extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(
                   horizontal: padding, vertical: paddingSmall),
               child: Column(
-                children: [
+                children: <Widget>[
                   TextField(
                     controller: textController,
                     autofocus: true,
@@ -125,7 +125,7 @@ class SearchPage extends ConsumerWidget {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.only(top: paddingTiny),
-                      children: [
+                      children: <Widget>[
                         InputChip(
                             label:
                                 Text(capitalise(searchController.filter.type)),
@@ -137,12 +137,14 @@ class SearchPage extends ConsumerWidget {
                             onPressed: () {
                               showModalBottomSheet(
                                   context: context,
-                                  builder: (context) {
+                                  builder: (BuildContext context) {
                                     return ListView.separated(
                                       shrinkWrap: true,
                                       padding: const EdgeInsets.all(padding),
                                       itemCount: SearchType.values.length,
-                                      itemBuilder: (context, index) => ListTile(
+                                      itemBuilder:
+                                          (BuildContext context, int index) =>
+                                              ListTile(
                                         horizontalTitleGap: padding,
                                         trailing: searchController
                                                     .filter.type ==
@@ -175,12 +177,14 @@ class SearchPage extends ConsumerWidget {
                             onPressed: () {
                               showModalBottomSheet(
                                   context: context,
-                                  builder: (context) {
+                                  builder: (BuildContext context) {
                                     return ListView.separated(
                                       shrinkWrap: true,
                                       padding: const EdgeInsets.all(padding),
                                       itemCount: searchLanguages.values.length,
-                                      itemBuilder: (context, index) => ListTile(
+                                      itemBuilder:
+                                          (BuildContext context, int index) =>
+                                              ListTile(
                                         horizontalTitleGap: padding,
                                         trailing:
                                             searchController.filter.language ==
@@ -229,7 +233,7 @@ class SearchPage extends ConsumerWidget {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: const Text("Select Year"),
+                                    title: const Text('Select Year'),
                                     content: SizedBox(
                                       // Need to use container to add size constraint.
                                       width: 300,
@@ -275,14 +279,14 @@ class SearchPage extends ConsumerWidget {
             ),
           )),
       body: searchController.searchResponse.when(
-          data: (res) => res.results.isNotEmpty
+          data: (SearchResponse res) => res.results.isNotEmpty
               ? NotificationListener<ScrollEndNotification>(
-                  onNotification: (scrollEnd) {
+                  onNotification: (ScrollEndNotification scrollEnd) {
                     if (scrollEnd.metrics.atEdge) {
                       _showNavigationSnackbar(
                         context: context,
                         res: res,
-                        ref: ref,
+                        controller: searchController,
                         disablePrevious: res.page == 1,
                         disableNext: res.page == res.totalPages,
                       );
@@ -293,7 +297,7 @@ class SearchPage extends ConsumerWidget {
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.only(
                         left: padding, right: padding, bottom: paddingBig * 2),
-                    itemBuilder: (context, index) =>
+                    itemBuilder: (BuildContext context, int index) =>
                         SearchResultWidget(res: res.results[index]),
                     itemCount: res.results.length,
                     separatorBuilder: (BuildContext context, int index) =>
@@ -317,7 +321,7 @@ class SearchPage extends ConsumerWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
+                            children: <Widget>[
                               Icon(Remix.search_eye_line,
                                   size: paddingBig + padding),
                               Padding(
@@ -332,7 +336,7 @@ class SearchPage extends ConsumerWidget {
                         ),
                       ),
                     ),
-          error: (err, stack) => Align(
+          error: (Object err, StackTrace stack) => Align(
                 alignment: Alignment.topCenter,
                 child: Card(
                   child: Padding(

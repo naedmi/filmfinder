@@ -17,8 +17,8 @@ class LoggerService extends ProviderObserver {
   }
 
   String _truncate(Object? value) {
-    final str = value.toString();
-    const maxLength = 400;
+    final String str = value.toString();
+    const int maxLength = 400;
     return str.length > maxLength ? '${str.substring(0, maxLength)}...' : str;
   }
 }
