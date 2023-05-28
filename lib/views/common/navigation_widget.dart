@@ -28,7 +28,7 @@ class BottomNavigationWidget extends StatelessWidget {
                   context.push(routeHome);
                 } else {
                   controller?.animateTo(0,
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: animationDuration),
                       curve: Curves.easeInOut);
                 }
               },
@@ -90,8 +90,8 @@ class MainBottomBarScaffold extends StatelessWidget {
               child: Animate(
                 effects: const <ShimmerEffect>[
                   ShimmerEffect(
-                    delay: Duration(milliseconds: 250),
-                    duration: Duration(milliseconds: 500),
+                    delay: Duration(milliseconds: animationDelay),
+                    duration: Duration(milliseconds: animationDuration),
                   ),
                 ],
                 child: const GradientDecoration(

@@ -4,6 +4,7 @@ import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:filmfinder/views/landing_page.dart';
 import 'package:filmfinder/views/list_page.dart';
 import 'package:filmfinder/views/search/search_page.dart';
+import 'package:filmfinder/views/swipe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,7 +33,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
         path: routeSwipe,
         pageBuilder: (BuildContext context, GoRouterState state) {
-          return customPageBuilder(const Placeholder(), context, state);
+          return customPageBuilder(const SwipePage(), context, state);
         }),
     GoRoute(
         path: routeSearch,
