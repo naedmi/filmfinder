@@ -10,7 +10,7 @@ abstract class SearchController {
 
   late AsyncValue<SearchResponse> searchResponse;
 
-  final StateProviderRef<SearchController> ref;
+  final AutoDisposeStateProviderRef<SearchController> ref;
   late SearchFilter filter;
 
   void updateFilters(SearchFilter filter);
@@ -29,7 +29,8 @@ abstract class SearchController {
 }
 
 class SearchControllerImpl extends SearchController {
-  SearchControllerImpl(ref) : super(ref) {
+  SearchControllerImpl(AutoDisposeStateProviderRef<SearchController> ref)
+      : super(ref) {
     filter = ref.watch(searchFilterProvider);
     searchResponse = ref.watch(searchApiService(filter));
   }

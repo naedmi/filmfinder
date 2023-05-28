@@ -10,7 +10,7 @@ class SearchResponse with _$SearchResponse {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory SearchResponse({
     @Default(1) int page,
-    @Default([]) List<SearchResult> results,
+    @Default(<SearchResult>[]) List<SearchResult> results,
     @Default(1) int totalPages,
     @Default(0) int totalResults,
   }) = _SearchResponse;

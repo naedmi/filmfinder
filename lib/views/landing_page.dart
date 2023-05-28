@@ -18,13 +18,13 @@ class LandingPage extends StatelessWidget {
           controller: _controller,
           padding: const EdgeInsets.all(10),
           shrinkWrap: true,
-          children: [
+          children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(top: padding),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: <Widget>[
                   IconButton(
                       onPressed: () {
                         context.push(routeSearch);
@@ -57,7 +57,7 @@ class OverviewScrollWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(top: 10.0, left: 10),
           child: Text(
@@ -71,19 +71,19 @@ class OverviewScrollWidget extends StatelessWidget {
           child: ListView(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            children: const [
+            children: const <Widget>[
               ThumbnailWidget(
                   image:
-                      "https://4.bp.blogspot.com/-TPUcWcXSVEo/XL8wbIghG9I/AAAAAAAAHGE/MSmmTGnBkTM6moWJFPsBkWeRqXNUUH-vACLcBGAs/s400/The%2BVelociPastor%2BPoster.jpeg"),
+                      'https://4.bp.blogspot.com/-TPUcWcXSVEo/XL8wbIghG9I/AAAAAAAAHGE/MSmmTGnBkTM6moWJFPsBkWeRqXNUUH-vACLcBGAs/s400/The%2BVelociPastor%2BPoster.jpeg'),
               ThumbnailWidget(
                   image:
-                      "https://4.bp.blogspot.com/-TPUcWcXSVEo/XL8wbIghG9I/AAAAAAAAHGE/MSmmTGnBkTM6moWJFPsBkWeRqXNUUH-vACLcBGAs/s400/The%2BVelociPastor%2BPoster.jpeg"),
+                      'https://4.bp.blogspot.com/-TPUcWcXSVEo/XL8wbIghG9I/AAAAAAAAHGE/MSmmTGnBkTM6moWJFPsBkWeRqXNUUH-vACLcBGAs/s400/The%2BVelociPastor%2BPoster.jpeg'),
               ThumbnailWidget(
                   image:
-                      "https://4.bp.blogspot.com/-TPUcWcXSVEo/XL8wbIghG9I/AAAAAAAAHGE/MSmmTGnBkTM6moWJFPsBkWeRqXNUUH-vACLcBGAs/s400/The%2BVelociPastor%2BPoster.jpeg"),
+                      'https://4.bp.blogspot.com/-TPUcWcXSVEo/XL8wbIghG9I/AAAAAAAAHGE/MSmmTGnBkTM6moWJFPsBkWeRqXNUUH-vACLcBGAs/s400/The%2BVelociPastor%2BPoster.jpeg'),
               ThumbnailWidget(
                   image:
-                      "https://4.bp.blogspot.com/-TPUcWcXSVEo/XL8wbIghG9I/AAAAAAAAHGE/MSmmTGnBkTM6moWJFPsBkWeRqXNUUH-vACLcBGAs/s400/The%2BVelociPastor%2BPoster.jpeg"),
+                      'https://4.bp.blogspot.com/-TPUcWcXSVEo/XL8wbIghG9I/AAAAAAAAHGE/MSmmTGnBkTM6moWJFPsBkWeRqXNUUH-vACLcBGAs/s400/The%2BVelociPastor%2BPoster.jpeg'),
             ],
           ),
         ),

@@ -3,25 +3,33 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 /// Routes ********************************************************************
-const routes = [
+const List<String> routes = <String>[
   '/',
   '/list',
   '/swipe',
   '/search',
 ];
-final routeHome = routes[0];
-final routeList = routes[1];
-final routeSwipe = routes[2];
-final routeSearch = routes[3];
+final String routeHome = routes[0];
+final String routeList = routes[1];
+final String routeSwipe = routes[2];
+final String routeSearch = routes[3];
 
 /// ***************************************************************************
 
 /// tmdb **********************************************************************
 
-const posterSizes = ["w92", "w154", "w185", "w342", "w500", "w780", "original"];
+const List<String> posterSizes = <String>[
+  'w92',
+  'w154',
+  'w185',
+  'w342',
+  'w500',
+  'w780',
+  'original'
+];
 
-poster({required String path, dynamic width = "w342"}) =>
-    'https://image.tmdb.org/t/p/${width is num ? 'w$width' : width}/$path';
+String poster({required String path, String width = 'w342'}) =>
+    'https://image.tmdb.org/t/p/$width/$path';
 
 enum SearchType {
   movie,
@@ -31,58 +39,58 @@ enum SearchType {
   //multi,
 }
 
-const searchLanguages = {
-  "en-US": 'English',
-  "de-DE": 'German',
-  "fr-FR": 'French',
-  "es-ES": 'Spanish',
-  "it-IT": 'Italian',
-  "ja-JP": 'Japanese',
+const Map<String, String> searchLanguages = <String, String>{
+  'en-US': 'English',
+  'de-DE': 'German',
+  'fr-FR': 'French',
+  'es-ES': 'Spanish',
+  'it-IT': 'Italian',
+  'ja-JP': 'Japanese',
 };
 
 /// **************************************************************************
 
 /// Search *******************************************************************
 
-capitalise(String s) {
+String capitalise(String s) {
   return s[0].toUpperCase() + s.substring(1);
 }
 
-const chipShape = RoundedRectangleBorder(
+const RoundedRectangleBorder chipShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.all(
     Radius.circular(borderRadiusBig),
   ),
 );
 
-const chipSite = BorderSide(
+const BorderSide chipSite = BorderSide(
   color: Colors.transparent,
 );
 
 /// **************************************************************************
 
 /// Radius & Padding *********************************************************
-const borderRadiusBig = 24.0;
-const borderRadius = 12.0;
-const borderRadiusSmall = 6.0;
+const double borderRadiusBig = 24.0;
+const double borderRadius = 12.0;
+const double borderRadiusSmall = 6.0;
 
-const paddingBig = 48.0;
-const paddingMedium = 24.0;
-const paddingSmall = 12.0;
-const paddingTiny = 6.0;
-const padding = paddingMedium;
+const double paddingBig = 48.0;
+const double paddingMedium = 24.0;
+const double paddingSmall = 12.0;
+const double paddingTiny = 6.0;
+const double padding = paddingMedium;
 
 /// **************************************************************************
 
 /// Various Sizes ************************************************************
-const mainActionButtonHeight = 84.0;
-const mainActionButtonWidth = 84.0;
+const double mainActionButtonHeight = 84.0;
+const double mainActionButtonWidth = 84.0;
 
-const elevation = paddingSmall;
+const double elevation = paddingSmall;
 
 /// **************************************************************************
 
 /// FlexColorScheme **********************************************************
-final theme = FlexThemeData.light(
+final ThemeData theme = FlexThemeData.light(
   scheme: FlexScheme.deepBlue,
   subThemesData: const FlexSubThemesData(
     interactionEffects: false,
@@ -119,7 +127,7 @@ final theme = FlexThemeData.light(
   swapLegacyOnMaterial3: true,
   fontFamily: GoogleFonts.notoSans().fontFamily,
 );
-final darkTheme = FlexThemeData.dark(
+final ThemeData darkTheme = FlexThemeData.dark(
   scheme: FlexScheme.deepBlue,
   subThemesData: const FlexSubThemesData(
     interactionEffects: false,

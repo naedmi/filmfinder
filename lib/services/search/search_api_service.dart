@@ -2,10 +2,12 @@ import 'package:filmfinder/models/search/search_filter.dart';
 import 'package:filmfinder/models/search/search_response.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../api_service.dart';
+import '../dio_provider.dart';
 
-final searchApiService =
-    FutureProvider.autoDispose.family((ref, SearchFilter filter) async {
+final AutoDisposeFutureProviderFamily<SearchResponse, SearchFilter>
+    searchApiService = FutureProvider.autoDispose.family(
+        (AutoDisposeFutureProviderRef<SearchResponse> ref,
+            SearchFilter filter) async {
   if (filter.query.isEmpty) {
     return const SearchResponse();
   }

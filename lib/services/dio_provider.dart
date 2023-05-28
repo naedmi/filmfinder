@@ -3,13 +3,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-final Provider<Dio> dioProvider = Provider((ref) {
-  final key = dotenv.env['API_KEY'];
+final Provider<Dio> dioProvider = Provider<Dio>((ProviderRef<Dio> ref) {
+  final String? key = dotenv.env['API_KEY'];
 
   Dio d = Dio(BaseOptions(
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 3),
-      headers: {
+      headers: <String, String>{
         'accept': 'application/json',
         'Authorization': 'Bearer $key',
       }));
