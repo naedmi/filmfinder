@@ -2,7 +2,7 @@ import 'package:filmfinder/services/logger_provider_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:filmfinder/views/landing_page.dart';
-import 'package:filmfinder/views/list_page.dart';
+import 'package:filmfinder/views/list/list_page.dart';
 import 'package:filmfinder/views/search/search_page.dart';
 import 'package:filmfinder/views/swipe_page.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
         path: routeList,
         pageBuilder: (BuildContext context, GoRouterState state) {
-          return customPageBuilder(const ListPage(), context, state);
+          return customPageBuilder(ListPage(), context, state);
         }),
     GoRoute(
         path: routeSwipe,
