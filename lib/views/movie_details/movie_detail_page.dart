@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
+import '../common/navigation_widget_main_details.dart';
 
 class MovieDetailsPage extends ConsumerWidget {
   final String movieId;
@@ -10,10 +10,11 @@ class MovieDetailsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return SimpleBottomBarScaffold(
       appBar: AppBar(
         title: Text('Movie Details'),
       ),
+      showMiddleButton: false,
       body: Container(
         padding: EdgeInsets.all(16.0),
         child: ListView(
