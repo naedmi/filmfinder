@@ -3,6 +3,7 @@ import 'package:filmfinder/models/search/search_response.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:remixicon/remixicon.dart';
 
 class SearchResultWidget extends StatelessWidget {
@@ -109,11 +110,10 @@ class SearchResultWidget extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            // TODO: Add navigation when detail page is ready
-            //context.pushNamed(
-            //  '/details',
-            //  pathParameters: {'id': res.id.toString()},
-            //);
+            context.pushNamed(
+             'details',
+             pathParameters: {'id': res.id.toString()},
+            );
           },
           child: Material(
             elevation: elevation,
