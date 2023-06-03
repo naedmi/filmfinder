@@ -33,7 +33,10 @@ class LandingPage extends StatelessWidget {
                         Remix.search_line,
                       )),
                   IconButton(
-                      onPressed: () {}, icon: const Icon(Remix.settings_line)),
+                      onPressed: () {
+                        context.push(routeSettings);
+                      },
+                      icon: const Icon(Remix.settings_line)),
                 ],
               ),
             ),

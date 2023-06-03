@@ -42,6 +42,11 @@ final GoRouter _router = GoRouter(
           return customPageBuilder(SearchPage(), context, state);
         }),
     GoRoute(
+        path: routeSettings,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return customPageBuilder(const SettingsPage(), context, state);
+        }),
+    GoRoute(
         path: '$routeDetails/:id',
         name: 'details',
         pageBuilder: (BuildContext context, GoRouterState state) {

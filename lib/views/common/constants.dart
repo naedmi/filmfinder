@@ -91,6 +91,13 @@ const double mainActionButtonWidth = 84.0;
 
 const double elevation = paddingSmall;
 
+const double settingFontSize = 20;
+const double settingIconSizeMultiplicator = 1.4;
+const double settingIconSize = settingFontSize * settingIconSizeMultiplicator;
+const double settingSwitchSize = 0.9;
+const double settingHeight = settingFontSize * 2;
+const double settingRoundBoxSize = 15;
+
 /// **************************************************************************
 
 /// FlexColorScheme **********************************************************
