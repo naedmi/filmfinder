@@ -32,17 +32,6 @@ const List<String> posterSizes = <String>[
   'original'
 ];
 
-String poster({required String path, String width = 'w342'}) =>
-    'https://image.tmdb.org/t/p/$width/$path';
-
-enum SearchType {
-  movie,
-  // TODO: implement different model provider for each type
-  //tv,
-  //person,
-  //multi,
-}
-
 const Map<String, String> searchLanguages = <String, String>{
   'en-US': 'English',
   'de-DE': 'German',

@@ -1,4 +1,4 @@
-import 'package:filmfinder/models/search/search_response.dart';
+import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:filmfinder/views/list/list_media_widget.dart';
@@ -20,11 +20,11 @@ class ListPage extends ConsumerWidget {
         padding: const EdgeInsets.only(
             left: padding, right: padding, bottom: paddingBig * 2),
         itemBuilder: (BuildContext context, int index) => const ListMediaWidget(
-            res: SearchResult(
+            res: MovieResult(
                 adult: true,
                 backdropPath: null,
                 genreIds: null,
-                id: null,
+                id: 0,
                 originalLanguage: null,
                 originalTitle: null,
                 overview: null,
