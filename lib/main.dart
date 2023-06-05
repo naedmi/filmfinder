@@ -72,7 +72,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final SettingsDarkModel darkModeModel =
+    final SettingsDarkModeModel darkModeModel =
         ref.watch(settingsControllerProvider);
     return MaterialApp.router(
       routerConfig: _router,

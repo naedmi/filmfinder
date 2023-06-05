@@ -1,10 +1,9 @@
-import 'package:filmfinder/controllers/settings/settings_controller.dart';
 import 'package:filmfinder/controllers/settings/settings_provider.dart';
-import 'package:filmfinder/views/settings/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
 
+import '../../controllers/settings/settings_controller_interfaces.dart';
 import '../../models/settings/settings.dart';
 import '../common/constants.dart';
 import '../common/navigation_widget.dart';
@@ -46,8 +45,12 @@ class Settings extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final SettingsDarkModeController darkModeController =
         ref.read(settingsControllerProvider.notifier);
-    final SettingsDarkModel darkModeModel =
+    final SettingsDarkModeModel darkModeModel =
         ref.watch(settingsControllerProvider);
+    final SettingsLanguageController languageController =
+        ref.read(settingsLanguageControllerProvider.notifier);
+    final SettingsLanguageModel languageModel =
+        ref.watch(settingsLanguageControllerProvider);
     const double localPadding = 8.0;
     return Padding(
       padding: const EdgeInsets.only(
@@ -100,13 +103,13 @@ class Settings extends ConsumerWidget {
                         itemBuilder: (BuildContext context, int index) =>
                             ListTile(
                           horizontalTitleGap: padding,
-                          trailing: FilmfinderPreferences.getLanguage() ==
-                                  settingLangs[index]
-                              ? const Icon(Remix.check_line)
-                              : null,
+                          trailing:
+                              languageModel.language == settingLangs[index]
+                                  ? const Icon(Remix.check_line)
+                                  : null,
                           title: Text(settingLangs[index]),
                           onTap: () {
-                            FilmfinderPreferences.setLanguage(
+                            languageController.setLanguage(
                               settingLangs[index],
                             );
                             Navigator.pop(context);

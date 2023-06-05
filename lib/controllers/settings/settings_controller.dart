@@ -1,20 +1,18 @@
+import 'package:filmfinder/controllers/settings/settings_controller_interfaces.dart';
 import 'package:filmfinder/models/settings/settings.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../views/settings/shared_preferences.dart';
 
-abstract class SettingsDarkModeController
-    extends StateNotifier<SettingsDarkModel> {
-  SettingsDarkModeController(SettingsDarkModel state) : super(state);
+/// **************************************************************************
 
-  void switchDarkMode();
-}
+/// DarkMode *****************************************************************
 
 class SettingsDarkModeControllerImpl extends SettingsDarkModeController {
   SettingsDarkModeControllerImpl({
-    SettingsDarkModel? model,
+    SettingsDarkModeModel? model,
   }) : super(model ??
-            SettingsDarkModel(darkMode: FilmfinderPreferences.getDarkMode()));
+            SettingsDarkModeModel(
+                darkMode: FilmfinderPreferences.getDarkMode()));
 
   @override
   void switchDarkMode() {
@@ -22,3 +20,23 @@ class SettingsDarkModeControllerImpl extends SettingsDarkModeController {
     state = state.copyWith(darkMode: FilmfinderPreferences.getDarkMode());
   }
 }
+
+/// **************************************************************************
+
+/// Language *****************************************************************
+
+class SettingsLanguageControllerImpl extends SettingsLanguageController {
+  SettingsLanguageControllerImpl({
+    SettingsLanguageModel? model,
+  }) : super(model ??
+            SettingsLanguageModel(
+                language: FilmfinderPreferences.getLanguage()));
+
+  @override
+  void setLanguage(String lang) {
+    FilmfinderPreferences.setLanguage(lang);
+    state = state.copyWith(language: FilmfinderPreferences.getLanguage());
+  }
+}
+
+/// **************************************************************************
