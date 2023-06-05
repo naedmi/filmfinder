@@ -5,11 +5,11 @@ import 'package:remixicon/remixicon.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
   final ScrollController? controller;
-  final bool showMiddleButton;
 
-  const BottomNavigationWidget(
-      {Key? key, this.controller, this.showMiddleButton = true})
-      : super(key: key);
+  const BottomNavigationWidget({
+    Key? key,
+    this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +37,7 @@ class BottomNavigationWidget extends StatelessWidget {
                 }
               },
             ),
-            if (showMiddleButton) const MiddleButton(),
-            //TODO this Spacer puts them too far apart maybe use a SizedBox
-            if (!showMiddleButton) const Spacer(),
+            const MiddleButton(),
             IconButton(
               onPressed: () {
                 //toDo add to list
@@ -106,7 +104,8 @@ class SimpleBottomBarScaffold extends StatelessWidget {
           extendBody: true,
           resizeToAvoidBottomInset: false,
           bottomNavigationBar: BottomNavigationWidget(
-              controller: controller, showMiddleButton: showMiddleButton),
+            controller: controller,
+          ),
           body: body),
     );
   }

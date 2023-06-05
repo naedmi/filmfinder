@@ -5,6 +5,8 @@ import 'package:filmfinder/views/landing_page.dart';
 import 'package:filmfinder/views/list/list_page.dart';
 import 'package:filmfinder/views/movie_details/movie_detail_page.dart';
 import 'package:filmfinder/views/search/search_page.dart';
+import 'package:filmfinder/views/settings/settings_page.dart';
+import 'package:filmfinder/views/settings/shared_preferences.dart';
 import 'package:filmfinder/views/swipe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -12,6 +14,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FilmfinderPreferences.init();
   await dotenv.load();
   runApp(ProviderScope(
       observers: <ProviderObserver>[LoggerService()], child: const MyApp()));
@@ -42,6 +46,11 @@ final GoRouter _router = GoRouter(
           return customPageBuilder(SearchPage(), context, state);
         }),
     GoRoute(
+        path: routeSettings,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return customPageBuilder(const SettingsPage(), context, state);
+        }),
+    GoRoute(
         path: '$routeDetails/:id',
         name: 'details',
         pageBuilder: (BuildContext context, GoRouterState state) {
@@ -65,7 +74,9 @@ class MyApp extends StatelessWidget {
       title: 'filmfinder',
       theme: theme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: FilmfinderPreferences.getDarkMode()
+          ? ThemeMode.dark
+          : ThemeMode.light,
       debugShowCheckedModeBanner: false,
     );
   }
