@@ -19,6 +19,22 @@ class LandingPage extends ConsumerWidget {
     final LandingController controller = ref.watch(landingControllerProvider);
     return MainBottomBarScaffold(
         controller: _scrollController,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          forceMaterialTransparency: true,
+          title: const Text('Home'),
+          titleSpacing: padding,
+          actions: <Widget>[
+            IconButton(
+                onPressed: () {
+                  context.push(routeSearch);
+                },
+                icon: const Icon(
+                  Remix.search_line,
+                )),
+            IconButton(onPressed: () {}, icon: const Icon(Remix.settings_line)),
+          ],
+        ),
         body: RefreshIndicator(
           onRefresh: () async {
             controller.refresh();
@@ -28,24 +44,6 @@ class LandingPage extends ConsumerWidget {
             padding: const EdgeInsets.all(10),
             shrinkWrap: true,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: padding),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    IconButton(
-                        onPressed: () {
-                          context.push(routeSearch);
-                        },
-                        icon: const Icon(
-                          Remix.search_line,
-                        )),
-                    IconButton(
-                        onPressed: () {}, icon: const Icon(Remix.settings_line)),
-                  ],
-                ),
-              ),
               for (Future<LandingCategory> landingCategory
                   in controller.landingCategories)
                 OverviewRowWidget(landingCategory: landingCategory),
@@ -72,8 +70,8 @@ class OverviewRowWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding:
-                      const EdgeInsets.only(top: paddingSmall, left: padding),
+                  padding: const EdgeInsets.only(
+                      top: paddingSmall, left: padding, bottom: paddingTiny),
                   child: Text(
                     snapshot.data!.title,
                     style: Theme.of(context).textTheme.headlineMedium,
@@ -81,15 +79,18 @@ class OverviewRowWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height:
-                      MediaQuery.of(context).size.width / 3 + paddingBig * 2,
+                  height: MediaQuery.of(context).size.width / 3 +
+                      paddingBig * 2 +
+                      padding,
                   child: ListView.separated(
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(horizontal: padding),
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int i) =>
-                        ResultPosterWidget(
-                            id: snapshot.data!.posters[i].movieId, posterPath: snapshot.data!.posters[i].posterPath),
+                    itemBuilder: (BuildContext context, int i) => Container(
+                        margin: const EdgeInsets.only(bottom: padding),
+                        child: ResultPosterWidget(
+                            id: snapshot.data!.posters[i].movieId,
+                            posterPath: snapshot.data!.posters[i].posterPath)),
                     itemCount: snapshot.data!.posters.length,
                     separatorBuilder: (BuildContext context, int i) =>
                         const SizedBox(width: paddingSmall),
@@ -108,7 +109,7 @@ class OverviewRowWidget extends StatelessWidget {
                   )),
                   child: Padding(
                     padding: EdgeInsets.all(padding),
-                      child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(),
                   ),
                 ),
               ),

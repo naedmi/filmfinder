@@ -7,7 +7,8 @@ enum AvailableLandingCategory {
   upcoming,
 }
 
-final Map<AvailableLandingCategory, String> categoryNameMap = <AvailableLandingCategory, String>{
+final Map<AvailableLandingCategory, String> categoryNameMap =
+    <AvailableLandingCategory, String>{
   AvailableLandingCategory.now_playing: 'Now Playing',
   AvailableLandingCategory.popular: 'Popular',
   AvailableLandingCategory.top_rated: 'Top Rated',
