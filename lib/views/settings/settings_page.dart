@@ -66,8 +66,8 @@ class Settings extends ConsumerWidget {
               settingName: darkMode,
               withSwitch: true,
               switchDefault: darkModeModel.darkMode,
-              settingIcon: const Icon(
-                Remix.moon_clear_line,
+              settingIcon: Icon(
+                darkModeModel.darkMode ? Remix.moon_line : Remix.sun_line,
                 size: settingIconSize,
               ),
               onPressed: () {

@@ -105,7 +105,7 @@ const List<String> settingLangs = <String>[
   'en-US',
   'de-DE',
 ]; // default lang first in list
-const String darkMode = 'Dark Mode';
+const String darkMode = 'Dark Theme';
 const String parentalControl = 'Parental Control';
 const String language = 'Language';
 const String about = 'About';
