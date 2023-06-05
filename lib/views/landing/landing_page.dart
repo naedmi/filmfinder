@@ -21,18 +21,58 @@ class LandingPage extends ConsumerWidget {
         controller: _scrollController,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          forceMaterialTransparency: true,
-          title: const Text('Home'),
+          title: GestureDetector(
+            onTap: () {
+              // TODO: Add about page
+            },
+            onLongPress: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(padding),
+                          child: Text(
+                            'filmfinder™',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ),
+                      ],
+                    );
+                  });
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(borderRadiusBig),
+              child: Container(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                padding: const EdgeInsets.all(1),
+                child: const Image(
+                    image: AssetImage('assets/images/filmfinder_logo.png'),
+                    fit: BoxFit.contain,
+                    height: 42),
+              ),
+            ),
+          ),
           titleSpacing: padding,
           actions: <Widget>[
-            IconButton(
-                onPressed: () {
-                  context.push(routeSearch);
-                },
-                icon: const Icon(
-                  Remix.search_line,
-                )),
-            IconButton(onPressed: () {}, icon: const Icon(Remix.settings_line)),
+            Hero(
+              tag: iconHeroTag,
+              child: IconButton(
+                  onPressed: () {
+                    context.push(routeSearch);
+                  },
+                  icon: const Icon(
+                    Remix.search_line,
+                  )),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: paddingTiny),
+              child: IconButton(
+                  onPressed: () {}, icon: const Icon(Remix.settings_line)),
+            ),
           ],
         ),
         body: RefreshIndicator(
@@ -41,13 +81,12 @@ class LandingPage extends ConsumerWidget {
           },
           child: ListView(
             controller: _scrollController,
-            padding: const EdgeInsets.all(10),
             shrinkWrap: true,
             children: <Widget>[
               for (Future<LandingCategory> landingCategory
                   in controller.landingCategories)
                 OverviewRowWidget(landingCategory: landingCategory),
-              const SizedBox(height: paddingBig * 2),
+              const SizedBox(height: paddingBig),
             ],
           ),
         ));
@@ -69,19 +108,19 @@ class OverviewRowWidget extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                const Divider(endIndent: padding, indent: padding),
                 Padding(
                   padding: const EdgeInsets.only(
                       top: paddingSmall, left: padding, bottom: paddingTiny),
                   child: Text(
                     snapshot.data!.title,
                     style: Theme.of(context).textTheme.headlineMedium,
+                    maxLines: 1,
                     textAlign: TextAlign.left,
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.width / 3 +
-                      paddingBig * 2 +
-                      padding,
+                  height: posterContainerDefaultHeight(context) + padding,
                   child: ListView.separated(
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(horizontal: padding),
@@ -93,26 +132,52 @@ class OverviewRowWidget extends StatelessWidget {
                             posterPath: snapshot.data!.posters[i].posterPath)),
                     itemCount: snapshot.data!.posters.length,
                     separatorBuilder: (BuildContext context, int i) =>
-                        const SizedBox(width: paddingSmall),
+                        const SizedBox(width: paddingTiny),
+                  ),
+                ),
+              ],
+            );
+          } else if (snapshot.hasError) {
+            return Column(
+              children: <Widget>[
+                const Divider(endIndent: padding, indent: padding),
+                SizedBox(
+                  height: posterContainerDefaultHeight(context) + padding,
+                  child: const Center(
+                    child: Card(
+                      shape: CircleBorder(
+                          side: BorderSide(
+                        color: Colors.transparent,
+                      )),
+                      child: Padding(
+                        padding: EdgeInsets.all(padding),
+                        child: Icon(Remix.wifi_off_line),
+                      ),
+                    ),
                   ),
                 ),
               ],
             );
           } else {
-            return const Padding(
-              padding: EdgeInsets.only(top: paddingBig),
-              child: Center(
-                child: Card(
-                  shape: CircleBorder(
-                      side: BorderSide(
-                    color: Colors.transparent,
-                  )),
-                  child: Padding(
-                    padding: EdgeInsets.all(padding),
-                    child: CircularProgressIndicator(),
+            return Column(
+              children: <Widget>[
+                const Divider(endIndent: padding, indent: padding),
+                SizedBox(
+                  height: posterContainerDefaultHeight(context) + padding,
+                  child: const Center(
+                    child: Card(
+                      shape: CircleBorder(
+                          side: BorderSide(
+                        color: Colors.transparent,
+                      )),
+                      child: Padding(
+                        padding: EdgeInsets.all(padding),
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             );
           }
         });

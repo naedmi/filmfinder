@@ -26,7 +26,7 @@ class SearchPage extends ConsumerWidget {
       required search_controller.SearchController controller,
       required bool disablePrevious,
       required bool disableNext}) {
-    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,
@@ -106,12 +106,15 @@ class SearchPage extends ConsumerWidget {
                               },
                             )
                           : null,
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                          searchController.setQuery(textController.text);
-                        },
-                        icon: const Icon(Remix.search_line),
+                      suffixIcon: Hero(
+                        tag: iconHeroTag,
+                        child: IconButton(
+                          onPressed: () {
+                            FocusScope.of(context).unfocus();
+                            searchController.setQuery(textController.text);
+                          },
+                          icon: const Icon(Remix.search_line),
+                        ),
                       ),
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: paddingSmall),

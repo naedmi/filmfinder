@@ -23,12 +23,8 @@ class SearchResultWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(paddingSmall),
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.width / 3 +
-                      paddingBig -
-                      paddingSmall * 2,
-                  width: MediaQuery.of(context).size.width / 3 * 2 -
-                      paddingBig * 2 -
-                      paddingSmall,
+                  height: posterContainerDefaultHeight(context) * 2 / 3,
+                  width: posterContainerDefaultHeight(context) * 2 / 3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +103,9 @@ class SearchResultWidget extends StatelessWidget {
             ],
           ),
         ),
-        ResultPosterWidget(id: res.id, posterPath: res.posterPath),
+        SizedBox(
+            height: posterContainerDefaultHeight(context),
+            child: ResultPosterWidget(id: res.id, posterPath: res.posterPath)),
       ]),
     );
   }

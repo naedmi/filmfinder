@@ -21,6 +21,8 @@ final String routeDetails = routes[5];
 /// ***************************************************************************
 
 /// tmdb **********************************************************************
+double posterContainerDefaultHeight(BuildContext context) =>
+    MediaQuery.of(context).size.width / 3 + paddingBig * 2;
 
 const List<String> posterSizes = <String>[
   'w92',
@@ -44,6 +46,7 @@ const Map<String, String> searchLanguages = <String, String>{
 /// **************************************************************************
 
 /// Search *******************************************************************
+const String iconHeroTag = 'search';
 
 String capitalise(String s) {
   return s[0].toUpperCase() + s.substring(1);
@@ -161,7 +164,7 @@ final ThemeData darkTheme = FlexThemeData.dark(
 /// **************************************************************************
 
 /// Animation ****************************************************************
-const int animationDuration = 500;
+const int animationDuration = 1000;
 const int animationDelay = 250;
 
 /// **************************************************************************
