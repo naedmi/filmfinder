@@ -17,36 +17,41 @@ class LandingPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final LandingController controller = ref.watch(landingControllerProvider);
-    //final StateController<LandingController> notifier = ref.read(landingControllerProvider.notifier);
     return MainBottomBarScaffold(
         controller: _scrollController,
-        body: ListView(
-          controller: _scrollController,
-          padding: const EdgeInsets.all(10),
-          shrinkWrap: true,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: padding),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                      onPressed: () {
-                        context.push(routeSearch);
-                      },
-                      icon: const Icon(
-                        Remix.search_line,
-                      )),
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Remix.settings_line)),
-                ],
+        body: RefreshIndicator(
+          onRefresh: () async {
+            controller.refresh();
+          },
+          child: ListView(
+            controller: _scrollController,
+            padding: const EdgeInsets.all(10),
+            shrinkWrap: true,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: padding),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    IconButton(
+                        onPressed: () {
+                          context.push(routeSearch);
+                        },
+                        icon: const Icon(
+                          Remix.search_line,
+                        )),
+                    IconButton(
+                        onPressed: () {}, icon: const Icon(Remix.settings_line)),
+                  ],
+                ),
               ),
-            ),
-            for (Future<LandingCategory> landingCategory
-                in controller.landingCategories)
-              OverviewRowWidget(landingCategory: landingCategory),
-          ],
+              for (Future<LandingCategory> landingCategory
+                  in controller.landingCategories)
+                OverviewRowWidget(landingCategory: landingCategory),
+              const SizedBox(height: paddingBig * 2),
+            ],
+          ),
         ));
   }
 }
@@ -68,7 +73,7 @@ class OverviewRowWidget extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding:
-                      const EdgeInsets.only(top: paddingBig, left: padding),
+                      const EdgeInsets.only(top: paddingSmall, left: padding),
                   child: Text(
                     snapshot.data!.title,
                     style: Theme.of(context).textTheme.headlineMedium,
@@ -78,46 +83,37 @@ class OverviewRowWidget extends StatelessWidget {
                 SizedBox(
                   height:
                       MediaQuery.of(context).size.width / 3 + paddingBig * 2,
-                  child: ListView(
+                  child: ListView.separated(
                     shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(horizontal: padding),
                     scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      for (ClickablePoster poster in snapshot.data!.posters)
+                    itemBuilder: (BuildContext context, int i) =>
                         ResultPosterWidget(
-                            id: poster.movieId, posterPath: poster.posterPath)
-                    ],
+                            id: snapshot.data!.posters[i].movieId, posterPath: snapshot.data!.posters[i].posterPath),
+                    itemCount: snapshot.data!.posters.length,
+                    separatorBuilder: (BuildContext context, int i) =>
+                        const SizedBox(width: paddingSmall),
                   ),
                 ),
               ],
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Padding(
+              padding: EdgeInsets.only(top: paddingBig),
+              child: Center(
+                child: Card(
+                  shape: CircleBorder(
+                      side: BorderSide(
+                    color: Colors.transparent,
+                  )),
+                  child: Padding(
+                    padding: EdgeInsets.all(padding),
+                      child: CircularProgressIndicator(),
+                  ),
+                ),
+              ),
+            );
           }
         });
   }
 }
-/*
-Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 10.0, left: 10),
-          child: Text(
-            'Neu',
-            style: Theme.of(context).textTheme.headlineMedium,
-            textAlign: TextAlign.left,
-          ),
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.width / 3 + paddingBig * 2,
-          child: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: const <Widget>[
-              ResultPosterWidget(id: 42069, posterPath: null)
-            ],
-          ),
-        ),
-      ],
-    );
- */

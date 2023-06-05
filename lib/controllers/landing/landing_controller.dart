@@ -12,6 +12,8 @@ abstract class LandingController {
 
   late List<Future<LandingCategory>> landingCategories =
       <Future<LandingCategory>>[];
+
+  void refresh();
 }
 
 class LandingControllerImpl extends LandingController {
@@ -20,11 +22,18 @@ class LandingControllerImpl extends LandingController {
     for (AvailableLandingCategory category in AvailableLandingCategory.values) {
       landingCategories.add(ref.watch(categoryApiService(category).selectAsync(
           (DefaultResponse data) => LandingCategory(
-              title: category.name,
+              title: categoryNameMap[category] ?? '',
               posters: data.results
                   .map((MovieResult m) => ClickablePoster(
                       movieId: m.id, posterPath: m.posterPath ?? ''))
                   .toList()))));
+    }
+  }
+
+  @override
+  void refresh() {
+    for (AvailableLandingCategory category in AvailableLandingCategory.values) {
+      ref.invalidate(categoryApiService(category));
     }
   }
 }
