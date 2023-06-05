@@ -13,6 +13,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'controllers/settings/settings_provider.dart';
+import 'models/settings/settings.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FilmfinderPreferences.init();
@@ -64,19 +67,19 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final SettingsDarkModel darkModeModel =
+        ref.watch(settingsControllerProvider);
     return MaterialApp.router(
       routerConfig: _router,
       title: 'filmfinder',
       theme: theme,
       darkTheme: darkTheme,
-      themeMode: FilmfinderPreferences.getDarkMode()
-          ? ThemeMode.dark
-          : ThemeMode.light,
+      themeMode: darkModeModel.darkMode ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
     );
   }

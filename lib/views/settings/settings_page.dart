@@ -1,7 +1,11 @@
+import 'package:filmfinder/controllers/settings/settings_controller.dart';
+import 'package:filmfinder/controllers/settings/settings_provider.dart';
 import 'package:filmfinder/views/settings/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
 
+import '../../models/settings/settings.dart';
 import '../common/constants.dart';
 import '../common/navigation_widget.dart';
 import 'settings_widget.dart';
@@ -35,11 +39,15 @@ class SettingsPage extends StatelessWidget {
   }
 }
 
-class Settings extends StatelessWidget {
+class Settings extends ConsumerWidget {
   const Settings({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final SettingsDarkModeController darkModeController =
+        ref.read(settingsControllerProvider.notifier);
+    final SettingsDarkModel darkModeModel =
+        ref.watch(settingsControllerProvider);
     const double localPadding = 8.0;
     return Padding(
       padding: const EdgeInsets.only(
@@ -54,14 +62,13 @@ class Settings extends StatelessWidget {
             SettingWidget(
               settingName: darkMode,
               withSwitch: true,
-              switchDefault: FilmfinderPreferences.getDarkMode(),
+              switchDefault: darkModeModel.darkMode,
               settingIcon: const Icon(
                 Remix.moon_clear_line,
                 size: settingIconSize,
               ),
               onPressed: () {
-                FilmfinderPreferences.setDarkMode(
-                    !FilmfinderPreferences.getDarkMode());
+                darkModeController.switchDarkMode();
               },
             ),
             SettingWidget(
