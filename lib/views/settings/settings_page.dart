@@ -1,3 +1,4 @@
+import 'package:filmfinder/views/settings/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -5,6 +6,8 @@ import '../common/constants.dart';
 import '../common/navigation_widget.dart';
 import 'settings_widget.dart';
 import 'user_profile_widget.dart';
+
+typedef OnPressed = void Function();
 
 final ScrollController _controller = ScrollController();
 
@@ -49,47 +52,76 @@ class Settings extends StatelessWidget {
           scrollDirection: Axis.vertical,
           children: <Widget>[
             SettingWidget(
-              settingName: 'appearance',
+              settingName: darkMode,
               withSwitch: true,
+              switchDefault: FilmfinderPreferences.getDarkMode(),
               settingIcon: const Icon(
                 Remix.moon_clear_line,
                 size: settingIconSize,
               ),
-              onPressed: () {},
-            ),
-            SettingWidget(
-              settingName: 'filter',
-              settingIcon: const Icon(
-                Remix.filter_2_line,
-                size: settingIconSize,
-              ),
-              withSwitch: true,
               onPressed: () {
-                //toDo open filter
+                FilmfinderPreferences.setDarkMode(
+                    !FilmfinderPreferences.getDarkMode());
               },
             ),
             SettingWidget(
-              settingName: 'parental control',
+              settingName: parentalControl,
               settingIcon: const Icon(
                 Remix.parent_line,
                 size: settingIconSize,
               ),
               withSwitch: false,
               onPressed: () {
-                //toDo open parent settings
+                //todo parental control page
               },
             ),
             SettingWidget(
-              settingName: 'about',
+              settingName: language,
               settingIcon: const Icon(
-                Remix.information_line,
+                Remix.translate_2,
                 size: settingIconSize,
               ),
               withSwitch: false,
               onPressed: () {
-                //toDo open about page
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(padding),
+                        itemCount: settingLangs.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            ListTile(
+                          horizontalTitleGap: padding,
+                          trailing: FilmfinderPreferences.getLanguage() ==
+                                  settingLangs[index]
+                              ? const Icon(Remix.check_line)
+                              : null,
+                          title: Text(settingLangs[index]),
+                          onTap: () {
+                            FilmfinderPreferences.setLanguage(
+                              settingLangs[index],
+                            );
+                            Navigator.pop(context);
+                          },
+                        ),
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const Divider(),
+                      );
+                    });
               },
             ),
+            SettingWidget(
+              settingName: about,
+              withSwitch: false,
+              settingIcon: const Icon(
+                Remix.information_line,
+                size: settingIconSize,
+              ),
+              onPressed: () {
+                //todo open about popup
+              },
+            )
           ],
         ),
       ),

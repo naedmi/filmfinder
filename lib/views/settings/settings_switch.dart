@@ -12,16 +12,11 @@ class SettingSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        onSwitchChanged(!switchValue);
-      },
-      child: Switch(
-        // This bool value toggles the switch.
-        value: switchValue,
-        activeColor: Colors.white,
-        onChanged: onSwitchChanged,
-      ),
+    return Switch(
+      // This bool value toggles the switch.
+      value: switchValue,
+      activeColor: Colors.white,
+      onChanged: onSwitchChanged,
     );
   }
 }

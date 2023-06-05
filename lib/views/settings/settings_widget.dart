@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../common/constants.dart';
 import 'settings_switch.dart';
 
-typedef TapCallback = void Function();
+typedef OnPressed = void Function();
 
 class SettingWidget extends StatefulWidget {
   final String settingName;
   final bool withSwitch;
+  final bool? switchDefault;
   final Icon settingIcon;
-  final TapCallback? onPressed;
+  final OnPressed onPressed;
 
   const SettingWidget({
     Key? key,
@@ -17,6 +18,7 @@ class SettingWidget extends StatefulWidget {
     required this.withSwitch,
     required this.settingIcon,
     required this.onPressed,
+    this.switchDefault,
   }) : super(key: key);
 
   @override
@@ -24,7 +26,13 @@ class SettingWidget extends StatefulWidget {
 }
 
 class _SettingWidgetState extends State<SettingWidget> {
-  bool _switchValue = false;
+  late bool _switchValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _switchValue = widget.switchDefault ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +42,7 @@ class _SettingWidgetState extends State<SettingWidget> {
         setState(() {
           _switchValue = value;
         });
+        widget.onPressed();
       },
     );
     return Padding(
@@ -41,9 +50,12 @@ class _SettingWidgetState extends State<SettingWidget> {
       child: InkWell(
         borderRadius: BorderRadius.circular(settingRoundBoxSize),
         onTap: () {
-          setState(() {
-            _switchValue = !_switchValue;
-          });
+          if (widget.withSwitch) {
+            setState(() {
+              _switchValue = !_switchValue;
+            });
+          }
+          widget.onPressed();
         },
         child: SizedBox(
           height: settingHeight,
@@ -68,9 +80,10 @@ class _SettingWidgetState extends State<SettingWidget> {
               Expanded(
                 flex: 1,
                 child: Transform.scale(
-                    scale: settingSwitchSize,
-                    child:
-                        widget.withSwitch ? settingSwitch : const SizedBox()),
+                  scale: settingSwitchSize,
+                  child: widget.withSwitch ? settingSwitch : const SizedBox(),
+                  // : const Test(),
+                ),
               ),
             ],
           ),

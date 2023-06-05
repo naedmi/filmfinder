@@ -13,7 +13,7 @@ class UserProfile extends StatelessWidget {
           height: 200,
           //toDo replace with picture of account
           child: Icon(
-            Remix.account_circle_line,
+            Remix.account_pin_box_line,
             size: 180,
           ),
         ),
