@@ -16,13 +16,6 @@ Future<void> main() async {
   await dotenv.load();
   runApp(ProviderScope(
       observers: <ProviderObserver>[LoggerService()], child: const MyApp()));
-
-  // This is for flutter working with riverpods stack traces
-  FlutterError.demangleStackTrace = (StackTrace stack) {
-    if (stack is stack_trace.Trace) return stack.vmTrace;
-    if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;
-    return stack;
-  };
 }
 
 /// The route configuration.
