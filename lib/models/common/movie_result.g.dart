@@ -1,37 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'search_response.dart';
+part of 'movie_result.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SearchResponse _$$_SearchResponseFromJson(Map<String, dynamic> json) =>
-    _$_SearchResponse(
-      page: json['page'] as int? ?? 1,
-      results: (json['results'] as List<dynamic>?)
-              ?.map((e) => SearchResult.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      totalPages: json['total_pages'] as int? ?? 1,
-      totalResults: json['total_results'] as int? ?? 0,
-    );
-
-Map<String, dynamic> _$$_SearchResponseToJson(_$_SearchResponse instance) =>
-    <String, dynamic>{
-      'page': instance.page,
-      'results': instance.results,
-      'total_pages': instance.totalPages,
-      'total_results': instance.totalResults,
-    };
-
-_$_SearchResult _$$_SearchResultFromJson(Map<String, dynamic> json) =>
-    _$_SearchResult(
+_$_MovieResult _$$_MovieResultFromJson(Map<String, dynamic> json) =>
+    _$_MovieResult(
       adult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'] as String?,
       genreIds:
           (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
-      id: json['id'] as int?,
+      id: json['id'] as int,
       originalLanguage: json['original_language'] as String?,
       originalTitle: json['original_title'] as String?,
       overview: json['overview'] as String?,
@@ -44,7 +25,7 @@ _$_SearchResult _$$_SearchResultFromJson(Map<String, dynamic> json) =>
       voteCount: json['vote_count'] as int?,
     );
 
-Map<String, dynamic> _$$_SearchResultToJson(_$_SearchResult instance) =>
+Map<String, dynamic> _$$_MovieResultToJson(_$_MovieResult instance) =>
     <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,

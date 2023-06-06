@@ -1,14 +1,13 @@
+import 'package:filmfinder/controllers/search/search_providers.dart';
+import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
-import 'package:filmfinder/models/search/search_response.dart';
 import 'package:filmfinder/services/search/search_api_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'search_providers.dart';
 
 abstract class SearchController {
   SearchController(this.ref);
 
-  late AsyncValue<SearchResponse> searchResponse;
+  late AsyncValue<DefaultResponse> searchResponse;
 
   final AutoDisposeStateProviderRef<SearchController> ref;
   late SearchFilter filter;

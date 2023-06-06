@@ -1,7 +1,7 @@
 import 'package:filmfinder/services/logger_provider_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
-import 'package:filmfinder/views/landing_page.dart';
+import 'package:filmfinder/views/landing/landing_page.dart';
 import 'package:filmfinder/views/list/list_page.dart';
 import 'package:filmfinder/views/movie_details/movie_detail_page.dart';
 import 'package:filmfinder/views/search/search_page.dart';
@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
         path: routeHome,
         pageBuilder: (BuildContext context, GoRouterState state) {
-          return customPageBuilder(const LandingPage(), context, state);
+          return customPageBuilder(LandingPage(), context, state);
         }),
     GoRoute(
         path: routeList,

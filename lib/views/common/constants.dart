@@ -21,6 +21,8 @@ final String routeDetails = routes[5];
 /// ***************************************************************************
 
 /// tmdb **********************************************************************
+double posterContainerDefaultHeight(BuildContext context) =>
+    MediaQuery.of(context).size.width / 3 + paddingBig * 2;
 
 const List<String> posterSizes = <String>[
   'w92',
@@ -31,17 +33,6 @@ const List<String> posterSizes = <String>[
   'w780',
   'original'
 ];
-
-String poster({required String path, String width = 'w342'}) =>
-    'https://image.tmdb.org/t/p/$width/$path';
-
-enum SearchType {
-  movie,
-  // TODO: implement different model provider for each type
-  //tv,
-  //person,
-  //multi,
-}
 
 const Map<String, String> searchLanguages = <String, String>{
   'en-US': 'English',
@@ -55,6 +46,7 @@ const Map<String, String> searchLanguages = <String, String>{
 /// **************************************************************************
 
 /// Search *******************************************************************
+const String iconHeroTag = 'search';
 
 String capitalise(String s) {
   return s[0].toUpperCase() + s.substring(1);
@@ -191,7 +183,7 @@ final ThemeData darkTheme = FlexThemeData.dark(
 /// **************************************************************************
 
 /// Animation ****************************************************************
-const int animationDuration = 500;
+const int animationDuration = 1000;
 const int animationDelay = 250;
 
 /// **************************************************************************

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filmfinder/models/search/search_response.dart';
+import 'package:filmfinder/models/common/movie_result.dart';
+import 'package:filmfinder/services/common/poster_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -7,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:remixicon/remixicon.dart';
 
 class ListMediaWidget extends StatelessWidget {
-  final SearchResult res;
+  final MovieResult res;
 
   const ListMediaWidget({Key? key, required this.res}) : super(key: key);
 
@@ -140,7 +141,7 @@ class ListMediaWidget extends StatelessWidget {
           onTap: () {
             context.pushNamed(
               'details',
-              pathParameters: {'id': res.id.toString()},
+              pathParameters: <String, String>{'id': res.id.toString()},
             );
           },
           child: Material(
@@ -149,7 +150,7 @@ class ListMediaWidget extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(borderRadiusBig),
               child: CachedNetworkImage(
-                imageUrl: poster(path: res.posterPath ?? ''),
+                imageUrl: posterUrl(path: res.posterPath ?? ''),
                 fit: BoxFit.cover,
                 width: MediaQuery.of(context).size.width / 3 + paddingSmall,
                 height: MediaQuery.of(context).size.width / 3 + paddingBig * 2,

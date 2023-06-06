@@ -1,15 +1,14 @@
+import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
-import 'package:filmfinder/models/search/search_response.dart';
+import 'package:filmfinder/services/dio_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../dio_provider.dart';
-
-final AutoDisposeFutureProviderFamily<SearchResponse, SearchFilter>
+final AutoDisposeFutureProviderFamily<DefaultResponse, SearchFilter>
     searchApiService = FutureProvider.autoDispose.family(
-        (AutoDisposeFutureProviderRef<SearchResponse> ref,
+        (AutoDisposeFutureProviderRef<DefaultResponse> ref,
             SearchFilter filter) async {
   if (filter.query.isEmpty) {
-    return const SearchResponse();
+    return const DefaultResponse();
   }
 
   dynamic response = await ref.watch(dioProvider).get(
@@ -22,5 +21,5 @@ final AutoDisposeFutureProviderFamily<SearchResponse, SearchFilter>
       );
   ref.keepAlive();
 
-  return SearchResponse.fromJson(response.data);
+  return DefaultResponse.fromJson(response.data);
 });

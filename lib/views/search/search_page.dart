@@ -1,14 +1,14 @@
 import 'package:filmfinder/controllers/search/search_controller.dart'
     as search_controller;
 import 'package:filmfinder/controllers/search/search_providers.dart';
-import 'package:filmfinder/models/search/search_response.dart';
+import 'package:filmfinder/models/common/default_response.dart';
+import 'package:filmfinder/models/search/api_search_types.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
+import 'package:filmfinder/views/search/search_result_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
-
-import 'search_result_widget.dart';
 
 class SearchPage extends ConsumerWidget {
   SearchPage({super.key});
@@ -22,11 +22,11 @@ class SearchPage extends ConsumerWidget {
 
   void _showNavigationSnackbar(
       {required BuildContext context,
-      required SearchResponse res,
+      required DefaultResponse res,
       required search_controller.SearchController controller,
       required bool disablePrevious,
       required bool disableNext}) {
-    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,
@@ -106,12 +106,15 @@ class SearchPage extends ConsumerWidget {
                               },
                             )
                           : null,
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                          searchController.setQuery(textController.text);
-                        },
-                        icon: const Icon(Remix.search_line),
+                      suffixIcon: Hero(
+                        tag: iconHeroTag,
+                        child: IconButton(
+                          onPressed: () {
+                            FocusScope.of(context).unfocus();
+                            searchController.setQuery(textController.text);
+                          },
+                          icon: const Icon(Remix.search_line),
+                        ),
                       ),
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: paddingSmall),
@@ -279,7 +282,7 @@ class SearchPage extends ConsumerWidget {
             ),
           )),
       body: searchController.searchResponse.when(
-          data: (SearchResponse res) => res.results.isNotEmpty
+          data: (DefaultResponse res) => res.results.isNotEmpty
               ? NotificationListener<ScrollEndNotification>(
                   onNotification: (ScrollEndNotification scrollEnd) {
                     if (scrollEnd.metrics.atEdge) {
