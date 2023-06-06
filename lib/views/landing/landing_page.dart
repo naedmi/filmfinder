@@ -71,7 +71,10 @@ class LandingPage extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(right: paddingTiny),
               child: IconButton(
-                  onPressed: () {}, icon: const Icon(Remix.settings_line)),
+                  onPressed: () {
+                    context.push(routeSettings);
+                  },
+                  icon: const Icon(Remix.settings_line)),
             ),
           ],
         ),
