@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'search_response.dart';
+part of 'movie_result.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,225 +14,16 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-SearchResponse _$SearchResponseFromJson(Map<String, dynamic> json) {
-  return _SearchResponse.fromJson(json);
+MovieResult _$MovieResultFromJson(Map<String, dynamic> json) {
+  return _MovieResult.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SearchResponse {
-  int get page => throw _privateConstructorUsedError;
-  List<SearchResult> get results => throw _privateConstructorUsedError;
-  int get totalPages => throw _privateConstructorUsedError;
-  int get totalResults => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SearchResponseCopyWith<SearchResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SearchResponseCopyWith<$Res> {
-  factory $SearchResponseCopyWith(
-          SearchResponse value, $Res Function(SearchResponse) then) =
-      _$SearchResponseCopyWithImpl<$Res, SearchResponse>;
-  @useResult
-  $Res call(
-      {int page, List<SearchResult> results, int totalPages, int totalResults});
-}
-
-/// @nodoc
-class _$SearchResponseCopyWithImpl<$Res, $Val extends SearchResponse>
-    implements $SearchResponseCopyWith<$Res> {
-  _$SearchResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? page = null,
-    Object? results = null,
-    Object? totalPages = null,
-    Object? totalResults = null,
-  }) {
-    return _then(_value.copyWith(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      results: null == results
-          ? _value.results
-          : results // ignore: cast_nullable_to_non_nullable
-              as List<SearchResult>,
-      totalPages: null == totalPages
-          ? _value.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalResults: null == totalResults
-          ? _value.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_SearchResponseCopyWith<$Res>
-    implements $SearchResponseCopyWith<$Res> {
-  factory _$$_SearchResponseCopyWith(
-          _$_SearchResponse value, $Res Function(_$_SearchResponse) then) =
-      __$$_SearchResponseCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int page, List<SearchResult> results, int totalPages, int totalResults});
-}
-
-/// @nodoc
-class __$$_SearchResponseCopyWithImpl<$Res>
-    extends _$SearchResponseCopyWithImpl<$Res, _$_SearchResponse>
-    implements _$$_SearchResponseCopyWith<$Res> {
-  __$$_SearchResponseCopyWithImpl(
-      _$_SearchResponse _value, $Res Function(_$_SearchResponse) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? page = null,
-    Object? results = null,
-    Object? totalPages = null,
-    Object? totalResults = null,
-  }) {
-    return _then(_$_SearchResponse(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      results: null == results
-          ? _value._results
-          : results // ignore: cast_nullable_to_non_nullable
-              as List<SearchResult>,
-      totalPages: null == totalPages
-          ? _value.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalResults: null == totalResults
-          ? _value.totalResults
-          : totalResults // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
-class _$_SearchResponse implements _SearchResponse {
-  const _$_SearchResponse(
-      {this.page = 1,
-      final List<SearchResult> results = const [],
-      this.totalPages = 1,
-      this.totalResults = 0})
-      : _results = results;
-
-  factory _$_SearchResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchResponseFromJson(json);
-
-  @override
-  @JsonKey()
-  final int page;
-  final List<SearchResult> _results;
-  @override
-  @JsonKey()
-  List<SearchResult> get results {
-    if (_results is EqualUnmodifiableListView) return _results;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_results);
-  }
-
-  @override
-  @JsonKey()
-  final int totalPages;
-  @override
-  @JsonKey()
-  final int totalResults;
-
-  @override
-  String toString() {
-    return 'SearchResponse(page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SearchResponse &&
-            (identical(other.page, page) || other.page == page) &&
-            const DeepCollectionEquality().equals(other._results, _results) &&
-            (identical(other.totalPages, totalPages) ||
-                other.totalPages == totalPages) &&
-            (identical(other.totalResults, totalResults) ||
-                other.totalResults == totalResults));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, page,
-      const DeepCollectionEquality().hash(_results), totalPages, totalResults);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SearchResponseCopyWith<_$_SearchResponse> get copyWith =>
-      __$$_SearchResponseCopyWithImpl<_$_SearchResponse>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_SearchResponseToJson(
-      this,
-    );
-  }
-}
-
-abstract class _SearchResponse implements SearchResponse {
-  const factory _SearchResponse(
-      {final int page,
-      final List<SearchResult> results,
-      final int totalPages,
-      final int totalResults}) = _$_SearchResponse;
-
-  factory _SearchResponse.fromJson(Map<String, dynamic> json) =
-      _$_SearchResponse.fromJson;
-
-  @override
-  int get page;
-  @override
-  List<SearchResult> get results;
-  @override
-  int get totalPages;
-  @override
-  int get totalResults;
-  @override
-  @JsonKey(ignore: true)
-  _$$_SearchResponseCopyWith<_$_SearchResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-SearchResult _$SearchResultFromJson(Map<String, dynamic> json) {
-  return _SearchResult.fromJson(json);
-}
-
-/// @nodoc
-mixin _$SearchResult {
+mixin _$MovieResult {
   bool? get adult => throw _privateConstructorUsedError;
   String? get backdropPath => throw _privateConstructorUsedError;
   List<int>? get genreIds => throw _privateConstructorUsedError;
-  int? get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String? get originalLanguage => throw _privateConstructorUsedError;
   String? get originalTitle => throw _privateConstructorUsedError;
   String? get overview => throw _privateConstructorUsedError;
@@ -246,21 +37,21 @@ mixin _$SearchResult {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SearchResultCopyWith<SearchResult> get copyWith =>
+  $MovieResultCopyWith<MovieResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SearchResultCopyWith<$Res> {
-  factory $SearchResultCopyWith(
-          SearchResult value, $Res Function(SearchResult) then) =
-      _$SearchResultCopyWithImpl<$Res, SearchResult>;
+abstract class $MovieResultCopyWith<$Res> {
+  factory $MovieResultCopyWith(
+          MovieResult value, $Res Function(MovieResult) then) =
+      _$MovieResultCopyWithImpl<$Res, MovieResult>;
   @useResult
   $Res call(
       {bool? adult,
       String? backdropPath,
       List<int>? genreIds,
-      int? id,
+      int id,
       String? originalLanguage,
       String? originalTitle,
       String? overview,
@@ -274,9 +65,9 @@ abstract class $SearchResultCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SearchResultCopyWithImpl<$Res, $Val extends SearchResult>
-    implements $SearchResultCopyWith<$Res> {
-  _$SearchResultCopyWithImpl(this._value, this._then);
+class _$MovieResultCopyWithImpl<$Res, $Val extends MovieResult>
+    implements $MovieResultCopyWith<$Res> {
+  _$MovieResultCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -289,7 +80,7 @@ class _$SearchResultCopyWithImpl<$Res, $Val extends SearchResult>
     Object? adult = freezed,
     Object? backdropPath = freezed,
     Object? genreIds = freezed,
-    Object? id = freezed,
+    Object? id = null,
     Object? originalLanguage = freezed,
     Object? originalTitle = freezed,
     Object? overview = freezed,
@@ -314,10 +105,10 @@ class _$SearchResultCopyWithImpl<$Res, $Val extends SearchResult>
           ? _value.genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
               as List<int>?,
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
@@ -363,18 +154,18 @@ class _$SearchResultCopyWithImpl<$Res, $Val extends SearchResult>
 }
 
 /// @nodoc
-abstract class _$$_SearchResultCopyWith<$Res>
-    implements $SearchResultCopyWith<$Res> {
-  factory _$$_SearchResultCopyWith(
-          _$_SearchResult value, $Res Function(_$_SearchResult) then) =
-      __$$_SearchResultCopyWithImpl<$Res>;
+abstract class _$$_MovieResultCopyWith<$Res>
+    implements $MovieResultCopyWith<$Res> {
+  factory _$$_MovieResultCopyWith(
+          _$_MovieResult value, $Res Function(_$_MovieResult) then) =
+      __$$_MovieResultCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {bool? adult,
       String? backdropPath,
       List<int>? genreIds,
-      int? id,
+      int id,
       String? originalLanguage,
       String? originalTitle,
       String? overview,
@@ -388,11 +179,11 @@ abstract class _$$_SearchResultCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchResultCopyWithImpl<$Res>
-    extends _$SearchResultCopyWithImpl<$Res, _$_SearchResult>
-    implements _$$_SearchResultCopyWith<$Res> {
-  __$$_SearchResultCopyWithImpl(
-      _$_SearchResult _value, $Res Function(_$_SearchResult) _then)
+class __$$_MovieResultCopyWithImpl<$Res>
+    extends _$MovieResultCopyWithImpl<$Res, _$_MovieResult>
+    implements _$$_MovieResultCopyWith<$Res> {
+  __$$_MovieResultCopyWithImpl(
+      _$_MovieResult _value, $Res Function(_$_MovieResult) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -401,7 +192,7 @@ class __$$_SearchResultCopyWithImpl<$Res>
     Object? adult = freezed,
     Object? backdropPath = freezed,
     Object? genreIds = freezed,
-    Object? id = freezed,
+    Object? id = null,
     Object? originalLanguage = freezed,
     Object? originalTitle = freezed,
     Object? overview = freezed,
@@ -413,7 +204,7 @@ class __$$_SearchResultCopyWithImpl<$Res>
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
   }) {
-    return _then(_$_SearchResult(
+    return _then(_$_MovieResult(
       adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
@@ -426,10 +217,10 @@ class __$$_SearchResultCopyWithImpl<$Res>
           ? _value._genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
               as List<int>?,
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
@@ -477,8 +268,8 @@ class __$$_SearchResultCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_SearchResult implements _SearchResult {
-  const _$_SearchResult(
+class _$_MovieResult implements _MovieResult {
+  const _$_MovieResult(
       {required this.adult,
       required this.backdropPath,
       required final List<int>? genreIds,
@@ -495,8 +286,8 @@ class _$_SearchResult implements _SearchResult {
       required this.voteCount})
       : _genreIds = genreIds;
 
-  factory _$_SearchResult.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchResultFromJson(json);
+  factory _$_MovieResult.fromJson(Map<String, dynamic> json) =>
+      _$$_MovieResultFromJson(json);
 
   @override
   final bool? adult;
@@ -513,7 +304,7 @@ class _$_SearchResult implements _SearchResult {
   }
 
   @override
-  final int? id;
+  final int id;
   @override
   final String? originalLanguage;
   @override
@@ -537,14 +328,14 @@ class _$_SearchResult implements _SearchResult {
 
   @override
   String toString() {
-    return 'SearchResult(adult: $adult, backdropPath: $backdropPath, genreIds: $genreIds, id: $id, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, title: $title, video: $video, voteAverage: $voteAverage, voteCount: $voteCount)';
+    return 'MovieResult(adult: $adult, backdropPath: $backdropPath, genreIds: $genreIds, id: $id, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, title: $title, video: $video, voteAverage: $voteAverage, voteCount: $voteCount)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchResult &&
+            other is _$_MovieResult &&
             (identical(other.adult, adult) || other.adult == adult) &&
             (identical(other.backdropPath, backdropPath) ||
                 other.backdropPath == backdropPath) &&
@@ -592,23 +383,23 @@ class _$_SearchResult implements _SearchResult {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchResultCopyWith<_$_SearchResult> get copyWith =>
-      __$$_SearchResultCopyWithImpl<_$_SearchResult>(this, _$identity);
+  _$$_MovieResultCopyWith<_$_MovieResult> get copyWith =>
+      __$$_MovieResultCopyWithImpl<_$_MovieResult>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchResultToJson(
+    return _$$_MovieResultToJson(
       this,
     );
   }
 }
 
-abstract class _SearchResult implements SearchResult {
-  const factory _SearchResult(
+abstract class _MovieResult implements MovieResult {
+  const factory _MovieResult(
       {required final bool? adult,
       required final String? backdropPath,
       required final List<int>? genreIds,
-      required final int? id,
+      required final int id,
       required final String? originalLanguage,
       required final String? originalTitle,
       required final String? overview,
@@ -618,10 +409,10 @@ abstract class _SearchResult implements SearchResult {
       required final String? title,
       required final bool? video,
       required final double? voteAverage,
-      required final int? voteCount}) = _$_SearchResult;
+      required final int? voteCount}) = _$_MovieResult;
 
-  factory _SearchResult.fromJson(Map<String, dynamic> json) =
-      _$_SearchResult.fromJson;
+  factory _MovieResult.fromJson(Map<String, dynamic> json) =
+      _$_MovieResult.fromJson;
 
   @override
   bool? get adult;
@@ -630,7 +421,7 @@ abstract class _SearchResult implements SearchResult {
   @override
   List<int>? get genreIds;
   @override
-  int? get id;
+  int get id;
   @override
   String? get originalLanguage;
   @override
@@ -653,6 +444,6 @@ abstract class _SearchResult implements SearchResult {
   int? get voteCount;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchResultCopyWith<_$_SearchResult> get copyWith =>
+  _$$_MovieResultCopyWith<_$_MovieResult> get copyWith =>
       throw _privateConstructorUsedError;
 }

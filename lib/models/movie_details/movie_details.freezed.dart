@@ -25,8 +25,7 @@ mixin _$MovieDetails {
   String get overview => throw _privateConstructorUsedError;
   String? get posterPath => throw _privateConstructorUsedError;
   double? get voteAverage => throw _privateConstructorUsedError;
-  int? get voteCount =>
-      throw _privateConstructorUsedError; // TODO: Add more details, depending what we want
+  int? get voteCount => throw _privateConstructorUsedError;
   List<Map>? get genres => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -204,9 +203,7 @@ class _$_MovieDetails implements _MovieDetails {
   final double? voteAverage;
   @override
   final int? voteCount;
-// TODO: Add more details, depending what we want
   final List<Map>? _genres;
-// TODO: Add more details, depending what we want
   @override
   List<Map>? get genres {
     final value = _genres;
@@ -283,7 +280,7 @@ abstract class _MovieDetails implements MovieDetails {
   double? get voteAverage;
   @override
   int? get voteCount;
-  @override // TODO: Add more details, depending what we want
+  @override
   List<Map>? get genres;
   @override
   @JsonKey(ignore: true)

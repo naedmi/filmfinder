@@ -1,13 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filmfinder/models/search/search_response.dart';
+import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/views/common/result_poster_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:go_router/go_router.dart';
 import 'package:remixicon/remixicon.dart';
 
 class SearchResultWidget extends StatelessWidget {
-  final SearchResult res;
+  final MovieResult res;
 
   const SearchResultWidget({Key? key, required this.res}) : super(key: key);
 
@@ -24,12 +23,8 @@ class SearchResultWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(paddingSmall),
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.width / 3 +
-                      paddingBig -
-                      paddingSmall * 2,
-                  width: MediaQuery.of(context).size.width / 3 * 2 -
-                      paddingBig * 2 -
-                      paddingSmall,
+                  height: posterContainerDefaultHeight(context) * 2 / 3,
+                  width: posterContainerDefaultHeight(context) * 2 / 3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -108,31 +103,9 @@ class SearchResultWidget extends StatelessWidget {
             ],
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            context.pushNamed(
-             'details',
-             pathParameters: {'id': res.id.toString()},
-            );
-          },
-          child: Material(
-            elevation: elevation,
-            borderRadius: BorderRadius.circular(borderRadiusBig),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(borderRadiusBig),
-              child: CachedNetworkImage(
-                imageUrl: poster(path: res.posterPath ?? ''),
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width / 3 + paddingSmall,
-                height: MediaQuery.of(context).size.width / 3 + paddingBig * 2,
-                placeholder: (BuildContext context, String url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (BuildContext context, String url, _) =>
-                    const Icon(Remix.image_2_line, size: 100),
-              ),
-            ),
-          ),
-        ),
+        SizedBox(
+            height: posterContainerDefaultHeight(context),
+            child: ResultPosterWidget(id: res.id, posterPath: res.posterPath)),
       ]),
     );
   }
