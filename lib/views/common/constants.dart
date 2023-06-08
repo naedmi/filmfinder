@@ -18,6 +18,7 @@ final String routeSearch = routes[3];
 final String routeSettings = routes[4];
 final String routeDetails = routes[5];
 
+const String logoPath = 'assets/images/filmfinder_logo.png';
 /// ***************************************************************************
 
 /// tmdb **********************************************************************

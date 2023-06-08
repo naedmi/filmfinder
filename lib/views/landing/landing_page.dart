@@ -5,6 +5,7 @@ import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:filmfinder/views/common/result_poster_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:remixicon/remixicon.dart';
@@ -50,7 +51,7 @@ class LandingPage extends ConsumerWidget {
                 color: Theme.of(context).colorScheme.primaryContainer,
                 padding: const EdgeInsets.all(1),
                 child: const Image(
-                    image: AssetImage('assets/images/filmfinder_logo.png'),
+                    image: AssetImage(logoPath),
                     fit: BoxFit.contain,
                     height: 42),
               ),
@@ -108,6 +109,7 @@ class OverviewRowWidget extends StatelessWidget {
         builder:
             (BuildContext context, AsyncSnapshot<LandingCategory> snapshot) {
           if (snapshot.hasData) {
+            FlutterNativeSplash.remove();
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -141,6 +143,7 @@ class OverviewRowWidget extends StatelessWidget {
               ],
             );
           } else if (snapshot.hasError) {
+            FlutterNativeSplash.remove();
             return Column(
               children: <Widget>[
                 const Divider(endIndent: padding, indent: padding),

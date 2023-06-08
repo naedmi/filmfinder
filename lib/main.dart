@@ -9,15 +9,18 @@ import 'package:filmfinder/views/settings/settings_page.dart';
 import 'package:filmfinder/views/settings/shared_preferences.dart';
 import 'package:filmfinder/views/swipe_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FilmfinderPreferences.init();
   await dotenv.load();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(ProviderScope(
       observers: <ProviderObserver>[LoggerService()], child: const MyApp()));
 }
@@ -34,7 +37,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
         path: routeList,
         pageBuilder: (BuildContext context, GoRouterState state) {
-          return customPageBuilder(ListPage(), context, state);
+          return customPageBuilder(const ListPage(), context, state);
         }),
     GoRoute(
         path: routeSwipe,
@@ -70,6 +73,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]); // Force portrait mode
     return MaterialApp.router(
       routerConfig: _router,
       title: 'filmfinder',
