@@ -1,3 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:filmfinder/controllers/settings/settings_provider.dart';
+import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/services/logger_provider_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
@@ -15,17 +18,24 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:filmfinder/controllers/settings/settings_provider.dart';
-import 'package:filmfinder/models/settings/settings.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await FilmfinderPreferences.init();
   await dotenv.load();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  runApp(ProviderScope(
-      observers: <ProviderObserver>[LoggerService()], child: const MyApp()));
+  runApp(
+    ProviderScope(
+      observers: <ProviderObserver>[LoggerService()],
+      child: EasyLocalization(
+        supportedLocales: supportedLanguages.values.toList(),
+        path: langPath,
+        fallbackLocale: supportedLanguages.values.first,
+        child: const MyApp(),
+      ),
+    ),
+  );
 }
 
 /// The route configuration.
@@ -78,9 +88,9 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final SettingsDarkModeModel darkModeModel =
         ref.watch(settingsControllerProvider);
-      SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
+    SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
     ]); // Force portrait mode
     return MaterialApp.router(
       routerConfig: _router,
@@ -89,6 +99,9 @@ class MyApp extends ConsumerWidget {
       darkTheme: darkTheme,
       themeMode: darkModeModel.darkMode ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
     );
   }
 }

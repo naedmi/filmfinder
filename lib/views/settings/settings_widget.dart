@@ -1,7 +1,6 @@
+import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/views/settings/settings_switch.dart';
 import 'package:flutter/material.dart';
-
-import '../common/constants.dart';
-import 'settings_switch.dart';
 
 typedef OnPressed = void Function();
 

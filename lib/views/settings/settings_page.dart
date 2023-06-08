@@ -1,14 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:filmfinder/controllers/settings/settings_controller_interfaces.dart';
 import 'package:filmfinder/controllers/settings/settings_provider.dart';
+import 'package:filmfinder/models/settings/settings.dart';
+import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/views/common/navigation_widget.dart';
+import 'package:filmfinder/views/settings/settings_widget.dart';
+import 'package:filmfinder/views/settings/user_profile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
-
-import '../../controllers/settings/settings_controller_interfaces.dart';
-import '../../models/settings/settings.dart';
-import '../common/constants.dart';
-import '../common/navigation_widget.dart';
-import 'settings_widget.dart';
-import 'user_profile_widget.dart';
 
 typedef OnPressed = void Function();
 
@@ -21,7 +21,9 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainBottomBarScaffold(
         appBar: AppBar(
-          title: const Text('Settings'),
+          title: Text(
+            tr('settings_header'),
+          ),
           automaticallyImplyLeading: false,
         ),
         body: const Padding(
@@ -99,18 +101,18 @@ class Settings extends ConsumerWidget {
                       return ListView.separated(
                         shrinkWrap: true,
                         padding: const EdgeInsets.all(padding),
-                        itemCount: settingLangs.length,
+                        itemCount: supportedLanguages.keys.toList().length,
                         itemBuilder: (BuildContext context, int index) =>
                             ListTile(
                           horizontalTitleGap: padding,
-                          trailing:
-                              languageModel.language == settingLangs[index]
-                                  ? const Icon(Remix.check_line)
-                                  : null,
-                          title: Text(settingLangs[index]),
+                          trailing: languageModel.language ==
+                                  supportedLanguages.keys.toList()[index]
+                              ? const Icon(Remix.check_line)
+                              : null,
+                          title: Text(supportedLanguages.keys.toList()[index]),
                           onTap: () {
                             languageController.setLanguage(
-                              settingLangs[index],
+                              supportedLanguages.keys.toList()[index],
                             );
                             Navigator.pop(context);
                           },
