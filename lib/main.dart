@@ -7,7 +7,7 @@ import 'package:filmfinder/views/movie_details/movie_detail_page.dart';
 import 'package:filmfinder/views/search/search_page.dart';
 import 'package:filmfinder/views/settings/settings_page.dart';
 import 'package:filmfinder/views/settings/shared_preferences.dart';
-import 'package:filmfinder/views/swipe_page.dart';
+import 'package:filmfinder/views/swipe/swipe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
