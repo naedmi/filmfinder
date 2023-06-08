@@ -15,8 +15,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'controllers/settings/settings_provider.dart';
-import 'models/settings/settings.dart';
+import 'package:filmfinder/controllers/settings/settings_provider.dart';
+import 'package:filmfinder/models/settings/settings.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,10 +78,9 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final SettingsDarkModeModel darkModeModel =
         ref.watch(settingsControllerProvider);
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
+      SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
     ]); // Force portrait mode
     return MaterialApp.router(
       routerConfig: _router,
