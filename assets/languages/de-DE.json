@@ -1,3 +1,12 @@
 {
-  "settings_header": "Einstellungen"
+  "settings_header": "Einstellungen",
+  "settings_color": "Dunkler Modus",
+  "settings_parental_control": "Kindersicherung",
+  "settings_lang": "Sprache",
+  "settings_about": "Über uns",
+  "landing_cat_now_playing": "Jetzt im Kino",
+  "landing_cat_popular": "Beliebt",
+  "landing_cat_top_rated": "Top bewertet",
+  "landing_cat_upcoming": "Demnächst",
+  "list_header": "Meine Liste"
 }

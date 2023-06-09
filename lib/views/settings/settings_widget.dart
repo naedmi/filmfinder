@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/settings/settings_switch.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                       child: Text(
                         widget.settingName,
                         style: const TextStyle(fontSize: settingFontSize),
-                      ),
+                      ).tr(),
                     ),
                   ),
                 ),

@@ -21,9 +21,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainBottomBarScaffold(
         appBar: AppBar(
-          title: Text(
-            tr('settings_header'),
-          ),
+          title: const Text('settings_header').tr(),
           automaticallyImplyLeading: false,
         ),
         body: const Padding(
@@ -65,7 +63,7 @@ class Settings extends ConsumerWidget {
           scrollDirection: Axis.vertical,
           children: <Widget>[
             SettingWidget(
-              settingName: darkMode,
+              settingName: 'settings_color',
               withSwitch: true,
               switchDefault: darkModeModel.darkMode,
               settingIcon: Icon(
@@ -77,7 +75,7 @@ class Settings extends ConsumerWidget {
               },
             ),
             SettingWidget(
-              settingName: parentalControl,
+              settingName: 'settings_parental_control',
               settingIcon: const Icon(
                 Remix.parent_line,
                 size: settingIconSize,
@@ -88,7 +86,7 @@ class Settings extends ConsumerWidget {
               },
             ),
             SettingWidget(
-              settingName: language,
+              settingName: 'settings_lang',
               settingIcon: const Icon(
                 Remix.translate_2,
                 size: settingIconSize,
@@ -111,9 +109,15 @@ class Settings extends ConsumerWidget {
                               : null,
                           title: Text(supportedLanguages.keys.toList()[index]),
                           onTap: () {
+                            String key =
+                                supportedLanguages.keys.toList()[index];
                             languageController.setLanguage(
-                              supportedLanguages.keys.toList()[index],
+                              key,
+                              context,
                             );
+                            EasyLocalization.of(context)
+                                ?.setLocale(supportedLanguages[key]!);
+                            context.setLocale(supportedLanguages[key]!);
                             Navigator.pop(context);
                           },
                         ),
@@ -124,7 +128,7 @@ class Settings extends ConsumerWidget {
               },
             ),
             SettingWidget(
-              settingName: about,
+              settingName: 'settings_about',
               withSwitch: false,
               settingIcon: const Icon(
                 Remix.information_line,

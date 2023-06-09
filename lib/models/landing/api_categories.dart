@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 enum AvailableLandingCategory {
   popular,
   // ignore: constant_identifier_names
@@ -9,8 +11,8 @@ enum AvailableLandingCategory {
 
 final Map<AvailableLandingCategory, String> categoryNameMap =
     <AvailableLandingCategory, String>{
-  AvailableLandingCategory.now_playing: 'Now Playing',
-  AvailableLandingCategory.popular: 'Popular',
-  AvailableLandingCategory.top_rated: 'Top Rated',
-  AvailableLandingCategory.upcoming: 'Upcoming',
+  AvailableLandingCategory.now_playing: 'landing_cat_now_playing'.tr(),
+  AvailableLandingCategory.popular: 'landing_cat_popular'.tr(),
+  AvailableLandingCategory.top_rated: 'landing_cat_top_rated'.tr(),
+  AvailableLandingCategory.upcoming: 'landing_cat_upcoming'.tr(),
 };

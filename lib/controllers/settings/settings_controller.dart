@@ -1,5 +1,6 @@
 import 'package:filmfinder/controllers/settings/settings_controller_interfaces.dart';
 import 'package:filmfinder/models/settings/settings.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../views/settings/shared_preferences.dart';
 
@@ -33,7 +34,7 @@ class SettingsLanguageControllerImpl extends SettingsLanguageController {
                 language: FilmfinderPreferences.getLanguage()));
 
   @override
-  void setLanguage(String lang) {
+  void setLanguage(String lang, BuildContext context) {
     FilmfinderPreferences.setLanguage(lang);
     state = state.copyWith(language: FilmfinderPreferences.getLanguage());
   }

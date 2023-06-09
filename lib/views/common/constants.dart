@@ -95,10 +95,6 @@ const double settingIconSize = settingFontSize * settingIconSizeMultiplicator;
 const double settingSwitchSize = 0.9;
 const double settingHeight = settingFontSize * 2;
 const double settingRoundBoxSize = 15;
-const List<String> settingLangs = <String>[
-  'en-US',
-  'de-DE',
-]; // default lang first in list
 const String darkMode = 'Dark Theme';
 const String parentalControl = 'Parental Control';
 const String language = 'Language';
