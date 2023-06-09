@@ -25,6 +25,7 @@
     "remove": {
       "title": "Remove from list",
       "text": "Are you sure you want to remove this movie from your list?",
+      "confirmation": "Confirmation",
       "cancel": "Cancel",
       "confirm": "Remove"
     }

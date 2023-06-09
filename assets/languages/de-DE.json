@@ -25,6 +25,7 @@
     "remove": {
       "title": "Aus der Liste entfernen",
       "text": "Möchtest du diesen Film wirklich aus deiner Liste entfernen?",
+      "confirmation": "Bestaetigung",
       "cancel": "Abbrechen",
       "confirm": "Entfernen"
     }
