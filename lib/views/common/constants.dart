@@ -103,10 +103,10 @@ const String about = 'About';
 const Map<String, Locale> supportedLanguages = <String, Locale>{
   'English': Locale('en', 'US'),
   'Deutsch': Locale('de', 'DE'),
-  'France': Locale('fr', 'FR'),
-  'Spanish': Locale('es', 'ES'),
-  'Italian': Locale('it', 'IT'),
-  'Japanese': Locale('ja', 'JP')
+  // 'France': Locale('fr', 'FR'),
+  // 'Spanish': Locale('es', 'ES'),
+  // 'Italian': Locale('it', 'IT'),
+  // 'Japanese': Locale('ja', 'JP')
 };
 const String langPath = 'assets/languages';
 
