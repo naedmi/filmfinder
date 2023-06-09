@@ -87,17 +87,13 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final SettingsDarkModeModel darkModeModel =
         ref.watch(settingsControllerProvider);
-    final SettingsLanguageModel languageModel =
-        ref.watch(settingsLanguageControllerProvider);
     SystemChrome.setPreferredOrientations(<DeviceOrientation>[
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]); // Force portrait mode
     return MaterialApp.router(
       // Language settings
-      locale: languageModel.language != ''
-          ? Locale(languageModel.language)
-          : context.locale,
+      locale: context.locale,
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
       routerConfig: _router,
