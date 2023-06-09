@@ -11,8 +11,8 @@ enum AvailableLandingCategory {
 
 final Map<AvailableLandingCategory, String> categoryNameMap =
     <AvailableLandingCategory, String>{
-  AvailableLandingCategory.now_playing: 'landing_cat_now_playing'.tr(),
-  AvailableLandingCategory.popular: 'landing_cat_popular'.tr(),
-  AvailableLandingCategory.top_rated: 'landing_cat_top_rated'.tr(),
-  AvailableLandingCategory.upcoming: 'landing_cat_upcoming'.tr(),
+  AvailableLandingCategory.now_playing: 'landing.category.now_playing'.tr(),
+  AvailableLandingCategory.popular: 'landing.category.popular'.tr(),
+  AvailableLandingCategory.top_rated: 'landing.category.top_rated'.tr(),
+  AvailableLandingCategory.upcoming: 'landing.category.upcoming'.tr(),
 };

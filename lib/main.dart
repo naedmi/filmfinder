@@ -26,11 +26,11 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(
-    ProviderScope(
-      observers: <ProviderObserver>[LoggerService()],
-      child: EasyLocalization(
-        supportedLocales: supportedLanguages.values.toList(),
-        path: langPath,
+    EasyLocalization(
+      supportedLocales: supportedLanguages.values.toList(),
+      path: langPath,
+      child: ProviderScope(
+        observers: <ProviderObserver>[LoggerService()],
         child: const MyApp(),
       ),
     ),

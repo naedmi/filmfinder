@@ -14,7 +14,7 @@ class ListPage extends ConsumerWidget {
     return MainBottomBarScaffold(
       appBar: AppBar(
         title: Center(
-          child: const Text('list_header').tr(),
+          child: const Text('list.header').tr(),
         ),
         automaticallyImplyLeading: false,
       ),

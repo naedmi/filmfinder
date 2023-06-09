@@ -1,12 +1,32 @@
 {
-  "settings_header": "Settings",
-  "settings_color": "Dark Theme",
-  "settings_parental_control": "Parental Control",
-  "settings_lang": "Language",
-  "settings_about": "About",
-  "landing_cat_now_playing": "Now Playing",
-  "landing_cat_popular": "Popular",
-  "landing_cat_top_rated": "Top Rated",
-  "landing_cat_upcoming": "Upcoming",
-  "list_header": "My List"
+  "settings": {
+    "header": "Settings",
+    "color": "Dark Theme",
+    "parental_control": "Parental Control",
+    "lang": "Language",
+    "about": "About"
+  },
+  "landing": {
+    "category": {
+      "now_playing": "Now Playing",
+      "popular": "Popular",
+      "top_rated": "Top Rated",
+      "upcoming": "Upcoming"
+    },
+    "exit": {
+      "question": "Are you sure?",
+      "text": "We hate to see you leave...",
+      "yes": "Yes",
+      "no": "No"
+    }
+  },
+  "list": {
+    "header": "My List",
+    "remove": {
+      "title": "Remove from list",
+      "text": "Are you sure you want to remove this movie from your list?",
+      "cancel": "Cancel",
+      "confirm": "Remove"
+    }
+  }
 }
