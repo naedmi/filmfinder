@@ -22,5 +22,5 @@ class FilmfinderPreferences {
   static Future<void> setLanguage(String value) async =>
       await _preferences.setString(language, value);
 
-  static String getLanguage() => _preferences.getString(language) ?? 'English';
+  static String getLanguage() => _preferences.getString(language) ?? 'en-US';
 }
