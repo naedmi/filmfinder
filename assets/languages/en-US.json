@@ -4,7 +4,8 @@
     "color": "Dark Theme",
     "parental_control": "Parental Control",
     "lang": "Language",
-    "about": "About"
+    "about": "About",
+    "save_msg": "settings saved"
   },
   "landing": {
     "category": {

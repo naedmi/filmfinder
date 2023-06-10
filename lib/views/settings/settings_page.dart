@@ -8,6 +8,7 @@ import 'package:filmfinder/views/settings/settings_widget.dart';
 import 'package:filmfinder/views/settings/user_profile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:remixicon/remixicon.dart';
 
 typedef OnPressed = void Function();
@@ -72,6 +73,7 @@ class Settings extends ConsumerWidget {
               ),
               onPressed: () {
                 darkModeController.switchDarkMode();
+                settingsSavedToast();
               },
             ),
             SettingWidget(
@@ -121,6 +123,7 @@ class Settings extends ConsumerWidget {
                                 .setLocale(supportedLanguages[key]!);
                             context.setLocale(supportedLanguages[key]!);
                             Navigator.pop(context);
+                            settingsSavedToast();
                           },
                         ),
                         separatorBuilder: (BuildContext context, int index) =>
@@ -138,6 +141,7 @@ class Settings extends ConsumerWidget {
               ),
               onPressed: () {
                 //todo open about popup
+                settingsSavedToast();
               },
             )
           ],
@@ -145,4 +149,15 @@ class Settings extends ConsumerWidget {
       ),
     );
   }
+}
+
+void settingsSavedToast() {
+  Fluttertoast.showToast(
+      msg: 'settings.save_msg'.tr(),
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.green,
+      textColor: Colors.white,
+      fontSize: 16.0);
 }
