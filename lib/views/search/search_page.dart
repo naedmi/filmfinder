@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/search/search_controller.dart'
     as search_controller;
 import 'package:filmfinder/controllers/search/search_providers.dart';
@@ -213,7 +214,8 @@ class SearchPage extends ConsumerWidget {
                             }),
                         const Divider(indent: paddingTiny),
                         InputChip(
-                            label: Text((searchController.filter.year ?? 'Year')
+                            label: Text((searchController.filter.year ??
+                                    'search.year'.tr())
                                 .toString()),
                             shape: chipShape,
                             side: chipSite,
@@ -264,7 +266,7 @@ class SearchPage extends ConsumerWidget {
                             }),
                         const Divider(indent: paddingTiny),
                         FilterChip(
-                          label: const Text('Adult'),
+                          label: const Text('search.adult').tr(),
                           shape: chipShape,
                           side: chipSite,
                           backgroundColor:

@@ -1,11 +1,15 @@
-import 'package:filmfinder/views/settings/shared_preferences.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:filmfinder/controllers/settings/settings_controller_interfaces.dart';
+import 'package:filmfinder/controllers/settings/settings_provider.dart';
+import 'package:filmfinder/models/settings/settings.dart';
+import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/views/common/navigation_widget.dart';
+import 'package:filmfinder/views/settings/settings_widget.dart';
+import 'package:filmfinder/views/settings/user_profile_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:remixicon/remixicon.dart';
-
-import '../common/constants.dart';
-import '../common/navigation_widget.dart';
-import 'settings_widget.dart';
-import 'user_profile_widget.dart';
 
 typedef OnPressed = void Function();
 
@@ -18,7 +22,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainBottomBarScaffold(
         appBar: AppBar(
-          title: const Text('Settings'),
+          title: const Text('settings.header').tr(context: context),
           automaticallyImplyLeading: false,
         ),
         body: const Padding(
@@ -35,11 +39,19 @@ class SettingsPage extends StatelessWidget {
   }
 }
 
-class Settings extends StatelessWidget {
+class Settings extends ConsumerWidget {
   const Settings({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final SettingsDarkModeController darkModeController =
+        ref.read(settingsControllerProvider.notifier);
+    final SettingsDarkModeModel darkModeModel =
+        ref.watch(settingsControllerProvider);
+    final SettingsLanguageController languageController =
+        ref.read(settingsLanguageControllerProvider.notifier);
+    final SettingsLanguageModel languageModel =
+        ref.watch(settingsLanguageControllerProvider);
     const double localPadding = 8.0;
     return Padding(
       padding: const EdgeInsets.only(
@@ -52,20 +64,20 @@ class Settings extends StatelessWidget {
           scrollDirection: Axis.vertical,
           children: <Widget>[
             SettingWidget(
-              settingName: darkMode,
+              settingName: 'settings.color',
               withSwitch: true,
-              switchDefault: FilmfinderPreferences.getDarkMode(),
-              settingIcon: const Icon(
-                Remix.moon_clear_line,
+              switchDefault: darkModeModel.darkMode,
+              settingIcon: Icon(
+                darkModeModel.darkMode ? Remix.moon_line : Remix.sun_line,
                 size: settingIconSize,
               ),
               onPressed: () {
-                FilmfinderPreferences.setDarkMode(
-                    !FilmfinderPreferences.getDarkMode());
+                darkModeController.switchDarkMode();
+                settingsSavedToast();
               },
             ),
             SettingWidget(
-              settingName: parentalControl,
+              settingName: 'settings.parental_control',
               settingIcon: const Icon(
                 Remix.parent_line,
                 size: settingIconSize,
@@ -76,7 +88,7 @@ class Settings extends StatelessWidget {
               },
             ),
             SettingWidget(
-              settingName: language,
+              settingName: 'settings.lang',
               settingIcon: const Icon(
                 Remix.translate_2,
                 size: settingIconSize,
@@ -89,20 +101,29 @@ class Settings extends StatelessWidget {
                       return ListView.separated(
                         shrinkWrap: true,
                         padding: const EdgeInsets.all(padding),
-                        itemCount: settingLangs.length,
+                        itemCount: supportedLanguages.keys.toList().length,
                         itemBuilder: (BuildContext context, int index) =>
                             ListTile(
                           horizontalTitleGap: padding,
-                          trailing: FilmfinderPreferences.getLanguage() ==
-                                  settingLangs[index]
+                          trailing: languageModel.language ==
+                                  '${supportedLanguages[supportedLanguages.keys.toList()[index]]?.languageCode}-${supportedLanguages[supportedLanguages.keys.toList()[index]]?.countryCode}'
                               ? const Icon(Remix.check_line)
                               : null,
-                          title: Text(settingLangs[index]),
+                          title: Text(supportedLanguages.keys.toList()[index]),
                           onTap: () {
-                            FilmfinderPreferences.setLanguage(
-                              settingLangs[index],
+                            String key =
+                                supportedLanguages.keys.toList()[index];
+                            String? languageCountryCode =
+                                '${supportedLanguages[key]?.languageCode}-${supportedLanguages[key]?.countryCode}';
+                            languageController.setLanguage(
+                              languageCountryCode,
+                              context,
                             );
+                            EasyLocalization.of(context)!
+                                .setLocale(supportedLanguages[key]!);
+                            context.setLocale(supportedLanguages[key]!);
                             Navigator.pop(context);
+                            settingsSavedToast();
                           },
                         ),
                         separatorBuilder: (BuildContext context, int index) =>
@@ -112,7 +133,7 @@ class Settings extends StatelessWidget {
               },
             ),
             SettingWidget(
-              settingName: about,
+              settingName: 'settings.about',
               withSwitch: false,
               settingIcon: const Icon(
                 Remix.information_line,
@@ -120,6 +141,7 @@ class Settings extends StatelessWidget {
               ),
               onPressed: () {
                 //todo open about popup
+                settingsSavedToast();
               },
             )
           ],
@@ -127,4 +149,15 @@ class Settings extends StatelessWidget {
       ),
     );
   }
+}
+
+void settingsSavedToast() {
+  Fluttertoast.showToast(
+      msg: 'settings.save_msg'.tr(),
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.green,
+      textColor: Colors.white,
+      fontSize: 16.0);
 }

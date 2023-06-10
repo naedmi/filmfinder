@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/services/common/poster_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
@@ -92,26 +93,33 @@ class ListMediaWidget extends StatelessWidget {
                           ),
                           const Spacer(),
                           Tooltip(
-                            message: 'Remove from list',
+                            message: 'list.remove.title'.tr(),
                             child: ElevatedButton(
                               onPressed: () {
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      title: const Text('Confirmation'),
+                                      title:
+                                          const Text('list.remove.confirmation')
+                                              .tr(),
                                       content: Text(
-                                          'Remove ${res.title} from your list?'),
+                                              'list.remove.text' '${res.title}')
+                                          .tr(),
                                       actions: <Widget>[
                                         TextButton(
-                                          child: const Text('Cancel'),
+                                          child:
+                                              const Text('list.remove.cancel')
+                                                  .tr(),
                                           onPressed: () {
                                             Navigator.of(context)
                                                 .pop(); // Close the dialog
                                           },
                                         ),
                                         TextButton(
-                                          child: const Text('Remove'),
+                                          child:
+                                              const Text('list.remove.confirm')
+                                                  .tr(),
                                           onPressed: () {
                                             // TODO: Remove the movie from the list
                                             Navigator.of(context)

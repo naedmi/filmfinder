@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/landing/landing_controller.dart';
 import 'package:filmfinder/controllers/landing/landing_providers.dart';
 import 'package:filmfinder/models/landing/landing_category.dart';
@@ -118,7 +119,7 @@ class OverviewRowWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       top: paddingSmall, left: padding, bottom: paddingTiny),
                   child: Text(
-                    snapshot.data!.title,
+                    snapshot.data!.title.tr(),
                     style: Theme.of(context).textTheme.headlineMedium,
                     maxLines: 1,
                     textAlign: TextAlign.left,

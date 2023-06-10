@@ -1,3 +1,5 @@
+
+
 enum AvailableLandingCategory {
   popular,
   // ignore: constant_identifier_names
@@ -9,8 +11,8 @@ enum AvailableLandingCategory {
 
 final Map<AvailableLandingCategory, String> categoryNameMap =
     <AvailableLandingCategory, String>{
-  AvailableLandingCategory.now_playing: 'Now Playing',
-  AvailableLandingCategory.popular: 'Popular',
-  AvailableLandingCategory.top_rated: 'Top Rated',
-  AvailableLandingCategory.upcoming: 'Upcoming',
+  AvailableLandingCategory.now_playing: 'landing.category.now_playing',
+  AvailableLandingCategory.popular: 'landing.category.popular',
+  AvailableLandingCategory.top_rated: 'landing.category.top_rated',
+  AvailableLandingCategory.upcoming: 'landing.category.upcoming',
 };

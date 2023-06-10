@@ -1,0 +1,38 @@
+{
+  "settings": {
+    "header": "Settings",
+    "color": "Dark Theme",
+    "parental_control": "Parental Control",
+    "lang": "Language",
+    "about": "About",
+    "save_msg": "settings saved"
+  },
+  "landing": {
+    "category": {
+      "now_playing": "Now Playing",
+      "popular": "Popular",
+      "top_rated": "Top Rated",
+      "upcoming": "Upcoming"
+    },
+    "exit": {
+      "question": "Are you sure?",
+      "text": "We hate to see you leave...",
+      "yes": "Yes",
+      "no": "No"
+    }
+  },
+  "list": {
+    "header": "My List",
+    "remove": {
+      "title": "Remove from list",
+      "text": "Are you sure you want to remove this movie from your list?",
+      "confirmation": "Confirmation",
+      "cancel": "Cancel",
+      "confirm": "Remove"
+    }
+  },
+  "search": {
+    "adult": "Adult",
+    "year": "Year"
+  }
+}
