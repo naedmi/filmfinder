@@ -21,7 +21,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainBottomBarScaffold(
         appBar: AppBar(
-          title: const Text('settings.header').tr(),
+          title: const Text('settings.header').tr(context: context),
           automaticallyImplyLeading: false,
         ),
         body: const Padding(
@@ -119,7 +119,7 @@ class Settings extends ConsumerWidget {
                             );
                             EasyLocalization.of(context)!
                                 .setLocale(supportedLanguages[key]!);
-                            //context.setLocale(supportedLanguages[key]!);
+                            context.setLocale(supportedLanguages[key]!);
                             Navigator.pop(context);
                           },
                         ),

@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+
 
 enum AvailableLandingCategory {
   popular,
@@ -11,8 +11,8 @@ enum AvailableLandingCategory {
 
 final Map<AvailableLandingCategory, String> categoryNameMap =
     <AvailableLandingCategory, String>{
-  AvailableLandingCategory.now_playing: 'landing.category.now_playing'.tr(),
-  AvailableLandingCategory.popular: 'landing.category.popular'.tr(),
-  AvailableLandingCategory.top_rated: 'landing.category.top_rated'.tr(),
-  AvailableLandingCategory.upcoming: 'landing.category.upcoming'.tr(),
+  AvailableLandingCategory.now_playing: 'landing.category.now_playing',
+  AvailableLandingCategory.popular: 'landing.category.popular',
+  AvailableLandingCategory.top_rated: 'landing.category.top_rated',
+  AvailableLandingCategory.upcoming: 'landing.category.upcoming',
 };
