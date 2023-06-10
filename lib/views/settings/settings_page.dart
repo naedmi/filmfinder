@@ -104,15 +104,17 @@ class Settings extends ConsumerWidget {
                             ListTile(
                           horizontalTitleGap: padding,
                           trailing: languageModel.language ==
-                                  supportedLanguages.keys.toList()[index]
+                                  '${supportedLanguages[supportedLanguages.keys.toList()[index]]?.languageCode}-${supportedLanguages[supportedLanguages.keys.toList()[index]]?.countryCode}'
                               ? const Icon(Remix.check_line)
                               : null,
                           title: Text(supportedLanguages.keys.toList()[index]),
                           onTap: () {
                             String key =
                                 supportedLanguages.keys.toList()[index];
+                            String? languageCountryCode =
+                                '${supportedLanguages[key]?.languageCode}-${supportedLanguages[key]?.countryCode}';
                             languageController.setLanguage(
-                              key,
+                              languageCountryCode,
                               context,
                             );
                             EasyLocalization.of(context)!

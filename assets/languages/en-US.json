@@ -29,5 +29,9 @@
       "cancel": "Cancel",
       "confirm": "Remove"
     }
+  },
+  "search": {
+    "adult": "Adult",
+    "year": "Year"
   }
 }
