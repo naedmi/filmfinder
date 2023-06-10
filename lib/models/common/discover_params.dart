@@ -59,7 +59,7 @@ class DiscoverParams with _$DiscoverParams {
         '${primaryReleaseYear != null ? 'primary_release_year=$primaryReleaseYear&' : ''}'
         '${primaryReleaseDateGte != null ? 'primary_release_date.gte=$primaryReleaseDateGte&' : ''}'
         '${primaryReleaseDateLte != null ? 'primary_release_date.lte=$primaryReleaseDateLte&' : ''}'
-        'sort_by=${discoverSortByValues[sortBy]}&'
+        'sort_by=${sortBy.value}&'
         '${voteAverageGte != null ? 'vote_average.gte=$voteAverageGte&' : ''}'
         '${voteAverageLte != null ? 'vote_average.lte=$voteAverageLte&' : ''}'
         '${voteCountGte != null ? 'vote_count.gte=$voteCountGte&' : ''}'
@@ -101,18 +101,23 @@ enum DiscoverSortBy {
   voteCountDesc,
 }
 
-final Map<DiscoverSortBy, String> discoverSortByValues =
-    <DiscoverSortBy, String>{
-  DiscoverSortBy.popularityAsc: 'popularity.asc',
-  DiscoverSortBy.popularityDesc: 'popularity.desc',
-  DiscoverSortBy.revenueAsc: 'revenue.asc',
-  DiscoverSortBy.revenueDesc: 'revenue.desc',
-  DiscoverSortBy.primaryReleaseDateAsc: 'primary_release_date.asc',
-  DiscoverSortBy.primaryReleaseDateDesc: 'primary_release_date.desc',
-  DiscoverSortBy.originalTitleAsc: 'original_title.asc',
-  DiscoverSortBy.originalTitleDesc: 'original_title.desc',
-  DiscoverSortBy.voteAverageAsc: 'vote_average.asc',
-  DiscoverSortBy.voteAverageDesc: 'vote_average.desc',
-  DiscoverSortBy.voteCountAsc: 'vote_count.asc',
-  DiscoverSortBy.voteCountDesc: 'vote_count.desc',
-};
+extension DiscoverSort on DiscoverSortBy {
+  String get value {
+    final Map<DiscoverSortBy, String> discoverSortByValues =
+        <DiscoverSortBy, String>{
+      DiscoverSortBy.popularityAsc: 'popularity.asc',
+      DiscoverSortBy.popularityDesc: 'popularity.desc',
+      DiscoverSortBy.revenueAsc: 'revenue.asc',
+      DiscoverSortBy.revenueDesc: 'revenue.desc',
+      DiscoverSortBy.primaryReleaseDateAsc: 'primary_release_date.asc',
+      DiscoverSortBy.primaryReleaseDateDesc: 'primary_release_date.desc',
+      DiscoverSortBy.originalTitleAsc: 'original_title.asc',
+      DiscoverSortBy.originalTitleDesc: 'original_title.desc',
+      DiscoverSortBy.voteAverageAsc: 'vote_average.asc',
+      DiscoverSortBy.voteAverageDesc: 'vote_average.desc',
+      DiscoverSortBy.voteCountAsc: 'vote_count.asc',
+      DiscoverSortBy.voteCountDesc: 'vote_count.desc',
+    };
+    return discoverSortByValues[this]!;
+  }
+}

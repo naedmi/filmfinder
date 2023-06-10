@@ -1,23 +1,29 @@
+import 'package:filmfinder/controllers/swipe/swipe_controller.dart';
+import 'package:filmfinder/controllers/swipe/swipe_providers.dart';
+import 'package:filmfinder/controllers/swipe/video_controller.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
+import 'package:filmfinder/models/swipe/video_controller_state.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class SingleSwipeWidget extends StatelessWidget {
+class SingleSwipeWidget extends ConsumerWidget {
   final MovieDetails movie;
-  final YoutubePlayerFlags ytFlags;
+  final SwipeController swipeController;
 
   const SingleSwipeWidget(
-      {super.key, required this.movie, required this.ytFlags});
+      {super.key, required this.movie, required this.swipeController});
 
   @override
-  Widget build(BuildContext context) {
-    YoutubePlayerController controller = YoutubePlayerController(
-      initialVideoId: movie.videos?.results?.first.key ?? '',
-      flags: ytFlags,
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AutoDisposeStateNotifierProvider<VideoController,
+            VideoControllerState> provider =
+        videoControllerProvider(movie.videos?.results?.first.key ?? '');
+    final VideoControllerState controllerState = ref.watch(provider);
+    final VideoController videoController = ref.read(provider.notifier);
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -39,15 +45,17 @@ class SingleSwipeWidget extends StatelessWidget {
                   MediaQuery.of(context).padding.top,
               width: MediaQuery.of(context).size.width,
               child: YoutubePlayer(
-                controller: controller,
+                controller: controllerState.controller,
                 showVideoProgressIndicator: true,
                 progressIndicatorColor: Theme.of(context).primaryColor,
                 bottomActions: <Widget>[
                   IconButton.outlined(
-                      onPressed: () => controller.mute(),
+                      onPressed: () => videoController.toggleMute(),
                       color: Colors.white,
-                      icon: const Icon(
-                        Remix.volume_up_line,
+                      icon: Icon(
+                        controllerState.isMute
+                            ? Remix.volume_mute_line
+                            : Remix.volume_up_line,
                         color: Colors.white,
                       ))
                 ],
@@ -89,7 +97,7 @@ class SingleSwipeWidget extends StatelessWidget {
                               child: RatingBarIndicator(
                                 itemSize: padding,
                                 rating: (movie.voteAverage ?? 0) / 2,
-                                itemCount: 4,
+                                itemCount: 5,
                                 itemBuilder: (BuildContext context, int index) {
                                   return Icon(
                                     Remix.star_fill,

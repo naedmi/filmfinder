@@ -7,7 +7,6 @@ import 'package:filmfinder/models/movie_details/movie_params.dart';
 import 'package:filmfinder/services/common/discover_service.dart';
 import 'package:filmfinder/services/movie_details/movie_details_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 abstract class SwipeController {
   SwipeController(this.ref);
@@ -15,23 +14,6 @@ abstract class SwipeController {
   late AsyncValue<List<AsyncValue<MovieDetails>>> currentMovies;
 
   final AutoDisposeStateProviderRef<SwipeController> ref;
-
-  YoutubePlayerFlags ytFlags = const YoutubePlayerFlags(
-    autoPlay: true,
-    mute: false,
-    enableCaption: false,
-    loop: true,
-    controlsVisibleAtStart: false,
-    forceHD: false,
-    hideControls: false,
-    hideThumbnail: true,
-    startAt: 0,
-    disableDragSeek: false,
-  );
-
-  bool isMute();
-
-  void toggleMute();
 }
 
 class SwipeControllerImpl extends SwipeController {
@@ -48,16 +30,5 @@ class SwipeControllerImpl extends SwipeController {
                 language: language,
                 appendToResponse: 'videos'))))
         .toList());
-  }
-
-  @override
-  bool isMute() {
-    return ytFlags.mute;
-  }
-
-  @override
-  void toggleMute() {
-    ytFlags = ytFlags.copyWith(mute: !ytFlags.mute);
-    ref.controller.state = this;
   }
 }

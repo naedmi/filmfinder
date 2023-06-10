@@ -26,7 +26,7 @@ class SwipePage extends ConsumerWidget {
                 movie.when(
                     data: (MovieDetails details) => SingleSwipeWidget(
                           movie: details,
-                          ytFlags: swipeController.ytFlags,
+                          swipeController: swipeController,
                         ),
                     error: (Object error, StackTrace? stackTrace) {
                       return Card(
@@ -61,9 +61,9 @@ class SwipePage extends ConsumerWidget {
           return const Center(
             child: Card(
                 child: Padding(
-                  padding: EdgeInsets.all(padding),
-                  child: CircularProgressIndicator(),
-                )),
+              padding: EdgeInsets.all(padding),
+              child: CircularProgressIndicator(),
+            )),
           );
         }, error: (Object error, StackTrace? stackTrace) {
           return Card(
