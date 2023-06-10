@@ -1,5 +1,6 @@
 import 'package:filmfinder/models/movie_details/movie_details.dart';
-import 'package:filmfinder/services/movie_details/movie_details_api_service.dart';
+import 'package:filmfinder/models/movie_details/movie_params.dart';
+import 'package:filmfinder/services/movie_details/movie_details_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class MovieDetailsController {
@@ -15,6 +16,7 @@ class MovieDetailsControllerImpl extends MovieDetailsController {
       AutoDisposeStateProviderRef<MovieDetailsController> ref, int movieID)
       : super(ref) {
     this.movieID = movieID;
-    movieDetails = ref.watch(movieDetailsApiService(movieID));
+    movieDetails =
+        ref.watch(movieDetailsApiService(MovieParams(movieID: movieID)));
   }
 }

@@ -53,7 +53,8 @@ class MovieDetailsPage extends ConsumerWidget {
                       color: Theme.of(context).colorScheme.primaryContainer,
                       borderRadius: BorderRadius.circular(12.0),
                     ),
-                    child: Text(genre['name']),
+                    //child: Text(genre['name']),
+                    child: Text('FIXME'),
                   );
                 }).toList() ?? [],
               ),
@@ -106,7 +107,6 @@ class MovieDetailsPage extends ConsumerWidget {
           ),
         ),
       ),
-
     );
   }
 }
