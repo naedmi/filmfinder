@@ -34,5 +34,8 @@
   "search": {
     "adult": "Erwachsen",
     "year": "Jahr"
+  },
+  "details": {
+    "votes": "Bewertungen"
   }
 }

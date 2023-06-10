@@ -34,5 +34,8 @@
   "search": {
     "adult": "Adult",
     "year": "Year"
+  },
+  "details": {
+    "votes": "votes"
   }
 }

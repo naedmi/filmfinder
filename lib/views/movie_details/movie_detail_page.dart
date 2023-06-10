@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -78,7 +79,7 @@ class MovieDetailsPage extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    '${details.voteCount} votes',
+                    '${details.voteCount} ${"details.votes".tr()}',
                     style: const TextStyle(fontSize: 16.0),
                   ),
                 ],
