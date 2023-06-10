@@ -16,8 +16,11 @@ class MovieParams with _$MovieParams {
   factory MovieParams.fromJson(Map<String, dynamic> json) =>
       _$MovieParamsFromJson(json);
 
+  // ignore: unused_element
+  const MovieParams._();
+
   @override
   String toString() {
-    return '$movieID/?language=$language${appendToResponse != null ? '&append_to_response=$appendToResponse' : ''}';
+    return '$movieID?language=$language${appendToResponse != null ? '&append_to_response=$appendToResponse' : ''}';
   }
 }

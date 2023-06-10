@@ -1,3 +1,4 @@
+import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -5,25 +6,17 @@ import 'package:remixicon/remixicon.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class SingleSwipeWidget extends StatelessWidget {
-  final String videoId;
+  final MovieDetails movie;
+  final YoutubePlayerFlags ytFlags;
 
-  const SingleSwipeWidget({super.key, required this.videoId});
+  const SingleSwipeWidget(
+      {super.key, required this.movie, required this.ytFlags});
 
   @override
   Widget build(BuildContext context) {
     YoutubePlayerController controller = YoutubePlayerController(
-      initialVideoId: videoId,
-      flags: const YoutubePlayerFlags(
-        autoPlay: true,
-        // TODO: make this stateful
-        mute: true,
-        enableCaption: false,
-        loop: true,
-        controlsVisibleAtStart: false,
-        forceHD: true,
-        hideControls: false,
-        hideThumbnail: true,
-      ),
+      initialVideoId: movie.videos?.results?.first.key ?? '',
+      flags: ytFlags,
     );
     return Container(
       decoration: BoxDecoration(
@@ -50,7 +43,6 @@ class SingleSwipeWidget extends StatelessWidget {
                 showVideoProgressIndicator: true,
                 progressIndicatorColor: Theme.of(context).primaryColor,
                 bottomActions: <Widget>[
-                  // TODO: state
                   IconButton.outlined(
                       onPressed: () => controller.mute(),
                       color: Colors.white,
@@ -80,33 +72,44 @@ class SingleSwipeWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        Text('Fast X',
-                            style: Theme.of(context).textTheme.headlineMedium),
+                        RichText(
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(
+                            style: Theme.of(context).textTheme.headlineMedium,
+                            text: movie.title,
+                          ),
+                        ),
                         const Divider(),
                         Row(
                           children: <Widget>[
-                            RatingBarIndicator(
-                              itemSize: padding,
-                              rating: 4.5,
-                              itemCount: 5,
-                              itemBuilder: (BuildContext context, int index) {
-                                return const Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                );
-                              },
+                            Tooltip(
+                              message:
+                                  '${movie.voteAverage.toString()} / 10 stars',
+                              child: RatingBarIndicator(
+                                itemSize: padding,
+                                rating: (movie.voteAverage ?? 0) / 2,
+                                itemCount: 4,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Icon(
+                                    Remix.star_fill,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  );
+                                },
+                              ),
                             ),
                             const Spacer(),
-                            const Text('1337 votes')
+                            Text('${movie.voteCount ?? '-'} votes')
                           ],
                         ),
                         const Divider(),
                         RichText(
-                          maxLines: 5,
+                          maxLines: 4,
+                          overflow: TextOverflow.ellipsis,
                           text: TextSpan(
                             style: Theme.of(context).textTheme.bodyMedium,
-                            text:
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.',
+                            text: movie.overview,
                           ),
                         ),
                         const Spacer(),

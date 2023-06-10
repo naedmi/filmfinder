@@ -5,7 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final AutoDisposeFutureProviderFamily<MovieDetails, MovieParams>
     movieDetailsApiService = FutureProvider.autoDispose.family(
-        (AutoDisposeFutureProviderRef<MovieDetails> ref, MovieParams params) async {
+        (AutoDisposeFutureProviderRef<MovieDetails> ref,
+            MovieParams params) async {
   dynamic response = await ref.watch(dioProvider).get(
         'https://api.themoviedb.org/3/movie/$params',
       );

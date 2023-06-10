@@ -119,9 +119,10 @@ class __$$_MovieParamsCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_MovieParams implements _MovieParams {
+class _$_MovieParams extends _MovieParams {
   const _$_MovieParams(
-      {required this.movieID, this.appendToResponse, this.language = 'en-US'});
+      {required this.movieID, this.appendToResponse, this.language = 'en-US'})
+      : super._();
 
   factory _$_MovieParams.fromJson(Map<String, dynamic> json) =>
       _$$_MovieParamsFromJson(json);
@@ -165,11 +166,12 @@ class _$_MovieParams implements _MovieParams {
   }
 }
 
-abstract class _MovieParams implements MovieParams {
+abstract class _MovieParams extends MovieParams {
   const factory _MovieParams(
       {required final int movieID,
       final String? appendToResponse,
       final String language}) = _$_MovieParams;
+  const _MovieParams._() : super._();
 
   factory _MovieParams.fromJson(Map<String, dynamic> json) =
       _$_MovieParams.fromJson;

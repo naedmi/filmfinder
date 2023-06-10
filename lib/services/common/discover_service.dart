@@ -8,7 +8,7 @@ final AutoDisposeFutureProviderFamily<DefaultResponse, DiscoverParams>
         (AutoDisposeFutureProviderRef<DefaultResponse> ref,
             DiscoverParams params) async {
   dynamic response = await ref.watch(dioProvider).get(
-        'https://api.themoviedb.org/3/discover/movie/$params',
+        'https://api.themoviedb.org/3/discover/movie?$params',
       );
   ref.keepAlive();
 

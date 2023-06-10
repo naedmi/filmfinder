@@ -536,7 +536,7 @@ class __$$_DiscoverParamsCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_DiscoverParams implements _DiscoverParams {
+class _$_DiscoverParams extends _DiscoverParams {
   const _$_DiscoverParams(
       {this.certification,
       this.certificationGte,
@@ -572,7 +572,8 @@ class _$_DiscoverParams implements _DiscoverParams {
       this.withoutGenres,
       this.withoutKeywords,
       this.withoutWatchProviders,
-      this.year});
+      this.year})
+      : super._();
 
   @override
   final String? certification;
@@ -773,7 +774,7 @@ class _$_DiscoverParams implements _DiscoverParams {
       __$$_DiscoverParamsCopyWithImpl<_$_DiscoverParams>(this, _$identity);
 }
 
-abstract class _DiscoverParams implements DiscoverParams {
+abstract class _DiscoverParams extends DiscoverParams {
   const factory _DiscoverParams(
       {final String? certification,
       final String? certificationGte,
@@ -810,6 +811,7 @@ abstract class _DiscoverParams implements DiscoverParams {
       final String? withoutKeywords,
       final String? withoutWatchProviders,
       final int? year}) = _$_DiscoverParams;
+  const _DiscoverParams._() : super._();
 
   @override
   String? get certification;
