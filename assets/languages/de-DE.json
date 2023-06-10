@@ -1,0 +1,38 @@
+{
+  "settings": {
+    "header": "Einstellungen",
+    "color": "Dunkler Modus",
+    "parental_control": "Kindersicherung",
+    "lang": "Sprache",
+    "about": "Über uns",
+    "save_msg": "Einstellungen gespeichert"
+  },
+  "landing": {
+    "category": {
+      "now_playing": "Jetzt im Kino",
+      "popular": "Beliebt",
+      "top_rated": "Top bewertet",
+      "upcoming": "Demnächst"
+    },
+    "exit": {
+      "question": "Bist du dir sicher?",
+      "text": "Wir hassen es, dich gehen zu sehen :(",
+      "yes": "Ja",
+      "no": "Nein"
+    }
+  },
+  "list": {
+    "header": "Meine Liste",
+    "remove": {
+      "title": "Aus der Liste entfernen",
+      "text": "Möchtest du diesen Film wirklich aus deiner Liste entfernen?",
+      "confirmation": "Bestaetigung",
+      "cancel": "Abbrechen",
+      "confirm": "Entfernen"
+    }
+  },
+  "search": {
+    "adult": "Erwachsen",
+    "year": "Jahr"
+  }
+}

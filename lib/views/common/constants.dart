@@ -19,6 +19,7 @@ final String routeSettings = routes[4];
 final String routeDetails = routes[5];
 
 const String logoPath = 'assets/images/filmfinder_logo.png';
+
 /// ***************************************************************************
 
 /// tmdb **********************************************************************
@@ -94,14 +95,20 @@ const double settingIconSize = settingFontSize * settingIconSizeMultiplicator;
 const double settingSwitchSize = 0.9;
 const double settingHeight = settingFontSize * 2;
 const double settingRoundBoxSize = 15;
-const List<String> settingLangs = <String>[
-  'en-US',
-  'de-DE',
-]; // default lang first in list
-const String darkMode = 'Dark Mode';
+const String darkMode = 'Dark Theme';
 const String parentalControl = 'Parental Control';
 const String language = 'Language';
 const String about = 'About';
+//first is fallback option
+const Map<String, Locale> supportedLanguages = <String, Locale>{
+  'English': Locale('en', 'US'),
+  'Deutsch': Locale('de', 'DE'),
+  // 'France': Locale('fr', 'FR'),
+  // 'Spanish': Locale('es', 'ES'),
+  // 'Italian': Locale('it', 'IT'),
+  // 'Japanese': Locale('ja', 'JP')
+};
+const String langPath = 'assets/languages';
 
 /// **************************************************************************
 

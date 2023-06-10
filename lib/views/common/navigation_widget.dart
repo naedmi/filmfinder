@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -113,16 +114,16 @@ class MainBottomBarScaffold extends StatelessWidget {
 
   AlertDialog _buildExitDialog(BuildContext context) {
     return AlertDialog(
-      title: const Text('Are you sure?'),
-      content: const Text('We hate to see you leave...'),
+      title: const Text('exit.question').tr(),
+      content: const Text('exit.text').tr(),
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),
-          child: const Text('No'),
+          child: const Text('exit.no').tr(),
         ),
         TextButton(
           onPressed: () => Navigator.of(context).pop(true),
-          child: const Text('Yes'),
+          child: const Text('exit.yes').tr(),
         ),
       ],
     );

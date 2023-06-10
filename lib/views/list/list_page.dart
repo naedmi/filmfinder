@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
@@ -12,7 +13,9 @@ class ListPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MainBottomBarScaffold(
       appBar: AppBar(
-        title: const Center(child: Text('My List')),
+        title: Center(
+          child: const Text('list.header').tr(),
+        ),
         automaticallyImplyLeading: false,
       ),
       body: ListView.separated(
