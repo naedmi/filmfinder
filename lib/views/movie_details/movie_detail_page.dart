@@ -47,15 +47,14 @@ class MovieDetailsPage extends ConsumerWidget {
               Wrap(
                 spacing: 8.0,
                 runSpacing: 4.0,
-                children: details.genres?.map((genre) {
+                children: details.genres?.map((Genre genre) {
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.primaryContainer,
                       borderRadius: BorderRadius.circular(12.0),
                     ),
-                    //child: Text(genre['name']),
-                    child: Text('FIXME'),
+                    child: Text(genre.name),
                   );
                 }).toList() ?? [],
               ),
