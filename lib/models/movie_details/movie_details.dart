@@ -81,8 +81,6 @@ class VideoResult with _$VideoResult {
 
 @freezed
 class WatchProviders with _$WatchProviders {
-  // ignore: invalid_annotation_target
-  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory WatchProviders({
     required Map<String, WatchProviderResult>? results,
   }) = _WatchProviders;
@@ -93,13 +91,12 @@ class WatchProviders with _$WatchProviders {
 
 @freezed
 class WatchProviderResult with _$WatchProviderResult {
-  // ignore: invalid_annotation_target
-  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory WatchProviderResult({
     required String? link,
-    required Map<String, WatchProvider>? flatrate,
-    required Map<String, WatchProvider>? rent,
-    required Map<String, WatchProvider>? buy,
+    required List<WatchProvider>? flatrate,
+    required List<WatchProvider>? rent,
+    required List<WatchProvider>? buy,
+    required List<WatchProvider>? ads,
   }) = _WatchProviderResult;
 
   factory WatchProviderResult.fromJson(Map<String, dynamic> json) =>
@@ -108,13 +105,15 @@ class WatchProviderResult with _$WatchProviderResult {
 
 @freezed
 class WatchProvider with _$WatchProvider {
-  // ignore: invalid_annotation_target
-  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory WatchProvider({
-    required int? displayPriority,
+    @JsonKey(name: 'logo_path')
     required String? logoPath,
-    required String? providerId,
+    @JsonKey(name: 'provider_id')
+    required int? providerId,
+    @JsonKey(name: 'provider_name')
     required String? providerName,
+    @JsonKey(name: 'display_priority')
+    required int? displayPriority,
   }) = _WatchProvider;
 
   factory WatchProvider.fromJson(Map<String, dynamic> json) =>

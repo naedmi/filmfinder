@@ -1309,8 +1309,7 @@ class __$$_WatchProvidersCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$_WatchProviders implements _WatchProviders {
   const _$_WatchProviders(
       {required final Map<String, WatchProviderResult>? results})
@@ -1384,10 +1383,10 @@ WatchProviderResult _$WatchProviderResultFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WatchProviderResult {
   String? get link => throw _privateConstructorUsedError;
-  Map<String, WatchProvider>? get flatrate =>
-      throw _privateConstructorUsedError;
-  Map<String, WatchProvider>? get rent => throw _privateConstructorUsedError;
-  Map<String, WatchProvider>? get buy => throw _privateConstructorUsedError;
+  List<WatchProvider>? get flatrate => throw _privateConstructorUsedError;
+  List<WatchProvider>? get rent => throw _privateConstructorUsedError;
+  List<WatchProvider>? get buy => throw _privateConstructorUsedError;
+  List<WatchProvider>? get ads => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1403,9 +1402,10 @@ abstract class $WatchProviderResultCopyWith<$Res> {
   @useResult
   $Res call(
       {String? link,
-      Map<String, WatchProvider>? flatrate,
-      Map<String, WatchProvider>? rent,
-      Map<String, WatchProvider>? buy});
+      List<WatchProvider>? flatrate,
+      List<WatchProvider>? rent,
+      List<WatchProvider>? buy,
+      List<WatchProvider>? ads});
 }
 
 /// @nodoc
@@ -1425,6 +1425,7 @@ class _$WatchProviderResultCopyWithImpl<$Res, $Val extends WatchProviderResult>
     Object? flatrate = freezed,
     Object? rent = freezed,
     Object? buy = freezed,
+    Object? ads = freezed,
   }) {
     return _then(_value.copyWith(
       link: freezed == link
@@ -1434,15 +1435,19 @@ class _$WatchProviderResultCopyWithImpl<$Res, $Val extends WatchProviderResult>
       flatrate: freezed == flatrate
           ? _value.flatrate
           : flatrate // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
       rent: freezed == rent
           ? _value.rent
           : rent // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
       buy: freezed == buy
           ? _value.buy
           : buy // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
+      ads: freezed == ads
+          ? _value.ads
+          : ads // ignore: cast_nullable_to_non_nullable
+              as List<WatchProvider>?,
     ) as $Val);
   }
 }
@@ -1457,9 +1462,10 @@ abstract class _$$_WatchProviderResultCopyWith<$Res>
   @useResult
   $Res call(
       {String? link,
-      Map<String, WatchProvider>? flatrate,
-      Map<String, WatchProvider>? rent,
-      Map<String, WatchProvider>? buy});
+      List<WatchProvider>? flatrate,
+      List<WatchProvider>? rent,
+      List<WatchProvider>? buy,
+      List<WatchProvider>? ads});
 }
 
 /// @nodoc
@@ -1477,6 +1483,7 @@ class __$$_WatchProviderResultCopyWithImpl<$Res>
     Object? flatrate = freezed,
     Object? rent = freezed,
     Object? buy = freezed,
+    Object? ads = freezed,
   }) {
     return _then(_$_WatchProviderResult(
       link: freezed == link
@@ -1486,70 +1493,85 @@ class __$$_WatchProviderResultCopyWithImpl<$Res>
       flatrate: freezed == flatrate
           ? _value._flatrate
           : flatrate // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
       rent: freezed == rent
           ? _value._rent
           : rent // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
       buy: freezed == buy
           ? _value._buy
           : buy // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
+      ads: freezed == ads
+          ? _value._ads
+          : ads // ignore: cast_nullable_to_non_nullable
+              as List<WatchProvider>?,
     ));
   }
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$_WatchProviderResult implements _WatchProviderResult {
   const _$_WatchProviderResult(
       {required this.link,
-      required final Map<String, WatchProvider>? flatrate,
-      required final Map<String, WatchProvider>? rent,
-      required final Map<String, WatchProvider>? buy})
+      required final List<WatchProvider>? flatrate,
+      required final List<WatchProvider>? rent,
+      required final List<WatchProvider>? buy,
+      required final List<WatchProvider>? ads})
       : _flatrate = flatrate,
         _rent = rent,
-        _buy = buy;
+        _buy = buy,
+        _ads = ads;
 
   factory _$_WatchProviderResult.fromJson(Map<String, dynamic> json) =>
       _$$_WatchProviderResultFromJson(json);
 
   @override
   final String? link;
-  final Map<String, WatchProvider>? _flatrate;
+  final List<WatchProvider>? _flatrate;
   @override
-  Map<String, WatchProvider>? get flatrate {
+  List<WatchProvider>? get flatrate {
     final value = _flatrate;
     if (value == null) return null;
-    if (_flatrate is EqualUnmodifiableMapView) return _flatrate;
+    if (_flatrate is EqualUnmodifiableListView) return _flatrate;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableListView(value);
   }
 
-  final Map<String, WatchProvider>? _rent;
+  final List<WatchProvider>? _rent;
   @override
-  Map<String, WatchProvider>? get rent {
+  List<WatchProvider>? get rent {
     final value = _rent;
     if (value == null) return null;
-    if (_rent is EqualUnmodifiableMapView) return _rent;
+    if (_rent is EqualUnmodifiableListView) return _rent;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableListView(value);
   }
 
-  final Map<String, WatchProvider>? _buy;
+  final List<WatchProvider>? _buy;
   @override
-  Map<String, WatchProvider>? get buy {
+  List<WatchProvider>? get buy {
     final value = _buy;
     if (value == null) return null;
-    if (_buy is EqualUnmodifiableMapView) return _buy;
+    if (_buy is EqualUnmodifiableListView) return _buy;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<WatchProvider>? _ads;
+  @override
+  List<WatchProvider>? get ads {
+    final value = _ads;
+    if (value == null) return null;
+    if (_ads is EqualUnmodifiableListView) return _ads;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'WatchProviderResult(link: $link, flatrate: $flatrate, rent: $rent, buy: $buy)';
+    return 'WatchProviderResult(link: $link, flatrate: $flatrate, rent: $rent, buy: $buy, ads: $ads)';
   }
 
   @override
@@ -1560,7 +1582,8 @@ class _$_WatchProviderResult implements _WatchProviderResult {
             (identical(other.link, link) || other.link == link) &&
             const DeepCollectionEquality().equals(other._flatrate, _flatrate) &&
             const DeepCollectionEquality().equals(other._rent, _rent) &&
-            const DeepCollectionEquality().equals(other._buy, _buy));
+            const DeepCollectionEquality().equals(other._buy, _buy) &&
+            const DeepCollectionEquality().equals(other._ads, _ads));
   }
 
   @JsonKey(ignore: true)
@@ -1570,7 +1593,8 @@ class _$_WatchProviderResult implements _WatchProviderResult {
       link,
       const DeepCollectionEquality().hash(_flatrate),
       const DeepCollectionEquality().hash(_rent),
-      const DeepCollectionEquality().hash(_buy));
+      const DeepCollectionEquality().hash(_buy),
+      const DeepCollectionEquality().hash(_ads));
 
   @JsonKey(ignore: true)
   @override
@@ -1590,9 +1614,10 @@ class _$_WatchProviderResult implements _WatchProviderResult {
 abstract class _WatchProviderResult implements WatchProviderResult {
   const factory _WatchProviderResult(
       {required final String? link,
-      required final Map<String, WatchProvider>? flatrate,
-      required final Map<String, WatchProvider>? rent,
-      required final Map<String, WatchProvider>? buy}) = _$_WatchProviderResult;
+      required final List<WatchProvider>? flatrate,
+      required final List<WatchProvider>? rent,
+      required final List<WatchProvider>? buy,
+      required final List<WatchProvider>? ads}) = _$_WatchProviderResult;
 
   factory _WatchProviderResult.fromJson(Map<String, dynamic> json) =
       _$_WatchProviderResult.fromJson;
@@ -1600,11 +1625,13 @@ abstract class _WatchProviderResult implements WatchProviderResult {
   @override
   String? get link;
   @override
-  Map<String, WatchProvider>? get flatrate;
+  List<WatchProvider>? get flatrate;
   @override
-  Map<String, WatchProvider>? get rent;
+  List<WatchProvider>? get rent;
   @override
-  Map<String, WatchProvider>? get buy;
+  List<WatchProvider>? get buy;
+  @override
+  List<WatchProvider>? get ads;
   @override
   @JsonKey(ignore: true)
   _$$_WatchProviderResultCopyWith<_$_WatchProviderResult> get copyWith =>
@@ -1617,10 +1644,14 @@ WatchProvider _$WatchProviderFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WatchProvider {
-  int? get displayPriority => throw _privateConstructorUsedError;
+  @JsonKey(name: 'logo_path')
   String? get logoPath => throw _privateConstructorUsedError;
-  String? get providerId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'provider_id')
+  int? get providerId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'provider_name')
   String? get providerName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'display_priority')
+  int? get displayPriority => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1635,10 +1666,10 @@ abstract class $WatchProviderCopyWith<$Res> {
       _$WatchProviderCopyWithImpl<$Res, WatchProvider>;
   @useResult
   $Res call(
-      {int? displayPriority,
-      String? logoPath,
-      String? providerId,
-      String? providerName});
+      {@JsonKey(name: 'logo_path') String? logoPath,
+      @JsonKey(name: 'provider_id') int? providerId,
+      @JsonKey(name: 'provider_name') String? providerName,
+      @JsonKey(name: 'display_priority') int? displayPriority});
 }
 
 /// @nodoc
@@ -1654,16 +1685,12 @@ class _$WatchProviderCopyWithImpl<$Res, $Val extends WatchProvider>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? displayPriority = freezed,
     Object? logoPath = freezed,
     Object? providerId = freezed,
     Object? providerName = freezed,
+    Object? displayPriority = freezed,
   }) {
     return _then(_value.copyWith(
-      displayPriority: freezed == displayPriority
-          ? _value.displayPriority
-          : displayPriority // ignore: cast_nullable_to_non_nullable
-              as int?,
       logoPath: freezed == logoPath
           ? _value.logoPath
           : logoPath // ignore: cast_nullable_to_non_nullable
@@ -1671,11 +1698,15 @@ class _$WatchProviderCopyWithImpl<$Res, $Val extends WatchProvider>
       providerId: freezed == providerId
           ? _value.providerId
           : providerId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       providerName: freezed == providerName
           ? _value.providerName
           : providerName // ignore: cast_nullable_to_non_nullable
               as String?,
+      displayPriority: freezed == displayPriority
+          ? _value.displayPriority
+          : displayPriority // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -1689,10 +1720,10 @@ abstract class _$$_WatchProviderCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? displayPriority,
-      String? logoPath,
-      String? providerId,
-      String? providerName});
+      {@JsonKey(name: 'logo_path') String? logoPath,
+      @JsonKey(name: 'provider_id') int? providerId,
+      @JsonKey(name: 'provider_name') String? providerName,
+      @JsonKey(name: 'display_priority') int? displayPriority});
 }
 
 /// @nodoc
@@ -1706,16 +1737,12 @@ class __$$_WatchProviderCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? displayPriority = freezed,
     Object? logoPath = freezed,
     Object? providerId = freezed,
     Object? providerName = freezed,
+    Object? displayPriority = freezed,
   }) {
     return _then(_$_WatchProvider(
-      displayPriority: freezed == displayPriority
-          ? _value.displayPriority
-          : displayPriority // ignore: cast_nullable_to_non_nullable
-              as int?,
       logoPath: freezed == logoPath
           ? _value.logoPath
           : logoPath // ignore: cast_nullable_to_non_nullable
@@ -1723,40 +1750,47 @@ class __$$_WatchProviderCopyWithImpl<$Res>
       providerId: freezed == providerId
           ? _value.providerId
           : providerId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       providerName: freezed == providerName
           ? _value.providerName
           : providerName // ignore: cast_nullable_to_non_nullable
               as String?,
+      displayPriority: freezed == displayPriority
+          ? _value.displayPriority
+          : displayPriority // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$_WatchProvider implements _WatchProvider {
   const _$_WatchProvider(
-      {required this.displayPriority,
-      required this.logoPath,
-      required this.providerId,
-      required this.providerName});
+      {@JsonKey(name: 'logo_path') required this.logoPath,
+      @JsonKey(name: 'provider_id') required this.providerId,
+      @JsonKey(name: 'provider_name') required this.providerName,
+      @JsonKey(name: 'display_priority') required this.displayPriority});
 
   factory _$_WatchProvider.fromJson(Map<String, dynamic> json) =>
       _$$_WatchProviderFromJson(json);
 
   @override
-  final int? displayPriority;
-  @override
+  @JsonKey(name: 'logo_path')
   final String? logoPath;
   @override
-  final String? providerId;
+  @JsonKey(name: 'provider_id')
+  final int? providerId;
   @override
+  @JsonKey(name: 'provider_name')
   final String? providerName;
+  @override
+  @JsonKey(name: 'display_priority')
+  final int? displayPriority;
 
   @override
   String toString() {
-    return 'WatchProvider(displayPriority: $displayPriority, logoPath: $logoPath, providerId: $providerId, providerName: $providerName)';
+    return 'WatchProvider(logoPath: $logoPath, providerId: $providerId, providerName: $providerName, displayPriority: $displayPriority)';
   }
 
   @override
@@ -1764,20 +1798,20 @@ class _$_WatchProvider implements _WatchProvider {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_WatchProvider &&
-            (identical(other.displayPriority, displayPriority) ||
-                other.displayPriority == displayPriority) &&
             (identical(other.logoPath, logoPath) ||
                 other.logoPath == logoPath) &&
             (identical(other.providerId, providerId) ||
                 other.providerId == providerId) &&
             (identical(other.providerName, providerName) ||
-                other.providerName == providerName));
+                other.providerName == providerName) &&
+            (identical(other.displayPriority, displayPriority) ||
+                other.displayPriority == displayPriority));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, displayPriority, logoPath, providerId, providerName);
+      runtimeType, logoPath, providerId, providerName, displayPriority);
 
   @JsonKey(ignore: true)
   @override
@@ -1795,22 +1829,30 @@ class _$_WatchProvider implements _WatchProvider {
 
 abstract class _WatchProvider implements WatchProvider {
   const factory _WatchProvider(
-      {required final int? displayPriority,
-      required final String? logoPath,
-      required final String? providerId,
-      required final String? providerName}) = _$_WatchProvider;
+      {@JsonKey(name: 'logo_path')
+          required final String? logoPath,
+      @JsonKey(name: 'provider_id')
+          required final int? providerId,
+      @JsonKey(name: 'provider_name')
+          required final String? providerName,
+      @JsonKey(name: 'display_priority')
+          required final int? displayPriority}) = _$_WatchProvider;
 
   factory _WatchProvider.fromJson(Map<String, dynamic> json) =
       _$_WatchProvider.fromJson;
 
   @override
-  int? get displayPriority;
-  @override
+  @JsonKey(name: 'logo_path')
   String? get logoPath;
   @override
-  String? get providerId;
+  @JsonKey(name: 'provider_id')
+  int? get providerId;
   @override
+  @JsonKey(name: 'provider_name')
   String? get providerName;
+  @override
+  @JsonKey(name: 'display_priority')
+  int? get displayPriority;
   @override
   @JsonKey(ignore: true)
   _$$_WatchProviderCopyWith<_$_WatchProvider> get copyWith =>

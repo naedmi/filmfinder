@@ -18,7 +18,8 @@ class MovieDetailsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final MovieDetailsController movieDetailsController = ref.watch(movieDetailsProvider(int.parse(movieId)));
+    final MovieDetailsController movieDetailsController =
+        ref.watch(movieDetailsProvider(int.parse(movieId)));
 
     return SimpleBottomBarScaffold(
       showMiddleButton: false,
@@ -30,16 +31,20 @@ class MovieDetailsPage extends ConsumerWidget {
               // Display the movie poster image
               if (details.posterPath != null)
                 CachedNetworkImage(
-                  imageUrl: 'https://image.tmdb.org/t/p/w500${details.posterPath}',
-                  placeholder: (context, url) => const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Remix.error_warning_line),
+                  imageUrl:
+                      'https://image.tmdb.org/t/p/w500${details.posterPath}',
+                  placeholder: (BuildContext context, String url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (BuildContext context, String url, error) =>
+                      const Icon(Remix.error_warning_line),
                 ),
               const SizedBox(height: 16.0),
               // Display the movie title
               Center(
                 child: Text(
                   details.title,
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 16.0),
@@ -48,15 +53,17 @@ class MovieDetailsPage extends ConsumerWidget {
                 spacing: 8.0,
                 runSpacing: 4.0,
                 children: details.genres?.map((Genre genre) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    child: Text(genre.name),
-                  );
-                }).toList() ?? [],
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 4.0),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: Text(genre.name),
+                      );
+                    }).toList() ??
+                    [],
               ),
               const SizedBox(height: 16.0),
               // Display the movie star rating
@@ -91,13 +98,15 @@ class MovieDetailsPage extends ConsumerWidget {
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 16.0),
-              // Display the vote average and vote count
-              // Add more details as needed
+              Text(
+                details.watchProviders.toString(),
+                style: const TextStyle(fontSize: 16),
+              ),
             ],
           ),
         ),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (Object error, StackTrace stackTrace) =>  Align(
+        error: (Object error, StackTrace stackTrace) => Align(
           alignment: Alignment.topCenter,
           child: Card(
             child: Padding(

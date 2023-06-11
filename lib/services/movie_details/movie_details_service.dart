@@ -5,12 +5,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final AutoDisposeFutureProviderFamily<MovieDetails, MovieParams>
     movieDetailsApiService = FutureProvider.autoDispose.family(
-        (AutoDisposeFutureProviderRef<MovieDetails> ref,
-            MovieParams params) async {
-  dynamic response = await ref.watch(dioProvider).get(
-        'https://api.themoviedb.org/3/movie/$params',
-      );
-  ref.keepAlive();
+  (AutoDisposeFutureProviderRef<MovieDetails> ref, MovieParams params) async {
+    dynamic movieResponse = await ref.watch(dioProvider).get(
+          'https://api.themoviedb.org/3/movie/$params',
+        );
+    ref.keepAlive();
 
-  return MovieDetails.fromJson(response.data);
-});
+    dynamic watchProvidersResponse = await ref.watch(dioProvider).get(
+          'https://api.themoviedb.org/3/movie/${params.movieID}/watch/providers',
+        );
+    ref.keepAlive();
+
+    MovieDetails movieDetails = MovieDetails.fromJson(movieResponse.data);
+
+    WatchProviders watchProviders =
+        WatchProviders.fromJson(watchProvidersResponse.data);
+
+    return movieDetails.copyWith(watchProviders: watchProviders);
+  },
+);
