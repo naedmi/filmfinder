@@ -7,6 +7,7 @@ import 'package:remixicon/remixicon.dart';
 
 import 'package:filmfinder/controllers/movie_details/movie_details_controller.dart';
 import 'package:filmfinder/controllers/movie_details/movie_details_provider.dart';
+import 'package:filmfinder/controllers/settings/settings_provider.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget_main_details.dart';
@@ -20,6 +21,9 @@ class MovieDetailsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final MovieDetailsController movieDetailsController =
         ref.watch(movieDetailsProvider(int.parse(movieId)));
+
+    final String language = ref.watch(settingsLanguageProvider).language;
+    final String countryCode = language.split('-').last;
 
     return SimpleBottomBarScaffold(
       showMiddleButton: false,
@@ -98,10 +102,44 @@ class MovieDetailsPage extends ConsumerWidget {
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 16.0),
-              Text(
-                details.watchProviders.toString(),
-                style: const TextStyle(fontSize: 16),
-              ),
+
+              // Display the provider names from the flatrate map for the specified country
+              if (details.watchProviders != null &&
+                  details.watchProviders!.results != null &&
+                  details.watchProviders!.results![countryCode] != null &&
+                  details.watchProviders!.results![countryCode]!.flatrate !=
+                      null)
+                Wrap(
+                    spacing: 8.0,
+                    runSpacing: 4.0,
+                    children: details
+                        .watchProviders!.results![countryCode]!.flatrate!
+                        .map((WatchProvider provider) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 4.0),
+                        child: provider.logoPath != null
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      'https://image.tmdb.org/t/p/w500${provider.logoPath}',
+                                  placeholder:
+                                      (BuildContext context, String url) =>
+                                          const CircularProgressIndicator(),
+                                  errorWidget: (BuildContext context,
+                                          String url, error) =>
+                                      const Icon(Remix.error_warning_line),
+                                  width: 50,
+                                  height: 50,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : const Text('No logo available'),
+                      );
+                    }).toList())
+              else
+                const Text('No providers available in your country'),
             ],
           ),
         ),
