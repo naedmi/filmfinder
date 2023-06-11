@@ -20,6 +20,6 @@ class MovieDetailsControllerImpl extends MovieDetailsController {
     movieDetails = ref.watch(movieDetailsApiService(MovieParams(
         movieID: movieID,
         language: ref.watch(settingsLanguageProvider).language,
-        appendToResponse: 'watch/providers')));
+        appendToResponse: 'watch/providers,credits')));
   }
 }

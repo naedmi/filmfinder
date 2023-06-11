@@ -27,6 +27,7 @@ class MovieDetails with _$MovieDetails {
     required double? voteAverage,
     required int? voteCount,
     Videos? videos,
+    Credits? credits,
     // ignore: invalid_annotation_target
     @JsonKey(name: 'watch/providers') WatchProviders? watchProviders,
   }) = _MovieDetails;
@@ -118,4 +119,27 @@ class WatchProvider with _$WatchProvider {
 
   factory WatchProvider.fromJson(Map<String, dynamic> json) =>
       _$WatchProviderFromJson(json);
+}
+
+@freezed
+class Credits with _$Credits {
+  const factory Credits({
+    required List<Cast>? cast,
+  }) = _Credits;
+
+  factory Credits.fromJson(Map<String, dynamic> json) =>
+      _$CreditsFromJson(json);
+}
+
+@freezed
+class Cast with _$Cast {
+  const factory Cast({
+    required int? id,
+    required String? name,
+    required String? character,
+    @JsonKey(name: 'profile_path')
+    required String? profilePath,
+  }) = _Cast;
+
+  factory Cast.fromJson(Map<String, dynamic> json) => _$CastFromJson(json);
 }

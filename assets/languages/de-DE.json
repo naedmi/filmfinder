@@ -36,6 +36,8 @@
     "year": "Jahr"
   },
   "details": {
-    "votes": "Bewertungen"
+    "votes": "Bewertungen",
+    "no_provider": "Keine Anbieter in ihrem Land gefunden",
+    "top_actors": "Bekannteste Schauspieler"
   }
 }

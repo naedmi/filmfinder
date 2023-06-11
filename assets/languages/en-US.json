@@ -36,6 +36,8 @@
     "year": "Year"
   },
   "details": {
-    "votes": "votes"
+    "votes": "votes",
+    "no_provider": "No providers available in your country",
+    "top_actors": "Top Actors"
   }
 }

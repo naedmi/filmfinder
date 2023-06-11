@@ -11,6 +11,7 @@ import 'package:filmfinder/controllers/settings/settings_provider.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget_main_details.dart';
+import 'package:filmfinder/views/movie_details/actor_widget.dart';
 
 class MovieDetailsPage extends ConsumerWidget {
   final String movieId;
@@ -139,7 +140,9 @@ class MovieDetailsPage extends ConsumerWidget {
                       );
                     }).toList())
               else
-                const Text('No providers available in your country'),
+                Text('details.no_provider'.tr()),
+              const SizedBox(height: 16.0),
+              FilmActorsList(actors: details.credits?.cast)
             ],
           ),
         ),
