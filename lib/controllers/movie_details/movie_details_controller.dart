@@ -19,6 +19,7 @@ class MovieDetailsControllerImpl extends MovieDetailsController {
     this.movieID = movieID;
     movieDetails = ref.watch(movieDetailsApiService(MovieParams(
         movieID: movieID,
-        language: ref.watch(settingsLanguageProvider).language)));
+        language: ref.watch(settingsLanguageProvider).language,
+        appendToResponse: 'watch/providers')));
   }
 }

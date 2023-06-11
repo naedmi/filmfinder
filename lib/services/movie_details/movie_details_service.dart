@@ -11,16 +11,6 @@ final AutoDisposeFutureProviderFamily<MovieDetails, MovieParams>
         );
     ref.keepAlive();
 
-    dynamic watchProvidersResponse = await ref.watch(dioProvider).get(
-          'https://api.themoviedb.org/3/movie/${params.movieID}/watch/providers',
-        );
-    ref.keepAlive();
-
-    MovieDetails movieDetails = MovieDetails.fromJson(movieResponse.data);
-
-    WatchProviders watchProviders =
-        WatchProviders.fromJson(watchProvidersResponse.data);
-
-    return movieDetails.copyWith(watchProviders: watchProviders);
+    return MovieDetails.fromJson(movieResponse.data);
   },
 );
