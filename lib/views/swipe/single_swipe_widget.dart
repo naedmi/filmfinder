@@ -1,4 +1,3 @@
-import 'package:filmfinder/controllers/swipe/swipe_controller.dart';
 import 'package:filmfinder/controllers/swipe/swipe_providers.dart';
 import 'package:filmfinder/controllers/swipe/video_controller.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
@@ -7,15 +6,14 @@ import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class SingleSwipeWidget extends ConsumerWidget {
   final MovieDetails movie;
-  final SwipeController swipeController;
 
-  const SingleSwipeWidget(
-      {super.key, required this.movie, required this.swipeController});
+  const SingleSwipeWidget({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,46 +37,54 @@ class SingleSwipeWidget extends ConsumerWidget {
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: MediaQuery.of(context).padding.top),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 2 -
-                  MediaQuery.of(context).padding.top,
-              width: MediaQuery.of(context).size.width,
-              child: YoutubePlayer(
-                controller: controllerState.controller,
-                showVideoProgressIndicator: true,
-                progressIndicatorColor: Theme.of(context).primaryColor,
-                bottomActions: <Widget>[
-                  IconButton.outlined(
-                      onPressed: () => videoController.toggleMute(),
-                      color: Colors.white,
-                      icon: Icon(
-                        controllerState.isMute
-                            ? Remix.volume_mute_line
-                            : Remix.volume_up_line,
+            Padding(
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height / 2 -
+                    MediaQuery.of(context).padding.top,
+                child: YoutubePlayer(
+                  controller: controllerState.controller,
+                  showVideoProgressIndicator: true,
+                  progressIndicatorColor: Theme.of(context).primaryColor,
+                  bottomActions: <Widget>[
+                    IconButton.outlined(
+                        onPressed: () => videoController.toggleMute(),
                         color: Colors.white,
-                      ))
-                ],
-                topActions: const <Widget>[],
-                progressColors: ProgressBarColors(
-                  playedColor: Theme.of(context).primaryColor,
-                  handleColor: Theme.of(context).colorScheme.secondary,
+                        icon: Icon(
+                          controllerState.isMute
+                              ? Remix.volume_mute_line
+                              : Remix.volume_up_line,
+                          color: Colors.white,
+                        ))
+                  ],
+                  topActions: const <Widget>[],
+                  progressColors: ProgressBarColors(
+                    playedColor: Theme.of(context).primaryColor,
+                    handleColor: Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
               ),
             ),
-            Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(padding),
+            Container(
+                constraints: BoxConstraints(
+                  minHeight: 0,
+                  maxHeight: MediaQuery.of(context).size.height / 2,
                 ),
-                margin: const EdgeInsets.all(padding),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width - padding * 2,
-                  height: MediaQuery.of(context).size.height / 3 + padding,
-                  child: Padding(
-                    padding: const EdgeInsets.all(padding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                child: GestureDetector(
+                  onTap: () => context.pushNamed(
+                    'details',
+                    pathParameters: <String, String>{'id': movie.id.toString()},
+                  ),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(padding),
+                    ),
+                    margin: const EdgeInsets.all(padding)
+                        .copyWith(bottom: mainActionButtonHeight),
+                    child: ListView(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(padding),
+                      physics: const NeverScrollableScrollPhysics(),
                       children: <Widget>[
                         RichText(
                           maxLines: 2,
@@ -113,36 +119,13 @@ class SingleSwipeWidget extends ConsumerWidget {
                         ),
                         const Divider(),
                         RichText(
-                          maxLines: 4,
+                          maxLines: 6,
                           overflow: TextOverflow.ellipsis,
                           text: TextSpan(
                             style: Theme.of(context).textTheme.bodyMedium,
                             text: movie.overview,
                           ),
                         ),
-                        const Spacer(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            IconButton(
-                              icon: const Icon(Remix.netflix_line),
-                              onPressed: () {},
-                            ),
-                            IconButton(
-                              icon: const Icon(Remix.amazon_line),
-                              onPressed: () {},
-                            ),
-                            IconButton(
-                              icon: const Icon(Remix.youtube_line),
-                              onPressed: () {},
-                            ),
-                            const Spacer(),
-                            IconButton(
-                              icon: const Icon(Remix.share_forward_line),
-                              onPressed: () {},
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   ),

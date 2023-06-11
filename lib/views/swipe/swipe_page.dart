@@ -26,7 +26,6 @@ class SwipePage extends ConsumerWidget {
                 movie.when(
                     data: (MovieDetails details) => SingleSwipeWidget(
                           movie: details,
-                          swipeController: swipeController,
                         ),
                     error: (Object error, StackTrace? stackTrace) {
                       return Card(
