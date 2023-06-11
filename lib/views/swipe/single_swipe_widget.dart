@@ -21,7 +21,7 @@ class SingleSwipeWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AutoDisposeStateNotifierProvider<VideoController,
             VideoControllerState> provider =
-        videoControllerProvider(movie.videos?.results?.first.key ?? '');
+        videoControllerProvider(movie.videos!.results!.first.key!);
     final VideoControllerState controllerState = ref.watch(provider);
     final VideoController videoController = ref.read(provider.notifier);
     return Container(

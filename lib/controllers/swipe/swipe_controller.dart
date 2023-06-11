@@ -29,6 +29,22 @@ class SwipeControllerImpl extends SwipeController {
                 movieID: movie.id,
                 language: language,
                 appendToResponse: 'videos'))))
+        .whereAsync((AsyncValue<MovieDetails> element) => element.whenData(
+            (MovieDetails movie) => movie.videos!.results!.isNotEmpty))
         .toList());
+  }
+}
+
+extension IterableExtension<E> on Iterable<E> {
+  Iterable<E> whereAsync(AsyncValue<bool> Function(E element) selector) {
+    final List<E> result = <E>[];
+    forEach((E x) {
+      selector(x).whenData((bool value) {
+        if (value) {
+          result.add(x);
+        }
+      });
+    });
+    return result;
   }
 }
