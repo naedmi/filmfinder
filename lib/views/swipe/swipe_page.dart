@@ -13,12 +13,18 @@ class SwipePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final SwipeController swipeController = ref.watch(swipeControllerProvider);
+    final AsyncValue<List<AsyncValue<MovieDetails>>> swipeController =
+        ref.watch(swipeControllerProvider);
+    final SwipeController swipeNotifier =
+        ref.read(swipeControllerProvider.notifier);
     return SimpleBottomBarScaffold(
       body: Center(
-        child: swipeController.currentMovies.when(
-            data: (List<AsyncValue<MovieDetails>> movies) {
+        child:
+            swipeController.when(data: (List<AsyncValue<MovieDetails>> movies) {
           return PageView(
+            onPageChanged: (int index) {
+              swipeNotifier.swipe(index);
+            },
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.vertical,
             children: <Widget>[
