@@ -26,7 +26,7 @@ class SwipeControllerImpl extends SwipeController {
     final StateController<int> currentPage = ref.read(pageProvider.notifier);
     if (state is! AsyncData<List<AsyncValue<MovieDetails>>>) return;
 
-    if (index >= responses.results.length - nonVideoResults - 1) {
+    if (index >= responses.results.length - nonVideoResults) {
       currentPage.state++;
     }
     state = AsyncData<List<AsyncValue<MovieDetails>>>(_loadNext());

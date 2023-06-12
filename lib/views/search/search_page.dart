@@ -5,6 +5,8 @@ import 'package:filmfinder/controllers/search/search_providers.dart';
 import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/search/api_search_types.dart';
 import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/views/common/error_card_widget.dart';
+import 'package:filmfinder/views/common/loading_card_widget.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:filmfinder/views/search/search_result_widget.dart';
 import 'package:flutter/material.dart';
@@ -284,80 +286,70 @@ class SearchPage extends ConsumerWidget {
             ),
           )),
       body: searchController.searchResponse.when(
-          data: (DefaultResponse res) => res.results.isNotEmpty
-              ? NotificationListener<ScrollEndNotification>(
-                  onNotification: (ScrollEndNotification scrollEnd) {
-                    if (scrollEnd.metrics.atEdge) {
-                      _showNavigationSnackbar(
-                        context: context,
-                        res: res,
-                        controller: searchController,
-                        disablePrevious: res.page == 1,
-                        disableNext: res.page == res.totalPages,
-                      );
-                    }
-                    return true;
-                  },
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.only(
-                        left: padding, right: padding, bottom: paddingBig * 2),
-                    itemBuilder: (BuildContext context, int index) =>
-                        SearchResultWidget(res: res.results[index]),
-                    itemCount: res.results.length,
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(),
-                  ))
-              : searchController.filter.query.isNotEmpty
-                  ? const Align(
-                      alignment: Alignment.topCenter,
-                      child: Card(
-                        child: Padding(
-                          padding: EdgeInsets.all(padding),
-                          child: Text('No results found'),
-                        ),
+        data: (DefaultResponse res) => res.results.isNotEmpty
+            ? NotificationListener<ScrollEndNotification>(
+                onNotification: (ScrollEndNotification scrollEnd) {
+                  if (scrollEnd.metrics.atEdge) {
+                    _showNavigationSnackbar(
+                      context: context,
+                      res: res,
+                      controller: searchController,
+                      disablePrevious: res.page == 1,
+                      disableNext: res.page == res.totalPages,
+                    );
+                  }
+                  return true;
+                },
+                child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.only(
+                      left: padding, right: padding, bottom: paddingBig * 2),
+                  itemBuilder: (BuildContext context, int index) =>
+                      SearchResultWidget(res: res.results[index]),
+                  itemCount: res.results.length,
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const Divider(),
+                ))
+            : searchController.filter.query.isNotEmpty
+                ? const Align(
+                    alignment: Alignment.topCenter,
+                    child: Card(
+                      child: Padding(
+                        padding: EdgeInsets.all(padding),
+                        child: Text('No results found'),
                       ),
-                    )
-                  : const Align(
-                      alignment: Alignment.topCenter,
-                      child: Card(
-                        child: SizedBox(
-                          height: paddingBig * 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(Remix.search_eye_line,
-                                  size: paddingBig + padding),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: paddingBig,
-                                    right: paddingBig,
-                                    top: padding),
-                                child: Text('Enter something to search...'),
-                              ),
-                            ],
-                          ),
+                    ),
+                  )
+                : const Align(
+                    alignment: Alignment.topCenter,
+                    child: Card(
+                      child: SizedBox(
+                        height: paddingBig * 4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(Remix.search_eye_line,
+                                size: paddingBig + padding),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: paddingBig,
+                                  right: paddingBig,
+                                  top: padding),
+                              child: Text('Enter something to search...'),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-          error: (Object err, StackTrace stack) => Align(
-                alignment: Alignment.topCenter,
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(padding),
-                    child: Text('Could not load data: ${err.toString()}'),
                   ),
-                ),
-              ),
-          loading: () => const Align(
-                alignment: Alignment.topCenter,
-                child: Card(
-                    child: Padding(
-                  padding: EdgeInsets.all(padding),
-                  child: CircularProgressIndicator(),
-                )),
-              )),
+        error: (Object err, StackTrace? stack) => ErrorCardWidget(
+          error: err,
+          stackTrace: stack,
+          alignment: Alignment.topCenter,
+        ),
+        loading: () => const LoadingCardWidget(alignment: Alignment.topCenter),
+      ),
     );
   }
 }
