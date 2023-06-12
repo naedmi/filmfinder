@@ -17,120 +17,156 @@ class SingleSwipeWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AutoDisposeStateNotifierProvider<VideoController,
-            VideoControllerState> provider =
+    final AutoDisposeFamilyNotifierProvider<VideoController,
+            VideoControllerState, String> provider =
         videoControllerProvider(movie.videos!.results!.first.key!);
     final VideoControllerState controllerState = ref.watch(provider);
     final VideoController videoController = ref.read(provider.notifier);
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: const <double>[0.6, 0.9],
-          colors: <Color>[
-            Colors.black,
-            Theme.of(context).colorScheme.background,
-          ],
-        ),
-      ),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height / 2 -
-                    MediaQuery.of(context).padding.top,
-                child: YoutubePlayer(
-                  controller: controllerState.controller,
-                  showVideoProgressIndicator: true,
-                  progressIndicatorColor: Theme.of(context).primaryColor,
-                  bottomActions: <Widget>[
-                    IconButton.outlined(
-                        onPressed: () => videoController.toggleMute(),
-                        color: Colors.white,
-                        icon: Icon(
-                          controllerState.isMute
-                              ? Remix.volume_mute_line
-                              : Remix.volume_up_line,
-                          color: Colors.white,
-                        ))
-                  ],
-                  topActions: const <Widget>[],
-                  progressColors: ProgressBarColors(
-                    playedColor: Theme.of(context).primaryColor,
-                    handleColor: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-                constraints: BoxConstraints(
-                  minHeight: 0,
-                  maxHeight: MediaQuery.of(context).size.height / 2,
-                ),
-                child: GestureDetector(
-                  onTap: () => context.pushNamed(
-                    'details',
-                    pathParameters: <String, String>{'id': movie.id.toString()},
-                  ),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(padding),
+    return OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) =>
+            orientation == Orientation.portrait
+                ? Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: const <double>[0.6, 0.9],
+                        colors: <Color>[
+                          Colors.black,
+                          Theme.of(context).colorScheme.background,
+                        ],
+                      ),
                     ),
-                    margin: const EdgeInsets.all(padding)
-                        .copyWith(bottom: mainActionButtonHeight),
-                    child: ListView(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.all(padding),
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: <Widget>[
-                        RichText(
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                            style: Theme.of(context).textTheme.headlineMedium,
-                            text: movie.title,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).padding.top),
+                            child: SizedBox(
+                                height: MediaQuery.of(context).size.height / 2 -
+                                    MediaQuery.of(context).padding.top,
+                                child: _buildVideoPlayer(
+                                    context, controllerState, videoController)),
                           ),
-                        ),
-                        const Divider(),
-                        Row(
-                          children: <Widget>[
-                            Tooltip(
-                              message:
-                                  '${movie.voteAverage.toString()} / 10 stars',
-                              child: RatingBarIndicator(
-                                itemSize: padding,
-                                rating: (movie.voteAverage ?? 0) / 2,
-                                itemCount: 5,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Icon(
-                                    Remix.star_fill,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
+                          Container(
+                              constraints: BoxConstraints(
+                                minHeight: 0,
+                                maxHeight:
+                                    MediaQuery.of(context).size.height / 2,
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  controllerState.controller.pause();
+                                  context.pushNamed(
+                                    'details',
+                                    pathParameters: <String, String>{
+                                      'id': movie.id.toString()
+                                    },
                                   );
                                 },
-                              ),
-                            ),
-                            const Spacer(),
-                            Text('${movie.voteCount ?? '-'} votes')
-                          ],
-                        ),
-                        const Divider(),
-                        RichText(
-                          maxLines: 6,
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            text: movie.overview,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-          ]),
-    );
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(padding),
+                                  ),
+                                  margin: const EdgeInsets.all(padding)
+                                      .copyWith(bottom: mainActionButtonHeight),
+                                  child: ListView(
+                                    shrinkWrap: true,
+                                    padding: const EdgeInsets.all(padding),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    children: <Widget>[
+                                      RichText(
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        text: TextSpan(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineMedium,
+                                          text: movie.title,
+                                        ),
+                                      ),
+                                      const Divider(),
+                                      Row(
+                                        children: <Widget>[
+                                          Tooltip(
+                                            message:
+                                                '${movie.voteAverage.toString()} / 10 stars',
+                                            child: RatingBarIndicator(
+                                              itemSize: padding,
+                                              rating:
+                                                  (movie.voteAverage ?? 0) / 2,
+                                              itemCount: 5,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Icon(
+                                                  Remix.star_fill,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          Text(
+                                              '${movie.voteCount ?? '-'} votes')
+                                        ],
+                                      ),
+                                      const Divider(),
+                                      RichText(
+                                        maxLines: 6,
+                                        overflow: TextOverflow.ellipsis,
+                                        text: TextSpan(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
+                                          text: movie.overview,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )),
+                        ]),
+                  )
+                : _buildVideoPlayer(context, controllerState, videoController));
   }
+
+  YoutubePlayer _buildVideoPlayer(
+          BuildContext context,
+          VideoControllerState controllerState,
+          VideoController videoController) =>
+      YoutubePlayer(
+        controller: controllerState.controller,
+        showVideoProgressIndicator: true,
+        progressIndicatorColor: Theme.of(context).primaryColor,
+        bottomActions: <Widget>[
+          IconButton.outlined(
+              onPressed: () => videoController.toggleMute(),
+              color: Colors.white,
+              icon: Icon(
+                controllerState.isMute
+                    ? Remix.volume_mute_line
+                    : Remix.volume_up_line,
+                color: Colors.white,
+              )),
+          const Spacer(),
+          IconButton.outlined(
+              onPressed: () => videoController.toggleFullscreen(),
+              color: Colors.white,
+              icon: const Icon(
+                Remix.fullscreen_line,
+                color: Colors.white,
+              )),
+        ],
+        topActions: const <Widget>[],
+        progressColors: ProgressBarColors(
+          playedColor: Theme.of(context).primaryColor,
+          handleColor: Theme.of(context).colorScheme.secondary,
+        ),
+      );
 }

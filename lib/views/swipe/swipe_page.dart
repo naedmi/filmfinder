@@ -18,6 +18,8 @@ class SwipePage extends ConsumerWidget {
     final SwipeController swipeNotifier =
         ref.read(swipeControllerProvider.notifier);
     return SimpleBottomBarScaffold(
+      hideBottomBar:
+          MediaQuery.of(context).orientation == Orientation.landscape,
       body: Center(
         child: swipeController.when(
             data: (List<AsyncValue<MovieDetails>> movies) {

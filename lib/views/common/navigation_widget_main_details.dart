@@ -79,14 +79,16 @@ class SimpleBottomBarScaffold extends StatelessWidget {
   final Widget body;
   final AppBar? appBar;
   final ScrollController? controller;
-  final showMiddleButton;
+  final bool showMiddleButton;
+  final bool hideBottomBar;
 
   const SimpleBottomBarScaffold(
       {super.key,
       required this.body,
       this.appBar,
       this.controller,
-      this.showMiddleButton = true});
+      this.showMiddleButton = true,
+      this.hideBottomBar = false});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +105,7 @@ class SimpleBottomBarScaffold extends StatelessWidget {
           appBar: appBar,
           extendBody: true,
           resizeToAvoidBottomInset: false,
-          bottomNavigationBar: BottomNavigationWidget(
+          bottomNavigationBar: hideBottomBar ? null : BottomNavigationWidget(
             controller: controller,
           ),
           body: body),
