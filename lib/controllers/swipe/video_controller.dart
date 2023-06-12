@@ -1,4 +1,5 @@
 import 'package:filmfinder/models/swipe/video_controller_state.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -19,7 +20,12 @@ class VideoControllerImpl extends VideoController {
   @override
   void toggleFullscreen() {
     state.controller.toggleFullScreenMode();
-    ref.invalidateSelf();
+    if (state.isFullscreen) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    } else {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    }
+    state = state.copyWith(isFullscreen: !state.isFullscreen, isMute: false);
   }
 
   @override
@@ -40,6 +46,7 @@ class VideoControllerImpl extends VideoController {
             disableDragSeek: false,
           ),
         ),
-        isMute: false);
+        isMute: false,
+        isFullscreen: false);
   }
 }

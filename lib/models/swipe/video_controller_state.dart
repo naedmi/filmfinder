@@ -8,5 +8,6 @@ class VideoControllerState with _$VideoControllerState {
   factory VideoControllerState({
     required YoutubePlayerController controller,
     required bool isMute,
+    required bool isFullscreen,
   }) = _VideoControllerState;
 }

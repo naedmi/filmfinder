@@ -54,7 +54,6 @@ final GoRouter goRouter = GoRouter(
   ],
 );
 
-
 // Keeps the app in portrait mode after exiting video player
 class GoRouterObserver extends NavigatorObserver {
   @override
@@ -65,6 +64,7 @@ class GoRouterObserver extends NavigatorObserver {
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     }
   }
 
@@ -76,6 +76,7 @@ class GoRouterObserver extends NavigatorObserver {
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     }
   }
 }

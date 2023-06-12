@@ -158,8 +158,10 @@ class SingleSwipeWidget extends ConsumerWidget {
           IconButton.outlined(
               onPressed: () => videoController.toggleFullscreen(),
               color: Colors.white,
-              icon: const Icon(
-                Remix.fullscreen_line,
+              icon: Icon(
+                controllerState.isFullscreen
+                    ? Remix.fullscreen_exit_line
+                    : Remix.fullscreen_line,
                 color: Colors.white,
               )),
         ],

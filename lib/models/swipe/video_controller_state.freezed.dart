@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$VideoControllerState {
   YoutubePlayerController get controller => throw _privateConstructorUsedError;
   bool get isMute => throw _privateConstructorUsedError;
+  bool get isFullscreen => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $VideoControllerStateCopyWith<VideoControllerState> get copyWith =>
@@ -30,7 +31,8 @@ abstract class $VideoControllerStateCopyWith<$Res> {
           $Res Function(VideoControllerState) then) =
       _$VideoControllerStateCopyWithImpl<$Res, VideoControllerState>;
   @useResult
-  $Res call({YoutubePlayerController controller, bool isMute});
+  $Res call(
+      {YoutubePlayerController controller, bool isMute, bool isFullscreen});
 }
 
 /// @nodoc
@@ -49,6 +51,7 @@ class _$VideoControllerStateCopyWithImpl<$Res,
   $Res call({
     Object? controller = null,
     Object? isMute = null,
+    Object? isFullscreen = null,
   }) {
     return _then(_value.copyWith(
       controller: null == controller
@@ -58,6 +61,10 @@ class _$VideoControllerStateCopyWithImpl<$Res,
       isMute: null == isMute
           ? _value.isMute
           : isMute // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFullscreen: null == isFullscreen
+          ? _value.isFullscreen
+          : isFullscreen // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -71,7 +78,8 @@ abstract class _$$_VideoControllerStateCopyWith<$Res>
       __$$_VideoControllerStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({YoutubePlayerController controller, bool isMute});
+  $Res call(
+      {YoutubePlayerController controller, bool isMute, bool isFullscreen});
 }
 
 /// @nodoc
@@ -87,6 +95,7 @@ class __$$_VideoControllerStateCopyWithImpl<$Res>
   $Res call({
     Object? controller = null,
     Object? isMute = null,
+    Object? isFullscreen = null,
   }) {
     return _then(_$_VideoControllerState(
       controller: null == controller
@@ -97,6 +106,10 @@ class __$$_VideoControllerStateCopyWithImpl<$Res>
           ? _value.isMute
           : isMute // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFullscreen: null == isFullscreen
+          ? _value.isFullscreen
+          : isFullscreen // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -104,16 +117,21 @@ class __$$_VideoControllerStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_VideoControllerState implements _VideoControllerState {
-  _$_VideoControllerState({required this.controller, required this.isMute});
+  _$_VideoControllerState(
+      {required this.controller,
+      required this.isMute,
+      required this.isFullscreen});
 
   @override
   final YoutubePlayerController controller;
   @override
   final bool isMute;
+  @override
+  final bool isFullscreen;
 
   @override
   String toString() {
-    return 'VideoControllerState(controller: $controller, isMute: $isMute)';
+    return 'VideoControllerState(controller: $controller, isMute: $isMute, isFullscreen: $isFullscreen)';
   }
 
   @override
@@ -123,11 +141,14 @@ class _$_VideoControllerState implements _VideoControllerState {
             other is _$_VideoControllerState &&
             (identical(other.controller, controller) ||
                 other.controller == controller) &&
-            (identical(other.isMute, isMute) || other.isMute == isMute));
+            (identical(other.isMute, isMute) || other.isMute == isMute) &&
+            (identical(other.isFullscreen, isFullscreen) ||
+                other.isFullscreen == isFullscreen));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, controller, isMute);
+  int get hashCode =>
+      Object.hash(runtimeType, controller, isMute, isFullscreen);
 
   @JsonKey(ignore: true)
   @override
@@ -140,12 +161,15 @@ class _$_VideoControllerState implements _VideoControllerState {
 abstract class _VideoControllerState implements VideoControllerState {
   factory _VideoControllerState(
       {required final YoutubePlayerController controller,
-      required final bool isMute}) = _$_VideoControllerState;
+      required final bool isMute,
+      required final bool isFullscreen}) = _$_VideoControllerState;
 
   @override
   YoutubePlayerController get controller;
   @override
   bool get isMute;
+  @override
+  bool get isFullscreen;
   @override
   @JsonKey(ignore: true)
   _$$_VideoControllerStateCopyWith<_$_VideoControllerState> get copyWith =>
