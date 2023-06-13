@@ -34,6 +34,11 @@
     "adult": "Adult",
     "year": "Year"
   },
+  "details": {
+    "votes": "votes",
+    "no_provider": "No providers available in your country",
+    "top_actors": "Top Actors"
+  },
   "exit": {
     "question": "Are you sure?",
     "text": "We hate to see you leave...",
