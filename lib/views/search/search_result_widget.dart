@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/result_poster_widget.dart';
@@ -43,7 +44,8 @@ class SearchResultWidget extends StatelessWidget {
                       const Divider(),
                       Wrap(spacing: paddingTiny, children: <Widget>[
                         Tooltip(
-                          message: '${res.voteAverage.toString()} / 10 stars',
+                          message: 'common.rating'
+                              .tr(args: <String>[res.voteAverage.toString()]),
                           child: RatingBarIndicator(
                             itemSize: padding,
                             rating: (res.voteAverage ?? 0) / 2,
@@ -57,7 +59,8 @@ class SearchResultWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${res.voteCount} votes',
+                          'common.votes'.tr(
+                              args: <String>[res.voteCount?.toString() ?? '-']),
                           style: const TextStyle(fontSize: paddingSmall),
                         ),
                       ]),
@@ -86,7 +89,7 @@ class SearchResultWidget extends StatelessWidget {
                           ),
                           const Spacer(),
                           Tooltip(
-                            message: 'Add to list',
+                            message: 'common.add'.tr(),
                             child: ElevatedButton(
                               onPressed: () {},
                               child: const Icon(

@@ -1,4 +1,9 @@
 {
+  "common": {
+    "rating": "{} / 10 Sterne",
+    "votes": "{} Stimmen",
+    "add": "Zur Liste hinzufügen"
+  },
   "settings": {
     "header": "Einstellungen",
     "color": "Dunkler Modus",
@@ -13,12 +18,6 @@
       "popular": "Beliebt",
       "top_rated": "Top bewertet",
       "upcoming": "Demnächst"
-    },
-    "exit": {
-      "question": "Bist du dir sicher?",
-      "text": "Wir hassen es, dich gehen zu sehen :(",
-      "yes": "Ja",
-      "no": "Nein"
     }
   },
   "list": {
@@ -34,5 +33,11 @@
   "search": {
     "adult": "Erwachsen",
     "year": "Jahr"
+  },
+  "exit": {
+    "question": "Bist du dir sicher?",
+    "text": "Wir hassen es, dich gehen zu sehen :(",
+    "yes": "Ja",
+    "no": "Nein"
   }
 }

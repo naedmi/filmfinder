@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/swipe/swipe_providers.dart';
 import 'package:filmfinder/controllers/swipe/video_controller.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
@@ -93,7 +94,7 @@ class SingleSwipeWidget extends ConsumerWidget {
                                         children: <Widget>[
                                           Tooltip(
                                             message:
-                                                '${movie.voteAverage.toString()} / 10 stars',
+                                                'common.rating'.tr(args: <String>[movie.voteAverage.toString()]),
                                             child: RatingBarIndicator(
                                               itemSize: padding,
                                               rating:
@@ -112,8 +113,8 @@ class SingleSwipeWidget extends ConsumerWidget {
                                             ),
                                           ),
                                           const Spacer(),
-                                          Text(
-                                              '${movie.voteCount ?? '-'} votes')
+                                          const Text(
+                                              'common.votes').tr(args: <String>[movie.voteCount?.toString() ?? '-'])
                                         ],
                                       ),
                                       const Divider(),
