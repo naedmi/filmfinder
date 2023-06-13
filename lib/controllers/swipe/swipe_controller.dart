@@ -34,7 +34,7 @@ class SwipeControllerImpl extends SwipeController {
 
   @override
   FutureOr<List<AsyncValue<MovieDetails>>> build() async {
-    language = ref.watch(settingsLanguageProvider).language;
+    language = ref.watch(settingsLanguageControllerProvider).language;
     final int currentPage = ref.watch(pageProvider);
 
     responses = await ref.watch(discoverApiService(
