@@ -3,6 +3,8 @@ import 'package:filmfinder/controllers/landing/landing_controller.dart';
 import 'package:filmfinder/controllers/landing/landing_providers.dart';
 import 'package:filmfinder/models/landing/landing_category.dart';
 import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/views/common/error_card_widget.dart';
+import 'package:filmfinder/views/common/loading_card_widget.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:filmfinder/views/common/result_poster_widget.dart';
 import 'package:flutter/material.dart';
@@ -150,17 +152,9 @@ class OverviewRowWidget extends StatelessWidget {
                 const Divider(endIndent: padding, indent: padding),
                 SizedBox(
                   height: posterContainerDefaultHeight(context) + padding,
-                  child: const Center(
-                    child: Card(
-                      shape: CircleBorder(
-                          side: BorderSide(
-                        color: Colors.transparent,
-                      )),
-                      child: Padding(
-                        padding: EdgeInsets.all(padding),
-                        child: Icon(Remix.wifi_off_line),
-                      ),
-                    ),
+                  child: ErrorCardWidget(
+                    error: snapshot.error!,
+                    stackTrace: snapshot.stackTrace,
                   ),
                 ),
               ],
@@ -172,16 +166,7 @@ class OverviewRowWidget extends StatelessWidget {
                 SizedBox(
                   height: posterContainerDefaultHeight(context) + padding,
                   child: const Center(
-                    child: Card(
-                      shape: CircleBorder(
-                          side: BorderSide(
-                        color: Colors.transparent,
-                      )),
-                      child: Padding(
-                        padding: EdgeInsets.all(padding),
-                        child: CircularProgressIndicator(),
-                      ),
-                    ),
+                    child: LoadingCardWidget(),
                   ),
                 ),
               ],

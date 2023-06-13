@@ -77,6 +77,8 @@ const double paddingSmall = 12.0;
 const double paddingTiny = 6.0;
 const double padding = paddingMedium;
 
+const double defaultLoadingSize = 36.0;
+
 /// **************************************************************************
 
 /// Various Sizes ************************************************************
