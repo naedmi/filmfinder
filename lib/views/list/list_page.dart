@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/list/list_controller.dart'
     as list_controller;
 import 'package:filmfinder/providers.dart';
@@ -18,11 +19,11 @@ class ListPage extends ConsumerWidget {
 
     return MainBottomBarScaffold(
       appBar: AppBar(
-        title: const Center(child: Text('My List')),
+        title: Center(child: Text('list.header'.tr())),
         automaticallyImplyLeading: false,
       ),
       body: listController.movieList.movies.isEmpty
-          ? const Align(
+          ? Align(
               alignment: Alignment.topCenter,
               child: Card(
                 child: SizedBox(
@@ -31,12 +32,14 @@ class ListPage extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Icon(Remix.emotion_sad_line, size: paddingBig + padding),
+                      const Icon(Remix.emotion_sad_line,
+                          size: paddingBig + padding),
                       Padding(
-                        padding: EdgeInsets.only(
-                            left: paddingBig, right: paddingBig, top: padding),
-                        child: Text('No movies added to list yet.'),
-                      ),
+                          padding: const EdgeInsets.only(
+                              left: paddingBig,
+                              right: paddingBig,
+                              top: padding),
+                          child: Text('list.empty'.tr())),
                     ],
                   ),
                 ),
