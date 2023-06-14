@@ -1,145 +1,175 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:filmfinder/controllers/swipe/swipe_providers.dart';
+import 'package:filmfinder/controllers/swipe/video_controller.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
+import 'package:filmfinder/models/swipe/video_controller_state.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class SingleSwipeWidget extends StatelessWidget {
+class SingleSwipeWidget extends ConsumerWidget {
   final MovieDetails movie;
-  final YoutubePlayerFlags ytFlags;
 
-  const SingleSwipeWidget(
-      {super.key, required this.movie, required this.ytFlags});
+  const SingleSwipeWidget({super.key, required this.movie});
 
   @override
-  Widget build(BuildContext context) {
-    YoutubePlayerController controller = YoutubePlayerController(
-      initialVideoId: movie.videos?.results?.first.key ?? '',
-      flags: ytFlags,
-    );
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: const <double>[0.6, 0.9],
-          colors: <Color>[
-            Colors.black,
-            Theme.of(context).colorScheme.background,
-          ],
-        ),
-      ),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: MediaQuery.of(context).padding.top),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 2 -
-                  MediaQuery.of(context).padding.top,
-              width: MediaQuery.of(context).size.width,
-              child: YoutubePlayer(
-                controller: controller,
-                showVideoProgressIndicator: true,
-                progressIndicatorColor: Theme.of(context).primaryColor,
-                bottomActions: <Widget>[
-                  IconButton.outlined(
-                      onPressed: () => controller.mute(),
-                      color: Colors.white,
-                      icon: const Icon(
-                        Remix.volume_up_line,
-                        color: Colors.white,
-                      ))
-                ],
-                topActions: const <Widget>[],
-                progressColors: ProgressBarColors(
-                  playedColor: Theme.of(context).primaryColor,
-                  handleColor: Theme.of(context).colorScheme.secondary,
-                ),
-              ),
-            ),
-            Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(padding),
-                ),
-                margin: const EdgeInsets.all(padding),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width - padding * 2,
-                  height: MediaQuery.of(context).size.height / 3 + padding,
-                  child: Padding(
-                    padding: const EdgeInsets.all(padding),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AutoDisposeFamilyNotifierProvider<VideoController,
+            VideoControllerState, String> provider =
+        videoControllerProvider(movie.videos!.results!.first.key!);
+    final VideoControllerState controllerState = ref.watch(provider);
+    final VideoController videoController = ref.read(provider.notifier);
+    return OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) =>
+            orientation == Orientation.portrait
+                ? Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: const <double>[0.6, 0.9],
+                        colors: <Color>[
+                          Colors.black,
+                          Theme.of(context).colorScheme.background,
+                        ],
+                      ),
+                    ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        RichText(
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                            style: Theme.of(context).textTheme.headlineMedium,
-                            text: movie.title,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).padding.top),
+                            child: SizedBox(
+                                height: MediaQuery.of(context).size.height / 2 -
+                                    MediaQuery.of(context).padding.top,
+                                child: _buildVideoPlayer(
+                                    context, controllerState, videoController)),
                           ),
-                        ),
-                        const Divider(),
-                        Row(
-                          children: <Widget>[
-                            Tooltip(
-                              message:
-                                  '${movie.voteAverage.toString()} / 10 stars',
-                              child: RatingBarIndicator(
-                                itemSize: padding,
-                                rating: (movie.voteAverage ?? 0) / 2,
-                                itemCount: 4,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Icon(
-                                    Remix.star_fill,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
+                          Container(
+                              constraints: BoxConstraints(
+                                minHeight: 0,
+                                maxHeight:
+                                    MediaQuery.of(context).size.height / 2,
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  controllerState.controller.pause();
+                                  context.pushNamed(
+                                    'details',
+                                    pathParameters: <String, String>{
+                                      'id': movie.id.toString()
+                                    },
                                   );
                                 },
-                              ),
-                            ),
-                            const Spacer(),
-                            Text('${movie.voteCount ?? '-'} votes')
-                          ],
-                        ),
-                        const Divider(),
-                        RichText(
-                          maxLines: 4,
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            text: movie.overview,
-                          ),
-                        ),
-                        const Spacer(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            IconButton(
-                              icon: const Icon(Remix.netflix_line),
-                              onPressed: () {},
-                            ),
-                            IconButton(
-                              icon: const Icon(Remix.amazon_line),
-                              onPressed: () {},
-                            ),
-                            IconButton(
-                              icon: const Icon(Remix.youtube_line),
-                              onPressed: () {},
-                            ),
-                            const Spacer(),
-                            IconButton(
-                              icon: const Icon(Remix.share_forward_line),
-                              onPressed: () {},
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                )),
-          ]),
-    );
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(padding),
+                                  ),
+                                  margin: const EdgeInsets.all(padding)
+                                      .copyWith(bottom: mainActionButtonHeight),
+                                  child: ListView(
+                                    shrinkWrap: true,
+                                    padding: const EdgeInsets.all(padding),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    children: <Widget>[
+                                      RichText(
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        text: TextSpan(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineMedium,
+                                          text: movie.title,
+                                        ),
+                                      ),
+                                      const Divider(),
+                                      Row(
+                                        children: <Widget>[
+                                          Tooltip(
+                                            message:
+                                                'common.rating'.tr(args: <String>[movie.voteAverage.toString()]),
+                                            child: RatingBarIndicator(
+                                              itemSize: padding,
+                                              rating:
+                                                  (movie.voteAverage ?? 0) / 2,
+                                              itemCount: 5,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Icon(
+                                                  Remix.star_fill,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          const Text(
+                                              'common.votes').tr(args: <String>[movie.voteCount?.toString() ?? '-'])
+                                        ],
+                                      ),
+                                      const Divider(),
+                                      RichText(
+                                        maxLines: 6,
+                                        overflow: TextOverflow.ellipsis,
+                                        text: TextSpan(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
+                                          text: movie.overview,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )),
+                        ]),
+                  )
+                : _buildVideoPlayer(context, controllerState, videoController));
   }
+
+  YoutubePlayer _buildVideoPlayer(
+          BuildContext context,
+          VideoControllerState controllerState,
+          VideoController videoController) =>
+      YoutubePlayer(
+        controller: controllerState.controller,
+        showVideoProgressIndicator: true,
+        progressIndicatorColor: Theme.of(context).primaryColor,
+        bottomActions: <Widget>[
+          IconButton.outlined(
+              onPressed: () => videoController.toggleMute(),
+              color: Colors.white,
+              icon: Icon(
+                controllerState.isMute
+                    ? Remix.volume_mute_line
+                    : Remix.volume_up_line,
+                color: Colors.white,
+              )),
+          const Spacer(),
+          IconButton.outlined(
+              onPressed: () => videoController.toggleFullscreen(),
+              color: Colors.white,
+              icon: Icon(
+                controllerState.isFullscreen
+                    ? Remix.fullscreen_exit_line
+                    : Remix.fullscreen_line,
+                color: Colors.white,
+              )),
+        ],
+        topActions: const <Widget>[],
+        progressColors: ProgressBarColors(
+          playedColor: Theme.of(context).primaryColor,
+          handleColor: Theme.of(context).colorScheme.secondary,
+        ),
+      );
 }

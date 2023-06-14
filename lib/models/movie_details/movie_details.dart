@@ -27,6 +27,7 @@ class MovieDetails with _$MovieDetails {
     required double? voteAverage,
     required int? voteCount,
     Videos? videos,
+    Credits? credits,
     // ignore: invalid_annotation_target
     @JsonKey(name: 'watch/providers') WatchProviders? watchProviders,
   }) = _MovieDetails;
@@ -81,8 +82,6 @@ class VideoResult with _$VideoResult {
 
 @freezed
 class WatchProviders with _$WatchProviders {
-  // ignore: invalid_annotation_target
-  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory WatchProviders({
     required Map<String, WatchProviderResult>? results,
   }) = _WatchProviders;
@@ -93,13 +92,12 @@ class WatchProviders with _$WatchProviders {
 
 @freezed
 class WatchProviderResult with _$WatchProviderResult {
-  // ignore: invalid_annotation_target
-  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory WatchProviderResult({
     required String? link,
-    required Map<String, WatchProvider>? flatrate,
-    required Map<String, WatchProvider>? rent,
-    required Map<String, WatchProvider>? buy,
+    required List<WatchProvider>? flatrate,
+    required List<WatchProvider>? rent,
+    required List<WatchProvider>? buy,
+    required List<WatchProvider>? ads,
   }) = _WatchProviderResult;
 
   factory WatchProviderResult.fromJson(Map<String, dynamic> json) =>
@@ -108,15 +106,40 @@ class WatchProviderResult with _$WatchProviderResult {
 
 @freezed
 class WatchProvider with _$WatchProvider {
-  // ignore: invalid_annotation_target
-  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory WatchProvider({
-    required int? displayPriority,
+    @JsonKey(name: 'logo_path')
     required String? logoPath,
-    required String? providerId,
+    @JsonKey(name: 'provider_id')
+    required int? providerId,
+    @JsonKey(name: 'provider_name')
     required String? providerName,
+    @JsonKey(name: 'display_priority')
+    required int? displayPriority,
   }) = _WatchProvider;
 
   factory WatchProvider.fromJson(Map<String, dynamic> json) =>
       _$WatchProviderFromJson(json);
+}
+
+@freezed
+class Credits with _$Credits {
+  const factory Credits({
+    required List<Cast>? cast,
+  }) = _Credits;
+
+  factory Credits.fromJson(Map<String, dynamic> json) =>
+      _$CreditsFromJson(json);
+}
+
+@freezed
+class Cast with _$Cast {
+  const factory Cast({
+    required int? id,
+    required String? name,
+    required String? character,
+    @JsonKey(name: 'profile_path')
+    required String? profilePath,
+  }) = _Cast;
+
+  factory Cast.fromJson(Map<String, dynamic> json) => _$CastFromJson(json);
 }

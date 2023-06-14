@@ -38,7 +38,8 @@ mixin _$MovieDetails {
   String? get tagline => throw _privateConstructorUsedError;
   double? get voteAverage => throw _privateConstructorUsedError;
   int? get voteCount => throw _privateConstructorUsedError;
-  Videos? get videos =>
+  Videos? get videos => throw _privateConstructorUsedError;
+  Credits? get credits =>
       throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'watch/providers')
   WatchProviders? get watchProviders => throw _privateConstructorUsedError;
@@ -75,9 +76,11 @@ abstract class $MovieDetailsCopyWith<$Res> {
       double? voteAverage,
       int? voteCount,
       Videos? videos,
+      Credits? credits,
       @JsonKey(name: 'watch/providers') WatchProviders? watchProviders});
 
   $VideosCopyWith<$Res>? get videos;
+  $CreditsCopyWith<$Res>? get credits;
   $WatchProvidersCopyWith<$Res>? get watchProviders;
 }
 
@@ -113,6 +116,7 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
     Object? videos = freezed,
+    Object? credits = freezed,
     Object? watchProviders = freezed,
   }) {
     return _then(_value.copyWith(
@@ -192,6 +196,10 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.videos
           : videos // ignore: cast_nullable_to_non_nullable
               as Videos?,
+      credits: freezed == credits
+          ? _value.credits
+          : credits // ignore: cast_nullable_to_non_nullable
+              as Credits?,
       watchProviders: freezed == watchProviders
           ? _value.watchProviders
           : watchProviders // ignore: cast_nullable_to_non_nullable
@@ -208,6 +216,18 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
 
     return $VideosCopyWith<$Res>(_value.videos!, (value) {
       return _then(_value.copyWith(videos: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CreditsCopyWith<$Res>? get credits {
+    if (_value.credits == null) {
+      return null;
+    }
+
+    return $CreditsCopyWith<$Res>(_value.credits!, (value) {
+      return _then(_value.copyWith(credits: value) as $Val);
     });
   }
 
@@ -252,10 +272,13 @@ abstract class _$$_MovieDetailsCopyWith<$Res>
       double? voteAverage,
       int? voteCount,
       Videos? videos,
+      Credits? credits,
       @JsonKey(name: 'watch/providers') WatchProviders? watchProviders});
 
   @override
   $VideosCopyWith<$Res>? get videos;
+  @override
+  $CreditsCopyWith<$Res>? get credits;
   @override
   $WatchProvidersCopyWith<$Res>? get watchProviders;
 }
@@ -290,6 +313,7 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
     Object? videos = freezed,
+    Object? credits = freezed,
     Object? watchProviders = freezed,
   }) {
     return _then(_$_MovieDetails(
@@ -369,6 +393,10 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value.videos
           : videos // ignore: cast_nullable_to_non_nullable
               as Videos?,
+      credits: freezed == credits
+          ? _value.credits
+          : credits // ignore: cast_nullable_to_non_nullable
+              as Credits?,
       watchProviders: freezed == watchProviders
           ? _value.watchProviders
           : watchProviders // ignore: cast_nullable_to_non_nullable
@@ -401,6 +429,7 @@ class _$_MovieDetails implements _MovieDetails {
       required this.voteAverage,
       required this.voteCount,
       this.videos,
+      this.credits,
       @JsonKey(name: 'watch/providers') this.watchProviders})
       : _genres = genres;
 
@@ -453,6 +482,8 @@ class _$_MovieDetails implements _MovieDetails {
   final int? voteCount;
   @override
   final Videos? videos;
+  @override
+  final Credits? credits;
 // ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'watch/providers')
@@ -460,7 +491,7 @@ class _$_MovieDetails implements _MovieDetails {
 
   @override
   String toString() {
-    return 'MovieDetails(adult: $adult, backdropPath: $backdropPath, budget: $budget, genres: $genres, homepage: $homepage, id: $id, originalLanguage: $originalLanguage, title: $title, overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, status: $status, tagline: $tagline, voteAverage: $voteAverage, voteCount: $voteCount, videos: $videos, watchProviders: $watchProviders)';
+    return 'MovieDetails(adult: $adult, backdropPath: $backdropPath, budget: $budget, genres: $genres, homepage: $homepage, id: $id, originalLanguage: $originalLanguage, title: $title, overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, status: $status, tagline: $tagline, voteAverage: $voteAverage, voteCount: $voteCount, videos: $videos, credits: $credits, watchProviders: $watchProviders)';
   }
 
   @override
@@ -496,6 +527,7 @@ class _$_MovieDetails implements _MovieDetails {
             (identical(other.voteCount, voteCount) ||
                 other.voteCount == voteCount) &&
             (identical(other.videos, videos) || other.videos == videos) &&
+            (identical(other.credits, credits) || other.credits == credits) &&
             (identical(other.watchProviders, watchProviders) ||
                 other.watchProviders == watchProviders));
   }
@@ -523,6 +555,7 @@ class _$_MovieDetails implements _MovieDetails {
         voteAverage,
         voteCount,
         videos,
+        credits,
         watchProviders
       ]);
 
@@ -561,6 +594,7 @@ abstract class _MovieDetails implements MovieDetails {
       required final double? voteAverage,
       required final int? voteCount,
       final Videos? videos,
+      final Credits? credits,
       @JsonKey(name: 'watch/providers')
           final WatchProviders? watchProviders}) = _$_MovieDetails;
 
@@ -605,6 +639,8 @@ abstract class _MovieDetails implements MovieDetails {
   int? get voteCount;
   @override
   Videos? get videos;
+  @override
+  Credits? get credits;
   @override // ignore: invalid_annotation_target
   @JsonKey(name: 'watch/providers')
   WatchProviders? get watchProviders;
@@ -1309,8 +1345,7 @@ class __$$_WatchProvidersCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$_WatchProviders implements _WatchProviders {
   const _$_WatchProviders(
       {required final Map<String, WatchProviderResult>? results})
@@ -1384,10 +1419,10 @@ WatchProviderResult _$WatchProviderResultFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WatchProviderResult {
   String? get link => throw _privateConstructorUsedError;
-  Map<String, WatchProvider>? get flatrate =>
-      throw _privateConstructorUsedError;
-  Map<String, WatchProvider>? get rent => throw _privateConstructorUsedError;
-  Map<String, WatchProvider>? get buy => throw _privateConstructorUsedError;
+  List<WatchProvider>? get flatrate => throw _privateConstructorUsedError;
+  List<WatchProvider>? get rent => throw _privateConstructorUsedError;
+  List<WatchProvider>? get buy => throw _privateConstructorUsedError;
+  List<WatchProvider>? get ads => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1403,9 +1438,10 @@ abstract class $WatchProviderResultCopyWith<$Res> {
   @useResult
   $Res call(
       {String? link,
-      Map<String, WatchProvider>? flatrate,
-      Map<String, WatchProvider>? rent,
-      Map<String, WatchProvider>? buy});
+      List<WatchProvider>? flatrate,
+      List<WatchProvider>? rent,
+      List<WatchProvider>? buy,
+      List<WatchProvider>? ads});
 }
 
 /// @nodoc
@@ -1425,6 +1461,7 @@ class _$WatchProviderResultCopyWithImpl<$Res, $Val extends WatchProviderResult>
     Object? flatrate = freezed,
     Object? rent = freezed,
     Object? buy = freezed,
+    Object? ads = freezed,
   }) {
     return _then(_value.copyWith(
       link: freezed == link
@@ -1434,15 +1471,19 @@ class _$WatchProviderResultCopyWithImpl<$Res, $Val extends WatchProviderResult>
       flatrate: freezed == flatrate
           ? _value.flatrate
           : flatrate // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
       rent: freezed == rent
           ? _value.rent
           : rent // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
       buy: freezed == buy
           ? _value.buy
           : buy // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
+      ads: freezed == ads
+          ? _value.ads
+          : ads // ignore: cast_nullable_to_non_nullable
+              as List<WatchProvider>?,
     ) as $Val);
   }
 }
@@ -1457,9 +1498,10 @@ abstract class _$$_WatchProviderResultCopyWith<$Res>
   @useResult
   $Res call(
       {String? link,
-      Map<String, WatchProvider>? flatrate,
-      Map<String, WatchProvider>? rent,
-      Map<String, WatchProvider>? buy});
+      List<WatchProvider>? flatrate,
+      List<WatchProvider>? rent,
+      List<WatchProvider>? buy,
+      List<WatchProvider>? ads});
 }
 
 /// @nodoc
@@ -1477,6 +1519,7 @@ class __$$_WatchProviderResultCopyWithImpl<$Res>
     Object? flatrate = freezed,
     Object? rent = freezed,
     Object? buy = freezed,
+    Object? ads = freezed,
   }) {
     return _then(_$_WatchProviderResult(
       link: freezed == link
@@ -1486,70 +1529,85 @@ class __$$_WatchProviderResultCopyWithImpl<$Res>
       flatrate: freezed == flatrate
           ? _value._flatrate
           : flatrate // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
       rent: freezed == rent
           ? _value._rent
           : rent // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
       buy: freezed == buy
           ? _value._buy
           : buy // ignore: cast_nullable_to_non_nullable
-              as Map<String, WatchProvider>?,
+              as List<WatchProvider>?,
+      ads: freezed == ads
+          ? _value._ads
+          : ads // ignore: cast_nullable_to_non_nullable
+              as List<WatchProvider>?,
     ));
   }
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$_WatchProviderResult implements _WatchProviderResult {
   const _$_WatchProviderResult(
       {required this.link,
-      required final Map<String, WatchProvider>? flatrate,
-      required final Map<String, WatchProvider>? rent,
-      required final Map<String, WatchProvider>? buy})
+      required final List<WatchProvider>? flatrate,
+      required final List<WatchProvider>? rent,
+      required final List<WatchProvider>? buy,
+      required final List<WatchProvider>? ads})
       : _flatrate = flatrate,
         _rent = rent,
-        _buy = buy;
+        _buy = buy,
+        _ads = ads;
 
   factory _$_WatchProviderResult.fromJson(Map<String, dynamic> json) =>
       _$$_WatchProviderResultFromJson(json);
 
   @override
   final String? link;
-  final Map<String, WatchProvider>? _flatrate;
+  final List<WatchProvider>? _flatrate;
   @override
-  Map<String, WatchProvider>? get flatrate {
+  List<WatchProvider>? get flatrate {
     final value = _flatrate;
     if (value == null) return null;
-    if (_flatrate is EqualUnmodifiableMapView) return _flatrate;
+    if (_flatrate is EqualUnmodifiableListView) return _flatrate;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableListView(value);
   }
 
-  final Map<String, WatchProvider>? _rent;
+  final List<WatchProvider>? _rent;
   @override
-  Map<String, WatchProvider>? get rent {
+  List<WatchProvider>? get rent {
     final value = _rent;
     if (value == null) return null;
-    if (_rent is EqualUnmodifiableMapView) return _rent;
+    if (_rent is EqualUnmodifiableListView) return _rent;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableListView(value);
   }
 
-  final Map<String, WatchProvider>? _buy;
+  final List<WatchProvider>? _buy;
   @override
-  Map<String, WatchProvider>? get buy {
+  List<WatchProvider>? get buy {
     final value = _buy;
     if (value == null) return null;
-    if (_buy is EqualUnmodifiableMapView) return _buy;
+    if (_buy is EqualUnmodifiableListView) return _buy;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<WatchProvider>? _ads;
+  @override
+  List<WatchProvider>? get ads {
+    final value = _ads;
+    if (value == null) return null;
+    if (_ads is EqualUnmodifiableListView) return _ads;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'WatchProviderResult(link: $link, flatrate: $flatrate, rent: $rent, buy: $buy)';
+    return 'WatchProviderResult(link: $link, flatrate: $flatrate, rent: $rent, buy: $buy, ads: $ads)';
   }
 
   @override
@@ -1560,7 +1618,8 @@ class _$_WatchProviderResult implements _WatchProviderResult {
             (identical(other.link, link) || other.link == link) &&
             const DeepCollectionEquality().equals(other._flatrate, _flatrate) &&
             const DeepCollectionEquality().equals(other._rent, _rent) &&
-            const DeepCollectionEquality().equals(other._buy, _buy));
+            const DeepCollectionEquality().equals(other._buy, _buy) &&
+            const DeepCollectionEquality().equals(other._ads, _ads));
   }
 
   @JsonKey(ignore: true)
@@ -1570,7 +1629,8 @@ class _$_WatchProviderResult implements _WatchProviderResult {
       link,
       const DeepCollectionEquality().hash(_flatrate),
       const DeepCollectionEquality().hash(_rent),
-      const DeepCollectionEquality().hash(_buy));
+      const DeepCollectionEquality().hash(_buy),
+      const DeepCollectionEquality().hash(_ads));
 
   @JsonKey(ignore: true)
   @override
@@ -1590,9 +1650,10 @@ class _$_WatchProviderResult implements _WatchProviderResult {
 abstract class _WatchProviderResult implements WatchProviderResult {
   const factory _WatchProviderResult(
       {required final String? link,
-      required final Map<String, WatchProvider>? flatrate,
-      required final Map<String, WatchProvider>? rent,
-      required final Map<String, WatchProvider>? buy}) = _$_WatchProviderResult;
+      required final List<WatchProvider>? flatrate,
+      required final List<WatchProvider>? rent,
+      required final List<WatchProvider>? buy,
+      required final List<WatchProvider>? ads}) = _$_WatchProviderResult;
 
   factory _WatchProviderResult.fromJson(Map<String, dynamic> json) =
       _$_WatchProviderResult.fromJson;
@@ -1600,11 +1661,13 @@ abstract class _WatchProviderResult implements WatchProviderResult {
   @override
   String? get link;
   @override
-  Map<String, WatchProvider>? get flatrate;
+  List<WatchProvider>? get flatrate;
   @override
-  Map<String, WatchProvider>? get rent;
+  List<WatchProvider>? get rent;
   @override
-  Map<String, WatchProvider>? get buy;
+  List<WatchProvider>? get buy;
+  @override
+  List<WatchProvider>? get ads;
   @override
   @JsonKey(ignore: true)
   _$$_WatchProviderResultCopyWith<_$_WatchProviderResult> get copyWith =>
@@ -1617,10 +1680,14 @@ WatchProvider _$WatchProviderFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WatchProvider {
-  int? get displayPriority => throw _privateConstructorUsedError;
+  @JsonKey(name: 'logo_path')
   String? get logoPath => throw _privateConstructorUsedError;
-  String? get providerId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'provider_id')
+  int? get providerId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'provider_name')
   String? get providerName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'display_priority')
+  int? get displayPriority => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1635,10 +1702,10 @@ abstract class $WatchProviderCopyWith<$Res> {
       _$WatchProviderCopyWithImpl<$Res, WatchProvider>;
   @useResult
   $Res call(
-      {int? displayPriority,
-      String? logoPath,
-      String? providerId,
-      String? providerName});
+      {@JsonKey(name: 'logo_path') String? logoPath,
+      @JsonKey(name: 'provider_id') int? providerId,
+      @JsonKey(name: 'provider_name') String? providerName,
+      @JsonKey(name: 'display_priority') int? displayPriority});
 }
 
 /// @nodoc
@@ -1654,16 +1721,12 @@ class _$WatchProviderCopyWithImpl<$Res, $Val extends WatchProvider>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? displayPriority = freezed,
     Object? logoPath = freezed,
     Object? providerId = freezed,
     Object? providerName = freezed,
+    Object? displayPriority = freezed,
   }) {
     return _then(_value.copyWith(
-      displayPriority: freezed == displayPriority
-          ? _value.displayPriority
-          : displayPriority // ignore: cast_nullable_to_non_nullable
-              as int?,
       logoPath: freezed == logoPath
           ? _value.logoPath
           : logoPath // ignore: cast_nullable_to_non_nullable
@@ -1671,11 +1734,15 @@ class _$WatchProviderCopyWithImpl<$Res, $Val extends WatchProvider>
       providerId: freezed == providerId
           ? _value.providerId
           : providerId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       providerName: freezed == providerName
           ? _value.providerName
           : providerName // ignore: cast_nullable_to_non_nullable
               as String?,
+      displayPriority: freezed == displayPriority
+          ? _value.displayPriority
+          : displayPriority // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -1689,10 +1756,10 @@ abstract class _$$_WatchProviderCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? displayPriority,
-      String? logoPath,
-      String? providerId,
-      String? providerName});
+      {@JsonKey(name: 'logo_path') String? logoPath,
+      @JsonKey(name: 'provider_id') int? providerId,
+      @JsonKey(name: 'provider_name') String? providerName,
+      @JsonKey(name: 'display_priority') int? displayPriority});
 }
 
 /// @nodoc
@@ -1706,16 +1773,12 @@ class __$$_WatchProviderCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? displayPriority = freezed,
     Object? logoPath = freezed,
     Object? providerId = freezed,
     Object? providerName = freezed,
+    Object? displayPriority = freezed,
   }) {
     return _then(_$_WatchProvider(
-      displayPriority: freezed == displayPriority
-          ? _value.displayPriority
-          : displayPriority // ignore: cast_nullable_to_non_nullable
-              as int?,
       logoPath: freezed == logoPath
           ? _value.logoPath
           : logoPath // ignore: cast_nullable_to_non_nullable
@@ -1723,40 +1786,47 @@ class __$$_WatchProviderCopyWithImpl<$Res>
       providerId: freezed == providerId
           ? _value.providerId
           : providerId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       providerName: freezed == providerName
           ? _value.providerName
           : providerName // ignore: cast_nullable_to_non_nullable
               as String?,
+      displayPriority: freezed == displayPriority
+          ? _value.displayPriority
+          : displayPriority // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$_WatchProvider implements _WatchProvider {
   const _$_WatchProvider(
-      {required this.displayPriority,
-      required this.logoPath,
-      required this.providerId,
-      required this.providerName});
+      {@JsonKey(name: 'logo_path') required this.logoPath,
+      @JsonKey(name: 'provider_id') required this.providerId,
+      @JsonKey(name: 'provider_name') required this.providerName,
+      @JsonKey(name: 'display_priority') required this.displayPriority});
 
   factory _$_WatchProvider.fromJson(Map<String, dynamic> json) =>
       _$$_WatchProviderFromJson(json);
 
   @override
-  final int? displayPriority;
-  @override
+  @JsonKey(name: 'logo_path')
   final String? logoPath;
   @override
-  final String? providerId;
+  @JsonKey(name: 'provider_id')
+  final int? providerId;
   @override
+  @JsonKey(name: 'provider_name')
   final String? providerName;
+  @override
+  @JsonKey(name: 'display_priority')
+  final int? displayPriority;
 
   @override
   String toString() {
-    return 'WatchProvider(displayPriority: $displayPriority, logoPath: $logoPath, providerId: $providerId, providerName: $providerName)';
+    return 'WatchProvider(logoPath: $logoPath, providerId: $providerId, providerName: $providerName, displayPriority: $displayPriority)';
   }
 
   @override
@@ -1764,20 +1834,20 @@ class _$_WatchProvider implements _WatchProvider {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_WatchProvider &&
-            (identical(other.displayPriority, displayPriority) ||
-                other.displayPriority == displayPriority) &&
             (identical(other.logoPath, logoPath) ||
                 other.logoPath == logoPath) &&
             (identical(other.providerId, providerId) ||
                 other.providerId == providerId) &&
             (identical(other.providerName, providerName) ||
-                other.providerName == providerName));
+                other.providerName == providerName) &&
+            (identical(other.displayPriority, displayPriority) ||
+                other.displayPriority == displayPriority));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, displayPriority, logoPath, providerId, providerName);
+      runtimeType, logoPath, providerId, providerName, displayPriority);
 
   @JsonKey(ignore: true)
   @override
@@ -1795,24 +1865,369 @@ class _$_WatchProvider implements _WatchProvider {
 
 abstract class _WatchProvider implements WatchProvider {
   const factory _WatchProvider(
-      {required final int? displayPriority,
-      required final String? logoPath,
-      required final String? providerId,
-      required final String? providerName}) = _$_WatchProvider;
+      {@JsonKey(name: 'logo_path')
+          required final String? logoPath,
+      @JsonKey(name: 'provider_id')
+          required final int? providerId,
+      @JsonKey(name: 'provider_name')
+          required final String? providerName,
+      @JsonKey(name: 'display_priority')
+          required final int? displayPriority}) = _$_WatchProvider;
 
   factory _WatchProvider.fromJson(Map<String, dynamic> json) =
       _$_WatchProvider.fromJson;
 
   @override
-  int? get displayPriority;
-  @override
+  @JsonKey(name: 'logo_path')
   String? get logoPath;
   @override
-  String? get providerId;
+  @JsonKey(name: 'provider_id')
+  int? get providerId;
   @override
+  @JsonKey(name: 'provider_name')
   String? get providerName;
+  @override
+  @JsonKey(name: 'display_priority')
+  int? get displayPriority;
   @override
   @JsonKey(ignore: true)
   _$$_WatchProviderCopyWith<_$_WatchProvider> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+Credits _$CreditsFromJson(Map<String, dynamic> json) {
+  return _Credits.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Credits {
+  List<Cast>? get cast => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CreditsCopyWith<Credits> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CreditsCopyWith<$Res> {
+  factory $CreditsCopyWith(Credits value, $Res Function(Credits) then) =
+      _$CreditsCopyWithImpl<$Res, Credits>;
+  @useResult
+  $Res call({List<Cast>? cast});
+}
+
+/// @nodoc
+class _$CreditsCopyWithImpl<$Res, $Val extends Credits>
+    implements $CreditsCopyWith<$Res> {
+  _$CreditsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cast = freezed,
+  }) {
+    return _then(_value.copyWith(
+      cast: freezed == cast
+          ? _value.cast
+          : cast // ignore: cast_nullable_to_non_nullable
+              as List<Cast>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_CreditsCopyWith<$Res> implements $CreditsCopyWith<$Res> {
+  factory _$$_CreditsCopyWith(
+          _$_Credits value, $Res Function(_$_Credits) then) =
+      __$$_CreditsCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<Cast>? cast});
+}
+
+/// @nodoc
+class __$$_CreditsCopyWithImpl<$Res>
+    extends _$CreditsCopyWithImpl<$Res, _$_Credits>
+    implements _$$_CreditsCopyWith<$Res> {
+  __$$_CreditsCopyWithImpl(_$_Credits _value, $Res Function(_$_Credits) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cast = freezed,
+  }) {
+    return _then(_$_Credits(
+      cast: freezed == cast
+          ? _value._cast
+          : cast // ignore: cast_nullable_to_non_nullable
+              as List<Cast>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Credits implements _Credits {
+  const _$_Credits({required final List<Cast>? cast}) : _cast = cast;
+
+  factory _$_Credits.fromJson(Map<String, dynamic> json) =>
+      _$$_CreditsFromJson(json);
+
+  final List<Cast>? _cast;
+  @override
+  List<Cast>? get cast {
+    final value = _cast;
+    if (value == null) return null;
+    if (_cast is EqualUnmodifiableListView) return _cast;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'Credits(cast: $cast)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Credits &&
+            const DeepCollectionEquality().equals(other._cast, _cast));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_cast));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CreditsCopyWith<_$_Credits> get copyWith =>
+      __$$_CreditsCopyWithImpl<_$_Credits>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CreditsToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Credits implements Credits {
+  const factory _Credits({required final List<Cast>? cast}) = _$_Credits;
+
+  factory _Credits.fromJson(Map<String, dynamic> json) = _$_Credits.fromJson;
+
+  @override
+  List<Cast>? get cast;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CreditsCopyWith<_$_Credits> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Cast _$CastFromJson(Map<String, dynamic> json) {
+  return _Cast.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Cast {
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get character => throw _privateConstructorUsedError;
+  @JsonKey(name: 'profile_path')
+  String? get profilePath => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CastCopyWith<Cast> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CastCopyWith<$Res> {
+  factory $CastCopyWith(Cast value, $Res Function(Cast) then) =
+      _$CastCopyWithImpl<$Res, Cast>;
+  @useResult
+  $Res call(
+      {int? id,
+      String? name,
+      String? character,
+      @JsonKey(name: 'profile_path') String? profilePath});
+}
+
+/// @nodoc
+class _$CastCopyWithImpl<$Res, $Val extends Cast>
+    implements $CastCopyWith<$Res> {
+  _$CastCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? character = freezed,
+    Object? profilePath = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      character: freezed == character
+          ? _value.character
+          : character // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePath: freezed == profilePath
+          ? _value.profilePath
+          : profilePath // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_CastCopyWith<$Res> implements $CastCopyWith<$Res> {
+  factory _$$_CastCopyWith(_$_Cast value, $Res Function(_$_Cast) then) =
+      __$$_CastCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      String? name,
+      String? character,
+      @JsonKey(name: 'profile_path') String? profilePath});
+}
+
+/// @nodoc
+class __$$_CastCopyWithImpl<$Res> extends _$CastCopyWithImpl<$Res, _$_Cast>
+    implements _$$_CastCopyWith<$Res> {
+  __$$_CastCopyWithImpl(_$_Cast _value, $Res Function(_$_Cast) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? character = freezed,
+    Object? profilePath = freezed,
+  }) {
+    return _then(_$_Cast(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      character: freezed == character
+          ? _value.character
+          : character // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePath: freezed == profilePath
+          ? _value.profilePath
+          : profilePath // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Cast implements _Cast {
+  const _$_Cast(
+      {required this.id,
+      required this.name,
+      required this.character,
+      @JsonKey(name: 'profile_path') required this.profilePath});
+
+  factory _$_Cast.fromJson(Map<String, dynamic> json) => _$$_CastFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final String? name;
+  @override
+  final String? character;
+  @override
+  @JsonKey(name: 'profile_path')
+  final String? profilePath;
+
+  @override
+  String toString() {
+    return 'Cast(id: $id, name: $name, character: $character, profilePath: $profilePath)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Cast &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.character, character) ||
+                other.character == character) &&
+            (identical(other.profilePath, profilePath) ||
+                other.profilePath == profilePath));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, character, profilePath);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CastCopyWith<_$_Cast> get copyWith =>
+      __$$_CastCopyWithImpl<_$_Cast>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CastToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Cast implements Cast {
+  const factory _Cast(
+          {required final int? id,
+          required final String? name,
+          required final String? character,
+          @JsonKey(name: 'profile_path') required final String? profilePath}) =
+      _$_Cast;
+
+  factory _Cast.fromJson(Map<String, dynamic> json) = _$_Cast.fromJson;
+
+  @override
+  int? get id;
+  @override
+  String? get name;
+  @override
+  String? get character;
+  @override
+  @JsonKey(name: 'profile_path')
+  String? get profilePath;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CastCopyWith<_$_Cast> get copyWith => throw _privateConstructorUsedError;
 }

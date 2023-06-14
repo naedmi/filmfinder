@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/list/list_controller.dart'
     as list_controller;
 import 'package:filmfinder/models/common/movie_result.dart';
@@ -52,7 +53,8 @@ class SearchResultWidget extends ConsumerWidget {
                       const Divider(),
                       Wrap(spacing: paddingTiny, children: <Widget>[
                         Tooltip(
-                          message: '${res.voteAverage.toString()} / 10 stars',
+                          message: 'common.rating'
+                              .tr(args: <String>[res.voteAverage.toString()]),
                           child: RatingBarIndicator(
                             itemSize: padding,
                             rating: (res.voteAverage ?? 0) / 2,
@@ -66,7 +68,8 @@ class SearchResultWidget extends ConsumerWidget {
                           ),
                         ),
                         Text(
-                          '${res.voteCount} votes',
+                          'common.votes'.tr(
+                              args: <String>[res.voteCount?.toString() ?? '-']),
                           style: const TextStyle(fontSize: paddingSmall),
                         ),
                       ]),
@@ -96,8 +99,8 @@ class SearchResultWidget extends ConsumerWidget {
                           const Spacer(),
                           Tooltip(
                             message: movieList.movies.contains(res)
-                                ? 'Remove from list'
-                                : 'Add to list',
+                                ? 'common.remove'.tr()
+                                : 'common.add'.tr(),
                             child: ElevatedButton(
                               onPressed: () {
                                 if (!movieList.movies.contains(res)) {
@@ -107,21 +110,21 @@ class SearchResultWidget extends ConsumerWidget {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: const Text('Confirmation'),
-                                        content: Text(
-                                            'Remove ${res.title} from your list?'),
+                                        title: Text(
+                                            'list.remove.confirmation'.tr()),
+                                        content: Text('list.remove.text'.tr()),
                                         actions: <Widget>[
                                           TextButton(
-                                            child: const Text('Cancel'),
+                                            child:
+                                                Text('list.remove.cancel'.tr()),
                                             onPressed: () {
-                                              listController
-                                                  .removeMovie(res.id);
                                               Navigator.of(context)
                                                   .pop(); // Close the dialog
                                             },
                                           ),
                                           TextButton(
-                                            child: const Text('Remove'),
+                                            child: Text(
+                                                'list.remove.confirm'.tr()),
                                             onPressed: () {
                                               listController
                                                   .removeMovie(res.id);

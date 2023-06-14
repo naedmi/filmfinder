@@ -22,7 +22,7 @@ class LandingControllerImpl extends LandingController {
     for (AvailableLandingCategory category in AvailableLandingCategory.values) {
       landingCategories.add(ref.watch(categoryApiService(category).selectAsync(
           (DefaultResponse data) => LandingCategory(
-              title: categoryNameMap[category] ?? '',
+              title: category.value,
               posters: data.results
                   .map((MovieResult m) => ClickablePoster(
                       movieId: m.id, posterPath: m.posterPath ?? ''))
