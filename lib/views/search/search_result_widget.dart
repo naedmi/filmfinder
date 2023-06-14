@@ -1,7 +1,7 @@
 import 'package:filmfinder/controllers/list/list_controller.dart'
     as list_controller;
 import 'package:filmfinder/models/common/movie_result.dart';
-import 'package:filmfinder/models/li
+import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/result_poster_widget.dart';
@@ -95,43 +95,53 @@ class SearchResultWidget extends ConsumerWidget {
                           ),
                           const Spacer(),
                           Tooltip(
-                            message: listController.contains(res.id)
+                            message: movieList.movies.contains(res)
                                 ? 'Remove from list'
                                 : 'Add to list',
                             child: ElevatedButton(
                               onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text('Confirmation'),
-                                      content: Text(
-                                          'Remove ${res.title} from your list?'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: const Text('Cancel'),
-                                          onPressed: () {
-                                            listController.removeMovie(res.id);
-                                            Navigator.of(context)
-                                                .pop(); // Close the dialog
-                                          },
-                                        ),
-                                        TextButton(
-                                          child: const Text('Remove'),
-                                          onPressed: () {
-                                            listController.removeMovie(res.id);
-                                            Navigator.of(context)
-                                                .pop(); // Close the dialog
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                                if (!movieList.movies.contains(res)) {
+                                  listController.addMovie(res);
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Confirmation'),
+                                        content: Text(
+                                            'Remove ${res.title} from your list?'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: const Text('Cancel'),
+                                            onPressed: () {
+                                              listController
+                                                  .removeMovie(res.id);
+                                              Navigator.of(context)
+                                                  .pop(); // Close the dialog
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: const Text('Remove'),
+                                            onPressed: () {
+                                              listController
+                                                  .removeMovie(res.id);
+                                              Navigator.of(context)
+                                                  .pop(); // Close the dialog
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
                               },
-                              child: const Icon(
-                                Remix.heart_fill,
-                              ),
+                              child: movieList.movies.contains(res)
+                                  ? const Icon(
+                                      Remix.heart_fill,
+                                    )
+                                  : const Icon(
+                                      Remix.heart_line,
+                                    ),
                             ),
                           ),
                         ],

@@ -1,4 +1,5 @@
 import 'package:filmfinder/models/common/movie_result.dart';
+import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/list/local_persistence_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +9,10 @@ abstract class ListController {
 
   final AutoDisposeStateProviderRef<ListController> ref;
   late final LocalPersistenceService _localPersistenceService;
-  late final _movieList;
+
+  late MovieList _movieList;
+
+  MovieList get movieList => _movieList;
 
   List<MovieResult> getAllMovies();
 
@@ -61,7 +65,8 @@ class ListControllerImpl extends ListController {
   bool contains(int id) => _localPersistenceService.contains(id);
 
   void update() {
-    _movieList.state = _movieList.state.copyWith(movies: getAllMovies());
+    ref.read(providers.movieListProvider.notifier).state =
+        _movieList.copyWith(movies: getAllMovies());
   }
 
   // TODO: add list ordering
