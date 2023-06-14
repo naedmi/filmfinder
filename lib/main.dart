@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/settings/settings_provider.dart';
+import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/services/logger_provider_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
@@ -17,11 +18,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FilmfinderPreferences.init();
   await dotenv.load();
+  initHive();
   await EasyLocalization.ensureInitialized();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -35,6 +39,19 @@ Future<void> main() async {
       ),
     ),
   );
+  FlutterError.demangleStackTrace = (StackTrace stack) {
+    if (stack is stack_trace.Trace) return stack.vmTrace;
+    if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;
+    return stack;
+  };
+}
+
+void initHive() async {
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(0)) {
+    Hive.registerAdapter(MovieAdapter());
+  }
+  await Hive.openBox<MovieResult>('fav_movies');
 }
 
 /// The route configuration.
