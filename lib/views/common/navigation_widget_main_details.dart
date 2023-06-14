@@ -1,6 +1,5 @@
 import 'package:filmfinder/controllers/list/list_controller.dart'
     as list_controller;
-import 'package:filmfinder/controllers/movie_details/movie_details_controller.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
@@ -23,8 +22,6 @@ class BottomNavigationWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final list_controller.ListController listController =
         ref.watch(providers.listControllerProvider);
-    final MovieDetailsController movieDetailsController =
-        ref.watch(providers.movieDetailsProvider(int.parse(movieId)));
 
     return BottomAppBar(
         height: mainActionButtonHeight / 2 + padding,

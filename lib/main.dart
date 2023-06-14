@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:filmfinder/controllers/settings/settings_provider.dart';
 import 'package:filmfinder/go_router.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/models/settings/settings.dart';
+import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/logger_provider_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/settings/shared_preferences.dart';
@@ -53,7 +53,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final SettingsDarkModeModel darkModeModel =
-        ref.watch(settingsControllerProvider);
+        ref.watch(providers.settingsControllerProvider);
     SystemChrome.setPreferredOrientations(<DeviceOrientation>[
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,

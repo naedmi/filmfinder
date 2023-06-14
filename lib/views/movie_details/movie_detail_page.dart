@@ -19,9 +19,10 @@ class MovieDetailsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final MovieDetailsController movieDetailsController =
-        ref.watch(movieDetailsProvider(int.parse(movieId)));
+        ref.watch(providers.movieDetailsProvider(int.parse(movieId)));
 
-    final String language = ref.watch(settingsLanguageProvider).language;
+    final String language =
+        ref.watch(providers.settingsLanguageProvider).language;
     final String countryCode = language.split('-').last;
 
     return SimpleBottomBarScaffold(

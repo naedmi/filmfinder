@@ -52,6 +52,7 @@ class SwipePage extends ConsumerWidget {
                   stackTrace: stackTrace,
                 )),
       ),
+      movieId: '',
     );
   }
 }

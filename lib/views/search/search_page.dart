@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/search/search_controller.dart'
     as search_controller;
-import 'package:filmfinder/controllers/search/search_providers.dart';
 import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/search/api_search_types.dart';
+import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/error_card_widget.dart';
 import 'package:filmfinder/views/common/loading_card_widget.dart';
@@ -78,7 +78,7 @@ class SearchPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final search_controller.SearchController searchController =
-        ref.watch(searchControllerProvider);
+        ref.watch(providers.searchControllerProvider);
     final TextEditingController textController =
         TextEditingController(text: searchController.filter.query);
     return MainBottomBarScaffold(

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/landing/landing_controller.dart';
-import 'package:filmfinder/controllers/landing/landing_providers.dart';
 import 'package:filmfinder/models/landing/landing_category.dart';
+import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/error_card_widget.dart';
 import 'package:filmfinder/views/common/loading_card_widget.dart';
@@ -20,7 +20,8 @@ class LandingPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final LandingController controller = ref.watch(landingControllerProvider);
+    final LandingController controller =
+        ref.watch(providers.landingControllerProvider);
     return MainBottomBarScaffold(
         controller: _scrollController,
         appBar: AppBar(
