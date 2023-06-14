@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/list/list_controller.dart'
     as list_controller;
 import 'package:filmfinder/models/common/movie_result.dart';
-import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/result_poster_widget.dart';
@@ -20,7 +19,6 @@ class SearchResultWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final list_controller.ListController listController =
         ref.watch(providers.listControllerProvider);
-    final MovieList movieList = ref.watch(providers.movieListProvider);
 
     return Padding(
       padding: const EdgeInsets.all(paddingTiny),
@@ -98,12 +96,14 @@ class SearchResultWidget extends ConsumerWidget {
                           ),
                           const Spacer(),
                           Tooltip(
-                            message: movieList.movies.contains(res)
-                                ? 'common.remove'.tr()
-                                : 'common.add'.tr(),
+                            message:
+                                listController.movieList.movies.contains(res)
+                                    ? 'common.remove'.tr()
+                                    : 'common.add'.tr(),
                             child: ElevatedButton(
                               onPressed: () {
-                                if (!movieList.movies.contains(res)) {
+                                if (!listController.movieList.movies
+                                    .contains(res)) {
                                   listController.addMovie(res);
                                 } else {
                                   showDialog(
@@ -138,13 +138,14 @@ class SearchResultWidget extends ConsumerWidget {
                                   );
                                 }
                               },
-                              child: movieList.movies.contains(res)
-                                  ? const Icon(
-                                      Remix.heart_fill,
-                                    )
-                                  : const Icon(
-                                      Remix.heart_line,
-                                    ),
+                              child:
+                                  listController.movieList.movies.contains(res)
+                                      ? const Icon(
+                                          Remix.heart_fill,
+                                        )
+                                      : const Icon(
+                                          Remix.heart_line,
+                                        ),
                             ),
                           ),
                         ],

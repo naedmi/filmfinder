@@ -1,7 +1,11 @@
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/models/list/movie_list.dart';
+import 'package:filmfinder/models/movie_details/movie_details.dart';
+import 'package:filmfinder/models/movie_details/movie_params.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/list/local_persistence_service.dart';
+import 'package:filmfinder/services/movie_details/movie_details_service.dart';
+import 'package:filmfinder/views/settings/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class ListController {
@@ -19,6 +23,10 @@ abstract class ListController {
   String? getMovieDetails(String id);
 
   void addMovie(MovieResult res);
+
+  void addMovieFromDetails(MovieDetails details);
+
+  void addMovieFromId(String id);
 
   void removeMovie(int id);
 
@@ -47,6 +55,46 @@ class ListControllerImpl extends ListController {
   void addMovie(MovieResult res) {
     _localPersistenceService.addMovie(movie: res);
     update();
+  }
+
+  @override
+  void addMovieFromDetails(MovieDetails details) {
+    final MovieResult movie = MovieResult(
+        adult: details.adult,
+        backdropPath: details.backdropPath,
+        genreIds: details.genres?.map((Genre e) => e.id).toList(),
+        id: details.id,
+        originalLanguage: details.originalLanguage,
+        originalTitle: '',
+        overview: details.overview,
+        popularity: details.popularity,
+        posterPath: details.posterPath,
+        releaseDate: details.releaseDate,
+        title: details.title,
+        video: details.videos?.results?.isEmpty ?? false ? false : true,
+        voteAverage: details.voteAverage,
+        voteCount: details.voteCount);
+
+    _localPersistenceService.addMovie(movie: movie);
+    update();
+  }
+
+  @override
+  void addMovieFromId(String id) {
+    AsyncValue<MovieDetails> movieDetails = ref.watch(movieDetailsApiService(
+        MovieParams(
+            movieID: int.parse(id),
+            language: FilmfinderPreferences.getLanguage(),
+            appendToResponse: 'watch/providers,credits')));
+
+    movieDetails.when(
+        data: (MovieDetails details) {
+          addMovieFromDetails(details);
+        },
+        loading: () {},
+        error: (Object error, StackTrace? stackTrace) {
+          // TODO: handle error
+        });
   }
 
   @override
