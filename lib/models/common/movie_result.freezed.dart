@@ -20,19 +20,33 @@ MovieResult _$MovieResultFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MovieResult {
+  @HiveField(0)
   bool? get adult => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get backdropPath => throw _privateConstructorUsedError;
+  @HiveField(2)
   List<int>? get genreIds => throw _privateConstructorUsedError;
+  @HiveField(3)
   int get id => throw _privateConstructorUsedError;
+  @HiveField(4)
   String? get originalLanguage => throw _privateConstructorUsedError;
+  @HiveField(5)
   String? get originalTitle => throw _privateConstructorUsedError;
+  @HiveField(6)
   String? get overview => throw _privateConstructorUsedError;
+  @HiveField(7)
   double? get popularity => throw _privateConstructorUsedError;
+  @HiveField(8)
   String? get posterPath => throw _privateConstructorUsedError;
+  @HiveField(9)
   String? get releaseDate => throw _privateConstructorUsedError;
+  @HiveField(10)
   String? get title => throw _privateConstructorUsedError;
+  @HiveField(11)
   bool? get video => throw _privateConstructorUsedError;
+  @HiveField(12)
   double? get voteAverage => throw _privateConstructorUsedError;
+  @HiveField(13)
   int? get voteCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,20 +62,20 @@ abstract class $MovieResultCopyWith<$Res> {
       _$MovieResultCopyWithImpl<$Res, MovieResult>;
   @useResult
   $Res call(
-      {bool? adult,
-      String? backdropPath,
-      List<int>? genreIds,
-      int id,
-      String? originalLanguage,
-      String? originalTitle,
-      String? overview,
-      double? popularity,
-      String? posterPath,
-      String? releaseDate,
-      String? title,
-      bool? video,
-      double? voteAverage,
-      int? voteCount});
+      {@HiveField(0) bool? adult,
+      @HiveField(1) String? backdropPath,
+      @HiveField(2) List<int>? genreIds,
+      @HiveField(3) int id,
+      @HiveField(4) String? originalLanguage,
+      @HiveField(5) String? originalTitle,
+      @HiveField(6) String? overview,
+      @HiveField(7) double? popularity,
+      @HiveField(8) String? posterPath,
+      @HiveField(9) String? releaseDate,
+      @HiveField(10) String? title,
+      @HiveField(11) bool? video,
+      @HiveField(12) double? voteAverage,
+      @HiveField(13) int? voteCount});
 }
 
 /// @nodoc
@@ -162,20 +176,20 @@ abstract class _$$_MovieResultCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool? adult,
-      String? backdropPath,
-      List<int>? genreIds,
-      int id,
-      String? originalLanguage,
-      String? originalTitle,
-      String? overview,
-      double? popularity,
-      String? posterPath,
-      String? releaseDate,
-      String? title,
-      bool? video,
-      double? voteAverage,
-      int? voteCount});
+      {@HiveField(0) bool? adult,
+      @HiveField(1) String? backdropPath,
+      @HiveField(2) List<int>? genreIds,
+      @HiveField(3) int id,
+      @HiveField(4) String? originalLanguage,
+      @HiveField(5) String? originalTitle,
+      @HiveField(6) String? overview,
+      @HiveField(7) double? popularity,
+      @HiveField(8) String? posterPath,
+      @HiveField(9) String? releaseDate,
+      @HiveField(10) String? title,
+      @HiveField(11) bool? video,
+      @HiveField(12) double? voteAverage,
+      @HiveField(13) int? voteCount});
 }
 
 /// @nodoc
@@ -268,33 +282,37 @@ class __$$_MovieResultCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
+@HiveType(typeId: 0, adapterName: 'MovieAdapter')
 class _$_MovieResult implements _MovieResult {
   const _$_MovieResult(
-      {required this.adult,
-      required this.backdropPath,
-      required final List<int>? genreIds,
-      required this.id,
-      required this.originalLanguage,
-      required this.originalTitle,
-      required this.overview,
-      required this.popularity,
-      required this.posterPath,
-      required this.releaseDate,
-      required this.title,
-      required this.video,
-      required this.voteAverage,
-      required this.voteCount})
+      {@HiveField(0) required this.adult,
+      @HiveField(1) required this.backdropPath,
+      @HiveField(2) required final List<int>? genreIds,
+      @HiveField(3) required this.id,
+      @HiveField(4) required this.originalLanguage,
+      @HiveField(5) required this.originalTitle,
+      @HiveField(6) required this.overview,
+      @HiveField(7) required this.popularity,
+      @HiveField(8) required this.posterPath,
+      @HiveField(9) required this.releaseDate,
+      @HiveField(10) required this.title,
+      @HiveField(11) required this.video,
+      @HiveField(12) required this.voteAverage,
+      @HiveField(13) required this.voteCount})
       : _genreIds = genreIds;
 
   factory _$_MovieResult.fromJson(Map<String, dynamic> json) =>
       _$$_MovieResultFromJson(json);
 
   @override
+  @HiveField(0)
   final bool? adult;
   @override
+  @HiveField(1)
   final String? backdropPath;
   final List<int>? _genreIds;
   @override
+  @HiveField(2)
   List<int>? get genreIds {
     final value = _genreIds;
     if (value == null) return null;
@@ -304,26 +322,37 @@ class _$_MovieResult implements _MovieResult {
   }
 
   @override
+  @HiveField(3)
   final int id;
   @override
+  @HiveField(4)
   final String? originalLanguage;
   @override
+  @HiveField(5)
   final String? originalTitle;
   @override
+  @HiveField(6)
   final String? overview;
   @override
+  @HiveField(7)
   final double? popularity;
   @override
+  @HiveField(8)
   final String? posterPath;
   @override
+  @HiveField(9)
   final String? releaseDate;
   @override
+  @HiveField(10)
   final String? title;
   @override
+  @HiveField(11)
   final bool? video;
   @override
+  @HiveField(12)
   final double? voteAverage;
   @override
+  @HiveField(13)
   final int? voteCount;
 
   @override
@@ -396,51 +425,65 @@ class _$_MovieResult implements _MovieResult {
 
 abstract class _MovieResult implements MovieResult {
   const factory _MovieResult(
-      {required final bool? adult,
-      required final String? backdropPath,
-      required final List<int>? genreIds,
-      required final int id,
-      required final String? originalLanguage,
-      required final String? originalTitle,
-      required final String? overview,
-      required final double? popularity,
-      required final String? posterPath,
-      required final String? releaseDate,
-      required final String? title,
-      required final bool? video,
-      required final double? voteAverage,
-      required final int? voteCount}) = _$_MovieResult;
+      {@HiveField(0) required final bool? adult,
+      @HiveField(1) required final String? backdropPath,
+      @HiveField(2) required final List<int>? genreIds,
+      @HiveField(3) required final int id,
+      @HiveField(4) required final String? originalLanguage,
+      @HiveField(5) required final String? originalTitle,
+      @HiveField(6) required final String? overview,
+      @HiveField(7) required final double? popularity,
+      @HiveField(8) required final String? posterPath,
+      @HiveField(9) required final String? releaseDate,
+      @HiveField(10) required final String? title,
+      @HiveField(11) required final bool? video,
+      @HiveField(12) required final double? voteAverage,
+      @HiveField(13) required final int? voteCount}) = _$_MovieResult;
 
   factory _MovieResult.fromJson(Map<String, dynamic> json) =
       _$_MovieResult.fromJson;
 
   @override
+  @HiveField(0)
   bool? get adult;
   @override
+  @HiveField(1)
   String? get backdropPath;
   @override
+  @HiveField(2)
   List<int>? get genreIds;
   @override
+  @HiveField(3)
   int get id;
   @override
+  @HiveField(4)
   String? get originalLanguage;
   @override
+  @HiveField(5)
   String? get originalTitle;
   @override
+  @HiveField(6)
   String? get overview;
   @override
+  @HiveField(7)
   double? get popularity;
   @override
+  @HiveField(8)
   String? get posterPath;
   @override
+  @HiveField(9)
   String? get releaseDate;
   @override
+  @HiveField(10)
   String? get title;
   @override
+  @HiveField(11)
   bool? get video;
   @override
+  @HiveField(12)
   double? get voteAverage;
   @override
+  @HiveField(13)
   int? get voteCount;
   @override
   @JsonKey(ignore: true)

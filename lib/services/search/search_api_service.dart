@@ -1,6 +1,6 @@
 import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
-import 'package:filmfinder/services/dio_provider.dart';
+import 'package:filmfinder/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final AutoDisposeFutureProviderFamily<DefaultResponse, SearchFilter>
@@ -11,7 +11,7 @@ final AutoDisposeFutureProviderFamily<DefaultResponse, SearchFilter>
     return const DefaultResponse();
   }
 
-  dynamic response = await ref.watch(dioProvider).get(
+  dynamic response = await ref.watch(providers.dioProvider).get(
         'https://api.themoviedb.org/3/search/${filter.type}?'
         'query=${filter.query}'
         '&include_adult=${filter.adult}'

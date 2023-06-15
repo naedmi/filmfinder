@@ -1,6 +1,6 @@
-import 'package:filmfinder/controllers/search/search_providers.dart';
 import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
+import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/search/search_api_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -30,13 +30,13 @@ abstract class SearchController {
 class SearchControllerImpl extends SearchController {
   SearchControllerImpl(AutoDisposeStateProviderRef<SearchController> ref)
       : super(ref) {
-    filter = ref.watch(searchFilterProvider);
+    filter = ref.watch(providers.searchFilterProvider);
     searchResponse = ref.watch(searchApiService(filter));
   }
 
   @override
   void updateFilters(SearchFilter filter) {
-    ref.read(searchFilterProvider.notifier).state = filter;
+    ref.read(providers.searchFilterProvider.notifier).state = filter;
   }
 
   @override

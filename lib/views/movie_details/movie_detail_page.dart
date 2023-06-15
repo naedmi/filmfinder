@@ -1,17 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:filmfinder/controllers/movie_details/movie_details_controller.dart';
+import 'package:filmfinder/models/movie_details/movie_details.dart';
+import 'package:filmfinder/providers.dart';
+import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/views/common/navigation_widget_main_details.dart';
+import 'package:filmfinder/views/movie_details/actor_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
-
-import 'package:filmfinder/controllers/movie_details/movie_details_controller.dart';
-import 'package:filmfinder/controllers/movie_details/movie_details_provider.dart';
-import 'package:filmfinder/controllers/settings/settings_provider.dart';
-import 'package:filmfinder/models/movie_details/movie_details.dart';
-import 'package:filmfinder/views/common/constants.dart';
-import 'package:filmfinder/views/common/navigation_widget_main_details.dart';
-import 'package:filmfinder/views/movie_details/actor_widget.dart';
 
 class MovieDetailsPage extends ConsumerWidget {
   final String movieId;
@@ -21,9 +19,10 @@ class MovieDetailsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final MovieDetailsController movieDetailsController =
-        ref.watch(movieDetailsProvider(int.parse(movieId)));
+        ref.watch(providers.movieDetailsProvider(int.parse(movieId)));
 
-    final String language = ref.watch(settingsLanguageProvider).language;
+    final String language =
+        ref.watch(providers.settingsLanguageProvider).language;
     final String countryCode = language.split('-').last;
 
     return SimpleBottomBarScaffold(
@@ -157,6 +156,7 @@ class MovieDetailsPage extends ConsumerWidget {
           ),
         ),
       ),
+      movieId: movieId,
     );
   }
 }

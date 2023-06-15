@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/settings/settings_controller_interfaces.dart';
-import 'package:filmfinder/controllers/settings/settings_provider.dart';
 import 'package:filmfinder/models/settings/settings.dart';
+import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:filmfinder/views/settings/settings_widget.dart';
@@ -45,13 +45,13 @@ class Settings extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final SettingsDarkModeController darkModeController =
-        ref.read(settingsControllerProvider.notifier);
+        ref.read(providers.settingsControllerProvider.notifier);
     final SettingsDarkModeModel darkModeModel =
-        ref.watch(settingsControllerProvider);
+        ref.watch(providers.settingsControllerProvider);
     final SettingsLanguageController languageController =
-        ref.read(settingsLanguageControllerProvider.notifier);
+        ref.read(providers.settingsLanguageControllerProvider.notifier);
     final SettingsLanguageModel languageModel =
-        ref.watch(settingsLanguageControllerProvider);
+        ref.watch(providers.settingsLanguageControllerProvider);
     const double localPadding = 8.0;
     return Padding(
       padding: const EdgeInsets.only(

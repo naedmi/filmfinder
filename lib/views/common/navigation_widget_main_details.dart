@@ -1,18 +1,28 @@
+import 'package:filmfinder/controllers/list/list_controller.dart'
+    as list_controller;
+import 'package:filmfinder/models/common/movie_result.dart';
+import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:remixicon/remixicon.dart';
 
-class BottomNavigationWidget extends StatelessWidget {
+class BottomNavigationWidget extends ConsumerWidget {
   final ScrollController? controller;
+  final String movieId;
 
   const BottomNavigationWidget({
     Key? key,
+    required this.movieId,
     this.controller,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final list_controller.ListController listController =
+        ref.watch(providers.listControllerProvider);
+
     return BottomAppBar(
         height: mainActionButtonHeight / 2 + padding,
         shape: const CircularNotchedRectangle(),
@@ -40,11 +50,19 @@ class BottomNavigationWidget extends StatelessWidget {
             const MiddleButton(),
             IconButton(
               onPressed: () {
-                //toDo add to list
+                listController.movieList.movies.any(
+                        (MovieResult movie) => movie.id == int.parse(movieId))
+                    ? listController.removeMovie(int.parse(movieId))
+                    : listController.addMovieFromId(movieId);
               },
-              icon: const Icon(
-                Remix.add_circle_line,
-              ),
+              icon: listController.movieList.movies.any(
+                      (MovieResult movie) => movie.id == int.parse(movieId))
+                  ? const Icon(
+                      Remix.check_line,
+                    )
+                  : const Icon(
+                      Remix.add_circle_line,
+                    ),
             ),
           ],
         ));
@@ -81,6 +99,7 @@ class SimpleBottomBarScaffold extends StatelessWidget {
   final ScrollController? controller;
   final bool showMiddleButton;
   final bool hideBottomBar;
+  final String movieId;
 
   const SimpleBottomBarScaffold(
       {super.key,
@@ -88,7 +107,8 @@ class SimpleBottomBarScaffold extends StatelessWidget {
       this.appBar,
       this.controller,
       this.showMiddleButton = true,
-      this.hideBottomBar = false});
+      this.hideBottomBar = false,
+      required this.movieId});
 
   @override
   Widget build(BuildContext context) {
@@ -105,9 +125,12 @@ class SimpleBottomBarScaffold extends StatelessWidget {
           appBar: appBar,
           extendBody: true,
           resizeToAvoidBottomInset: false,
-          bottomNavigationBar: hideBottomBar ? null : BottomNavigationWidget(
-            controller: controller,
-          ),
+          bottomNavigationBar: hideBottomBar
+              ? null
+              : BottomNavigationWidget(
+                  controller: controller,
+                  movieId: movieId,
+                ),
           body: body),
     );
   }

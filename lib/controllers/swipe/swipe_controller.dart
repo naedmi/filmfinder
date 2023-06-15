@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:filmfinder/controllers/settings/settings_provider.dart';
 import 'package:filmfinder/controllers/swipe/swipe_providers.dart';
 import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/common/discover_params.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/models/movie_details/movie_params.dart';
+import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/common/discover_service.dart';
 import 'package:filmfinder/services/movie_details/movie_details_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,7 +34,7 @@ class SwipeControllerImpl extends SwipeController {
 
   @override
   FutureOr<List<AsyncValue<MovieDetails>>> build() async {
-    language = ref.watch(settingsLanguageControllerProvider).language;
+    language = ref.watch(providers.settingsLanguageControllerProvider).language;
     final int currentPage = ref.watch(pageProvider);
 
     responses = await ref.watch(discoverApiService(
