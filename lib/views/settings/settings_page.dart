@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/settings/settings_controller_interfaces.dart';
 import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/providers.dart';
+import 'package:filmfinder/views/common/about_widget.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:filmfinder/views/settings/settings_widget.dart';
@@ -133,15 +134,14 @@ class Settings extends ConsumerWidget {
               },
             ),
             SettingWidget(
-              settingName: 'settings.about',
+              settingName: 'settings.about.header',
               withSwitch: false,
               settingIcon: const Icon(
                 Remix.information_line,
                 size: settingIconSize,
               ),
               onPressed: () {
-                //todo open about popup
-                settingsSavedToast();
+                showAboutFilmfinder(context);
               },
             )
           ],

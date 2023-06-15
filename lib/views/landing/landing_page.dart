@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/landing/landing_controller.dart';
 import 'package:filmfinder/models/landing/landing_category.dart';
 import 'package:filmfinder/providers.dart';
+import 'package:filmfinder/views/common/about_widget.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/error_card_widget.dart';
 import 'package:filmfinder/views/common/loading_card_widget.dart';
@@ -28,7 +29,7 @@ class LandingPage extends ConsumerWidget {
           automaticallyImplyLeading: false,
           title: GestureDetector(
             onTap: () {
-              // TODO: Add about page
+              showAboutFilmfinder(context);
             },
             onLongPress: () {
               showModalBottomSheet(

@@ -10,7 +10,12 @@
     "color": "Dunkler Modus",
     "parental_control": "Kindersicherung",
     "lang": "Sprache",
-    "about": "Über uns",
+    "about": {
+      "header": "Über uns",
+      "text": "Filmfinder ist eine kostenlose Anwendung zum Suchen und Entdecken von Filmen.",
+      "attribution": "Alle Daten und Informationen zu Filmen, werden von\nThe Movie Database (TMDB) bereitgestellt.",
+      "tmdb": "Diese Anwendung verwendet die TMDB-API, aber ist nicht von TMDb zertifiziert oder unterstützt."
+    },
     "save_msg": "Einstellungen gespeichert"
   },
   "landing": {
