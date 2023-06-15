@@ -13,7 +13,6 @@ abstract class ListController {
 
   final AutoDisposeStateProviderRef<ListController> ref;
   late final LocalPersistenceService _localPersistenceService;
-
   late MovieList _movieList;
 
   MovieList get movieList => _movieList;
@@ -40,6 +39,11 @@ class ListControllerImpl extends ListController {
       : super(ref) {
     _localPersistenceService = ref.watch(providers.localPersistenceProvider);
     _movieList = ref.watch(providers.movieListProvider);
+    initList();
+  }
+
+  void initList() {
+    _movieList = _movieList.copyWith(movies: getAllMovies());
   }
 
   @override

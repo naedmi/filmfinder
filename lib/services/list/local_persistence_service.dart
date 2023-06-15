@@ -18,8 +18,6 @@ abstract class LocalPersistenceService {
 class LocalPersistenceServiceHive implements LocalPersistenceService {
   late final Box<MovieResult> _movies;
 
-  // static const String boxName = 'fav_movies';
-
   LocalPersistenceServiceHive() {
     _movies = Hive.box<MovieResult>('fav_movies');
   }
