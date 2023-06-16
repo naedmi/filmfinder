@@ -24,7 +24,7 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(
     EasyLocalization(
-      supportedLocales: supportedLanguages.values.toList(),
+      supportedLocales: supportedLocales.values.toList(),
       path: langPath,
       child: ProviderScope(
         observers: <ProviderObserver>[LoggerService()],

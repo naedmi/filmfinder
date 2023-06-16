@@ -1,0 +1,50 @@
+{
+  "common": {
+    "rating": "{} / 10 Sterne",
+    "votes": "{} Stimmen",
+    "add": "Zur Liste hinzufügen",
+    "remove": "Aus der Liste entfernen"
+  },
+  "settings": {
+    "header": "Einstellungen",
+    "color": "Dunkler Modus",
+    "parental_control": "Kindersicherung",
+    "lang": "Sprache",
+    "about": "Über uns",
+    "save_msg": "Einstellungen gespeichert"
+  },
+  "landing": {
+    "category": {
+      "now_playing": "Jetzt im Kino",
+      "popular": "Beliebt",
+      "top_rated": "Top bewertet",
+      "upcoming": "Demnächst"
+    }
+  },
+  "list": {
+    "header": "Meine Liste",
+    "empty": "Deine Liste ist leer.",
+    "remove": {
+      "title": "Aus der Liste entfernen",
+      "text": "Möchtest du diesen Film wirklich aus deiner Liste entfernen?",
+      "confirmation": "Bestätigung",
+      "cancel": "Abbrechen",
+      "confirm": "Entfernen"
+    }
+  },
+  "search": {
+    "adult": "Erwachsen",
+    "year": "Jahr"
+  },
+  "details": {
+    "votes": "Bewertungen",
+    "no_provider": "Keine Anbieter in ihrem Land gefunden",
+    "top_actors": "Bekannteste Schauspieler"
+  },
+  "exit": {
+    "question": "Bist du dir sicher?",
+    "text": "Wir hassen es, dich gehen zu sehen :(",
+    "yes": "Ja",
+    "no": "Nein"
+  }
+}

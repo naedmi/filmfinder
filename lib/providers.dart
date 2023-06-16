@@ -47,7 +47,7 @@ class Providers {
 
   final StateProvider<SearchFilter> searchFilterProvider =
       StateProvider<SearchFilter>((Ref ref) {
-    return const SearchFilter();
+    return SearchFilter(language: FilmfinderPreferences.getLanguage());
   });
 
   final AutoDisposeStateProviderFamily<MovieDetailsController, int>

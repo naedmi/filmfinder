@@ -173,7 +173,7 @@ class SearchPage extends ConsumerWidget {
                             }),
                         const Divider(indent: paddingTiny),
                         InputChip(
-                            label: Text(capitalise(searchLanguages[
+                            label: Text(capitalise(supportedLanguages[
                                 searchController.filter.language]!)),
                             shape: chipShape,
                             side: chipSite,
@@ -187,23 +187,24 @@ class SearchPage extends ConsumerWidget {
                                     return ListView.separated(
                                       shrinkWrap: true,
                                       padding: const EdgeInsets.all(padding),
-                                      itemCount: searchLanguages.values.length,
+                                      itemCount:
+                                          supportedLanguages.values.length,
                                       itemBuilder:
                                           (BuildContext context, int index) =>
                                               ListTile(
                                         horizontalTitleGap: padding,
                                         trailing:
                                             searchController.filter.language ==
-                                                    searchLanguages.keys
+                                                    supportedLanguages.keys
                                                         .elementAt(index)
                                                 ? const Icon(Remix.check_line)
                                                 : null,
-                                        title: Text(capitalise(searchLanguages
-                                            .values
-                                            .elementAt(index))),
+                                        title: Text(capitalise(
+                                            supportedLanguages.values
+                                                .elementAt(index))),
                                         onTap: () {
                                           searchController.setLanguage(
-                                              searchLanguages.keys
+                                              supportedLanguages.keys
                                                   .elementAt(index));
                                           Navigator.pop(context);
                                         },
