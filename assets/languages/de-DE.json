@@ -44,7 +44,8 @@
   "details": {
     "votes": "Bewertungen",
     "no_provider": "Keine Anbieter in ihrem Land gefunden",
-    "top_actors": "Bekannteste Schauspieler"
+    "top_actors": "Bekannteste Schauspieler",
+    "attribution": "bereitgestellt von "
   },
   "exit": {
     "question": "Bist du dir sicher?",

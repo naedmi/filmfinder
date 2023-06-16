@@ -44,7 +44,8 @@
   "details": {
     "votes": "votes",
     "no_provider": "No providers available in your country",
-    "top_actors": "Top Actors"
+    "top_actors": "Top Actors",
+    "attribution": "provided by "
   },
   "exit": {
     "question": "Are you sure?",
