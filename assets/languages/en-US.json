@@ -33,8 +33,10 @@
     }
   },
   "search": {
-    "adult": "Adult",
-    "year": "Year"
+    "year": "Year",
+    "hint": "Search",
+    "empty_results": "No results found",
+    "empty_query": "Enter something to search..."
   },
   "details": {
     "votes": "votes",

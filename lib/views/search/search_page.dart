@@ -8,6 +8,7 @@ import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/error_card_widget.dart';
 import 'package:filmfinder/views/common/loading_card_widget.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
+import 'package:filmfinder/views/search/card_message_widget.dart';
 import 'package:filmfinder/views/search/search_result_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -99,7 +100,7 @@ class SearchPage extends ConsumerWidget {
                       searchController.setQuery(value);
                     },
                     decoration: InputDecoration(
-                      hintText: 'Search',
+                      hintText: 'search.hint'.tr(),
                       prefixIcon: searchController.filter.query.isNotEmpty
                           ? IconButton(
                               icon: const Icon(Remix.close_line),
@@ -137,7 +138,11 @@ class SearchPage extends ConsumerWidget {
                                 Text(capitalise(searchController.filter.type)),
                             shape: chipShape,
                             side: chipSite,
-                            avatar: const Icon(Remix.list_check),
+                            avatar: Icon(
+                              Remix.list_check,
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium?.color,
+                            ),
                             backgroundColor:
                                 Theme.of(context).colorScheme.surfaceVariant,
                             onPressed: () {
@@ -177,7 +182,11 @@ class SearchPage extends ConsumerWidget {
                                 searchController.filter.language]!)),
                             shape: chipShape,
                             side: chipSite,
-                            avatar: const Icon(Remix.translate_2),
+                            avatar: Icon(
+                              Remix.translate_2,
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium?.color,
+                            ),
                             backgroundColor:
                                 Theme.of(context).colorScheme.surfaceVariant,
                             onPressed: () {
@@ -222,7 +231,11 @@ class SearchPage extends ConsumerWidget {
                                 .toString()),
                             shape: chipShape,
                             side: chipSite,
-                            avatar: const Icon(Remix.calendar_line),
+                            avatar: Icon(
+                              Remix.calendar_line,
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium?.color,
+                            ),
                             backgroundColor:
                                 Theme.of(context).colorScheme.surfaceVariant,
                             showCheckmark: false,
@@ -267,18 +280,6 @@ class SearchPage extends ConsumerWidget {
                                 },
                               );
                             }),
-                        const Divider(indent: paddingTiny),
-                        FilterChip(
-                          label: const Text('search.adult').tr(),
-                          shape: chipShape,
-                          side: chipSite,
-                          backgroundColor:
-                              Theme.of(context).colorScheme.surfaceVariant,
-                          selected: searchController.filter.adult,
-                          onSelected: (bool value) {
-                            searchController.setAdult(value);
-                          },
-                        ),
                       ],
                     ),
                   ),
@@ -312,37 +313,13 @@ class SearchPage extends ConsumerWidget {
                       const Divider(),
                 ))
             : searchController.filter.query.isNotEmpty
-                ? const Align(
-                    alignment: Alignment.topCenter,
-                    child: Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(padding),
-                        child: Text('No results found'),
-                      ),
-                    ),
+                ? const CardMessageWidget(
+                    messageKey: 'search.empty_results',
+                    icon: Remix.ghost_line,
                   )
-                : const Align(
-                    alignment: Alignment.topCenter,
-                    child: Card(
-                      child: SizedBox(
-                        height: paddingBig * 4,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(Remix.search_eye_line,
-                                size: paddingBig + padding),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: paddingBig,
-                                  right: paddingBig,
-                                  top: padding),
-                              child: Text('Enter something to search...'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                : const CardMessageWidget(
+                    messageKey: 'search.empty_query',
+                    icon: Remix.search_eye_line,
                   ),
         error: (Object err, StackTrace? stack) => ErrorCardWidget(
           error: err,

@@ -16,8 +16,6 @@ abstract class SearchController {
 
   void setQuery(String query);
 
-  void setAdult(bool adult);
-
   void setLanguage(String language);
 
   void setPage(int page);
@@ -42,11 +40,6 @@ class SearchControllerImpl extends SearchController {
   @override
   void setQuery(String query) {
     updateFilters(filter.copyWith(query: query, page: 1));
-  }
-
-  @override
-  void setAdult(bool adult) {
-    updateFilters(filter.copyWith(adult: adult, page: 1));
   }
 
   @override
