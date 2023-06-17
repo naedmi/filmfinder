@@ -1,50 +1,50 @@
 {
-  "common": {
-    "rating": "{} / 10 Sterne",
-    "votes": "{} Stimmen",
-    "add": "Zur Liste hinzufügen",
-    "remove": "Aus der Liste entfernen"
-  },
-  "settings": {
-    "header": "Einstellungen",
-    "color": "Dunkler Modus",
-    "parental_control": "Kindersicherung",
-    "lang": "Sprache",
-    "about": "Über uns",
-    "save_msg": "Einstellungen gespeichert"
-  },
-  "landing": {
-    "category": {
-      "now_playing": "Jetzt im Kino",
-      "popular": "Beliebt",
-      "top_rated": "Top bewertet",
-      "upcoming": "Demnächst"
+    "common": {
+        "rating": "10 \u00e9toiles",
+        "votes": "Votes",
+        "add": "Ajouter \u00e0 la liste",
+        "remove": "Retirer de la liste"
+    },
+    "settings": {
+        "header": "R\u00e9glages",
+        "color": "Th\u00e8me sombre",
+        "parental_control": "Contr\u00f4le parental",
+        "lang": "Langue",
+        "about": "\u00c0 propos de",
+        "save_msg": "param\u00e8tres enregistr\u00e9s"
+    },
+    "landing": {
+        "category": {
+            "now_playing": "En cours",
+            "popular": "Populaire",
+            "top_rated": "Mieux not\u00e9s",
+            "upcoming": "\u00c0 venir"
+        }
+    },
+    "list": {
+        "header": "Ma liste \u00ab\u00a0\u00e0 regarder plus tard\u00a0\u00bb",
+        "empty": "Votre liste est vide.",
+        "remove": {
+            "title": "Retirer de la liste",
+            "text": "\u00cates-vous s\u00fbr de vouloir supprimer ce film de votre liste\u00a0?",
+            "confirmation": "Confirmer la migration",
+            "cancel": "Annuler",
+            "confirm": "Supprimer"
+        }
+    },
+    "search": {
+        "adult": "Adulte",
+        "year": "Ann\u00e9e"
+    },
+    "details": {
+        "votes": "votes",
+        "no_provider": "Aucun fournisseur disponible dans votre pays",
+        "top_actors": "top 100 acteurs"
+    },
+    "exit": {
+        "question": "\u00cates-vous s\u00fbr\u00b7e\u00a0?",
+        "text": "Nous d\u00e9testons vous voir partir...",
+        "yes": "Oui",
+        "no": "Non"
     }
-  },
-  "list": {
-    "header": "Meine Liste",
-    "empty": "Deine Liste ist leer.",
-    "remove": {
-      "title": "Aus der Liste entfernen",
-      "text": "Möchtest du diesen Film wirklich aus deiner Liste entfernen?",
-      "confirmation": "Bestätigung",
-      "cancel": "Abbrechen",
-      "confirm": "Entfernen"
-    }
-  },
-  "search": {
-    "adult": "Erwachsen",
-    "year": "Jahr"
-  },
-  "details": {
-    "votes": "Bewertungen",
-    "no_provider": "Keine Anbieter in ihrem Land gefunden",
-    "top_actors": "Bekannteste Schauspieler"
-  },
-  "exit": {
-    "question": "Bist du dir sicher?",
-    "text": "Wir hassen es, dich gehen zu sehen :(",
-    "yes": "Ja",
-    "no": "Nein"
-  }
 }
