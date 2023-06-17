@@ -54,7 +54,10 @@ class SearchPage extends ConsumerWidget {
               ),
             ),
             Text(
-              'Page ${res.page} of ${res.totalPages}',
+              'search.page_indicator'.tr(args: <String>[
+                res.page.toString(),
+                res.totalPages.toString()
+              ]),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             SizedBox(
@@ -78,8 +81,10 @@ class SearchPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final search_controller.SearchController searchController =
+    final AsyncValue<DefaultResponse> searchResults =
         ref.watch(providers.searchControllerProvider);
+    final search_controller.SearchController searchController =
+        ref.read(providers.searchControllerProvider.notifier);
     final TextEditingController textController =
         TextEditingController(text: searchController.filter.query);
     return MainBottomBarScaffold(
@@ -287,7 +292,7 @@ class SearchPage extends ConsumerWidget {
               ),
             ),
           )),
-      body: searchController.searchResponse.when(
+      body: searchResults.when(
         data: (DefaultResponse res) => res.results.isNotEmpty
             ? NotificationListener<ScrollEndNotification>(
                 onNotification: (ScrollEndNotification scrollEnd) {

@@ -36,7 +36,8 @@
     "year": "Jahr",
     "hint": "Suche",
     "empty_results": "Keine Ergebnisse gefunden",
-    "empty_query": "Tippe etwas ein zum Suchen..."
+    "empty_query": "Tippe etwas ein zum Suchen...",
+    "page_indicator": "Seite {} von {}"
   },
   "details": {
     "votes": "Bewertungen",

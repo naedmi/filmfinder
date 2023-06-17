@@ -55,7 +55,7 @@ class Settings extends ConsumerWidget {
     final SettingsLanguageModel languageModel =
         ref.watch(providers.settingsLanguageControllerProvider);
     final search_controller.SearchController searchController =
-        ref.watch(providers.searchControllerProvider);
+        ref.read(providers.searchControllerProvider.notifier);
     const double localPadding = 8.0;
     return Padding(
       padding: const EdgeInsets.only(
