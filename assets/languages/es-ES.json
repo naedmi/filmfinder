@@ -18,7 +18,11 @@
             "now_playing": "En funcionamiento",
             "popular": "Populares",
             "top_rated": "Mejor Valorados",
-            "upcoming": "Pr\u00f3ximo"
+            "upcoming": "Pr\u00f3ximo",
+            "trending": {
+                "day": "Tendencias hoy",
+                "week": "Tendencias semanales"
+            }
         }
     },
     "list": {

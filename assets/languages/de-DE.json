@@ -18,7 +18,11 @@
       "now_playing": "Jetzt im Kino",
       "popular": "Beliebt",
       "top_rated": "Top bewertet",
-      "upcoming": "Demnächst"
+      "upcoming": "Demnächst",
+      "trending": {
+        "day": "Trending Heute",
+        "week": "Trending Woche"
+      }
     }
   },
   "list": {
