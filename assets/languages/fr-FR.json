@@ -18,7 +18,11 @@
             "now_playing": "En cours",
             "popular": "Populaire",
             "top_rated": "Mieux not\u00e9s",
-            "upcoming": "\u00c0 venir"
+            "upcoming": "\u00c0 venir",
+            "trending": {
+                "day": "Tendances d'aujourd'hui",
+                "week": "Tendance hebdomadaire"
+            }
         }
     },
     "list": {

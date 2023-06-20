@@ -18,7 +18,11 @@
             "now_playing": "\u518d\u751f\u4e2d",
             "popular": "\u4eba\u6c17",
             "top_rated": "\u9ad8\u8a55\u4fa1",
-            "upcoming": "\u4eca\u5f8c\u306e\u30a4\u30d9\u30f3\u30c8"
+            "upcoming": "\u4eca\u5f8c\u306e\u30a4\u30d9\u30f3\u30c8",
+            "trending": {
+                "day": "\u4eca\u65e5\u306e\u30c8\u30ec\u30f3\u30c9",
+                "week": "\u30c8\u30ec\u30f3\u30c9\u30a6\u30a3\u30fc\u30af\u30ea\u30fc"
+            }
         }
     },
     "list": {
