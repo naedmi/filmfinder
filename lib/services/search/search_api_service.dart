@@ -1,5 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:filmfinder/models/common/default_response.dart';
+import 'package:filmfinder/models/common/movie_result.dart';
+import 'package:filmfinder/models/search/api_search_types.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
+import 'package:filmfinder/models/search/tv_result.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,7 +17,7 @@ Future<DefaultResponse> searchApiServiceImpl(
     return const DefaultResponse();
   }
 
-  dynamic response = await ref.watch(providers.dioProvider).get(
+  Response<dynamic> response = await ref.watch(providers.dioProvider).get(
         'https://api.themoviedb.org/3/search/${filter.type}?'
         'query=${filter.query}'
         '&language=${filter.language}'
@@ -21,6 +25,17 @@ Future<DefaultResponse> searchApiServiceImpl(
         '${filter.year != null ? '&primary_release_year=${filter.year}' : ''}',
       );
   ref.keepAlive();
+
+  if (filter.type == SearchType.tv.name) {
+    List<MovieResult> tvResults = <MovieResult>[];
+    for (Map<String, dynamic> entry
+        in List<Map<String, dynamic>>.from(response.data['results'])) {
+      tvResults.add(TvResult.fromJson(entry).toMovieResult());
+    }
+    response.data['results'] = tvResults
+        .map((MovieResult movieResult) => movieResult.toJson())
+        .toList();
+  }
 
   return DefaultResponse.fromJson(response.data);
 }
