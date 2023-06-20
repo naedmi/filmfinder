@@ -33,8 +33,11 @@
         }
     },
     "search": {
-        "adult": "Adulto",
-        "year": "A\u00f1o"
+        "year": "A\u00f1o",
+        "hint": "Buscar",
+        "empty_results": "No se encontraron resultados",
+        "empty_query": "Introduzca algo a buscar",
+        "page_indicator": "P\u00e1gina  de "
     },
     "details": {
         "votes": "Votos",

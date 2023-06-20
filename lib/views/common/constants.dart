@@ -96,7 +96,7 @@ const String about = 'About';
 const Map<String, String> supportedLanguages = <String, String>{
   'en-US': 'English',
   'de-DE': 'German',
-  'fr-FR': 'France',
+  'fr-FR': 'French',
   'es-ES': 'Spanish',
   'it-IT': 'Italian',
   'ja-JP': 'Japanese'
