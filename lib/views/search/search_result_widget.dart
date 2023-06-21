@@ -139,14 +139,13 @@ class SearchResultWidget extends ConsumerWidget {
                                   );
                                 }
                               },
-                              child:
-                                  listController.movieList.movies.contains(res)
-                                      ? const Icon(
-                                          Remix.heart_fill,
-                                        )
-                                      : const Icon(
-                                          Remix.heart_line,
-                                        ),
+                              child: listController.contains(res.id)
+                                  ? const Icon(
+                                      Remix.heart_fill,
+                                    )
+                                  : const Icon(
+                                      Remix.heart_line,
+                                    ),
                             ),
                           ),
                         ],

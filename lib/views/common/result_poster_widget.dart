@@ -15,8 +15,8 @@ class ResultPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        context.pushNamed(
+      onTap: () async {
+        await context.pushNamed(
           'details',
           pathParameters: <String, String>{'id': id.toString()},
         );
