@@ -5,6 +5,7 @@ import 'package:filmfinder/controllers/movie_details/movie_details_controller.da
 import 'package:filmfinder/controllers/search/search_controller.dart';
 import 'package:filmfinder/controllers/settings/settings_controller.dart';
 import 'package:filmfinder/controllers/settings/settings_controller_interfaces.dart';
+import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
 import 'package:filmfinder/models/settings/settings.dart';
@@ -39,15 +40,14 @@ class Providers {
     return d;
   });
 
-  final AutoDisposeStateProvider<SearchController> searchControllerProvider =
-      StateProvider.autoDispose<SearchController>(
-          (AutoDisposeStateProviderRef<SearchController> ref) {
-    return SearchControllerImpl(ref);
-  });
+  final AutoDisposeNotifierProvider<SearchController,
+          AsyncValue<DefaultResponse>> searchControllerProvider =
+      NotifierProvider.autoDispose<SearchController,
+          AsyncValue<DefaultResponse>>(() => SearchControllerImpl());
 
   final StateProvider<SearchFilter> searchFilterProvider =
-      StateProvider<SearchFilter>((Ref ref) {
-    return const SearchFilter();
+      StateProvider<SearchFilter>((StateProviderRef<SearchFilter> ref) {
+    return SearchFilter(language: ref.watch(providers.settingsLanguageProvider).language);
   });
 
   final AutoDisposeStateProviderFamily<MovieDetailsController, int>

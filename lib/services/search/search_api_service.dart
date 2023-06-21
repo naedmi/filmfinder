@@ -4,9 +4,11 @@ import 'package:filmfinder/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final AutoDisposeFutureProviderFamily<DefaultResponse, SearchFilter>
-    searchApiService = FutureProvider.autoDispose.family(
-        (AutoDisposeFutureProviderRef<DefaultResponse> ref,
-            SearchFilter filter) async {
+    searchApiService = FutureProvider.autoDispose.family(searchApiServiceImpl);
+
+Future<DefaultResponse> searchApiServiceImpl(
+    AutoDisposeFutureProviderRef<DefaultResponse> ref,
+    SearchFilter filter) async {
   if (filter.query.isEmpty) {
     return const DefaultResponse();
   }
@@ -14,7 +16,6 @@ final AutoDisposeFutureProviderFamily<DefaultResponse, SearchFilter>
   dynamic response = await ref.watch(providers.dioProvider).get(
         'https://api.themoviedb.org/3/search/${filter.type}?'
         'query=${filter.query}'
-        '&include_adult=${filter.adult}'
         '&language=${filter.language}'
         '&page=${filter.page}'
         '${filter.year != null ? '&primary_release_year=${filter.year}' : ''}',
@@ -22,4 +23,4 @@ final AutoDisposeFutureProviderFamily<DefaultResponse, SearchFilter>
   ref.keepAlive();
 
   return DefaultResponse.fromJson(response.data);
-});
+}

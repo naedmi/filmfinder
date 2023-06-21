@@ -1,0 +1,57 @@
+{
+    "common": {
+        "rating": "10 estrellas",
+        "votes": " votos",
+        "add": "A\u00f1adir a la lista",
+        "remove": "Remover de la lista"
+    },
+    "settings": {
+        "header": "educativos",
+        "color": "Tema oscuro",
+        "parental_control": "Control parental",
+        "lang": "Idioma",
+        "about": "Acerca de",
+        "save_msg": "ajustes guardados"
+    },
+    "landing": {
+        "category": {
+            "now_playing": "En funcionamiento",
+            "popular": "Populares",
+            "top_rated": "Mejor Valorados",
+            "upcoming": "Pr\u00f3ximo",
+            "trending": {
+                "day": "Tendencias hoy",
+                "week": "Tendencias semanales"
+            }
+        }
+    },
+    "list": {
+        "header": "Mi lista",
+        "empty": "La lista esta vac\u00eda.",
+        "remove": {
+            "title": "Remover de la lista",
+            "text": "\u00bfEst\u00e1 seguro de que desea eliminar esta pel\u00edcula de su lista?",
+            "confirmation": "Confirmaci\u00f3n",
+            "cancel": "Cancelar",
+            "confirm": "Eliminar"
+        }
+    },
+    "search": {
+        "year": "A\u00f1o",
+        "hint": "Buscar",
+        "empty_results": "No se encontraron resultados",
+        "empty_query": "Introduzca algo a buscar",
+        "page_indicator": "P\u00e1gina  de "
+    },
+    "details": {
+        "votes": "Votos",
+        "no_provider": "No hay proveedores disponibles en tu pa\u00eds",
+        "top_actors": "Principales actores"
+    },
+    "exit": {
+        "question": "\u00bfEst\u00e1 seguro?",
+        "text": "Odiamos que te vayas...",
+        "yes": "S\u00ed",
+        "no": "No"
+    }
+}

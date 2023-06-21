@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:filmfinder/controllers/search/search_controller.dart'
+    as search_controller;
 import 'package:filmfinder/controllers/settings/settings_controller_interfaces.dart';
 import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/providers.dart';
@@ -53,6 +55,8 @@ class Settings extends ConsumerWidget {
         ref.read(providers.settingsLanguageControllerProvider.notifier);
     final SettingsLanguageModel languageModel =
         ref.watch(providers.settingsLanguageControllerProvider);
+    final search_controller.SearchController searchController =
+        ref.read(providers.searchControllerProvider.notifier);
     const double localPadding = 8.0;
     return Padding(
       padding: const EdgeInsets.only(
@@ -107,7 +111,7 @@ class Settings extends ConsumerWidget {
                             ListTile(
                           horizontalTitleGap: padding,
                           trailing: languageModel.language ==
-                                  '${supportedLanguages[supportedLanguages.keys.toList()[index]]?.languageCode}-${supportedLanguages[supportedLanguages.keys.toList()[index]]?.countryCode}'
+                                  supportedLanguages.keys.toList()[index]
                               ? const Icon(Remix.check_line)
                               : null,
                           title: Text(supportedLanguages.keys.toList()[index]),
@@ -115,14 +119,15 @@ class Settings extends ConsumerWidget {
                             String key =
                                 supportedLanguages.keys.toList()[index];
                             String? languageCountryCode =
-                                '${supportedLanguages[key]?.languageCode}-${supportedLanguages[key]?.countryCode}';
+                                supportedLanguages.keys.toList()[index];
                             languageController.setLanguage(
                               languageCountryCode,
                               context,
                             );
+                            searchController.setLanguage(languageCountryCode);
                             EasyLocalization.of(context)!
-                                .setLocale(supportedLanguages[key]!);
-                            context.setLocale(supportedLanguages[key]!);
+                                .setLocale(supportedLocales[key]!);
+                            context.setLocale(supportedLocales[key]!);
                             Navigator.pop(context);
                             settingsSavedToast();
                           },

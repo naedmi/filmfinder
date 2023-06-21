@@ -1,0 +1,57 @@
+{
+    "common": {
+        "rating": "10 stelle",
+        "votes": "Votazioni",
+        "add": "Aggiungi a elenco",
+        "remove": "Rimuovi"
+    },
+    "settings": {
+        "header": "Impostazioni",
+        "color": "Tema scuro",
+        "parental_control": "Parental Control",
+        "lang": "Lingua",
+        "about": "Info",
+        "save_msg": "impostazioni salvate."
+    },
+    "landing": {
+        "category": {
+            "now_playing": "In riproduzione",
+            "popular": "Apprezzato",
+            "top_rated": "\u0422\u043e\u043f \u0420\u0435\u0439\u0442\u0438\u043d\u0433",
+            "upcoming": "Prossimo",
+            "trending": {
+                "day": "Tendenza di oggi",
+                "week": "Tendenze settimanali"
+            }
+        }
+    },
+    "list": {
+        "header": "La mia lista",
+        "empty": "La tua lista \u00e8 vuota. ",
+        "remove": {
+            "title": "Rimuovi",
+            "text": "Sei sicuro di voler rimuovere questo film dall'elenco?",
+            "confirmation": "Conferma",
+            "cancel": "Annulla",
+            "confirm": "Rimuovi"
+        }
+    },
+    "search": {
+        "year": "Anno",
+        "hint": "Cerca",
+        "empty_results": "Nessun risultato trovato",
+        "empty_query": "Inserisci qualcosa da cercare...",
+        "page_indicator": "Pagina  di "
+    },
+    "details": {
+        "votes": "voti",
+        "no_provider": "Nessun provider disponibile nel tuo paese",
+        "top_actors": "Migliori attori"
+    },
+    "exit": {
+        "question": "Confermi?",
+        "text": "Ci dispiace vederti andar via...",
+        "yes": "S\u00ec",
+        "no": "No"
+    }
+}

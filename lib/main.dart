@@ -15,16 +15,15 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   await FilmfinderPreferences.init();
   await dotenv.load();
   initHive();
   await EasyLocalization.ensureInitialized();
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(
     EasyLocalization(
-      supportedLocales: supportedLanguages.values.toList(),
+      supportedLocales: supportedLocales.values.toList(),
       path: langPath,
       child: ProviderScope(
         observers: <ProviderObserver>[LoggerService()],

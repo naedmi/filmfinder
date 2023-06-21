@@ -76,24 +76,25 @@ class SearchResultWidget extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(borderRadiusBig),
-                              color:
-                                  Theme.of(context).colorScheme.surfaceVariant,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: paddingSmall,
-                                horizontal: paddingSmall + paddingTiny),
-                            child: Text(
-                              res.releaseDate?.isNotEmpty ?? false
-                                  ? DateTime.parse(res.releaseDate!)
-                                      .year
-                                      .toString()
-                                  : '',
-                            ),
-                          ),
+                          res.releaseDate?.isNotEmpty ?? false
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.circular(borderRadiusBig),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .surfaceVariant,
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: paddingSmall,
+                                      horizontal: paddingSmall + paddingTiny),
+                                  child: Text(
+                                    DateTime.parse(res.releaseDate!)
+                                        .year
+                                        .toString(),
+                                  ),
+                                )
+                              : const SizedBox(),
                           const Spacer(),
                           Tooltip(
                             message:

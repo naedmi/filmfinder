@@ -36,15 +36,6 @@ const List<String> posterSizes = <String>[
   'original'
 ];
 
-const Map<String, String> searchLanguages = <String, String>{
-  'en-US': 'English',
-  'de-DE': 'German',
-  'fr-FR': 'French',
-  'es-ES': 'Spanish',
-  'it-IT': 'Italian',
-  'ja-JP': 'Japanese',
-};
-
 /// **************************************************************************
 
 /// Search *******************************************************************
@@ -102,13 +93,22 @@ const String parentalControl = 'Parental Control';
 const String language = 'Language';
 const String about = 'About';
 //first is fallback option
-const Map<String, Locale> supportedLanguages = <String, Locale>{
-  'English': Locale('en', 'US'),
-  'Deutsch': Locale('de', 'DE'),
-  // 'France': Locale('fr', 'FR'),
-  // 'Spanish': Locale('es', 'ES'),
-  // 'Italian': Locale('it', 'IT'),
-  // 'Japanese': Locale('ja', 'JP')
+const Map<String, String> supportedLanguages = <String, String>{
+  'en-US': 'English',
+  'de-DE': 'German',
+  'fr-FR': 'French',
+  'es-ES': 'Spanish',
+  'it-IT': 'Italian',
+  'ja-JP': 'Japanese'
+};
+
+const Map<String, Locale> supportedLocales = <String, Locale>{
+  'en-US': Locale('en', 'US'),
+  'de-DE': Locale('de', 'DE'),
+  'fr-FR': Locale('fr', 'FR'),
+  'es-ES': Locale('es', 'ES'),
+  'it-IT': Locale('it', 'IT'),
+  'ja-JP': Locale('ja', 'JP')
 };
 const String langPath = 'assets/languages';
 

@@ -23,7 +23,11 @@
       "now_playing": "Now Playing",
       "popular": "Popular",
       "top_rated": "Top Rated",
-      "upcoming": "Upcoming"
+      "upcoming": "Upcoming",
+      "trending": {
+        "day": "Trending Today",
+        "week": "Trending Weekly"
+      }
     }
   },
   "list": {
@@ -38,8 +42,11 @@
     }
   },
   "search": {
-    "adult": "Adult",
-    "year": "Year"
+    "year": "Year",
+    "hint": "Search",
+    "empty_results": "No results found",
+    "empty_query": "Enter something to search...",
+    "page_indicator": "Page {} of {}"
   },
   "details": {
     "votes": "votes",

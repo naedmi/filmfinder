@@ -4,19 +4,13 @@ import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/search/search_api_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-abstract class SearchController {
-  SearchController(this.ref);
-
-  late AsyncValue<DefaultResponse> searchResponse;
-
-  final AutoDisposeStateProviderRef<SearchController> ref;
+abstract class SearchController
+    extends AutoDisposeNotifier<AsyncValue<DefaultResponse>> {
   late SearchFilter filter;
 
   void updateFilters(SearchFilter filter);
 
   void setQuery(String query);
-
-  void setAdult(bool adult);
 
   void setLanguage(String language);
 
@@ -28,12 +22,6 @@ abstract class SearchController {
 }
 
 class SearchControllerImpl extends SearchController {
-  SearchControllerImpl(AutoDisposeStateProviderRef<SearchController> ref)
-      : super(ref) {
-    filter = ref.watch(providers.searchFilterProvider);
-    searchResponse = ref.watch(searchApiService(filter));
-  }
-
   @override
   void updateFilters(SearchFilter filter) {
     ref.read(providers.searchFilterProvider.notifier).state = filter;
@@ -42,11 +30,6 @@ class SearchControllerImpl extends SearchController {
   @override
   void setQuery(String query) {
     updateFilters(filter.copyWith(query: query, page: 1));
-  }
-
-  @override
-  void setAdult(bool adult) {
-    updateFilters(filter.copyWith(adult: adult, page: 1));
   }
 
   @override
@@ -67,5 +50,13 @@ class SearchControllerImpl extends SearchController {
   @override
   void setYear(int? year) {
     updateFilters(filter.copyWith(year: year, page: 1));
+  }
+
+  @override
+  AsyncValue<DefaultResponse> build() {
+    filter = ref.watch(providers.searchFilterProvider);
+    final AsyncValue<DefaultResponse> searchResponse =
+        ref.watch(searchApiService(filter));
+    return searchResponse;
   }
 }
