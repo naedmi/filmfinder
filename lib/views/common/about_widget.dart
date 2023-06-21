@@ -25,9 +25,5 @@ void showAboutFilmfinder(BuildContext context) {
           ),
         ),
         Text('settings.about.attribution'.tr()),
-        Padding(
-          padding: const EdgeInsets.only(top: padding),
-          child: Text('settings.about.tmdb'.tr()),
-        ),
       ]);
 }
