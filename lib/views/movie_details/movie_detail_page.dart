@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/movie_details/movie_details_controller.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
+import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget_main_details.dart';
@@ -9,6 +10,7 @@ import 'package:filmfinder/views/movie_details/actor_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:remixicon/remixicon.dart';
 
 class MovieDetailsPage extends ConsumerWidget {
@@ -20,6 +22,8 @@ class MovieDetailsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final MovieDetailsController movieDetailsController =
         ref.watch(providers.movieDetailsProvider(int.parse(movieId)));
+    final SettingsDarkModeModel darkModeModel =
+        ref.watch(providers.settingsControllerProvider);
 
     final String language =
         ref.watch(providers.settingsLanguageProvider).language;
@@ -140,6 +144,27 @@ class MovieDetailsPage extends ConsumerWidget {
                     }).toList())
               else
                 Text('details.no_provider'.tr()),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: padding),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'details.attribution'.tr(),
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary),
+                      ),
+                      SvgPicture.asset(
+                        darkModeModel.darkMode
+                            ? 'assets/images/jw_logo_color.svg'
+                            : 'assets/images/jw_logo_black.svg',
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               const SizedBox(height: 16.0),
               FilmActorsList(actors: details.credits?.cast)
             ],

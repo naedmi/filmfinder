@@ -10,7 +10,11 @@
     "color": "Dunkler Modus",
     "parental_control": "Kindersicherung",
     "lang": "Sprache",
-    "about": "Über uns",
+    "about": {
+      "header": "Über uns",
+      "text": "Filmfinder ist eine kostenlose Anwendung zum Suchen und Entdecken von Filmen.",
+      "attribution": "Alle Daten und Informationen zu Filmen werden von The Movie Database (TMDB) bereitgestellt.\nFilmfinder ist nicht zertifiziert oder unterstützt von TMDB."
+    },
     "save_msg": "Einstellungen gespeichert"
   },
   "landing": {
@@ -46,7 +50,8 @@
   "details": {
     "votes": "Bewertungen",
     "no_provider": "Keine Anbieter in ihrem Land gefunden",
-    "top_actors": "Bekannteste Schauspieler"
+    "top_actors": "Bekannteste Schauspieler",
+    "attribution": "bereitgestellt von "
   },
   "exit": {
     "question": "Bist du dir sicher?",

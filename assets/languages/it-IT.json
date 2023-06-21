@@ -10,7 +10,11 @@
         "color": "Tema scuro",
         "parental_control": "Parental Control",
         "lang": "Lingua",
-        "about": "Info",
+        "about": {
+            "header": "Info",
+            "text": "Filmfinder \u00e8 un'applicazione gratuita che ti consente di cercare e scoprire film.",
+            "attribution": "Tutti i dati e le informazioni sui film sono forniti da The Movie Database (TMDB).\nFilmfinder non \u00e8 approvato o certificato da TMDB."
+        },
         "save_msg": "impostazioni salvate."
     },
     "landing": {
@@ -46,7 +50,8 @@
     "details": {
         "votes": "voti",
         "no_provider": "Nessun provider disponibile nel tuo paese",
-        "top_actors": "Migliori attori"
+        "top_actors": "Migliori attori",
+        "attribution": "forniti da"
     },
     "exit": {
         "question": "Confermi?",

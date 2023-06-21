@@ -10,7 +10,11 @@
         "color": "Tema oscuro",
         "parental_control": "Control parental",
         "lang": "Idioma",
-        "about": "Acerca de",
+        "about": {
+            "header": "Acerca de",
+            "text": "Filmfinder es una aplicaci\u00f3n gratuita que te permite buscar y descubrir pel\u00edculas.",
+            "attribution": "Todos los datos e informaci\u00f3n sobre pel\u00edculas son proporcionados por The Movie Database (TMDB).\nFilmfinder no est\u00e1 avalado ni certificado por TMDB."
+        },
         "save_msg": "ajustes guardados"
     },
     "landing": {
@@ -46,7 +50,8 @@
     "details": {
         "votes": "Votos",
         "no_provider": "No hay proveedores disponibles en tu pa\u00eds",
-        "top_actors": "Principales actores"
+        "top_actors": "Principales actores",
+        "attribution": "Proporcionado por"
     },
     "exit": {
         "question": "\u00bfEst\u00e1 seguro?",
