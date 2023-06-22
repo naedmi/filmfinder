@@ -106,14 +106,12 @@ class WatchProviderResult with _$WatchProviderResult {
 
 @freezed
 class WatchProvider with _$WatchProvider {
+  // ignore: invalid_annotation_target
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory WatchProvider({
-    @JsonKey(name: 'logo_path')
     required String? logoPath,
-    @JsonKey(name: 'provider_id')
     required int? providerId,
-    @JsonKey(name: 'provider_name')
     required String? providerName,
-    @JsonKey(name: 'display_priority')
     required int? displayPriority,
   }) = _WatchProvider;
 
@@ -133,11 +131,12 @@ class Credits with _$Credits {
 
 @freezed
 class Cast with _$Cast {
+  // ignore: invalid_annotation_target
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory Cast({
     required int? id,
     required String? name,
     required String? character,
-    @JsonKey(name: 'profile_path')
     required String? profilePath,
   }) = _Cast;
 
