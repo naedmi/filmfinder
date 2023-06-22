@@ -7,6 +7,7 @@ import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget_main_details.dart';
 import 'package:filmfinder/views/movie_details/actor_widget.dart';
+import 'package:filmfinder/views/settings/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,8 +26,7 @@ class MovieDetailsPage extends ConsumerWidget {
     final SettingsDarkModeModel darkModeModel =
         ref.watch(providers.settingsControllerProvider);
 
-    final String language =
-        ref.watch(providers.settingsLanguageProvider).language;
+    final String language = FilmfinderPreferences.getLanguage();
     final String countryCode = language.split('-').last;
 
     return SimpleBottomBarScaffold(
