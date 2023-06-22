@@ -42,8 +42,8 @@ class MovieDetailsPage extends ConsumerWidget {
                   imageUrl:
                       'https://image.tmdb.org/t/p/w500${details.posterPath}',
                   placeholder: (BuildContext context, String url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (BuildContext context, String url, error) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (BuildContext context, String url, _) =>
                       const Icon(Remix.error_warning_line),
                 ),
               const SizedBox(height: 16.0),
@@ -128,12 +128,13 @@ class MovieDetailsPage extends ConsumerWidget {
                                 child: CachedNetworkImage(
                                   imageUrl:
                                       'https://image.tmdb.org/t/p/w500${provider.logoPath}',
-                                  placeholder:
-                                      (BuildContext context, String url) =>
-                                          const CircularProgressIndicator(),
-                                  errorWidget: (BuildContext context,
-                                          String url, error) =>
-                                      const Icon(Remix.error_warning_line),
+                                  placeholder: (BuildContext context,
+                                          String url) =>
+                                      const Center(
+                                          child: CircularProgressIndicator()),
+                                  errorWidget:
+                                      (BuildContext context, String url, _) =>
+                                          const Icon(Remix.error_warning_line),
                                   width: 50,
                                   height: 50,
                                   fit: BoxFit.cover,
