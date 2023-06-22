@@ -33,7 +33,7 @@ class MovieDetailsPage extends ConsumerWidget {
       showMiddleButton: false,
       body: movieDetailsController.movieDetails.when(
         data: (MovieDetails details) => Container(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(padding),
           child: ListView(
             children: [
               // Display the movie poster image
@@ -46,42 +46,41 @@ class MovieDetailsPage extends ConsumerWidget {
                   errorWidget: (BuildContext context, String url, _) =>
                       const Icon(Remix.error_warning_line),
                 ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: padding),
               // Display the movie title
               Center(
                 child: Text(
                   details.title,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: padding),
               //Display the genres as rounded boxes
               Wrap(
-                spacing: 8.0,
-                runSpacing: 4.0,
+                spacing: paddingSmall,
+                runSpacing: paddingTiny,
                 children: details.genres?.map((Genre genre) {
                       return Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 4.0),
+                            horizontal: paddingSmall, vertical: paddingTiny),
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.primaryContainer,
-                          borderRadius: BorderRadius.circular(12.0),
+                          borderRadius: BorderRadius.circular(borderRadius),
                         ),
                         child: Text(genre.name),
                       );
                     }).toList() ??
                     [],
               ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: padding),
               // Display the movie star rating
               Wrap(
-                spacing: 8.0,
+                spacing: paddingSmall,
                 children: [
                   Tooltip(
                     message: '${details.voteAverage} / 10 stars',
                     child: RatingBarIndicator(
-                      itemSize: 20.0,
+                      itemSize: padding,
                       rating: (details.voteAverage ?? 0) / 2,
                       itemCount: 5,
                       itemBuilder: (BuildContext context, int index) {
@@ -94,18 +93,18 @@ class MovieDetailsPage extends ConsumerWidget {
                   ),
                   Text(
                     '${details.voteCount} ${"details.votes".tr()}',
-                    style: const TextStyle(fontSize: 16.0),
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],
               ),
 
-              const SizedBox(height: 16.0),
+              const SizedBox(height: padding),
               // Display the movie overview
               Text(
                 details.overview,
-                style: const TextStyle(fontSize: 16),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: paddingBig),
 
               // Display the provider names from the flatrate map for the specified country
               if (details.watchProviders != null &&
@@ -114,17 +113,18 @@ class MovieDetailsPage extends ConsumerWidget {
                   details.watchProviders!.results![countryCode]!.flatrate !=
                       null)
                 Wrap(
-                    spacing: 8.0,
-                    runSpacing: 4.0,
+                    spacing: paddingSmall,
+                    runSpacing: paddingTiny,
                     children: details
                         .watchProviders!.results![countryCode]!.flatrate!
                         .map((WatchProvider provider) {
                       return Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 4.0),
+                            horizontal: paddingTiny, vertical: paddingTiny),
                         child: provider.logoPath != null
                             ? ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius:
+                                    BorderRadius.circular(paddingSmall),
                                 child: CachedNetworkImage(
                                   imageUrl:
                                       'https://image.tmdb.org/t/p/w500${provider.logoPath}',
@@ -135,8 +135,8 @@ class MovieDetailsPage extends ConsumerWidget {
                                   errorWidget:
                                       (BuildContext context, String url, _) =>
                                           const Icon(Remix.error_warning_line),
-                                  width: 50,
-                                  height: 50,
+                                  width: providerLogoSize,
+                                  height: providerLogoSize,
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -145,6 +145,7 @@ class MovieDetailsPage extends ConsumerWidget {
                     }).toList())
               else
                 Text('details.no_provider'.tr()),
+              const SizedBox(height: paddingTiny),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
@@ -166,7 +167,7 @@ class MovieDetailsPage extends ConsumerWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: padding),
               FilmActorsList(actors: details.credits?.cast)
             ],
           ),

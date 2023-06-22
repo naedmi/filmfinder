@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-
 import 'package:filmfinder/models/movie_details/movie_details.dart';
+import 'package:filmfinder/views/common/constants.dart';
+import 'package:flutter/material.dart';
 
 class ActorCard extends StatelessWidget {
   final String? profilePath;
@@ -18,27 +18,27 @@ class ActorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16.0),
+      margin: const EdgeInsets.only(bottom: paddingSmall),
       child: IntrinsicHeight(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(borderRadiusSmall),
               child: profilePath != null
                   ? Image.network(
                       'https://image.tmdb.org/t/p/w500$profilePath',
-                      width: 80.0,
-                      height: 80.0,
+                      width: portraitPosterWidth,
+                      height: portraitPosterHeight,
                       fit: BoxFit.cover,
                     )
                   : Container(
-                      width: 80.0,
-                      height: 80.0,
+                      width: portraitPosterWidth,
+                      height: portraitPosterHeight,
                       color: Colors.grey, // Filler color
                     ),
             ),
-            const SizedBox(width: 16.0),
+            const SizedBox(width: padding),
             Expanded(
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -48,15 +48,12 @@ class ActorCard extends StatelessWidget {
                   children: [
                     Text(
                       actorName ?? '',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    const SizedBox(height: 4.0),
+                    const SizedBox(height: paddingTiny),
                     Text(
                       characterName ?? '',
-                      style: const TextStyle(fontSize: 14.0),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),
@@ -83,12 +80,9 @@ class FilmActorsList extends StatelessWidget {
       children: [
         Text(
           'details.top_actors'.tr(),
-          style: const TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: paddingSmall),
         Column(
           children: topActors.map((Cast actor) {
             return ActorCard(

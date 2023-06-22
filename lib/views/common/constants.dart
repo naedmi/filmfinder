@@ -114,6 +114,15 @@ const String langPath = 'assets/languages';
 
 /// **************************************************************************
 
+/// DetailPage ***************************************************************
+
+const double portraitPosterHeight = 110.0;
+const double portraitPosterWidth = 90.0;
+
+const double providerLogoSize = 60.0;
+
+/// **************************************************************************
+
 /// FlexColorScheme **********************************************************
 final ThemeData theme = FlexThemeData.light(
   scheme: FlexScheme.deepBlue,
