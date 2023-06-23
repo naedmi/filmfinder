@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:filmfinder/controllers/common/filter_controller.dart';
 import 'package:filmfinder/controllers/landing/landing_controller.dart';
 import 'package:filmfinder/controllers/list/list_controller.dart';
 import 'package:filmfinder/controllers/movie_details/movie_details_controller.dart';
@@ -6,6 +7,7 @@ import 'package:filmfinder/controllers/search/search_controller.dart';
 import 'package:filmfinder/controllers/settings/settings_controller.dart';
 import 'package:filmfinder/controllers/settings/settings_controller_interfaces.dart';
 import 'package:filmfinder/models/common/default_response.dart';
+import 'package:filmfinder/models/common/filter.dart';
 import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
 import 'package:filmfinder/models/settings/settings.dart';
@@ -47,7 +49,8 @@ class Providers {
 
   final StateProvider<SearchFilter> searchFilterProvider =
       StateProvider<SearchFilter>((StateProviderRef<SearchFilter> ref) {
-    return SearchFilter(language: ref.watch(providers.settingsLanguageProvider).language);
+    return SearchFilter(
+        language: ref.watch(providers.settingsLanguageProvider).language);
   });
 
   final AutoDisposeStateProviderFamily<MovieDetailsController, int>
@@ -120,6 +123,27 @@ class Providers {
     final SettingsLanguageModel settingsModel =
         SettingsLanguageModel(language: FilmfinderPreferences.getLanguage());
     return SettingsLanguageControllerImpl(model: settingsModel);
+  });
+
+  /// **************************************************************************
+
+  /// FilterProvider************************************************************
+
+  final Provider<FilterProviderModel> filterProviderProvider =
+      Provider<FilterProviderModel>((ProviderRef<FilterProviderModel> ref) {
+    final Map<String, String> providers = FilmfinderPreferences.getProviders();
+    return FilterProviderModel(providers: providers);
+  });
+
+  final StateNotifierProvider<FilterProviderController, FilterProviderModel>
+      filterProviderControllerProvider =
+      StateNotifierProvider<FilterProviderController, FilterProviderModel>(
+          (StateNotifierProviderRef<FilterProviderController,
+                  FilterProviderModel>
+              ref) {
+    final FilterProviderModel filterProviderModel =
+        FilterProviderModel(providers: FilmfinderPreferences.getProviders());
+    return FilterProviderControllerImpl(model: filterProviderModel);
   });
 
   /// **************************************************************************

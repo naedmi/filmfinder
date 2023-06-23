@@ -68,6 +68,7 @@ class Settings extends ConsumerWidget {
           controller: _controller,
           scrollDirection: Axis.vertical,
           children: <Widget>[
+            // Dark mode
             SettingWidget(
               settingName: 'settings.color',
               withSwitch: true,
@@ -81,17 +82,7 @@ class Settings extends ConsumerWidget {
                 settingsSavedToast();
               },
             ),
-            SettingWidget(
-              settingName: 'settings.parental_control',
-              settingIcon: const Icon(
-                Remix.parent_line,
-                size: settingIconSize,
-              ),
-              withSwitch: false,
-              onPressed: () {
-                //todo parental control page
-              },
-            ),
+            // Language
             SettingWidget(
               settingName: 'settings.lang',
               settingIcon: const Icon(
@@ -138,6 +129,7 @@ class Settings extends ConsumerWidget {
                     });
               },
             ),
+            // About
             SettingWidget(
               settingName: 'settings.about.header',
               withSwitch: false,

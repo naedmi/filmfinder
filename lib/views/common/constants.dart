@@ -80,7 +80,7 @@ const double elevation = paddingSmall;
 
 /// **************************************************************************
 
-/// SettingPage **************************************************************
+/// SettingsPage **************************************************************
 
 const double settingFontSize = 20;
 const double settingIconSizeMultiplicator = 1.4;
@@ -111,6 +111,8 @@ const Map<String, Locale> supportedLocales = <String, Locale>{
   'ja-JP': Locale('ja', 'JP')
 };
 const String langPath = 'assets/languages';
+//StringList
+const List<String> filterSettings = <String>['Adult', 'Provider'];
 
 /// **************************************************************************
 
@@ -204,5 +206,18 @@ final ThemeData darkTheme = FlexThemeData.dark(
 /// Animation ****************************************************************
 const int animationDuration = 1000;
 const int animationDelay = 250;
+
+/// **************************************************************************
+/// Filter *******************************************************************
+const String image =
+    'https://image.tmdb.org/t/p/w500/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg';
+
+const Map<String, String> availableProviders = {
+  'Amazon': image,
+  'Netflix': image,
+  'Disney+': image,
+  'Apple TV+': image,
+  'HBO Max': image,
+};
 
 /// **************************************************************************

@@ -23,4 +23,24 @@ class FilmfinderPreferences {
       await _preferences.setString(language, value);
 
   static String getLanguage() => _preferences.getString(language) ?? 'en-US';
+
+  static Future<void> setProviders(Map<String, String> providerMap) async {
+    List<String> tmpProviders = <String>[];
+    for (String key in providerMap.keys) {
+      tmpProviders.add('$key;${providerMap[key]}');
+    }
+    _preferences.setStringList('providers', tmpProviders);
+  }
+
+  static Map<String, String> getProviders() {
+    Map<String, String> providerMap = <String, String>{};
+    List<String>? tmpProviders = _preferences.getStringList('providers');
+    if (tmpProviders != null) {
+      for (String provider in tmpProviders) {
+        List<String> tmpProvider = provider.split(';');
+        providerMap[tmpProvider[0]] = tmpProvider[1];
+      }
+    }
+    return providerMap;
+  }
 }

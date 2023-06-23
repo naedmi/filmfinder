@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:filmfinder/controllers/common/filter_controller.dart';
 import 'package:filmfinder/controllers/list/list_controller.dart'
     as list_controller;
+import 'package:filmfinder/models/common/filter.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
@@ -40,7 +43,6 @@ class BottomNavigationWidget extends ConsumerWidget {
                 if (context.canPop()) {
                   context.pop();
                 } else {
-                  //was das? keinen unterschied zu ein oder auskommentiert?
                   controller?.animateTo(0,
                       duration: const Duration(milliseconds: animationDuration),
                       curve: Curves.easeInOut);
@@ -69,11 +71,15 @@ class BottomNavigationWidget extends ConsumerWidget {
   }
 }
 
-class MiddleButton extends StatelessWidget {
+class MiddleButton extends ConsumerWidget {
   const MiddleButton({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final FilterProviderController filterProviderController =
+        ref.read(providers.filterProviderControllerProvider.notifier);
+    final FilterProviderModel filterProviderModel =
+        ref.watch(providers.filterProviderControllerProvider);
     final bool isSwipe = GoRouter.of(context).location == routeSwipe;
     if (isSwipe) {
       return SizedBox(
@@ -82,7 +88,42 @@ class MiddleButton extends StatelessWidget {
           child: IconButton(
             icon: const Icon(Remix.filter_2_line),
             onPressed: () {
-              //toDo open filter
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(padding),
+                    itemCount: availableProviders.keys.toList().length,
+                    itemBuilder: (BuildContext context, int index) => ListTile(
+                      horizontalTitleGap: padding,
+                      trailing: filterProviderModel.providers.keys
+                              .contains(availableProviders.keys.toList()[index])
+                          ? const Icon(Remix.check_line)
+                          : null,
+                      title: LogoName(
+                        logo: availableProviders.values.toList()[index],
+                        provName: availableProviders.keys.toList()[index],
+                      ),
+                      onTap: () {
+                        final String clickedProviderKey =
+                            availableProviders.keys.toList()[index];
+                        if (filterProviderModel.providers.keys
+                            .contains(clickedProviderKey)) {
+                          filterProviderController
+                              .removeProvider(clickedProviderKey);
+                        } else {
+                          filterProviderController.addProvider(
+                              clickedProviderKey,
+                              availableProviders[clickedProviderKey]!);
+                        }
+                      },
+                    ),
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
+                  );
+                },
+              );
             },
           ),
         ),
@@ -132,6 +173,35 @@ class SimpleBottomBarScaffold extends StatelessWidget {
                   movieId: movieId,
                 ),
           body: body),
+    );
+  }
+}
+
+class LogoName extends StatelessWidget {
+  final String logo;
+  final String provName;
+
+  const LogoName({super.key, required this.logo, required this.provName});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        CachedNetworkImage(
+          imageUrl: logo,
+          placeholder: (BuildContext context, String url) =>
+              const Center(child: CircularProgressIndicator()),
+          errorWidget: (BuildContext context, String url, _) =>
+              const Icon(Remix.error_warning_line),
+          width: 30,
+          height: 30,
+        ),
+        const SizedBox(
+          width: padding,
+        ),
+        Text(provName),
+      ],
     );
   }
 }
