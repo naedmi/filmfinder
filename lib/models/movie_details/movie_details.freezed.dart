@@ -1680,13 +1680,9 @@ WatchProvider _$WatchProviderFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WatchProvider {
-  @JsonKey(name: 'logo_path')
   String? get logoPath => throw _privateConstructorUsedError;
-  @JsonKey(name: 'provider_id')
   int? get providerId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'provider_name')
   String? get providerName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'display_priority')
   int? get displayPriority => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1702,10 +1698,10 @@ abstract class $WatchProviderCopyWith<$Res> {
       _$WatchProviderCopyWithImpl<$Res, WatchProvider>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'logo_path') String? logoPath,
-      @JsonKey(name: 'provider_id') int? providerId,
-      @JsonKey(name: 'provider_name') String? providerName,
-      @JsonKey(name: 'display_priority') int? displayPriority});
+      {String? logoPath,
+      int? providerId,
+      String? providerName,
+      int? displayPriority});
 }
 
 /// @nodoc
@@ -1756,10 +1752,10 @@ abstract class _$$_WatchProviderCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'logo_path') String? logoPath,
-      @JsonKey(name: 'provider_id') int? providerId,
-      @JsonKey(name: 'provider_name') String? providerName,
-      @JsonKey(name: 'display_priority') int? displayPriority});
+      {String? logoPath,
+      int? providerId,
+      String? providerName,
+      int? displayPriority});
 }
 
 /// @nodoc
@@ -1800,28 +1796,25 @@ class __$$_WatchProviderCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$_WatchProvider implements _WatchProvider {
   const _$_WatchProvider(
-      {@JsonKey(name: 'logo_path') required this.logoPath,
-      @JsonKey(name: 'provider_id') required this.providerId,
-      @JsonKey(name: 'provider_name') required this.providerName,
-      @JsonKey(name: 'display_priority') required this.displayPriority});
+      {required this.logoPath,
+      required this.providerId,
+      required this.providerName,
+      required this.displayPriority});
 
   factory _$_WatchProvider.fromJson(Map<String, dynamic> json) =>
       _$$_WatchProviderFromJson(json);
 
   @override
-  @JsonKey(name: 'logo_path')
   final String? logoPath;
   @override
-  @JsonKey(name: 'provider_id')
   final int? providerId;
   @override
-  @JsonKey(name: 'provider_name')
   final String? providerName;
   @override
-  @JsonKey(name: 'display_priority')
   final int? displayPriority;
 
   @override
@@ -1865,29 +1858,21 @@ class _$_WatchProvider implements _WatchProvider {
 
 abstract class _WatchProvider implements WatchProvider {
   const factory _WatchProvider(
-      {@JsonKey(name: 'logo_path')
-          required final String? logoPath,
-      @JsonKey(name: 'provider_id')
-          required final int? providerId,
-      @JsonKey(name: 'provider_name')
-          required final String? providerName,
-      @JsonKey(name: 'display_priority')
-          required final int? displayPriority}) = _$_WatchProvider;
+      {required final String? logoPath,
+      required final int? providerId,
+      required final String? providerName,
+      required final int? displayPriority}) = _$_WatchProvider;
 
   factory _WatchProvider.fromJson(Map<String, dynamic> json) =
       _$_WatchProvider.fromJson;
 
   @override
-  @JsonKey(name: 'logo_path')
   String? get logoPath;
   @override
-  @JsonKey(name: 'provider_id')
   int? get providerId;
   @override
-  @JsonKey(name: 'provider_name')
   String? get providerName;
   @override
-  @JsonKey(name: 'display_priority')
   int? get displayPriority;
   @override
   @JsonKey(ignore: true)
@@ -2043,7 +2028,6 @@ mixin _$Cast {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get character => throw _privateConstructorUsedError;
-  @JsonKey(name: 'profile_path')
   String? get profilePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -2056,11 +2040,7 @@ abstract class $CastCopyWith<$Res> {
   factory $CastCopyWith(Cast value, $Res Function(Cast) then) =
       _$CastCopyWithImpl<$Res, Cast>;
   @useResult
-  $Res call(
-      {int? id,
-      String? name,
-      String? character,
-      @JsonKey(name: 'profile_path') String? profilePath});
+  $Res call({int? id, String? name, String? character, String? profilePath});
 }
 
 /// @nodoc
@@ -2108,11 +2088,7 @@ abstract class _$$_CastCopyWith<$Res> implements $CastCopyWith<$Res> {
       __$$_CastCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? id,
-      String? name,
-      String? character,
-      @JsonKey(name: 'profile_path') String? profilePath});
+  $Res call({int? id, String? name, String? character, String? profilePath});
 }
 
 /// @nodoc
@@ -2151,13 +2127,14 @@ class __$$_CastCopyWithImpl<$Res> extends _$CastCopyWithImpl<$Res, _$_Cast>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$_Cast implements _Cast {
   const _$_Cast(
       {required this.id,
       required this.name,
       required this.character,
-      @JsonKey(name: 'profile_path') required this.profilePath});
+      required this.profilePath});
 
   factory _$_Cast.fromJson(Map<String, dynamic> json) => _$$_CastFromJson(json);
 
@@ -2168,7 +2145,6 @@ class _$_Cast implements _Cast {
   @override
   final String? character;
   @override
-  @JsonKey(name: 'profile_path')
   final String? profilePath;
 
   @override
@@ -2210,11 +2186,10 @@ class _$_Cast implements _Cast {
 
 abstract class _Cast implements Cast {
   const factory _Cast(
-          {required final int? id,
-          required final String? name,
-          required final String? character,
-          @JsonKey(name: 'profile_path') required final String? profilePath}) =
-      _$_Cast;
+      {required final int? id,
+      required final String? name,
+      required final String? character,
+      required final String? profilePath}) = _$_Cast;
 
   factory _Cast.fromJson(Map<String, dynamic> json) = _$_Cast.fromJson;
 
@@ -2225,7 +2200,6 @@ abstract class _Cast implements Cast {
   @override
   String? get character;
   @override
-  @JsonKey(name: 'profile_path')
   String? get profilePath;
   @override
   @JsonKey(ignore: true)
