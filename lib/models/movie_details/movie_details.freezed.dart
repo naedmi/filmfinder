@@ -1419,10 +1419,10 @@ WatchProviderResult _$WatchProviderResultFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WatchProviderResult {
   String? get link => throw _privateConstructorUsedError;
-  List<WatchProvider>? get flatrate => throw _privateConstructorUsedError;
-  List<WatchProvider>? get rent => throw _privateConstructorUsedError;
-  List<WatchProvider>? get buy => throw _privateConstructorUsedError;
-  List<WatchProvider>? get ads => throw _privateConstructorUsedError;
+  List<MovieWatchProvider>? get flatrate => throw _privateConstructorUsedError;
+  List<MovieWatchProvider>? get rent => throw _privateConstructorUsedError;
+  List<MovieWatchProvider>? get buy => throw _privateConstructorUsedError;
+  List<MovieWatchProvider>? get ads => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1438,10 +1438,10 @@ abstract class $WatchProviderResultCopyWith<$Res> {
   @useResult
   $Res call(
       {String? link,
-      List<WatchProvider>? flatrate,
-      List<WatchProvider>? rent,
-      List<WatchProvider>? buy,
-      List<WatchProvider>? ads});
+      List<MovieWatchProvider>? flatrate,
+      List<MovieWatchProvider>? rent,
+      List<MovieWatchProvider>? buy,
+      List<MovieWatchProvider>? ads});
 }
 
 /// @nodoc
@@ -1471,19 +1471,19 @@ class _$WatchProviderResultCopyWithImpl<$Res, $Val extends WatchProviderResult>
       flatrate: freezed == flatrate
           ? _value.flatrate
           : flatrate // ignore: cast_nullable_to_non_nullable
-              as List<WatchProvider>?,
+              as List<MovieWatchProvider>?,
       rent: freezed == rent
           ? _value.rent
           : rent // ignore: cast_nullable_to_non_nullable
-              as List<WatchProvider>?,
+              as List<MovieWatchProvider>?,
       buy: freezed == buy
           ? _value.buy
           : buy // ignore: cast_nullable_to_non_nullable
-              as List<WatchProvider>?,
+              as List<MovieWatchProvider>?,
       ads: freezed == ads
           ? _value.ads
           : ads // ignore: cast_nullable_to_non_nullable
-              as List<WatchProvider>?,
+              as List<MovieWatchProvider>?,
     ) as $Val);
   }
 }
@@ -1498,10 +1498,10 @@ abstract class _$$_WatchProviderResultCopyWith<$Res>
   @useResult
   $Res call(
       {String? link,
-      List<WatchProvider>? flatrate,
-      List<WatchProvider>? rent,
-      List<WatchProvider>? buy,
-      List<WatchProvider>? ads});
+      List<MovieWatchProvider>? flatrate,
+      List<MovieWatchProvider>? rent,
+      List<MovieWatchProvider>? buy,
+      List<MovieWatchProvider>? ads});
 }
 
 /// @nodoc
@@ -1529,19 +1529,19 @@ class __$$_WatchProviderResultCopyWithImpl<$Res>
       flatrate: freezed == flatrate
           ? _value._flatrate
           : flatrate // ignore: cast_nullable_to_non_nullable
-              as List<WatchProvider>?,
+              as List<MovieWatchProvider>?,
       rent: freezed == rent
           ? _value._rent
           : rent // ignore: cast_nullable_to_non_nullable
-              as List<WatchProvider>?,
+              as List<MovieWatchProvider>?,
       buy: freezed == buy
           ? _value._buy
           : buy // ignore: cast_nullable_to_non_nullable
-              as List<WatchProvider>?,
+              as List<MovieWatchProvider>?,
       ads: freezed == ads
           ? _value._ads
           : ads // ignore: cast_nullable_to_non_nullable
-              as List<WatchProvider>?,
+              as List<MovieWatchProvider>?,
     ));
   }
 }
@@ -1551,10 +1551,10 @@ class __$$_WatchProviderResultCopyWithImpl<$Res>
 class _$_WatchProviderResult implements _WatchProviderResult {
   const _$_WatchProviderResult(
       {required this.link,
-      required final List<WatchProvider>? flatrate,
-      required final List<WatchProvider>? rent,
-      required final List<WatchProvider>? buy,
-      required final List<WatchProvider>? ads})
+      required final List<MovieWatchProvider>? flatrate,
+      required final List<MovieWatchProvider>? rent,
+      required final List<MovieWatchProvider>? buy,
+      required final List<MovieWatchProvider>? ads})
       : _flatrate = flatrate,
         _rent = rent,
         _buy = buy,
@@ -1565,9 +1565,9 @@ class _$_WatchProviderResult implements _WatchProviderResult {
 
   @override
   final String? link;
-  final List<WatchProvider>? _flatrate;
+  final List<MovieWatchProvider>? _flatrate;
   @override
-  List<WatchProvider>? get flatrate {
+  List<MovieWatchProvider>? get flatrate {
     final value = _flatrate;
     if (value == null) return null;
     if (_flatrate is EqualUnmodifiableListView) return _flatrate;
@@ -1575,9 +1575,9 @@ class _$_WatchProviderResult implements _WatchProviderResult {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<WatchProvider>? _rent;
+  final List<MovieWatchProvider>? _rent;
   @override
-  List<WatchProvider>? get rent {
+  List<MovieWatchProvider>? get rent {
     final value = _rent;
     if (value == null) return null;
     if (_rent is EqualUnmodifiableListView) return _rent;
@@ -1585,9 +1585,9 @@ class _$_WatchProviderResult implements _WatchProviderResult {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<WatchProvider>? _buy;
+  final List<MovieWatchProvider>? _buy;
   @override
-  List<WatchProvider>? get buy {
+  List<MovieWatchProvider>? get buy {
     final value = _buy;
     if (value == null) return null;
     if (_buy is EqualUnmodifiableListView) return _buy;
@@ -1595,9 +1595,9 @@ class _$_WatchProviderResult implements _WatchProviderResult {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<WatchProvider>? _ads;
+  final List<MovieWatchProvider>? _ads;
   @override
-  List<WatchProvider>? get ads {
+  List<MovieWatchProvider>? get ads {
     final value = _ads;
     if (value == null) return null;
     if (_ads is EqualUnmodifiableListView) return _ads;
@@ -1650,10 +1650,10 @@ class _$_WatchProviderResult implements _WatchProviderResult {
 abstract class _WatchProviderResult implements WatchProviderResult {
   const factory _WatchProviderResult(
       {required final String? link,
-      required final List<WatchProvider>? flatrate,
-      required final List<WatchProvider>? rent,
-      required final List<WatchProvider>? buy,
-      required final List<WatchProvider>? ads}) = _$_WatchProviderResult;
+      required final List<MovieWatchProvider>? flatrate,
+      required final List<MovieWatchProvider>? rent,
+      required final List<MovieWatchProvider>? buy,
+      required final List<MovieWatchProvider>? ads}) = _$_WatchProviderResult;
 
   factory _WatchProviderResult.fromJson(Map<String, dynamic> json) =
       _$_WatchProviderResult.fromJson;
@@ -1661,222 +1661,16 @@ abstract class _WatchProviderResult implements WatchProviderResult {
   @override
   String? get link;
   @override
-  List<WatchProvider>? get flatrate;
+  List<MovieWatchProvider>? get flatrate;
   @override
-  List<WatchProvider>? get rent;
+  List<MovieWatchProvider>? get rent;
   @override
-  List<WatchProvider>? get buy;
+  List<MovieWatchProvider>? get buy;
   @override
-  List<WatchProvider>? get ads;
+  List<MovieWatchProvider>? get ads;
   @override
   @JsonKey(ignore: true)
   _$$_WatchProviderResultCopyWith<_$_WatchProviderResult> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-WatchProvider _$WatchProviderFromJson(Map<String, dynamic> json) {
-  return _WatchProvider.fromJson(json);
-}
-
-/// @nodoc
-mixin _$WatchProvider {
-  String? get logoPath => throw _privateConstructorUsedError;
-  int? get providerId => throw _privateConstructorUsedError;
-  String? get providerName => throw _privateConstructorUsedError;
-  int? get displayPriority => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $WatchProviderCopyWith<WatchProvider> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $WatchProviderCopyWith<$Res> {
-  factory $WatchProviderCopyWith(
-          WatchProvider value, $Res Function(WatchProvider) then) =
-      _$WatchProviderCopyWithImpl<$Res, WatchProvider>;
-  @useResult
-  $Res call(
-      {String? logoPath,
-      int? providerId,
-      String? providerName,
-      int? displayPriority});
-}
-
-/// @nodoc
-class _$WatchProviderCopyWithImpl<$Res, $Val extends WatchProvider>
-    implements $WatchProviderCopyWith<$Res> {
-  _$WatchProviderCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? logoPath = freezed,
-    Object? providerId = freezed,
-    Object? providerName = freezed,
-    Object? displayPriority = freezed,
-  }) {
-    return _then(_value.copyWith(
-      logoPath: freezed == logoPath
-          ? _value.logoPath
-          : logoPath // ignore: cast_nullable_to_non_nullable
-              as String?,
-      providerId: freezed == providerId
-          ? _value.providerId
-          : providerId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      providerName: freezed == providerName
-          ? _value.providerName
-          : providerName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      displayPriority: freezed == displayPriority
-          ? _value.displayPriority
-          : displayPriority // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_WatchProviderCopyWith<$Res>
-    implements $WatchProviderCopyWith<$Res> {
-  factory _$$_WatchProviderCopyWith(
-          _$_WatchProvider value, $Res Function(_$_WatchProvider) then) =
-      __$$_WatchProviderCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? logoPath,
-      int? providerId,
-      String? providerName,
-      int? displayPriority});
-}
-
-/// @nodoc
-class __$$_WatchProviderCopyWithImpl<$Res>
-    extends _$WatchProviderCopyWithImpl<$Res, _$_WatchProvider>
-    implements _$$_WatchProviderCopyWith<$Res> {
-  __$$_WatchProviderCopyWithImpl(
-      _$_WatchProvider _value, $Res Function(_$_WatchProvider) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? logoPath = freezed,
-    Object? providerId = freezed,
-    Object? providerName = freezed,
-    Object? displayPriority = freezed,
-  }) {
-    return _then(_$_WatchProvider(
-      logoPath: freezed == logoPath
-          ? _value.logoPath
-          : logoPath // ignore: cast_nullable_to_non_nullable
-              as String?,
-      providerId: freezed == providerId
-          ? _value.providerId
-          : providerId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      providerName: freezed == providerName
-          ? _value.providerName
-          : providerName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      displayPriority: freezed == displayPriority
-          ? _value.displayPriority
-          : displayPriority // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
-class _$_WatchProvider implements _WatchProvider {
-  const _$_WatchProvider(
-      {required this.logoPath,
-      required this.providerId,
-      required this.providerName,
-      required this.displayPriority});
-
-  factory _$_WatchProvider.fromJson(Map<String, dynamic> json) =>
-      _$$_WatchProviderFromJson(json);
-
-  @override
-  final String? logoPath;
-  @override
-  final int? providerId;
-  @override
-  final String? providerName;
-  @override
-  final int? displayPriority;
-
-  @override
-  String toString() {
-    return 'WatchProvider(logoPath: $logoPath, providerId: $providerId, providerName: $providerName, displayPriority: $displayPriority)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_WatchProvider &&
-            (identical(other.logoPath, logoPath) ||
-                other.logoPath == logoPath) &&
-            (identical(other.providerId, providerId) ||
-                other.providerId == providerId) &&
-            (identical(other.providerName, providerName) ||
-                other.providerName == providerName) &&
-            (identical(other.displayPriority, displayPriority) ||
-                other.displayPriority == displayPriority));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, logoPath, providerId, providerName, displayPriority);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_WatchProviderCopyWith<_$_WatchProvider> get copyWith =>
-      __$$_WatchProviderCopyWithImpl<_$_WatchProvider>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_WatchProviderToJson(
-      this,
-    );
-  }
-}
-
-abstract class _WatchProvider implements WatchProvider {
-  const factory _WatchProvider(
-      {required final String? logoPath,
-      required final int? providerId,
-      required final String? providerName,
-      required final int? displayPriority}) = _$_WatchProvider;
-
-  factory _WatchProvider.fromJson(Map<String, dynamic> json) =
-      _$_WatchProvider.fromJson;
-
-  @override
-  String? get logoPath;
-  @override
-  int? get providerId;
-  @override
-  String? get providerName;
-  @override
-  int? get displayPriority;
-  @override
-  @JsonKey(ignore: true)
-  _$$_WatchProviderCopyWith<_$_WatchProvider> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
