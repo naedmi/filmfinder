@@ -5,6 +5,8 @@ import 'package:filmfinder/models/movie_details/movie_params.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/list/local_persistence_service.dart';
 import 'package:filmfinder/services/movie_details/movie_details_service.dart';
+import 'package:filmfinder/views/common/error_card_widget.dart';
+import 'package:filmfinder/views/common/loading_card_widget.dart';
 import 'package:filmfinder/views/settings/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -92,13 +94,15 @@ class ListControllerImpl extends ListController {
             appendToResponse: 'watch/providers,credits')));
 
     movieDetails.when(
-        data: (MovieDetails details) {
-          addMovieFromDetails(details);
-        },
-        loading: () {},
-        error: (Object error, StackTrace? stackTrace) {
-          // TODO: handle error
-        });
+      data: (MovieDetails details) {
+        addMovieFromDetails(details);
+      },
+      loading: () => const LoadingCardWidget(),
+      error: (Object error, StackTrace? stackTrace) => ErrorCardWidget(
+        error: error,
+        stackTrace: stackTrace,
+      ),
+    );
   }
 
   @override
