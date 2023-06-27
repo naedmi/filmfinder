@@ -131,16 +131,16 @@ _$_WatchProviderResult _$$_WatchProviderResultFromJson(
     _$_WatchProviderResult(
       link: json['link'] as String?,
       flatrate: (json['flatrate'] as List<dynamic>?)
-          ?.map((e) => WatchProvider.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => MovieWatchProvider.fromJson(e as Map<String, dynamic>))
           .toList(),
       rent: (json['rent'] as List<dynamic>?)
-          ?.map((e) => WatchProvider.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => MovieWatchProvider.fromJson(e as Map<String, dynamic>))
           .toList(),
       buy: (json['buy'] as List<dynamic>?)
-          ?.map((e) => WatchProvider.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => MovieWatchProvider.fromJson(e as Map<String, dynamic>))
           .toList(),
       ads: (json['ads'] as List<dynamic>?)
-          ?.map((e) => WatchProvider.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => MovieWatchProvider.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -152,22 +152,6 @@ Map<String, dynamic> _$$_WatchProviderResultToJson(
       'rent': instance.rent,
       'buy': instance.buy,
       'ads': instance.ads,
-    };
-
-_$_WatchProvider _$$_WatchProviderFromJson(Map<String, dynamic> json) =>
-    _$_WatchProvider(
-      logoPath: json['logo_path'] as String?,
-      providerId: json['provider_id'] as int?,
-      providerName: json['provider_name'] as String?,
-      displayPriority: json['display_priority'] as int?,
-    );
-
-Map<String, dynamic> _$$_WatchProviderToJson(_$_WatchProvider instance) =>
-    <String, dynamic>{
-      'logo_path': instance.logoPath,
-      'provider_id': instance.providerId,
-      'provider_name': instance.providerName,
-      'display_priority': instance.displayPriority,
     };
 
 _$_Credits _$$_CreditsFromJson(Map<String, dynamic> json) => _$_Credits(

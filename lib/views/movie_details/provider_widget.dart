@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/models/settings/settings.dart';
+import 'package:filmfinder/models/watch_provider/movie_provider_response.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/settings/shared_preferences.dart';
@@ -24,13 +25,13 @@ class ProviderLogoWidget extends ConsumerWidget {
         watchProviders!.results![countryCode] != null &&
         watchProviders!.results![countryCode]!.flatrate != null &&
         watchProviders!.results![countryCode]!.flatrate!.isNotEmpty) {
-      final List<WatchProvider> freeProviders =
+      final List<MovieWatchProvider> freeProviders =
           watchProviders!.results![countryCode]!.flatrate!;
       return Wrap(
         spacing: paddingSmall,
         runSpacing: paddingTiny,
         children: freeProviders
-            .map((WatchProvider provider) => Container(
+            .map((MovieWatchProvider provider) => Container(
                   padding: const EdgeInsets.symmetric(
                       horizontal: paddingTiny, vertical: paddingTiny),
                   child: ClipRRect(
