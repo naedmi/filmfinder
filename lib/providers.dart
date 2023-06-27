@@ -131,7 +131,8 @@ class Providers {
 
   final Provider<FilterProviderModel> filterProviderProvider =
       Provider<FilterProviderModel>((ProviderRef<FilterProviderModel> ref) {
-    final Map<String, String> providers = FilmfinderPreferences.getProviders();
+    final Map<String, (int, String)> providers =
+        FilmfinderPreferences.getProviders();
     return FilterProviderModel(providers: providers);
   });
 
@@ -141,8 +142,9 @@ class Providers {
           (StateNotifierProviderRef<FilterProviderController,
                   FilterProviderModel>
               ref) {
-    final FilterProviderModel filterProviderModel =
-        FilterProviderModel(providers: FilmfinderPreferences.getProviders());
+    final FilterProviderModel filterProviderModel = FilterProviderModel(
+      providers: FilmfinderPreferences.getProviders(),
+    );
     return FilterProviderControllerImpl(model: filterProviderModel);
   });
 

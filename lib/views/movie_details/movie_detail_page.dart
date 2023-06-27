@@ -31,13 +31,16 @@ class MovieDetailsPage extends ConsumerWidget {
             children: [
               // Display the movie poster image
               if (details.posterPath != null)
-                CachedNetworkImage(
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w500${details.posterPath}',
-                  placeholder: (BuildContext context, String url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (BuildContext context, String url, _) =>
-                      const Icon(Remix.error_warning_line),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(borderRadiusBig),
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        'https://image.tmdb.org/t/p/w500${details.posterPath}',
+                    placeholder: (BuildContext context, String url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (BuildContext context, String url, _) =>
+                        const Icon(Remix.error_warning_line),
+                  ),
                 ),
               const SizedBox(height: padding),
               // Display the movie title

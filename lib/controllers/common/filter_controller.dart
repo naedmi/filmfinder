@@ -4,16 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// **************************************************************************
 
-/// DarkMode *****************************************************************
+/// Provider *****************************************************************
 abstract class FilterProviderController
     extends StateNotifier<FilterProviderModel> {
   FilterProviderController(FilterProviderModel state) : super(state);
 
-  void setProvider(Map<String, String> providers);
+  Future<void> setProvider(Map<String, (int, String)> providers);
 
-  void addProvider(String key, String value);
+  Future<void> addProvider(String key, (int, String) value);
 
-  void removeProvider(String key);
+  Future<void> removeProvider(String key);
 }
 
 class FilterProviderControllerImpl extends FilterProviderController {
@@ -24,24 +24,20 @@ class FilterProviderControllerImpl extends FilterProviderController {
                 providers: FilmfinderPreferences.getProviders()));
 
   @override
-  void setProvider(Map<String, String> providers) {
-    FilmfinderPreferences.setProviders(providers);
+  Future<void> setProvider(Map<String, (int, String)> providers) async {
+    await FilmfinderPreferences.setProviders(providers);
     state = state.copyWith(providers: FilmfinderPreferences.getProviders());
   }
 
   @override
-  void addProvider(String key, String value) {
-    Map<String, String> providers = FilmfinderPreferences.getProviders();
-    providers[key] = value;
-    FilmfinderPreferences.setProviders(providers);
+  Future<void> addProvider(String key, (int, String) value) async {
+    await FilmfinderPreferences.addProvider(key, value);
     state = state.copyWith(providers: FilmfinderPreferences.getProviders());
   }
 
   @override
-  void removeProvider(String key) {
-    Map<String, String> providers = FilmfinderPreferences.getProviders();
-    providers.remove(key);
-    FilmfinderPreferences.setProviders(providers);
+  Future<void> removeProvider(String key) async {
+    await FilmfinderPreferences.removeProvider(key);
     state = state.copyWith(providers: FilmfinderPreferences.getProviders());
   }
 }

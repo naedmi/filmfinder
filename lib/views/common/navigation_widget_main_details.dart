@@ -4,7 +4,11 @@ import 'package:filmfinder/controllers/list/list_controller.dart'
     as list_controller;
 import 'package:filmfinder/models/common/filter.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
+import 'package:filmfinder/models/settings/settings.dart';
+import 'package:filmfinder/models/watch_provider/movie_provider_params.dart';
+import 'package:filmfinder/models/watch_provider/movie_provider_response.dart';
 import 'package:filmfinder/providers.dart';
+import 'package:filmfinder/services/watch_provider/watch_provider_api_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -76,10 +80,6 @@ class MiddleButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final FilterProviderController filterProviderController =
-        ref.read(providers.filterProviderControllerProvider.notifier);
-    final FilterProviderModel filterProviderModel =
-        ref.watch(providers.filterProviderControllerProvider);
     final bool isSwipe = GoRouter.of(context).location == routeSwipe;
     if (isSwipe) {
       return SizedBox(
@@ -91,36 +91,63 @@ class MiddleButton extends ConsumerWidget {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(padding),
-                    itemCount: availableProviders.keys.toList().length,
-                    itemBuilder: (BuildContext context, int index) => ListTile(
-                      horizontalTitleGap: padding,
-                      trailing: filterProviderModel.providers.keys
-                              .contains(availableProviders.keys.toList()[index])
-                          ? const Icon(Remix.check_line)
-                          : null,
-                      title: LogoName(
-                        logo: availableProviders.values.toList()[index],
-                        provName: availableProviders.keys.toList()[index],
-                      ),
-                      onTap: () {
-                        final String clickedProviderKey =
-                            availableProviders.keys.toList()[index];
-                        if (filterProviderModel.providers.keys
-                            .contains(clickedProviderKey)) {
-                          filterProviderController
-                              .removeProvider(clickedProviderKey);
-                        } else {
-                          filterProviderController.addProvider(
-                              clickedProviderKey,
-                              availableProviders[clickedProviderKey]!);
-                        }
-                      },
-                    ),
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(),
+                  return Consumer(
+                    builder: (BuildContext context, WidgetRef ref, _) {
+                      final FilterProviderController filterProviderController =
+                          ref.read(providers
+                              .filterProviderControllerProvider.notifier);
+                      final FilterProviderModel filterProviderModel =
+                          ref.watch(providers.filterProviderControllerProvider);
+                      final SettingsLanguageModel languageModel = ref
+                          .watch(providers.settingsLanguageControllerProvider);
+
+                      final AsyncValue<MovieProviderResponse> movieProviders =
+                          ref.watch(watchProviderApiService(MovieProviderParams(
+                        language: languageModel.language.split('-')[0],
+                        watchRegion: languageModel.language.split('-')[1],
+                      )));
+                      List<MovieWatchProvider> movieProviderList =
+                          <MovieWatchProvider>[];
+                      movieProviders.whenData((MovieProviderResponse value) =>
+                          movieProviderList = value.results);
+
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(padding),
+                        itemCount: movieProviderList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final String clickedProviderKey =
+                              movieProviderList[index].providerName;
+
+                          return ListTile(
+                            horizontalTitleGap: padding,
+                            trailing: filterProviderModel.providers.keys
+                                    .contains(clickedProviderKey)
+                                ? const Icon(Remix.check_line)
+                                : null,
+                            title: LogoName(
+                              logo: movieProviderList[index].logoPath,
+                              provName: movieProviderList[index].providerName,
+                            ),
+                            onTap: () {
+                              if (filterProviderModel.providers.keys
+                                  .contains(clickedProviderKey)) {
+                                filterProviderController
+                                    .removeProvider(clickedProviderKey);
+                              } else {
+                                filterProviderController.addProvider(
+                                    clickedProviderKey, (
+                                  movieProviderList[index].providerId,
+                                  movieProviderList[index].logoPath
+                                ));
+                              }
+                            },
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const Divider(),
+                      );
+                    },
                   );
                 },
               );
@@ -189,7 +216,7 @@ class LogoName extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         CachedNetworkImage(
-          imageUrl: logo,
+          imageUrl: 'https://image.tmdb.org/t/p/w500$logo',
           placeholder: (BuildContext context, String url) =>
               const Center(child: CircularProgressIndicator()),
           errorWidget: (BuildContext context, String url, _) =>
@@ -200,7 +227,7 @@ class LogoName extends StatelessWidget {
         const SizedBox(
           width: padding,
         ),
-        Text(provName),
+        Flexible(child: Text(provName)),
       ],
     );
   }

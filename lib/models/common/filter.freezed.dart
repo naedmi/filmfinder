@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FilterProviderModel {
-  Map<String, String> get providers => throw _privateConstructorUsedError;
+  Map<String, (int, String)> get providers =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FilterProviderModelCopyWith<FilterProviderModel> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $FilterProviderModelCopyWith<$Res> {
           FilterProviderModel value, $Res Function(FilterProviderModel) then) =
       _$FilterProviderModelCopyWithImpl<$Res, FilterProviderModel>;
   @useResult
-  $Res call({Map<String, String> providers});
+  $Res call({Map<String, (int, String)> providers});
 }
 
 /// @nodoc
@@ -51,7 +52,7 @@ class _$FilterProviderModelCopyWithImpl<$Res, $Val extends FilterProviderModel>
       providers: null == providers
           ? _value.providers
           : providers // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as Map<String, (int, String)>,
     ) as $Val);
   }
 }
@@ -64,7 +65,7 @@ abstract class _$$_FilterProviderModelCopyWith<$Res>
       __$$_FilterProviderModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, String> providers});
+  $Res call({Map<String, (int, String)> providers});
 }
 
 /// @nodoc
@@ -84,7 +85,7 @@ class __$$_FilterProviderModelCopyWithImpl<$Res>
       providers: null == providers
           ? _value._providers
           : providers // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as Map<String, (int, String)>,
     ));
   }
 }
@@ -93,13 +94,14 @@ class __$$_FilterProviderModelCopyWithImpl<$Res>
 
 class _$_FilterProviderModel implements _FilterProviderModel {
   _$_FilterProviderModel(
-      {final Map<String, String> providers = const <String, String>{}})
+      {final Map<String, (int, String)> providers =
+          const <String, (int, String)>{}})
       : _providers = providers;
 
-  final Map<String, String> _providers;
+  final Map<String, (int, String)> _providers;
   @override
   @JsonKey()
-  Map<String, String> get providers {
+  Map<String, (int, String)> get providers {
     if (_providers is EqualUnmodifiableMapView) return _providers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_providers);
@@ -132,11 +134,11 @@ class _$_FilterProviderModel implements _FilterProviderModel {
 }
 
 abstract class _FilterProviderModel implements FilterProviderModel {
-  factory _FilterProviderModel({final Map<String, String> providers}) =
+  factory _FilterProviderModel({final Map<String, (int, String)> providers}) =
       _$_FilterProviderModel;
 
   @override
-  Map<String, String> get providers;
+  Map<String, (int, String)> get providers;
   @override
   @JsonKey(ignore: true)
   _$$_FilterProviderModelCopyWith<_$_FilterProviderModel> get copyWith =>

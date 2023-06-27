@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MovieProviderParams {
   String get language => throw _privateConstructorUsedError;
-
   String get watchRegion => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +29,6 @@ abstract class $MovieProviderParamsCopyWith<$Res> {
   factory $MovieProviderParamsCopyWith(
           MovieProviderParams value, $Res Function(MovieProviderParams) then) =
       _$MovieProviderParamsCopyWithImpl<$Res, MovieProviderParams>;
-
   @useResult
   $Res call({String language, String watchRegion});
 }
@@ -42,7 +40,6 @@ class _$MovieProviderParamsCopyWithImpl<$Res, $Val extends MovieProviderParams>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -71,7 +68,6 @@ abstract class _$$_MovieProviderParamsCopyWith<$Res>
   factory _$$_MovieProviderParamsCopyWith(_$_MovieProviderParams value,
           $Res Function(_$_MovieProviderParams) then) =
       __$$_MovieProviderParamsCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({String language, String watchRegion});
@@ -142,15 +138,12 @@ abstract class _MovieProviderParams extends MovieProviderParams {
   const factory _MovieProviderParams(
       {required final String language,
       required final String watchRegion}) = _$_MovieProviderParams;
-
   const _MovieProviderParams._() : super._();
 
   @override
   String get language;
-
   @override
   String get watchRegion;
-
   @override
   @JsonKey(ignore: true)
   _$$_MovieProviderParamsCopyWith<_$_MovieProviderParams> get copyWith =>

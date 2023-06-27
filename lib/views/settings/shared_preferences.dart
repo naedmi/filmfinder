@@ -24,23 +24,37 @@ class FilmfinderPreferences {
 
   static String getLanguage() => _preferences.getString(language) ?? 'en-US';
 
-  static Future<void> setProviders(Map<String, String> providerMap) async {
+  static Future<void> setProviders(
+      Map<String, (int, String)> providerMap) async {
     List<String> tmpProviders = <String>[];
     for (String key in providerMap.keys) {
-      tmpProviders.add('$key;${providerMap[key]}');
+      tmpProviders.add('$key;${providerMap[key]?.$1};${providerMap[key]?.$2}');
     }
     _preferences.setStringList('providers', tmpProviders);
   }
 
-  static Map<String, String> getProviders() {
-    Map<String, String> providerMap = <String, String>{};
+  static Map<String, (int, String)> getProviders() {
+    Map<String, (int, String)> providerMap = <String, (int, String)>{};
     List<String>? tmpProviders = _preferences.getStringList('providers');
     if (tmpProviders != null) {
       for (String provider in tmpProviders) {
         List<String> tmpProvider = provider.split(';');
-        providerMap[tmpProvider[0]] = tmpProvider[1];
+        providerMap[tmpProvider[0]] =
+            (int.parse(tmpProvider[1]), tmpProvider[2]);
       }
     }
     return providerMap;
+  }
+
+  static Future<void> removeProvider(String key) async {
+    Map<String, (int, String)> tmpProviders = getProviders();
+    tmpProviders.remove(key);
+    setProviders(tmpProviders);
+  }
+
+  static Future<void> addProvider(String key, (int, String) value) async {
+    Map<String, (int, String)> tmpProviders = getProviders();
+    tmpProviders[key] = value;
+    setProviders(tmpProviders);
   }
 }

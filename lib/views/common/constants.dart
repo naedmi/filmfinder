@@ -208,16 +208,3 @@ const int animationDuration = 1000;
 const int animationDelay = 250;
 
 /// **************************************************************************
-/// Filter *******************************************************************
-const String image =
-    'https://image.tmdb.org/t/p/w500/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg';
-
-const Map<String, String> availableProviders = {
-  'Amazon': image,
-  'Netflix': image,
-  'Disney+': image,
-  'Apple TV+': image,
-  'HBO Max': image,
-};
-
-/// **************************************************************************
