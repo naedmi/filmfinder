@@ -8,9 +8,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 abstract class DiscoverController extends StateNotifier<DiscoverParams> {
   DiscoverController(DiscoverParams state) : super(state);
 
-  Future<void> refreshGenres();
+  void refreshGenres();
 
-  Future<void> refreshProviders();
+  void refreshProviders();
 }
 
 class DiscoverControllerImpl extends DiscoverController {
@@ -20,13 +20,13 @@ class DiscoverControllerImpl extends DiscoverController {
   }) : super(model ?? const DiscoverParams());
 
   @override
-  Future<void> refreshGenres() async {
+  void refreshGenres() {
     state =
         state.copyWith(withGenres: FilmfinderPreferences.getGenreQueryString());
   }
 
   @override
-  Future<void> refreshProviders() async {
+  void refreshProviders() {
     state = state.copyWith(
         withWatchProviders: FilmfinderPreferences.getProviderQueryString());
   }
