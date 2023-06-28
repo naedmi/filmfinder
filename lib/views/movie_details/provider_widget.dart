@@ -51,7 +51,7 @@ class ProviderLogoWidget extends ConsumerWidget {
     return Wrap(
       spacing: paddingSmall,
       runSpacing: paddingTiny,
-      children: List.generate(
+      children: List<Widget>.generate(
         4,
         (_) => Container(
           width: providerLogoSize,
@@ -77,7 +77,7 @@ class MovieProvidersWidget extends ConsumerWidget {
         ref.watch(providers.settingsControllerProvider);
 
     return Column(
-      children: [
+      children: <Widget>[
         ProviderLogoWidget(watchProviders: watchProviders),
         const SizedBox(height: paddingTiny),
         Align(

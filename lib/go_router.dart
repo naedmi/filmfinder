@@ -47,6 +47,7 @@ final GoRouter goRouter = GoRouter(
           return customPageBuilder(
               MovieDetailsPage(
                 movieId: state.pathParameters['id']!,
+                fromCategory: state.queryParameters['category'],
               ),
               context,
               state);
