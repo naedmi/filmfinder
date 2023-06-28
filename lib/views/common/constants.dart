@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:remixicon/remixicon.dart';
 
 /// Routes ********************************************************************
 const List<String> routes = <String>[
@@ -206,5 +207,36 @@ final ThemeData darkTheme = FlexThemeData.dark(
 /// Animation ****************************************************************
 const int animationDuration = 1000;
 const int animationDelay = 250;
+
+/// **************************************************************************
+
+/// Filter *******************************************************************
+
+const Map<String, IconData> filterOptions = <String, IconData>{
+  'Provider': Remix.tv_line,
+  'Genre': Remix.movie_line,
+};
+
+const Map<int, (String, IconData)> genreMap = <int, (String, IconData)>{
+  28: ('Action', Remix.alarm_warning_line),
+  12: ('Adventure', Remix.compass_3_line),
+  16: ('Animation', Remix.movie_2_line),
+  35: ('Comedy', Remix.emotion_laugh_line),
+  80: ('Crime', Remix.criminal_line),
+  99: ('Documentary', Remix.file_list_2_line),
+  18: ('Drama', Remix.emotion_sad_line),
+  10751: ('Family', Remix.parent_line),
+  14: ('Fantasy', Remix.magic_line),
+  36: ('History', Remix.history_line),
+  27: ('Horror', Remix.ghost_line),
+  10402: ('Music', Remix.music_2_line),
+  9648: ('Mystery', Remix.question_mark),
+  10749: ('Romance', Remix.heart_2_line),
+  878: ('Science Fiction', Remix.robot_line),
+  10770: ('TV Movie', Remix.tv_2_line),
+  53: ('Thriller', Remix.ghost_line),
+  10752: ('War', Remix.sword_line),
+  37: ('Western', Remix.sword_line),
+};
 
 /// **************************************************************************

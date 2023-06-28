@@ -57,4 +57,61 @@ class FilmfinderPreferences {
     tmpProviders[key] = value;
     setProviders(tmpProviders);
   }
+
+  static Future<void> setGenres(Map<int, String> genres) async {
+    List<String> tmpGenres = <String>[];
+    for (int key in genres.keys) {
+      tmpGenres.add('$key;${genres[key]}');
+    }
+    _preferences.setStringList('genres', tmpGenres);
+  }
+
+  static Map<int, String> getGenres() {
+    Map<int, String> tmpGenres = <int, String>{};
+    List<String>? genres = _preferences.getStringList('genres');
+    if (genres != null) {
+      for (String genre in genres) {
+        List<String> tmpGenre = genre.split(';');
+        tmpGenres[int.parse(tmpGenre[0])] = tmpGenre[1];
+      }
+    }
+    return tmpGenres;
+  }
+
+  static Future<void> removeGenre(int key) async {
+    Map<int, String> tmpGenres = getGenres();
+    tmpGenres.remove(key);
+    setGenres(tmpGenres);
+  }
+
+  static Future<void> addGenre(int key, String value) async {
+    Map<int, String> tmpGenres = getGenres();
+    tmpGenres[key] = value;
+    setGenres(tmpGenres);
+  }
+
+  static String getGenreQueryString() {
+    String queryString = '';
+    List<int> tmpGenres = getGenres().keys.toList();
+    for (int i = 0; i < tmpGenres.length; i++) {
+      queryString += tmpGenres[i].toString();
+      if (i < tmpGenres.length - 1) {
+        queryString += '|';
+      }
+    }
+    return queryString;
+  }
+
+  static String getProviderQueryString() {
+    String queryString = '';
+    List<int> tmpProviders =
+        getProviders().values.map(((int, String) tuple) => tuple.$1).toList();
+    for (int i = 0; i < tmpProviders.length; i++) {
+      queryString += tmpProviders[i].toString();
+      if (i < tmpProviders.length - 1) {
+        queryString += '|';
+      }
+    }
+    return queryString;
+  }
 }

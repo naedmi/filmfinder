@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:filmfinder/controllers/common/discover_controller.dart';
 import 'package:filmfinder/controllers/common/filter_controller.dart';
 import 'package:filmfinder/controllers/landing/landing_controller.dart';
 import 'package:filmfinder/controllers/list/list_controller.dart';
@@ -7,6 +8,7 @@ import 'package:filmfinder/controllers/search/search_controller.dart';
 import 'package:filmfinder/controllers/settings/settings_controller.dart';
 import 'package:filmfinder/controllers/settings/settings_controller_interfaces.dart';
 import 'package:filmfinder/models/common/default_response.dart';
+import 'package:filmfinder/models/common/discover_params.dart';
 import 'package:filmfinder/models/common/filter.dart';
 import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
@@ -127,7 +129,7 @@ class Providers {
 
   /// **************************************************************************
 
-  /// FilterProvider************************************************************
+  /// FilterProvider ***********************************************************
 
   final Provider<FilterProviderModel> filterProviderProvider =
       Provider<FilterProviderModel>((ProviderRef<FilterProviderModel> ref) {
@@ -146,6 +148,49 @@ class Providers {
       providers: FilmfinderPreferences.getProviders(),
     );
     return FilterProviderControllerImpl(model: filterProviderModel);
+  });
+
+  /// **************************************************************************
+
+  /// FilterGenre **************************************************************
+
+  final Provider<FilterGenreModel> filterGenreProvider =
+      Provider<FilterGenreModel>((ProviderRef<FilterGenreModel> ref) {
+    final Map<int, String> genres = FilmfinderPreferences.getGenres();
+    return FilterGenreModel(genres: genres);
+  });
+
+  final StateNotifierProvider<FilterGenreController, FilterGenreModel>
+      filterGenreControllerProvider =
+      StateNotifierProvider<FilterGenreController, FilterGenreModel>(
+          (StateNotifierProviderRef<FilterGenreController, FilterGenreModel>
+              ref) {
+    final FilterGenreModel filterGenreModel = FilterGenreModel(
+      genres: FilmfinderPreferences.getGenres(),
+    );
+    return FilterGenreControllerImpl(genres: filterGenreModel);
+  });
+
+  /// **************************************************************************
+
+  /// Discover *****************************************************************
+
+  final Provider<DiscoverParams> discoverProvider =
+      Provider<DiscoverParams>((ProviderRef<DiscoverParams> ref) {
+    return DiscoverParams(
+        withGenres: FilmfinderPreferences.getGenreQueryString(),
+        withWatchProviders: FilmfinderPreferences.getProviderQueryString());
+  });
+
+  final StateNotifierProvider<DiscoverController, DiscoverParams>
+      discoverControllerProvider =
+      StateNotifierProvider<DiscoverController, DiscoverParams>(
+          (StateNotifierProviderRef<DiscoverController, DiscoverParams> ref) {
+    final DiscoverParams discoverParams = DiscoverParams(
+      withGenres: FilmfinderPreferences.getGenreQueryString(),
+      withWatchProviders: FilmfinderPreferences.getProviderQueryString(),
+    );
+    return DiscoverControllerImpl(discoverParams: discoverParams);
   });
 
   /// **************************************************************************

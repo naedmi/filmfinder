@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:filmfinder/controllers/common/discover_controller.dart';
 import 'package:filmfinder/controllers/common/filter_controller.dart';
 import 'package:filmfinder/controllers/list/list_controller.dart'
     as list_controller;
@@ -91,63 +92,41 @@ class MiddleButton extends ConsumerWidget {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return Consumer(
-                    builder: (BuildContext context, WidgetRef ref, _) {
-                      final FilterProviderController filterProviderController =
-                          ref.read(providers
-                              .filterProviderControllerProvider.notifier);
-                      final FilterProviderModel filterProviderModel =
-                          ref.watch(providers.filterProviderControllerProvider);
-                      final SettingsLanguageModel languageModel = ref
-                          .watch(providers.settingsLanguageControllerProvider);
-
-                      final AsyncValue<MovieProviderResponse> movieProviders =
-                          ref.watch(watchProviderApiService(MovieProviderParams(
-                        language: languageModel.language.split('-')[0],
-                        watchRegion: languageModel.language.split('-')[1],
-                      )));
-                      List<MovieWatchProvider> movieProviderList =
-                          <MovieWatchProvider>[];
-                      movieProviders.whenData((MovieProviderResponse value) =>
-                          movieProviderList = value.results);
-
-                      return ListView.separated(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.all(padding),
-                        itemCount: movieProviderList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final String clickedProviderKey =
-                              movieProviderList[index].providerName;
-
-                          return ListTile(
-                            horizontalTitleGap: padding,
-                            trailing: filterProviderModel.providers.keys
-                                    .contains(clickedProviderKey)
-                                ? const Icon(Remix.check_line)
-                                : null,
-                            title: LogoName(
-                              logo: movieProviderList[index].logoPath,
-                              provName: movieProviderList[index].providerName,
-                            ),
-                            onTap: () {
-                              if (filterProviderModel.providers.keys
-                                  .contains(clickedProviderKey)) {
-                                filterProviderController
-                                    .removeProvider(clickedProviderKey);
-                              } else {
-                                filterProviderController.addProvider(
-                                    clickedProviderKey, (
-                                  movieProviderList[index].providerId,
-                                  movieProviderList[index].logoPath
-                                ));
-                              }
-                            },
-                          );
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(padding),
+                    itemCount: filterOptions.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        horizontalTitleGap: padding,
+                        title: IconName(
+                          logo: filterOptions[
+                              filterOptions.keys.toList()[index]]!,
+                          provName: filterOptions.keys.toList()[index],
+                        ),
+                        onTap: () {
+                          if (filterOptions.keys.toList()[index] ==
+                              'Provider') {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const ProviderConsumer();
+                              },
+                            );
+                          } else if (filterOptions.keys.toList()[index] ==
+                              'Genre') {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const GenreConsumer();
+                              },
+                            );
+                          }
                         },
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const Divider(),
                       );
                     },
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
                   );
                 },
               );
@@ -229,6 +208,141 @@ class LogoName extends StatelessWidget {
         ),
         Flexible(child: Text(provName)),
       ],
+    );
+  }
+}
+
+class IconName extends StatelessWidget {
+  final IconData logo;
+  final String provName;
+
+  const IconName({super.key, required this.logo, required this.provName});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Icon(logo),
+        const SizedBox(
+          width: padding,
+        ),
+        Flexible(child: Text(provName)),
+      ],
+    );
+  }
+}
+
+class ProviderConsumer extends StatelessWidget {
+  const ProviderConsumer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, _) {
+        final FilterProviderController filterProviderController =
+            ref.read(providers.filterProviderControllerProvider.notifier);
+        final FilterProviderModel filterProviderModel =
+            ref.watch(providers.filterProviderControllerProvider);
+        final SettingsLanguageModel languageModel =
+            ref.watch(providers.settingsLanguageControllerProvider);
+        final DiscoverController discoverController =
+            ref.read(providers.discoverControllerProvider.notifier);
+
+        final AsyncValue<MovieProviderResponse> movieProviders =
+            ref.watch(watchProviderApiService(MovieProviderParams(
+          language: languageModel.language.split('-')[0],
+          watchRegion: languageModel.language.split('-')[1],
+        )));
+        List<MovieWatchProvider> movieProviderList = <MovieWatchProvider>[];
+        movieProviders.whenData(
+            (MovieProviderResponse value) => movieProviderList = value.results);
+
+        return ListView.separated(
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(padding),
+          itemCount: movieProviderList.length,
+          itemBuilder: (BuildContext context, int index) {
+            final String clickedProviderKey =
+                movieProviderList[index].providerName;
+
+            return ListTile(
+              horizontalTitleGap: padding,
+              trailing: filterProviderModel.providers.keys
+                      .contains(clickedProviderKey)
+                  ? const Icon(Remix.check_line)
+                  : null,
+              title: LogoName(
+                logo: movieProviderList[index].logoPath,
+                provName: movieProviderList[index].providerName,
+              ),
+              onTap: () {
+                if (filterProviderModel.providers.keys
+                    .contains(clickedProviderKey)) {
+                  filterProviderController.removeProvider(clickedProviderKey);
+                } else {
+                  filterProviderController.addProvider(clickedProviderKey, (
+                    movieProviderList[index].providerId,
+                    movieProviderList[index].logoPath
+                  ));
+                  discoverController.refreshProviders();
+                }
+              },
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider(),
+        );
+      },
+    );
+  }
+}
+
+class GenreConsumer extends StatelessWidget {
+  const GenreConsumer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, _) {
+        final FilterGenreController filterGenreController =
+            ref.read(providers.filterGenreControllerProvider.notifier);
+        final FilterGenreModel filterGenreModel =
+            ref.watch(providers.filterGenreControllerProvider);
+        final DiscoverController discoverController =
+            ref.read(providers.discoverControllerProvider.notifier);
+
+        return ListView.separated(
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(padding),
+          itemCount: genreMap.length,
+          itemBuilder: (BuildContext context, int index) {
+            final int clickedGenreKey = genreMap.keys.toList()[index];
+
+            return ListTile(
+              horizontalTitleGap: padding,
+              trailing: filterGenreModel.genres.keys.contains(clickedGenreKey)
+                  ? const Icon(Remix.check_line)
+                  : null,
+              title: IconName(
+                logo: genreMap[genreMap.keys.toList()[index]]!.$2,
+                provName: genreMap[genreMap.keys.toList()[index]]!.$1,
+              ),
+              onTap: () {
+                if (filterGenreModel.genres.keys.contains(clickedGenreKey)) {
+                  filterGenreController.removeGenre(clickedGenreKey);
+                } else {
+                  filterGenreController.addGenre(clickedGenreKey,
+                      genreMap[genreMap.keys.toList()[index]]!.$1);
+                }
+                discoverController.refreshGenres();
+              },
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider(),
+        );
+      },
     );
   }
 }

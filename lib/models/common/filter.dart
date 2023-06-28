@@ -14,3 +14,14 @@ class FilterProviderModel with _$FilterProviderModel {
 }
 
 /// **************************************************************************
+
+/// pickedGenre **************************************************************
+
+@freezed
+class FilterGenreModel with _$FilterGenreModel {
+  factory FilterGenreModel({
+    @Default(<int, String>{}) Map<int, String> genres,
+  }) = _FilterGenreModel;
+}
+
+/// **************************************************************************
