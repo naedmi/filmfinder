@@ -15,7 +15,8 @@
             "text": "Filmfinder est une application gratuite qui vous permet de rechercher et de d\u00e9couvrir des films.",
             "attribution": "Toutes les donn\u00e9es et informations sur les films sont fournies par The Movie Database (TMDB).\nFilmfinder n'est pas approuv\u00e9 ou certifi\u00e9 par TMDB."
         },
-        "save_msg": "param\u00e8tres enregistr\u00e9s"
+        "save_msg": "param\u00e8tres enregistr\u00e9s",
+        "login": "Identifiant (login)"
     },
     "landing": {
         "category": {

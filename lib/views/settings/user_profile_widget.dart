@@ -1,38 +1,21 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:remixicon/remixicon.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        SizedBox(
-          height: 200,
-          //toDo replace with picture of account
-          child: Icon(
-            Remix.account_pin_box_line,
-            size: 180,
-          ),
+    return Center(
+      child: SizedBox(
+        width: 150,
+        child: ElevatedButton(
+          onPressed: () {
+            //toDo add login functionality
+          },
+          child: const Text('settings.login').tr(context: context),
         ),
-        /*
-          * text field with account information
-          * get data for specific account
-          */
-        Expanded(
-          flex: 1,
-          child: SizedBox(
-            height: 200,
-            child: Center(
-              child: Text('Name: Carsten Stahl\n'
-                  'Email: carsten.stahl@zugriff.de\n'
-                  'Age: 69'),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
