@@ -4,7 +4,7 @@ import 'package:filmfinder/controllers/list/list_controller.dart'
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
-import 'package:filmfinder/views/search/search_result_widget.dart';
+import 'package:filmfinder/views/common/result_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';

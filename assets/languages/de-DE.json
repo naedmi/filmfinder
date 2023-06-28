@@ -15,7 +15,8 @@
       "text": "Filmfinder ist eine kostenlose Anwendung zum Suchen und Entdecken von Filmen.",
       "attribution": "Alle Daten und Informationen zu Filmen werden von The Movie Database (TMDB) bereitgestellt.\nFilmfinder ist nicht zertifiziert oder unterstützt von TMDB."
     },
-    "save_msg": "Einstellungen gespeichert"
+    "save_msg": "Einstellungen gespeichert",
+    "login": "Anmelden"
   },
   "landing": {
     "category": {
@@ -57,5 +58,32 @@
     "text": "Wir hassen es, dich gehen zu sehen :(",
     "yes": "Ja",
     "no": "Nein"
+  },
+  "filter": {
+    "provider": {
+      "title": "Provider"
+    },
+    "genre": {
+      "title": "Genre",
+      "action": "Action",
+      "adventure": "Abenteuer",
+      "animation": "Animation",
+      "comedy": "Komödie",
+      "crime": "Krimi",
+      "documentary": "Dokumentation",
+      "drama": "Drama",
+      "family": "Familie",
+      "fantasy": "Fantasy",
+      "history": "Geschichte",
+      "horror": "Horror",
+      "music": "Musik",
+      "mystery": "Mystery",
+      "romance": "Romantik",
+      "science_fiction": "Science Fiction",
+      "tv_movie": "TV Film",
+      "thriller": "Thriller",
+      "war": "Krieg",
+      "western": "Western"
+    }
   }
 }

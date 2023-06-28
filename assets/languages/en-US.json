@@ -15,7 +15,8 @@
       "text": "Filmfinder is a free application that allows you to search and discover movies.",
       "attribution": "All data and information about movies is provided by The Movie Database (TMDB).\nFilmfinder is not endorsed or certified by TMDB."
     },
-    "save_msg": "settings saved"
+    "save_msg": "settings saved",
+    "login": "Login"
   },
   "landing": {
     "category": {
@@ -57,5 +58,32 @@
     "text": "We hate to see you leave...",
     "yes": "Yes",
     "no": "No"
+  },
+  "filter": {
+    "provider": {
+      "title": "Provider"
+    },
+    "genre": {
+      "title": "Genre",
+      "action": "Action",
+      "adventure": "Adventure",
+      "animation": "Animation",
+      "comedy": "Comedy",
+      "crime": "Crime",
+      "documentary": "Documentary",
+      "drama": "Drama",
+      "family": "Family",
+      "fantasy": "Fantasy",
+      "history": "History",
+      "horror": "Horror",
+      "music": "Music",
+      "mystery": "Mystery",
+      "romance": "Romance",
+      "science_fiction": "Science Fiction",
+      "tv_movie": "TV Movie",
+      "thriller": "Thriller",
+      "war": "War",
+      "western": "Western"
+    }
   }
 }
