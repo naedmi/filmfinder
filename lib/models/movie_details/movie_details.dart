@@ -1,3 +1,4 @@
+import 'package:filmfinder/models/watch_provider/movie_provider_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'movie_details.freezed.dart';
@@ -94,29 +95,14 @@ class WatchProviders with _$WatchProviders {
 class WatchProviderResult with _$WatchProviderResult {
   const factory WatchProviderResult({
     required String? link,
-    required List<WatchProvider>? flatrate,
-    required List<WatchProvider>? rent,
-    required List<WatchProvider>? buy,
-    required List<WatchProvider>? ads,
+    required List<MovieWatchProvider>? flatrate,
+    required List<MovieWatchProvider>? rent,
+    required List<MovieWatchProvider>? buy,
+    required List<MovieWatchProvider>? ads,
   }) = _WatchProviderResult;
 
   factory WatchProviderResult.fromJson(Map<String, dynamic> json) =>
       _$WatchProviderResultFromJson(json);
-}
-
-@freezed
-class WatchProvider with _$WatchProvider {
-  // ignore: invalid_annotation_target
-  @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory WatchProvider({
-    required String? logoPath,
-    required int? providerId,
-    required String? providerName,
-    required int? displayPriority,
-  }) = _WatchProvider;
-
-  factory WatchProvider.fromJson(Map<String, dynamic> json) =>
-      _$WatchProviderFromJson(json);
 }
 
 @freezed
