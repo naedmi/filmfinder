@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/search/search_controller.dart'
-    as search_controller;
+as search_controller;
 import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/search/api_search_types.dart';
 import 'package:filmfinder/providers.dart';
@@ -8,8 +8,8 @@ import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/error_card_widget.dart';
 import 'package:filmfinder/views/common/loading_card_widget.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
-import 'package:filmfinder/views/search/card_message_widget.dart';
-import 'package:filmfinder/views/search/search_result_widget.dart';
+import 'package:filmfinder/views/common/result_widget.dart';
+import 'package:filmfinder/views/search/card_messagesult_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
