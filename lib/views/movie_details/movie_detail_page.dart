@@ -28,7 +28,7 @@ class MovieDetailsPage extends ConsumerWidget {
           data: (MovieDetails details) => Container(
             padding: const EdgeInsets.all(padding),
             child: ListView(
-              children: [
+              children: <Widget>[
                 // Display the movie poster image
                 if (details.posterPath != null)
                   CachedNetworkImage(
@@ -48,7 +48,7 @@ class MovieDetailsPage extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: padding),
-                //Display the genres as rounded boxes
+                // Display the genres as rounded boxes
                 Wrap(
                   spacing: paddingSmall,
                   runSpacing: paddingTiny,
@@ -64,13 +64,13 @@ class MovieDetailsPage extends ConsumerWidget {
                           child: Text(genre.name),
                         );
                       }).toList() ??
-                      [],
+                      <Widget>[],
                 ),
                 const SizedBox(height: padding),
                 // Display the movie star rating
                 Wrap(
                   spacing: paddingSmall,
-                  children: [
+                  children: <Widget>[
                     Tooltip(
                       message: '${details.voteAverage} / 10 stars',
                       child: RatingBarIndicator(
