@@ -1,5 +1,5 @@
 import 'package:filmfinder/models/common/discover_params.dart';
-import 'package:filmfinder/views/common/shared_preferences.dart';
+import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// **************************************************************************

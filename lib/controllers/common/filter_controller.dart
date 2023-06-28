@@ -1,5 +1,5 @@
 import 'package:filmfinder/models/common/filter.dart';
-import 'package:filmfinder/views/common/shared_preferences.dart';
+import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// **************************************************************************
@@ -9,9 +9,9 @@ abstract class FilterProviderController
     extends StateNotifier<FilterProviderModel> {
   FilterProviderController(FilterProviderModel state) : super(state);
 
-  Future<void> addProvider(int key, (String, String) value);
+  void addProvider(int key, (String, String) value);
 
-  Future<void> removeProvider(int key);
+  void removeProvider(int key);
 }
 
 class FilterProviderControllerImpl extends FilterProviderController {
@@ -22,14 +22,14 @@ class FilterProviderControllerImpl extends FilterProviderController {
                 providers: FilmfinderPreferences.getProviders()));
 
   @override
-  Future<void> addProvider(int key, (String, String) value) async {
-    await FilmfinderPreferences.addProvider(key, value);
+  void addProvider(int key, (String, String) value) {
+    FilmfinderPreferences.addProvider(key, value);
     state = state.copyWith(providers: FilmfinderPreferences.getProviders());
   }
 
   @override
-  Future<void> removeProvider(int key) async {
-    await FilmfinderPreferences.removeProvider(key);
+  void removeProvider(int key) {
+    FilmfinderPreferences.removeProvider(key);
     state = state.copyWith(providers: FilmfinderPreferences.getProviders());
   }
 }
@@ -40,9 +40,9 @@ class FilterProviderControllerImpl extends FilterProviderController {
 abstract class FilterGenreController extends StateNotifier<FilterGenreModel> {
   FilterGenreController(FilterGenreModel state) : super(state);
 
-  Future<void> addGenre(int key, String value);
+  void addGenre(int key, String value);
 
-  Future<void> removeGenre(int key);
+  void removeGenre(int key);
 }
 
 class FilterGenreControllerImpl extends FilterGenreController {
@@ -53,14 +53,14 @@ class FilterGenreControllerImpl extends FilterGenreController {
             FilterGenreModel(genres: FilmfinderPreferences.getGenres()));
 
   @override
-  Future<void> addGenre(int key, String value) async {
-    await FilmfinderPreferences.addGenre(key, value);
+  void addGenre(int key, String value) {
+    FilmfinderPreferences.addGenre(key, value);
     state = state.copyWith(genres: FilmfinderPreferences.getGenres());
   }
 
   @override
-  Future<void> removeGenre(int key) async {
-    await FilmfinderPreferences.removeGenre(key);
+  void removeGenre(int key) {
+    FilmfinderPreferences.removeGenre(key);
     state = state.copyWith(genres: FilmfinderPreferences.getGenres());
   }
 }

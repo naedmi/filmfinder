@@ -8,24 +8,18 @@ class FilmfinderPreferences {
     _preferences = await SharedPreferences.getInstance();
   }
 
-  static Future<void> setDarkMode(bool value) async =>
-      await _preferences.setBool(darkMode, value);
+  static void setDarkMode(bool value) =>
+      _preferences.setBool(darkMode, value);
 
   static bool getDarkMode() => _preferences.getBool(darkMode) ?? false;
 
-  static Future<void> setParentalControl(bool value) async =>
-      await _preferences.setBool(parentalControl, value);
-
-  static bool getParentalControl() =>
-      _preferences.getBool(parentalControl) ?? false;
-
-  static Future<void> setLanguage(String value) async =>
-      await _preferences.setString(language, value);
+  static void setLanguage(String value)  =>
+      _preferences.setString(language, value);
 
   static String getLanguage() => _preferences.getString(language) ?? 'en-US';
 
-  static Future<void> setProviders(
-      Map<int, (String, String)> providerMap) async {
+  static void setProviders(
+      Map<int, (String, String)> providerMap)  {
     List<String> tmpProviders = <String>[];
     for (int key in providerMap.keys) {
       tmpProviders.add('$key;${providerMap[key]?.$1};${providerMap[key]?.$2}');
@@ -46,19 +40,19 @@ class FilmfinderPreferences {
     return providerMap;
   }
 
-  static Future<void> removeProvider(int key) async {
+  static void removeProvider(int key) {
     Map<int, (String, String)> tmpProviders = getProviders();
     tmpProviders.remove(key);
     setProviders(tmpProviders);
   }
 
-  static Future<void> addProvider(int key, (String, String) value) async {
+  static void addProvider(int key, (String, String) value) {
     Map<int, (String, String)> tmpProviders = getProviders();
     tmpProviders[key] = value;
     setProviders(tmpProviders);
   }
 
-  static Future<void> setGenres(Map<int, String> genres) async {
+  static void setGenres(Map<int, String> genres) {
     List<String> tmpGenres = <String>[];
     for (int key in genres.keys) {
       tmpGenres.add('$key;${genres[key]}');
@@ -78,13 +72,13 @@ class FilmfinderPreferences {
     return tmpGenres;
   }
 
-  static Future<void> removeGenre(int key) async {
+  static void removeGenre(int key) {
     Map<int, String> tmpGenres = getGenres();
     tmpGenres.remove(key);
     setGenres(tmpGenres);
   }
 
-  static Future<void> addGenre(int key, String value) async {
+  static void addGenre(int key, String value) {
     Map<int, String> tmpGenres = getGenres();
     tmpGenres[key] = value;
     setGenres(tmpGenres);
