@@ -26,15 +26,15 @@ const String logoPath = 'assets/images/filmfinder_logo.png';
 double posterContainerDefaultHeight(BuildContext context) =>
     MediaQuery.of(context).size.width / 3 + paddingBig * 2;
 
-const List<String> posterSizes = <String>[
-  'w92',
-  'w154',
-  'w185',
-  'w342',
-  'w500',
-  'w780',
-  'original'
-];
+enum PosterSizes {
+  w92,
+  w154,
+  w185,
+  w342,
+  w500,
+  w780,
+  original,
+}
 
 /// **************************************************************************
 

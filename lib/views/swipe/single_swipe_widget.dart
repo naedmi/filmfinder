@@ -4,8 +4,8 @@ import 'package:filmfinder/controllers/swipe/video_controller.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/models/swipe/video_controller_state.dart';
 import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/views/common/tooltip_rating_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:remixicon/remixicon.dart';
@@ -92,29 +92,14 @@ class SingleSwipeWidget extends ConsumerWidget {
                                       const Divider(),
                                       Row(
                                         children: <Widget>[
-                                          Tooltip(
-                                            message:
-                                                'common.rating'.tr(args: <String>[movie.voteAverage.toString()]),
-                                            child: RatingBarIndicator(
-                                              itemSize: padding,
-                                              rating:
-                                                  (movie.voteAverage ?? 0) / 2,
-                                              itemCount: 5,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return Icon(
-                                                  Remix.star_fill,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .primary,
-                                                );
-                                              },
-                                            ),
+                                          TooltipRatingWidget(
+                                            voteAverage: movie.voteAverage,
                                           ),
                                           const Spacer(),
-                                          const Text(
-                                              'common.votes').tr(args: <String>[movie.voteCount?.toString() ?? '-'])
+                                          const Text('common.votes')
+                                              .tr(args: <String>[
+                                            movie.voteCount?.toString() ?? '-'
+                                          ])
                                         ],
                                       ),
                                       const Divider(),

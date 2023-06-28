@@ -120,26 +120,29 @@ class OverviewRowWidget extends StatelessWidget {
               children: <Widget>[
                 const Divider(endIndent: padding, indent: padding),
                 Padding(
-                  padding: const EdgeInsets.only(
-                      top: paddingSmall, left: padding, bottom: paddingTiny),
+                  padding:
+                      const EdgeInsets.only(left: padding, top: paddingTiny),
                   child: Text(
                     snapshot.data!.title.tr(),
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: Theme.of(context).textTheme.headlineSmall,
                     maxLines: 1,
                     textAlign: TextAlign.left,
                   ),
                 ),
                 SizedBox(
-                  height: posterContainerDefaultHeight(context) + padding,
+                  height: posterContainerDefaultHeight(context) - padding,
                   child: ListView.separated(
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(horizontal: padding),
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (BuildContext context, int i) => Container(
-                        margin: const EdgeInsets.only(bottom: padding),
-                        child: ResultPosterWidget(
-                            id: snapshot.data!.posters[i].movieId,
-                            posterPath: snapshot.data!.posters[i].posterPath)),
+                      margin: const EdgeInsets.only(bottom: padding),
+                      child: ResultPosterWidget(
+                        id: snapshot.data!.posters[i].movieId,
+                        posterPath: snapshot.data!.posters[i].posterPath,
+                        category: snapshot.data!.title,
+                      ),
+                    ),
                     itemCount: snapshot.data!.posters.length,
                     separatorBuilder: (BuildContext context, int i) =>
                         const SizedBox(width: paddingTiny),

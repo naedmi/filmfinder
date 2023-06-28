@@ -8,9 +8,10 @@ import 'package:remixicon/remixicon.dart';
 class ResultPosterWidget extends StatelessWidget {
   final int id;
   final String? posterPath;
+  final String? category;
 
   const ResultPosterWidget(
-      {super.key, required this.id, required this.posterPath});
+      {super.key, required this.id, required this.posterPath, this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -19,22 +20,29 @@ class ResultPosterWidget extends StatelessWidget {
         context.pushNamed(
           'details',
           pathParameters: <String, String>{'id': id.toString()},
+          queryParameters: <String, String>{
+            if (category != null) 'category': category!,
+          },
         );
       },
       child: Material(
         elevation: elevation,
         borderRadius: BorderRadius.circular(borderRadiusBig),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(borderRadiusBig),
-          child: AspectRatio(
-            aspectRatio: 2 / 3,
-            child: CachedNetworkImage(
-              imageUrl: posterUrl(path: posterPath ?? ''),
-              fit: BoxFit.cover,
-              placeholder: (BuildContext context, String url) =>
-                  const Center(child: CircularProgressIndicator()),
-              errorWidget: (BuildContext context, String url, _) =>
-                  const Icon(Remix.image_2_line, size: 100),
+        child: Hero(
+          tag: '$id$category',
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(borderRadiusBig),
+            child: AspectRatio(
+              aspectRatio: 2 / 3,
+              child: CachedNetworkImage(
+                imageUrl: posterUrl(
+                    path: posterPath ?? '', width: PosterSizes.w500.name),
+                fit: BoxFit.cover,
+                placeholder: (BuildContext context, String url) =>
+                    const Center(child: CircularProgressIndicator()),
+                errorWidget: (BuildContext context, String url, _) =>
+                    const Icon(Remix.image_2_line, size: 100),
+              ),
             ),
           ),
         ),
