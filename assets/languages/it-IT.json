@@ -15,7 +15,8 @@
             "text": "Filmfinder \u00e8 un'applicazione gratuita che ti consente di cercare e scoprire film.",
             "attribution": "Tutti i dati e le informazioni sui film sono forniti da The Movie Database (TMDB).\nFilmfinder non \u00e8 approvato o certificato da TMDB."
         },
-        "save_msg": "impostazioni salvate."
+        "save_msg": "impostazioni salvate.",
+        "login": "Accesso"
     },
     "landing": {
         "category": {
