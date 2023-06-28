@@ -5,7 +5,7 @@ import 'package:filmfinder/models/movie_details/movie_params.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/list/local_persistence_service.dart';
 import 'package:filmfinder/services/movie_details/movie_details_service.dart';
-import 'package:filmfinder/views/settings/shared_preferences.dart';
+import 'package:filmfinder/views/common/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class ListController {

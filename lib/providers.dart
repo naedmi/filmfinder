@@ -14,7 +14,7 @@ import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
 import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/services/list/local_persistence_service.dart';
-import 'package:filmfinder/views/settings/shared_preferences.dart';
+import 'package:filmfinder/views/common/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -133,7 +133,7 @@ class Providers {
 
   final Provider<FilterProviderModel> filterProviderProvider =
       Provider<FilterProviderModel>((ProviderRef<FilterProviderModel> ref) {
-    final Map<String, (int, String)> providers =
+    final Map<int, (String, String)> providers =
         FilmfinderPreferences.getProviders();
     return FilterProviderModel(providers: providers);
   });

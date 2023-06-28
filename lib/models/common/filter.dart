@@ -9,7 +9,7 @@ part 'filter.freezed.dart';
 @freezed
 class FilterProviderModel with _$FilterProviderModel {
   factory FilterProviderModel({
-    @Default(<String, (int, String)>{}) Map<String, (int, String)> providers,
+    @Default(<int, (String, String)>{}) Map<int, (String, String)> providers,
   }) = _FilterProviderModel;
 }
 

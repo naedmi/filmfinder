@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/common/discover_controller.dart';
 import 'package:filmfinder/controllers/common/filter_controller.dart';
 import 'package:filmfinder/controllers/list/list_controller.dart'
@@ -227,7 +228,7 @@ class IconName extends StatelessWidget {
         const SizedBox(
           width: padding,
         ),
-        Flexible(child: Text(provName)),
+        Flexible(child: Text(provName).tr()),
       ],
     );
   }
@@ -263,8 +264,7 @@ class ProviderConsumer extends StatelessWidget {
           padding: const EdgeInsets.all(padding),
           itemCount: movieProviderList.length,
           itemBuilder: (BuildContext context, int index) {
-            final String clickedProviderKey =
-                movieProviderList[index].providerName;
+            final int clickedProviderKey = movieProviderList[index].providerId;
 
             return ListTile(
               horizontalTitleGap: padding,
@@ -282,7 +282,7 @@ class ProviderConsumer extends StatelessWidget {
                   filterProviderController.removeProvider(clickedProviderKey);
                 } else {
                   filterProviderController.addProvider(clickedProviderKey, (
-                    movieProviderList[index].providerId,
+                    movieProviderList[index].providerName,
                     movieProviderList[index].logoPath
                   ));
                   discoverController.refreshProviders();

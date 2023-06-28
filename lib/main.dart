@@ -5,7 +5,7 @@ import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/logger_provider_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
-import 'package:filmfinder/views/settings/shared_preferences.dart';
+import 'package:filmfinder/views/common/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

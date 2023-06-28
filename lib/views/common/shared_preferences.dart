@@ -25,35 +25,35 @@ class FilmfinderPreferences {
   static String getLanguage() => _preferences.getString(language) ?? 'en-US';
 
   static Future<void> setProviders(
-      Map<String, (int, String)> providerMap) async {
+      Map<int, (String, String)> providerMap) async {
     List<String> tmpProviders = <String>[];
-    for (String key in providerMap.keys) {
+    for (int key in providerMap.keys) {
       tmpProviders.add('$key;${providerMap[key]?.$1};${providerMap[key]?.$2}');
     }
     _preferences.setStringList('providers', tmpProviders);
   }
 
-  static Map<String, (int, String)> getProviders() {
-    Map<String, (int, String)> providerMap = <String, (int, String)>{};
+  static Map<int, (String, String)> getProviders() {
+    Map<int, (String, String)> providerMap = <int, (String, String)>{};
     List<String>? tmpProviders = _preferences.getStringList('providers');
     if (tmpProviders != null) {
       for (String provider in tmpProviders) {
         List<String> tmpProvider = provider.split(';');
-        providerMap[tmpProvider[0]] =
-            (int.parse(tmpProvider[1]), tmpProvider[2]);
+        providerMap[int.parse(tmpProvider[0])] =
+            (tmpProvider[1], tmpProvider[2]);
       }
     }
     return providerMap;
   }
 
-  static Future<void> removeProvider(String key) async {
-    Map<String, (int, String)> tmpProviders = getProviders();
+  static Future<void> removeProvider(int key) async {
+    Map<int, (String, String)> tmpProviders = getProviders();
     tmpProviders.remove(key);
     setProviders(tmpProviders);
   }
 
-  static Future<void> addProvider(String key, (int, String) value) async {
-    Map<String, (int, String)> tmpProviders = getProviders();
+  static Future<void> addProvider(int key, (String, String) value) async {
+    Map<int, (String, String)> tmpProviders = getProviders();
     tmpProviders[key] = value;
     setProviders(tmpProviders);
   }
@@ -104,8 +104,7 @@ class FilmfinderPreferences {
 
   static String getProviderQueryString() {
     String queryString = '';
-    List<int> tmpProviders =
-        getProviders().values.map(((int, String) tuple) => tuple.$1).toList();
+    List<int> tmpProviders = getProviders().keys.toList();
     for (int i = 0; i < tmpProviders.length; i++) {
       queryString += tmpProviders[i].toString();
       if (i < tmpProviders.length - 1) {

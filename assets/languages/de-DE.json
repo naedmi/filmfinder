@@ -57,5 +57,32 @@
     "text": "Wir hassen es, dich gehen zu sehen :(",
     "yes": "Ja",
     "no": "Nein"
+  },
+  "filter": {
+    "provider": {
+      "title": "Provider"
+    },
+    "genre": {
+      "title": "Genre",
+      "action": "Action",
+      "adventure": "Abenteuer",
+      "animation": "Animation",
+      "comedy": "Komödie",
+      "crime": "Krimi",
+      "documentary": "Dokumentation",
+      "drama": "Drama",
+      "family": "Familie",
+      "fantasy": "Fantasy",
+      "history": "Geschichte",
+      "horror": "Horror",
+      "music": "Musik",
+      "mystery": "Mystery",
+      "romance": "Romantik",
+      "science_fiction": "Science Fiction",
+      "tv_movie": "TV Film",
+      "thriller": "Thriller",
+      "war": "Krieg",
+      "western": "Western"
+    }
   }
 }
