@@ -182,16 +182,10 @@ class Providers {
         withWatchProviders: FilmfinderPreferences.getProviderQueryString());
   });
 
-  final StateNotifierProvider<DiscoverController, DiscoverParams>
+  final NotifierProvider<DiscoverController, DiscoverParams>
       discoverControllerProvider =
-      StateNotifierProvider<DiscoverController, DiscoverParams>(
-          (StateNotifierProviderRef<DiscoverController, DiscoverParams> ref) {
-    final DiscoverParams discoverParams = DiscoverParams(
-      withGenres: FilmfinderPreferences.getGenreQueryString(),
-      withWatchProviders: FilmfinderPreferences.getProviderQueryString(),
-    );
-    return DiscoverControllerImpl(discoverParams: discoverParams);
-  });
+      NotifierProvider<DiscoverController, DiscoverParams>(
+          () => DiscoverControllerImpl());
 
   /// **************************************************************************
 }

@@ -18,7 +18,7 @@ abstract class SwipeController
 
 class SwipeControllerImpl extends SwipeController {
   late DefaultResponse responses;
-  late String language;
+  late DiscoverParams currentParams;
   int nonVideoResults = 0;
 
   @override
@@ -34,12 +34,9 @@ class SwipeControllerImpl extends SwipeController {
 
   @override
   FutureOr<List<AsyncValue<MovieDetails>>> build() async {
-    language = ref.watch(providers.settingsLanguageControllerProvider).language;
-    final int currentPage = ref.watch(pageProvider);
+    currentParams = ref.watch(providers.discoverControllerProvider);
 
-    responses = await ref.watch(discoverApiService(
-            DiscoverParams(language: language, page: currentPage))
-        .future);
+    responses = await ref.watch(discoverApiService(currentParams).future);
 
     return _loadNext();
   }
@@ -49,7 +46,7 @@ class SwipeControllerImpl extends SwipeController {
         .map((MovieResult movie) => ref.watch(movieDetailsApiService(
             MovieParams(
                 movieID: movie.id,
-                language: language,
+                language: currentParams.language,
                 appendToResponse: 'videos'))))
         .where((AsyncValue<MovieDetails> movie) =>
             movie is AsyncData<MovieDetails> &&
