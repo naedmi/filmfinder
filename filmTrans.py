@@ -15,10 +15,11 @@ def translateJson(json_data, translator):
 
 def translater():
     for language in ['es-ES', 'fr-FR', 'it-IT', 'ja-JP']:
-        with open('./assets/languages/en-US.json', 'r') as jsonFile:
+        print(f'translating {language}')
+        with open('./assets/languages/en-US.json', 'r', encoding='UTF-8') as jsonFile:
             data = json.load(jsonFile)
             translateJson(data, translator=Translator(from_lang='en', to_lang=language.split('-')[0].lower()))
-            with open(f'./assets/languages/{language}.json', 'w') as file:
+            with open(f'./assets/languages/{language}.json', 'w', encoding='UTF-8') as file:
                 json.dump(data, file, indent=4)
 
 

@@ -3,6 +3,7 @@ import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/models/movie_details/movie_params.dart';
 import 'package:filmfinder/providers.dart';
+import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:filmfinder/services/list/local_persistence_service.dart';
 import 'package:filmfinder/services/movie_details/movie_details_service.dart';
 import 'package:filmfinder/views/common/error_card_widget.dart';

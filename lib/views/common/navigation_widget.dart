@@ -15,6 +15,7 @@ class BottomNavigationWidget extends StatelessWidget {
     final bool isHome = GoRouter.of(context).location == routeHome;
     final bool isList = GoRouter.of(context).location == routeList;
     return BottomAppBar(
+        clipBehavior: Clip.antiAlias,
         height: mainActionButtonHeight / 2 + padding,
         shape: const CircularNotchedRectangle(),
         notchMargin: paddingSmall,

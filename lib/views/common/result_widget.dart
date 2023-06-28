@@ -5,8 +5,8 @@ import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/result_poster_widget.dart';
+import 'package:filmfinder/views/common/tooltip_rating_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -50,20 +50,8 @@ class SearchResultWidget extends ConsumerWidget {
                       ),
                       const Divider(),
                       Wrap(spacing: paddingTiny, children: <Widget>[
-                        Tooltip(
-                          message: 'common.rating'
-                              .tr(args: <String>[res.voteAverage.toString()]),
-                          child: RatingBarIndicator(
-                            itemSize: padding,
-                            rating: (res.voteAverage ?? 0) / 2,
-                            itemCount: 5,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Icon(
-                                Remix.star_fill,
-                                color: Theme.of(context).colorScheme.primary,
-                              );
-                            },
-                          ),
+                        TooltipRatingWidget(
+                          voteAverage: res.voteAverage,
                         ),
                         Text(
                           'common.votes'.tr(

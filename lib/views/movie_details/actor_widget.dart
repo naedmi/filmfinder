@@ -22,7 +22,7 @@ class ActorCard extends StatelessWidget {
       child: IntrinsicHeight(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+          children: <Widget>[
             ClipRRect(
               borderRadius: BorderRadius.circular(borderRadiusSmall),
               child: profilePath != null
@@ -45,7 +45,7 @@ class ActorCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     Text(
                       actorName ?? '',
                       style: Theme.of(context).textTheme.titleLarge,
@@ -73,11 +73,11 @@ class FilmActorsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Cast> topActors = actors?.take(10).toList() ?? [];
+    final List<Cast> topActors = actors?.take(10).toList() ?? <Cast>[];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         Text(
           'details.top_actors'.tr(),
           style: Theme.of(context).textTheme.titleLarge,
