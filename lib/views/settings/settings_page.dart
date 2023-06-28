@@ -25,7 +25,8 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainBottomBarScaffold(
         appBar: AppBar(
-          title: const Text('settings.header').tr(context: context),
+          title:
+              Center(child: const Text('settings.header').tr(context: context)),
           automaticallyImplyLeading: false,
         ),
         body: const Padding(
