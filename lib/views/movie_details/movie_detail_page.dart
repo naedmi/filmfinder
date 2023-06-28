@@ -23,99 +23,99 @@ class MovieDetailsPage extends ConsumerWidget {
         ref.watch(providers.movieDetailsProvider(int.parse(movieId)));
 
     return SimpleBottomBarScaffold(
-      showMiddleButton: false,
-      body: movieDetailsController.movieDetails.when(
-        data: (MovieDetails details) => Container(
-          padding: const EdgeInsets.all(padding),
-          child: ListView(
-            children: [
-              // Display the movie poster image
-              if (details.posterPath != null)
-                CachedNetworkImage(
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w500${details.posterPath}',
-                  placeholder: (BuildContext context, String url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (BuildContext context, String url, _) =>
-                      const Icon(Remix.error_warning_line),
+        showMiddleButton: false,
+        body: movieDetailsController.movieDetails.when(
+          data: (MovieDetails details) => Container(
+            padding: const EdgeInsets.all(padding),
+            child: ListView(
+              children: [
+                // Display the movie poster image
+                if (details.posterPath != null)
+                  CachedNetworkImage(
+                    imageUrl:
+                        'https://image.tmdb.org/t/p/w500${details.posterPath}',
+                    placeholder: (BuildContext context, String url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (BuildContext context, String url, _) =>
+                        const Icon(Remix.error_warning_line),
+                  ),
+                const SizedBox(height: padding),
+                // Display the movie title
+                Center(
+                  child: Text(
+                    details.title,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
                 ),
-              const SizedBox(height: padding),
-              // Display the movie title
-              Center(
-                child: Text(
-                  details.title,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-              const SizedBox(height: padding),
-              //Display the genres as rounded boxes
-              Wrap(
-                spacing: paddingSmall,
-                runSpacing: paddingTiny,
-                children: details.genres?.map((Genre genre) {
-                      return Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: paddingSmall, vertical: paddingTiny),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryContainer,
-                          borderRadius: BorderRadius.circular(borderRadius),
-                        ),
-                        child: Text(genre.name),
-                      );
-                    }).toList() ??
-                    [],
-              ),
-              const SizedBox(height: padding),
-              // Display the movie star rating
-              Wrap(
-                spacing: paddingSmall,
-                children: [
-                  Tooltip(
-                    message: '${details.voteAverage} / 10 stars',
-                    child: RatingBarIndicator(
-                      itemSize: padding,
-                      rating: (details.voteAverage ?? 0) / 2,
-                      itemCount: 5,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Icon(
-                          Remix.star_fill,
-                          color: Theme.of(context).colorScheme.primary,
+                const SizedBox(height: padding),
+                //Display the genres as rounded boxes
+                Wrap(
+                  spacing: paddingSmall,
+                  runSpacing: paddingTiny,
+                  children: details.genres?.map((Genre genre) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: paddingSmall, vertical: paddingTiny),
+                          decoration: BoxDecoration(
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
+                            borderRadius: BorderRadius.circular(borderRadius),
+                          ),
+                          child: Text(genre.name),
                         );
-                      },
+                      }).toList() ??
+                      [],
+                ),
+                const SizedBox(height: padding),
+                // Display the movie star rating
+                Wrap(
+                  spacing: paddingSmall,
+                  children: [
+                    Tooltip(
+                      message: '${details.voteAverage} / 10 stars',
+                      child: RatingBarIndicator(
+                        itemSize: padding,
+                        rating: (details.voteAverage ?? 0) / 2,
+                        itemCount: 5,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Icon(
+                            Remix.star_fill,
+                            color: Theme.of(context).colorScheme.primary,
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  Text(
-                    '${details.voteCount} ${"details.votes".tr()}',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ],
-              ),
+                    Text(
+                      '${details.voteCount} ${"details.votes".tr()}',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
+                ),
 
-              const SizedBox(height: padding),
-              // Display the movie overview
-              Text(
-                details.overview,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              const SizedBox(height: paddingBig),
-              MovieProvidersWidget(watchProviders: details.watchProviders),
-              const SizedBox(height: padding),
-              FilmActorsList(actors: details.credits?.cast)
-            ],
+                const SizedBox(height: padding),
+                // Display the movie overview
+                Text(
+                  details.overview,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(height: paddingBig),
+                MovieProvidersWidget(watchProviders: details.watchProviders),
+                const SizedBox(height: padding),
+                FilmActorsList(actors: details.credits?.cast)
+              ],
+            ),
           ),
-        ),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (Object error, StackTrace stackTrace) => Align(
-          alignment: Alignment.topCenter,
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(padding),
-              child: Text('Could not load data: ${error.toString()}'),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (Object error, StackTrace stackTrace) => Align(
+            alignment: Alignment.topCenter,
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(padding),
+                child: Text('Could not load data: ${error.toString()}'),
+              ),
             ),
           ),
         ),
-      ),
-      movieId: movieId,
-    );
+        movieId: AsyncValue<String>.data(movieId));
   }
 }

@@ -1,6 +1,7 @@
 import 'package:filmfinder/controllers/swipe/swipe_controller.dart';
 import 'package:filmfinder/controllers/swipe/swipe_providers.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
+import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/error_card_widget.dart';
 import 'package:filmfinder/views/common/loading_card_widget.dart';
 import 'package:filmfinder/views/common/navigation_widget_main_details.dart';
@@ -17,6 +18,9 @@ class SwipePage extends ConsumerWidget {
         ref.watch(swipeControllerProvider);
     final SwipeController swipeNotifier =
         ref.read(swipeControllerProvider.notifier);
+    final AsyncValue<String> movieId =
+        ref.watch(providers.swipeMovieIdProvider);
+
     return SimpleBottomBarScaffold(
       hideBottomBar:
           MediaQuery.of(context).orientation == Orientation.landscape,
@@ -26,6 +30,14 @@ class SwipePage extends ConsumerWidget {
               return PageView(
                 onPageChanged: (int index) {
                   swipeNotifier.swipe(index);
+                  ref.read(providers.swipeMovieIdProvider.notifier).state =
+                      movies[index].when(
+                    data: (MovieDetails details) =>
+                        AsyncValue<String>.data(details.id.toString()),
+                    error: (Object error, StackTrace? stackTrace) =>
+                        AsyncValue<String>.error(error, stackTrace!),
+                    loading: () => const AsyncValue<String>.loading(),
+                  );
                 },
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
@@ -52,7 +64,7 @@ class SwipePage extends ConsumerWidget {
                   stackTrace: stackTrace,
                 )),
       ),
-      movieId: '',
+      movieId: movieId,
     );
   }
 }

@@ -47,7 +47,8 @@ class Providers {
 
   final StateProvider<SearchFilter> searchFilterProvider =
       StateProvider<SearchFilter>((StateProviderRef<SearchFilter> ref) {
-    return SearchFilter(language: ref.watch(providers.settingsLanguageProvider).language);
+    return SearchFilter(
+        language: ref.watch(providers.settingsLanguageProvider).language);
   });
 
   final AutoDisposeStateProviderFamily<MovieDetailsController, int>
@@ -72,6 +73,11 @@ class Providers {
   final StateProvider<MovieList> movieListProvider =
       StateProvider<MovieList>((Ref ref) {
     return const MovieList();
+  });
+
+  final StateProvider<AsyncValue<String>> swipeMovieIdProvider =
+      StateProvider<AsyncValue<String>>((Ref ref) {
+    return const AsyncValue<String>.loading();
   });
 
   final AutoDisposeStateProvider<LandingController> landingControllerProvider =
