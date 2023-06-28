@@ -49,7 +49,8 @@ class FilterGenreControllerImpl extends FilterGenreController {
   FilterGenreControllerImpl({
     FilterGenreModel? model,
     required FilterGenreModel genres,
-  }) : super(model ?? FilterGenreModel(genres: <int, String>{}));
+  }) : super(model ??
+            FilterGenreModel(genres: FilmfinderPreferences.getGenres()));
 
   @override
   Future<void> addGenre(int key, String value) async {
