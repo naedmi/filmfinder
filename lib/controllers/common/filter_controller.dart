@@ -1,4 +1,5 @@
 import 'package:filmfinder/models/common/filter.dart';
+import 'package:filmfinder/models/watch_provider/movie_provider_response.dart';
 import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,6 +8,10 @@ abstract class FilterProviderController extends Notifier<FilterProviderModel> {
   void addProvider(int key, (String, String) value);
 
   void removeProvider(int key);
+
+  void clearProviders();
+
+  void selectAllProviders(List<MovieWatchProvider> movieProviderList);
 }
 
 class FilterProviderControllerImpl extends FilterProviderController {
@@ -19,6 +24,23 @@ class FilterProviderControllerImpl extends FilterProviderController {
   @override
   void removeProvider(int key) {
     FilmfinderPreferences.removeProvider(key);
+    state = state.copyWith(providers: FilmfinderPreferences.getProviders());
+  }
+
+  @override
+  void clearProviders() {
+    FilmfinderPreferences.clearProviders();
+    state = state.copyWith(providers: FilmfinderPreferences.getProviders());
+  }
+
+  @override
+  void selectAllProviders(List<MovieWatchProvider> movieProviderList) {
+    Map<int, (String, String)> tmpProviders = <int, (String, String)>{};
+    for (MovieWatchProvider provider in movieProviderList) {
+      tmpProviders[provider.providerId] =
+          (provider.providerName, provider.logoPath);
+    }
+    FilmfinderPreferences.setProviders(tmpProviders);
     state = state.copyWith(providers: FilmfinderPreferences.getProviders());
   }
 

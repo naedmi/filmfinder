@@ -8,18 +8,16 @@ class FilmfinderPreferences {
     _preferences = await SharedPreferences.getInstance();
   }
 
-  static void setDarkMode(bool value) =>
-      _preferences.setBool(darkMode, value);
+  static void setDarkMode(bool value) => _preferences.setBool(darkMode, value);
 
   static bool getDarkMode() => _preferences.getBool(darkMode) ?? false;
 
-  static void setLanguage(String value)  =>
+  static void setLanguage(String value) =>
       _preferences.setString(language, value);
 
   static String getLanguage() => _preferences.getString(language) ?? 'en-US';
 
-  static void setProviders(
-      Map<int, (String, String)> providerMap)  {
+  static void setProviders(Map<int, (String, String)> providerMap) {
     List<String> tmpProviders = <String>[];
     for (int key in providerMap.keys) {
       tmpProviders.add('$key;${providerMap[key]?.$1};${providerMap[key]?.$2}');
@@ -50,6 +48,10 @@ class FilmfinderPreferences {
     Map<int, (String, String)> tmpProviders = getProviders();
     tmpProviders[key] = value;
     setProviders(tmpProviders);
+  }
+
+  static void clearProviders() {
+    _preferences.remove('providers');
   }
 
   static void setGenres(Map<int, String> genres) {

@@ -93,9 +93,9 @@ class MovieProvidersWidget extends ConsumerWidget {
               ),
               SvgPicture.asset(
                 darkModeModel.darkMode
-                    ? 'assets/images/jw_logo_color.svg'
-                    : 'assets/images/jw_logo_black.svg',
-                height: 10,
+                    ? justWatchImagePathLight
+                    : justWatchImagePathDark,
+                height: justWatchImageHeight,
               ),
             ],
           ),

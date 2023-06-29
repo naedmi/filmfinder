@@ -15,6 +15,7 @@ import 'package:filmfinder/services/watch_provider/watch_provider_api_service.da
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -109,15 +110,16 @@ class MiddleButton extends ConsumerWidget {
                         ),
                         onTap: () {
                           if (filterOptions.keys.toList()[index] ==
-                              'Provider') {
+                              'filter.provider.title'.tr()) {
                             showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
+                                //return const ProviderConsumer();
                                 return const ProviderConsumer();
                               },
                             );
                           } else if (filterOptions.keys.toList()[index] ==
-                              'Genre') {
+                              'filter.genre.title'.tr()) {
                             showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
@@ -203,8 +205,8 @@ class LogoName extends StatelessWidget {
               const Center(child: CircularProgressIndicator()),
           errorWidget: (BuildContext context, String url, _) =>
               const Icon(Remix.error_warning_line),
-          width: 30,
-          height: 30,
+          width: providerLogoSizeSmall,
+          height: providerLogoSizeSmall,
         ),
         const SizedBox(
           width: padding,
@@ -236,66 +238,113 @@ class IconName extends StatelessWidget {
   }
 }
 
-class ProviderConsumer extends StatelessWidget {
+class ProviderConsumer extends ConsumerWidget {
   const ProviderConsumer({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, _) {
-        final FilterProviderController filterProviderController =
-            ref.read(providers.filterProviderControllerProvider.notifier);
-        final FilterProviderModel filterProviderModel =
-            ref.watch(providers.filterProviderControllerProvider);
-        final SettingsLanguageModel languageModel =
-            ref.watch(providers.settingsLanguageControllerProvider);
-        final DiscoverController discoverController =
-            ref.read(providers.discoverControllerProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final FilterProviderController filterProviderController =
+        ref.read(providers.filterProviderControllerProvider.notifier);
+    final FilterProviderModel filterProviderModel =
+        ref.watch(providers.filterProviderControllerProvider);
+    final DiscoverController discoverController =
+        ref.read(providers.discoverControllerProvider.notifier);
+    final SettingsDarkModeModel darkModeModel =
+        ref.watch(providers.settingsControllerProvider);
 
-        final AsyncValue<MovieProviderResponse> movieProviders =
-            ref.watch(watchProviderApiService(MovieProviderParams(
-          language: languageModel.language.split('-')[0],
-          watchRegion: languageModel.language.split('-')[1],
-        )));
-        List<MovieWatchProvider> movieProviderList = <MovieWatchProvider>[];
-        movieProviders.whenData(
-            (MovieProviderResponse value) => movieProviderList = value.results);
+    final AsyncValue<MovieProviderResponse> movieProviders =
+        ref.watch(watchProviderApiService(MovieProviderParams(
+      language: Localizations.localeOf(context).languageCode.toString(),
+      watchRegion: Localizations.localeOf(context).countryCode.toString(),
+    )));
+    List<MovieWatchProvider> movieProviderList = <MovieWatchProvider>[];
+    movieProviders.whenData(
+        (MovieProviderResponse value) => movieProviderList = value.results);
 
-        return ListView.separated(
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(padding),
-          itemCount: movieProviderList.length,
-          itemBuilder: (BuildContext context, int index) {
-            final int clickedProviderKey = movieProviderList[index].providerId;
-
-            return ListTile(
-              horizontalTitleGap: padding,
-              trailing: filterProviderModel.providers.keys
-                      .contains(clickedProviderKey)
-                  ? const Icon(Remix.check_line)
-                  : null,
-              title: LogoName(
-                logo: movieProviderList[index].logoPath,
-                provName: movieProviderList[index].providerName,
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(paddingSmall),
+          child: SvgPicture.asset(
+            darkModeModel.darkMode
+                ? justWatchImagePathLight
+                : justWatchImagePathDark,
+            height: justWatchImageHeight,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(paddingSmall),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (filterProviderModel.providers.length ==
+                        movieProviderList.length) {
+                      filterProviderController.clearProviders();
+                    } else {
+                      filterProviderController
+                          .selectAllProviders(movieProviderList);
+                    }
+                  },
+                  child: movieProviderList.length ==
+                          filterProviderModel.providers.length
+                      ? const Text('filter.provider.selectAll').tr()
+                      : const Text('filter.provider.deselectAll').tr(),
+                ),
               ),
-              onTap: () {
-                if (filterProviderModel.providers.keys
-                    .contains(clickedProviderKey)) {
-                  filterProviderController.removeProvider(clickedProviderKey);
-                } else {
-                  filterProviderController.addProvider(clickedProviderKey, (
-                    movieProviderList[index].providerName,
-                    movieProviderList[index].logoPath
-                  ));
-                  discoverController.refreshProviders();
-                }
-              },
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-        );
-      },
+              const SizedBox(width: 8.0),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    discoverController.refreshProviders();
+                  },
+                  child: const Text('filter.provider.apply').tr(),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView.separated(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(padding),
+            itemCount: movieProviderList.length,
+            itemBuilder: (BuildContext context, int index) {
+              final int clickedProviderKey =
+                  movieProviderList[index].providerId;
+
+              return ListTile(
+                horizontalTitleGap: padding,
+                trailing: filterProviderModel.providers.keys
+                        .contains(clickedProviderKey)
+                    ? const Icon(Remix.check_line)
+                    : null,
+                title: LogoName(
+                  logo: movieProviderList[index].logoPath,
+                  provName: movieProviderList[index].providerName,
+                ),
+                onTap: () {
+                  if (filterProviderModel.providers.keys
+                      .contains(clickedProviderKey)) {
+                    filterProviderController.removeProvider(clickedProviderKey);
+                  } else {
+                    filterProviderController.addProvider(
+                      clickedProviderKey,
+                      (
+                        movieProviderList[index].providerName,
+                        movieProviderList[index].logoPath,
+                      ),
+                    );
+                  }
+                },
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(),
+          ),
+        ),
+      ],
     );
   }
 }
