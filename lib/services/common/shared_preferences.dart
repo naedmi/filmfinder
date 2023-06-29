@@ -86,6 +86,10 @@ class FilmfinderPreferences {
     setGenres(tmpGenres);
   }
 
+  static void clearGenres() {
+    _preferences.remove('genres');
+  }
+
   static String getGenreQueryString() {
     String queryString = '';
     List<int> tmpGenres = getGenres().keys.toList();

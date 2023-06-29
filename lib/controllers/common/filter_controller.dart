@@ -1,6 +1,7 @@
 import 'package:filmfinder/models/common/filter.dart';
 import 'package:filmfinder/models/watch_provider/movie_provider_response.dart';
 import 'package:filmfinder/services/common/shared_preferences.dart';
+import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Provider *****************************************************************
@@ -57,6 +58,10 @@ abstract class FilterGenreController extends Notifier<FilterGenreModel> {
   void addGenre(int key, String value);
 
   void removeGenre(int key);
+
+  void clearGenres();
+
+  void selectAllGenres();
 }
 
 class FilterGenreControllerImpl extends FilterGenreController {
@@ -69,6 +74,22 @@ class FilterGenreControllerImpl extends FilterGenreController {
   @override
   void removeGenre(int key) {
     FilmfinderPreferences.removeGenre(key);
+    state = state.copyWith(genres: FilmfinderPreferences.getGenres());
+  }
+
+  @override
+  void clearGenres() {
+    FilmfinderPreferences.clearGenres();
+    state = state.copyWith(genres: FilmfinderPreferences.getGenres());
+  }
+
+  @override
+  void selectAllGenres() {
+    Map<int, String> genreList = <int, String>{};
+    for (int key in genreMap.keys) {
+      genreList[key] = genreMap[key]!.$1;
+    }
+    FilmfinderPreferences.setGenres(genreList);
     state = state.copyWith(genres: FilmfinderPreferences.getGenres());
   }
 
