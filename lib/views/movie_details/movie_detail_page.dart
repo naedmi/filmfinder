@@ -40,6 +40,7 @@ class MovieDetailsPage extends ConsumerWidget {
                             id: details.id,
                             posterPath: details.posterPath,
                             category: fromCategory,
+                            enableTap: false,
                           )
                         ],
                       ),
