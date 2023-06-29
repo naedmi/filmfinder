@@ -113,10 +113,15 @@ class MovieDetailsPage extends ConsumerWidget {
                       details.overview,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    const SizedBox(height: paddingBig),
-                    MovieProvidersWidget(
-                        watchProviders: details.watchProviders),
-                    const SizedBox(height: padding),
+                    const SizedBox(height: paddingSmall),
+                    const Divider(),
+                    Padding(
+                      padding: const EdgeInsets.all(paddingTiny),
+                      child: MovieProvidersWidget(
+                          watchProviders: details.watchProviders),
+                    ),
+                    const Divider(),
+                    const SizedBox(height: paddingSmall),
                     FilmActorsList(actors: details.credits?.cast)
                   ],
                 ),
