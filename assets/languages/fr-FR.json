@@ -51,7 +51,8 @@
     "details": {
         "votes": "votes",
         "top_actors": "top 100 acteurs",
-        "attribution": "fournit par"
+        "attribution": "fournit par",
+        "providers": "Aucun fournisseur disponible. "
     },
     "exit": {
         "question": "\u00cates-vous s\u00fbr\u00b7e\u00a0?",

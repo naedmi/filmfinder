@@ -51,7 +51,8 @@
     "details": {
         "votes": "voti",
         "top_actors": "Migliori attori",
-        "attribution": "forniti da"
+        "attribution": "forniti da",
+        "providers": "Nessun provider disponibile"
     },
     "exit": {
         "question": "Confermi?",
