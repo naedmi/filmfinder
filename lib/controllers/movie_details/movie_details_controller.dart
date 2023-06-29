@@ -4,22 +4,20 @@ import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:filmfinder/services/movie_details/movie_details_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-abstract class MovieDetailsController {
-  MovieDetailsController(this.ref);
-
-  late AsyncValue<MovieDetails> movieDetails;
-  final AutoDisposeStateProviderRef<MovieDetailsController> ref;
+abstract class MovieDetailsController
+    extends AutoDisposeFamilyNotifier<AsyncValue<MovieDetails>, int> {
   late int movieID;
 }
 
 class MovieDetailsControllerImpl extends MovieDetailsController {
-  MovieDetailsControllerImpl(
-      AutoDisposeStateProviderRef<MovieDetailsController> ref, int movieID)
-      : super(ref) {
-    this.movieID = movieID;
-    movieDetails = ref.watch(movieDetailsApiService(MovieParams(
-        movieID: movieID,
-        language: FilmfinderPreferences.getLanguage(),
-        appendToResponse: 'watch/providers,credits')));
+  @override
+  AsyncValue<MovieDetails> build(int arg) {
+    movieID = arg;
+    final AsyncValue<MovieDetails> movieDetails = ref.watch(
+        movieDetailsApiService(MovieParams(
+            movieID: movieID,
+            language: FilmfinderPreferences.getLanguage(),
+            appendToResponse: 'watch/providers,credits')));
+    return movieDetails;
   }
 }

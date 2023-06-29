@@ -1,22 +1,14 @@
+import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/models/movie_details/movie_params.dart';
-import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:filmfinder/services/list/local_persistence_service.dart';
 import 'package:filmfinder/services/movie_details/movie_details_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-abstract class ListController {
-  ListController(this.ref);
-
-  final AutoDisposeStateProviderRef<ListController> ref;
-  late final LocalPersistenceService _localPersistenceService;
-  late MovieList _movieList;
-
-  MovieList get movieList => _movieList;
-
+abstract class ListController extends AutoDisposeNotifier<MovieList> {
   List<MovieResult> getAllMovies();
 
   String? getMovieDetails(String id);
@@ -35,12 +27,8 @@ abstract class ListController {
 }
 
 class ListControllerImpl extends ListController {
-  ListControllerImpl(AutoDisposeStateProviderRef<ListController> ref)
-      : super(ref) {
-    _localPersistenceService = ref.watch(providers.localPersistenceProvider);
-    _movieList = ref.watch(providers.movieListProvider);
-    initList();
-  }
+  late MovieList _movieList;
+  late LocalPersistenceService _localPersistenceService;
 
   void initList() {
     _movieList = _movieList.copyWith(movies: getAllMovies());
@@ -125,5 +113,13 @@ class ListControllerImpl extends ListController {
   List<MovieResult> sortMoviesByTitle(List<MovieResult> movies) {
     // movies.sort((Movie a, Movie b) => a.title.compareTo(b.title));
     return movies;
+  }
+
+  @override
+  MovieList build() {
+    _localPersistenceService = ref.watch(localPersistenceProvider);
+    _movieList = ref.watch(providers.movieListProvider);
+    initList();
+    return _movieList;
   }
 }

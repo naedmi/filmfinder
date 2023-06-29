@@ -1,6 +1,6 @@
+import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/controllers/swipe/swipe_providers.dart';
 import 'package:filmfinder/models/common/discover_params.dart';
-import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,7 +28,8 @@ class DiscoverControllerImpl extends DiscoverController {
 
   @override
   DiscoverParams build() {
-    String language = ref.watch(providers.settingsLanguageProvider).language;
+    String language =
+        ref.watch(providers.settingsLanguageControllerProvider).language;
     final int currentPage = ref.watch(pageProvider);
 
     return DiscoverParams(

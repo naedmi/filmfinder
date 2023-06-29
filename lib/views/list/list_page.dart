@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/list/list_controller.dart'
     as list_controller;
-import 'package:filmfinder/providers.dart';
+import 'package:filmfinder/controllers/providers.dart';
+import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:filmfinder/views/common/result_widget.dart';
@@ -15,14 +16,15 @@ class ListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final list_controller.ListController listController =
-        ref.watch(providers.listControllerProvider);
+        ref.read(providers.listControllerProvider.notifier);
+    final MovieList movieList = ref.watch(providers.listControllerProvider);
 
     return MainBottomBarScaffold(
       appBar: AppBar(
         title: Center(child: Text('list.header'.tr())),
         automaticallyImplyLeading: false,
       ),
-      body: listController.movieList.movies.isEmpty
+      body: movieList.movies.isEmpty
           ? Align(
               alignment: Alignment.topCenter,
               child: Card(
@@ -50,8 +52,7 @@ class ListPage extends ConsumerWidget {
               padding: const EdgeInsets.only(
                   left: padding, right: padding, bottom: paddingBig * 2),
               itemBuilder: (BuildContext context, int index) =>
-                  SearchResultWidget(
-                      res: listController.movieList.movies[index]),
+                  SearchResultWidget(res: movieList.movies[index]),
               itemCount: listController.getAllMovies().length,
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(),

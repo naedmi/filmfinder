@@ -4,12 +4,13 @@ import 'package:filmfinder/controllers/common/discover_controller.dart';
 import 'package:filmfinder/controllers/common/filter_controller.dart';
 import 'package:filmfinder/controllers/list/list_controller.dart'
     as list_controller;
+import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/common/filter.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
+import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/models/watch_provider/movie_provider_params.dart';
 import 'package:filmfinder/models/watch_provider/movie_provider_response.dart';
-import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/watch_provider/watch_provider_api_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,8 @@ class BottomNavigationWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final list_controller.ListController listController =
-        ref.watch(providers.listControllerProvider);
+        ref.read(providers.listControllerProvider.notifier);
+    final MovieList movieList = ref.watch(providers.listControllerProvider);
 
     return BottomAppBar(
         height: mainActionButtonHeight / 2 + padding,
@@ -58,12 +60,12 @@ class BottomNavigationWidget extends ConsumerWidget {
             const MiddleButton(),
             IconButton(
               onPressed: () {
-                listController.movieList.movies.any(
+                movieList.movies.any(
                         (MovieResult movie) => movie.id == int.parse(movieId))
                     ? listController.removeMovie(int.parse(movieId))
                     : listController.addMovieFromId(movieId);
               },
-              icon: listController.movieList.movies.any(
+              icon: movieList.movies.any(
                       (MovieResult movie) => movie.id == int.parse(movieId))
                   ? const Icon(
                       Remix.check_line,
