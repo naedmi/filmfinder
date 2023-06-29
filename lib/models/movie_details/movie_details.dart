@@ -20,13 +20,14 @@ class MovieDetails with _$MovieDetails {
     required String overview,
     required double? popularity,
     required String? posterPath,
-    required String? releaseDate,
+    required String releaseDate,
     required int? revenue,
-    required int? runtime,
+    required int runtime,
     required String? status,
     required String? tagline,
     required double? voteAverage,
     required int? voteCount,
+    required ReleaseDateQuery? releaseDates,
     Videos? videos,
     Credits? credits,
     // ignore: invalid_annotation_target
@@ -47,6 +48,46 @@ class Genre with _$Genre {
   }) = _Genre;
 
   factory Genre.fromJson(Map<String, dynamic> json) => _$GenreFromJson(json);
+}
+
+@freezed
+class ReleaseDateQuery with _$ReleaseDateQuery {
+  const factory ReleaseDateQuery({
+    required int? id,
+    required List<Releases> results,
+  }) = _ReleaseDateQuery;
+
+  factory ReleaseDateQuery.fromJson(Map<String, dynamic> json) =>
+      _$ReleaseDateQueryFromJson(json);
+}
+
+@freezed
+class Releases with _$Releases {
+  // ignore: invalid_annotation_target
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory Releases({
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'iso_3166_1') required String iso31661,
+    required List<ReleaseDateResult> releaseDates,
+  }) = _Releases;
+
+  factory Releases.fromJson(Map<String, dynamic> json) =>
+      _$ReleasesFromJson(json);
+}
+
+@freezed
+class ReleaseDateResult with _$ReleaseDateResult {
+  // ignore: invalid_annotation_target
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory ReleaseDateResult({
+    required String releaseDate,
+    required String certification,
+    required String? note,
+    required int type,
+  }) = _ReleaseDateResult;
+
+  factory ReleaseDateResult.fromJson(Map<String, dynamic> json) =>
+      _$ReleaseDateResultFromJson(json);
 }
 
 @freezed

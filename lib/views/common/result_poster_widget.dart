@@ -9,21 +9,28 @@ class ResultPosterWidget extends StatelessWidget {
   final int id;
   final String? posterPath;
   final String? category;
+  final bool enableTap;
 
   const ResultPosterWidget(
-      {super.key, required this.id, required this.posterPath, this.category});
+      {super.key,
+      required this.id,
+      required this.posterPath,
+      this.category,
+      this.enableTap = true});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(
-          'details',
-          pathParameters: <String, String>{'id': id.toString()},
-          queryParameters: <String, String>{
-            if (category != null) 'category': category!,
-          },
-        );
+        if (enableTap) {
+          context.pushNamed(
+            'details',
+            pathParameters: <String, String>{'id': id.toString()},
+            queryParameters: <String, String>{
+              if (category != null) 'category': category!,
+            },
+          );
+        }
       },
       child: Material(
         elevation: elevation,

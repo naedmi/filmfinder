@@ -51,7 +51,8 @@
     "details": {
         "votes": "Votos",
         "top_actors": "Principales actores",
-        "attribution": "Proporcionado por"
+        "attribution": "Proporcionado por",
+        "providers": "No hay proveedores disponibles"
     },
     "exit": {
         "question": "\u00bfEst\u00e1 seguro?",

@@ -21,13 +21,17 @@ _$_MovieDetails _$$_MovieDetailsFromJson(Map<String, dynamic> json) =>
       overview: json['overview'] as String,
       popularity: (json['popularity'] as num?)?.toDouble(),
       posterPath: json['poster_path'] as String?,
-      releaseDate: json['release_date'] as String?,
+      releaseDate: json['release_date'] as String,
       revenue: json['revenue'] as int?,
-      runtime: json['runtime'] as int?,
+      runtime: json['runtime'] as int,
       status: json['status'] as String?,
       tagline: json['tagline'] as String?,
       voteAverage: (json['vote_average'] as num?)?.toDouble(),
       voteCount: json['vote_count'] as int?,
+      releaseDates: json['release_dates'] == null
+          ? null
+          : ReleaseDateQuery.fromJson(
+              json['release_dates'] as Map<String, dynamic>),
       videos: json['videos'] == null
           ? null
           : Videos.fromJson(json['videos'] as Map<String, dynamic>),
@@ -60,6 +64,7 @@ Map<String, dynamic> _$$_MovieDetailsToJson(_$_MovieDetails instance) =>
       'tagline': instance.tagline,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
+      'release_dates': instance.releaseDates,
       'videos': instance.videos,
       'credits': instance.credits,
       'watch/providers': instance.watchProviders,
@@ -73,6 +78,50 @@ _$_Genre _$$_GenreFromJson(Map<String, dynamic> json) => _$_Genre(
 Map<String, dynamic> _$$_GenreToJson(_$_Genre instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+    };
+
+_$_ReleaseDateQuery _$$_ReleaseDateQueryFromJson(Map<String, dynamic> json) =>
+    _$_ReleaseDateQuery(
+      id: json['id'] as int?,
+      results: (json['results'] as List<dynamic>)
+          .map((e) => Releases.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_ReleaseDateQueryToJson(_$_ReleaseDateQuery instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'results': instance.results,
+    };
+
+_$_Releases _$$_ReleasesFromJson(Map<String, dynamic> json) => _$_Releases(
+      iso31661: json['iso_3166_1'] as String,
+      releaseDates: (json['release_dates'] as List<dynamic>)
+          .map((e) => ReleaseDateResult.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_ReleasesToJson(_$_Releases instance) =>
+    <String, dynamic>{
+      'iso_3166_1': instance.iso31661,
+      'release_dates': instance.releaseDates,
+    };
+
+_$_ReleaseDateResult _$$_ReleaseDateResultFromJson(Map<String, dynamic> json) =>
+    _$_ReleaseDateResult(
+      releaseDate: json['release_date'] as String,
+      certification: json['certification'] as String,
+      note: json['note'] as String?,
+      type: json['type'] as int,
+    );
+
+Map<String, dynamic> _$$_ReleaseDateResultToJson(
+        _$_ReleaseDateResult instance) =>
+    <String, dynamic>{
+      'release_date': instance.releaseDate,
+      'certification': instance.certification,
+      'note': instance.note,
+      'type': instance.type,
     };
 
 _$_Videos _$$_VideosFromJson(Map<String, dynamic> json) => _$_Videos(

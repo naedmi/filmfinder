@@ -51,7 +51,8 @@
     "details": {
         "votes": "\u6295\u7968",
         "top_actors": "\u30c8\u30c3\u30d7\u4ff3\u512a",
-        "attribution": "DIAN\u63d0\u4f9b"
+        "attribution": "DIAN\u63d0\u4f9b",
+        "providers": "\u5229\u7528\u53ef\u80fd\u306a\u30d7\u30ed\u30d0\u30a4\u30c0\u30fc\u304c\u3042\u308a\u307e\u305b\u3093"
     },
     "exit": {
         "question": "\u672c\u5f53\u306b\u5b9f\u884c\u3057\u307e\u3059\u304b\uff1f",

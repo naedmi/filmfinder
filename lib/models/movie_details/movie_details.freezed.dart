@@ -31,13 +31,14 @@ mixin _$MovieDetails {
   String get overview => throw _privateConstructorUsedError;
   double? get popularity => throw _privateConstructorUsedError;
   String? get posterPath => throw _privateConstructorUsedError;
-  String? get releaseDate => throw _privateConstructorUsedError;
+  String get releaseDate => throw _privateConstructorUsedError;
   int? get revenue => throw _privateConstructorUsedError;
-  int? get runtime => throw _privateConstructorUsedError;
+  int get runtime => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   String? get tagline => throw _privateConstructorUsedError;
   double? get voteAverage => throw _privateConstructorUsedError;
   int? get voteCount => throw _privateConstructorUsedError;
+  ReleaseDateQuery? get releaseDates => throw _privateConstructorUsedError;
   Videos? get videos => throw _privateConstructorUsedError;
   Credits? get credits =>
       throw _privateConstructorUsedError; // ignore: invalid_annotation_target
@@ -68,17 +69,19 @@ abstract class $MovieDetailsCopyWith<$Res> {
       String overview,
       double? popularity,
       String? posterPath,
-      String? releaseDate,
+      String releaseDate,
       int? revenue,
-      int? runtime,
+      int runtime,
       String? status,
       String? tagline,
       double? voteAverage,
       int? voteCount,
+      ReleaseDateQuery? releaseDates,
       Videos? videos,
       Credits? credits,
       @JsonKey(name: 'watch/providers') WatchProviders? watchProviders});
 
+  $ReleaseDateQueryCopyWith<$Res>? get releaseDates;
   $VideosCopyWith<$Res>? get videos;
   $CreditsCopyWith<$Res>? get credits;
   $WatchProvidersCopyWith<$Res>? get watchProviders;
@@ -108,13 +111,14 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
     Object? overview = null,
     Object? popularity = freezed,
     Object? posterPath = freezed,
-    Object? releaseDate = freezed,
+    Object? releaseDate = null,
     Object? revenue = freezed,
-    Object? runtime = freezed,
+    Object? runtime = null,
     Object? status = freezed,
     Object? tagline = freezed,
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
+    Object? releaseDates = freezed,
     Object? videos = freezed,
     Object? credits = freezed,
     Object? watchProviders = freezed,
@@ -164,18 +168,18 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      releaseDate: freezed == releaseDate
+      releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       revenue: freezed == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
               as int?,
-      runtime: freezed == runtime
+      runtime: null == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -192,6 +196,10 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      releaseDates: freezed == releaseDates
+          ? _value.releaseDates
+          : releaseDates // ignore: cast_nullable_to_non_nullable
+              as ReleaseDateQuery?,
       videos: freezed == videos
           ? _value.videos
           : videos // ignore: cast_nullable_to_non_nullable
@@ -205,6 +213,18 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           : watchProviders // ignore: cast_nullable_to_non_nullable
               as WatchProviders?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReleaseDateQueryCopyWith<$Res>? get releaseDates {
+    if (_value.releaseDates == null) {
+      return null;
+    }
+
+    return $ReleaseDateQueryCopyWith<$Res>(_value.releaseDates!, (value) {
+      return _then(_value.copyWith(releaseDates: value) as $Val);
+    });
   }
 
   @override
@@ -264,17 +284,20 @@ abstract class _$$_MovieDetailsCopyWith<$Res>
       String overview,
       double? popularity,
       String? posterPath,
-      String? releaseDate,
+      String releaseDate,
       int? revenue,
-      int? runtime,
+      int runtime,
       String? status,
       String? tagline,
       double? voteAverage,
       int? voteCount,
+      ReleaseDateQuery? releaseDates,
       Videos? videos,
       Credits? credits,
       @JsonKey(name: 'watch/providers') WatchProviders? watchProviders});
 
+  @override
+  $ReleaseDateQueryCopyWith<$Res>? get releaseDates;
   @override
   $VideosCopyWith<$Res>? get videos;
   @override
@@ -305,13 +328,14 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
     Object? overview = null,
     Object? popularity = freezed,
     Object? posterPath = freezed,
-    Object? releaseDate = freezed,
+    Object? releaseDate = null,
     Object? revenue = freezed,
-    Object? runtime = freezed,
+    Object? runtime = null,
     Object? status = freezed,
     Object? tagline = freezed,
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
+    Object? releaseDates = freezed,
     Object? videos = freezed,
     Object? credits = freezed,
     Object? watchProviders = freezed,
@@ -361,18 +385,18 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      releaseDate: freezed == releaseDate
+      releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       revenue: freezed == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
               as int?,
-      runtime: freezed == runtime
+      runtime: null == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -389,6 +413,10 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      releaseDates: freezed == releaseDates
+          ? _value.releaseDates
+          : releaseDates // ignore: cast_nullable_to_non_nullable
+              as ReleaseDateQuery?,
       videos: freezed == videos
           ? _value.videos
           : videos // ignore: cast_nullable_to_non_nullable
@@ -428,6 +456,7 @@ class _$_MovieDetails implements _MovieDetails {
       required this.tagline,
       required this.voteAverage,
       required this.voteCount,
+      required this.releaseDates,
       this.videos,
       this.credits,
       @JsonKey(name: 'watch/providers') this.watchProviders})
@@ -467,11 +496,11 @@ class _$_MovieDetails implements _MovieDetails {
   @override
   final String? posterPath;
   @override
-  final String? releaseDate;
+  final String releaseDate;
   @override
   final int? revenue;
   @override
-  final int? runtime;
+  final int runtime;
   @override
   final String? status;
   @override
@@ -480,6 +509,8 @@ class _$_MovieDetails implements _MovieDetails {
   final double? voteAverage;
   @override
   final int? voteCount;
+  @override
+  final ReleaseDateQuery? releaseDates;
   @override
   final Videos? videos;
   @override
@@ -491,7 +522,7 @@ class _$_MovieDetails implements _MovieDetails {
 
   @override
   String toString() {
-    return 'MovieDetails(adult: $adult, backdropPath: $backdropPath, budget: $budget, genres: $genres, homepage: $homepage, id: $id, originalLanguage: $originalLanguage, title: $title, overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, status: $status, tagline: $tagline, voteAverage: $voteAverage, voteCount: $voteCount, videos: $videos, credits: $credits, watchProviders: $watchProviders)';
+    return 'MovieDetails(adult: $adult, backdropPath: $backdropPath, budget: $budget, genres: $genres, homepage: $homepage, id: $id, originalLanguage: $originalLanguage, title: $title, overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, status: $status, tagline: $tagline, voteAverage: $voteAverage, voteCount: $voteCount, releaseDates: $releaseDates, videos: $videos, credits: $credits, watchProviders: $watchProviders)';
   }
 
   @override
@@ -526,6 +557,8 @@ class _$_MovieDetails implements _MovieDetails {
                 other.voteAverage == voteAverage) &&
             (identical(other.voteCount, voteCount) ||
                 other.voteCount == voteCount) &&
+            (identical(other.releaseDates, releaseDates) ||
+                other.releaseDates == releaseDates) &&
             (identical(other.videos, videos) || other.videos == videos) &&
             (identical(other.credits, credits) || other.credits == credits) &&
             (identical(other.watchProviders, watchProviders) ||
@@ -554,6 +587,7 @@ class _$_MovieDetails implements _MovieDetails {
         tagline,
         voteAverage,
         voteCount,
+        releaseDates,
         videos,
         credits,
         watchProviders
@@ -586,13 +620,14 @@ abstract class _MovieDetails implements MovieDetails {
       required final String overview,
       required final double? popularity,
       required final String? posterPath,
-      required final String? releaseDate,
+      required final String releaseDate,
       required final int? revenue,
-      required final int? runtime,
+      required final int runtime,
       required final String? status,
       required final String? tagline,
       required final double? voteAverage,
       required final int? voteCount,
+      required final ReleaseDateQuery? releaseDates,
       final Videos? videos,
       final Credits? credits,
       @JsonKey(name: 'watch/providers')
@@ -624,11 +659,11 @@ abstract class _MovieDetails implements MovieDetails {
   @override
   String? get posterPath;
   @override
-  String? get releaseDate;
+  String get releaseDate;
   @override
   int? get revenue;
   @override
-  int? get runtime;
+  int get runtime;
   @override
   String? get status;
   @override
@@ -637,6 +672,8 @@ abstract class _MovieDetails implements MovieDetails {
   double? get voteAverage;
   @override
   int? get voteCount;
+  @override
+  ReleaseDateQuery? get releaseDates;
   @override
   Videos? get videos;
   @override
@@ -794,6 +831,538 @@ abstract class _Genre implements Genre {
   @override
   @JsonKey(ignore: true)
   _$$_GenreCopyWith<_$_Genre> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ReleaseDateQuery _$ReleaseDateQueryFromJson(Map<String, dynamic> json) {
+  return _ReleaseDateQuery.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ReleaseDateQuery {
+  int? get id => throw _privateConstructorUsedError;
+  List<Releases> get results => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ReleaseDateQueryCopyWith<ReleaseDateQuery> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ReleaseDateQueryCopyWith<$Res> {
+  factory $ReleaseDateQueryCopyWith(
+          ReleaseDateQuery value, $Res Function(ReleaseDateQuery) then) =
+      _$ReleaseDateQueryCopyWithImpl<$Res, ReleaseDateQuery>;
+  @useResult
+  $Res call({int? id, List<Releases> results});
+}
+
+/// @nodoc
+class _$ReleaseDateQueryCopyWithImpl<$Res, $Val extends ReleaseDateQuery>
+    implements $ReleaseDateQueryCopyWith<$Res> {
+  _$ReleaseDateQueryCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? results = null,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      results: null == results
+          ? _value.results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<Releases>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ReleaseDateQueryCopyWith<$Res>
+    implements $ReleaseDateQueryCopyWith<$Res> {
+  factory _$$_ReleaseDateQueryCopyWith(
+          _$_ReleaseDateQuery value, $Res Function(_$_ReleaseDateQuery) then) =
+      __$$_ReleaseDateQueryCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? id, List<Releases> results});
+}
+
+/// @nodoc
+class __$$_ReleaseDateQueryCopyWithImpl<$Res>
+    extends _$ReleaseDateQueryCopyWithImpl<$Res, _$_ReleaseDateQuery>
+    implements _$$_ReleaseDateQueryCopyWith<$Res> {
+  __$$_ReleaseDateQueryCopyWithImpl(
+      _$_ReleaseDateQuery _value, $Res Function(_$_ReleaseDateQuery) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? results = null,
+  }) {
+    return _then(_$_ReleaseDateQuery(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      results: null == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<Releases>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ReleaseDateQuery implements _ReleaseDateQuery {
+  const _$_ReleaseDateQuery(
+      {required this.id, required final List<Releases> results})
+      : _results = results;
+
+  factory _$_ReleaseDateQuery.fromJson(Map<String, dynamic> json) =>
+      _$$_ReleaseDateQueryFromJson(json);
+
+  @override
+  final int? id;
+  final List<Releases> _results;
+  @override
+  List<Releases> get results {
+    if (_results is EqualUnmodifiableListView) return _results;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_results);
+  }
+
+  @override
+  String toString() {
+    return 'ReleaseDateQuery(id: $id, results: $results)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ReleaseDateQuery &&
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality().equals(other._results, _results));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, const DeepCollectionEquality().hash(_results));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ReleaseDateQueryCopyWith<_$_ReleaseDateQuery> get copyWith =>
+      __$$_ReleaseDateQueryCopyWithImpl<_$_ReleaseDateQuery>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ReleaseDateQueryToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ReleaseDateQuery implements ReleaseDateQuery {
+  const factory _ReleaseDateQuery(
+      {required final int? id,
+      required final List<Releases> results}) = _$_ReleaseDateQuery;
+
+  factory _ReleaseDateQuery.fromJson(Map<String, dynamic> json) =
+      _$_ReleaseDateQuery.fromJson;
+
+  @override
+  int? get id;
+  @override
+  List<Releases> get results;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ReleaseDateQueryCopyWith<_$_ReleaseDateQuery> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Releases _$ReleasesFromJson(Map<String, dynamic> json) {
+  return _Releases.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Releases {
+// ignore: invalid_annotation_target
+  @JsonKey(name: 'iso_3166_1')
+  String get iso31661 => throw _privateConstructorUsedError;
+  List<ReleaseDateResult> get releaseDates =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ReleasesCopyWith<Releases> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ReleasesCopyWith<$Res> {
+  factory $ReleasesCopyWith(Releases value, $Res Function(Releases) then) =
+      _$ReleasesCopyWithImpl<$Res, Releases>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'iso_3166_1') String iso31661,
+      List<ReleaseDateResult> releaseDates});
+}
+
+/// @nodoc
+class _$ReleasesCopyWithImpl<$Res, $Val extends Releases>
+    implements $ReleasesCopyWith<$Res> {
+  _$ReleasesCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? iso31661 = null,
+    Object? releaseDates = null,
+  }) {
+    return _then(_value.copyWith(
+      iso31661: null == iso31661
+          ? _value.iso31661
+          : iso31661 // ignore: cast_nullable_to_non_nullable
+              as String,
+      releaseDates: null == releaseDates
+          ? _value.releaseDates
+          : releaseDates // ignore: cast_nullable_to_non_nullable
+              as List<ReleaseDateResult>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ReleasesCopyWith<$Res> implements $ReleasesCopyWith<$Res> {
+  factory _$$_ReleasesCopyWith(
+          _$_Releases value, $Res Function(_$_Releases) then) =
+      __$$_ReleasesCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'iso_3166_1') String iso31661,
+      List<ReleaseDateResult> releaseDates});
+}
+
+/// @nodoc
+class __$$_ReleasesCopyWithImpl<$Res>
+    extends _$ReleasesCopyWithImpl<$Res, _$_Releases>
+    implements _$$_ReleasesCopyWith<$Res> {
+  __$$_ReleasesCopyWithImpl(
+      _$_Releases _value, $Res Function(_$_Releases) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? iso31661 = null,
+    Object? releaseDates = null,
+  }) {
+    return _then(_$_Releases(
+      iso31661: null == iso31661
+          ? _value.iso31661
+          : iso31661 // ignore: cast_nullable_to_non_nullable
+              as String,
+      releaseDates: null == releaseDates
+          ? _value._releaseDates
+          : releaseDates // ignore: cast_nullable_to_non_nullable
+              as List<ReleaseDateResult>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$_Releases implements _Releases {
+  const _$_Releases(
+      {@JsonKey(name: 'iso_3166_1') required this.iso31661,
+      required final List<ReleaseDateResult> releaseDates})
+      : _releaseDates = releaseDates;
+
+  factory _$_Releases.fromJson(Map<String, dynamic> json) =>
+      _$$_ReleasesFromJson(json);
+
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(name: 'iso_3166_1')
+  final String iso31661;
+  final List<ReleaseDateResult> _releaseDates;
+  @override
+  List<ReleaseDateResult> get releaseDates {
+    if (_releaseDates is EqualUnmodifiableListView) return _releaseDates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_releaseDates);
+  }
+
+  @override
+  String toString() {
+    return 'Releases(iso31661: $iso31661, releaseDates: $releaseDates)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Releases &&
+            (identical(other.iso31661, iso31661) ||
+                other.iso31661 == iso31661) &&
+            const DeepCollectionEquality()
+                .equals(other._releaseDates, _releaseDates));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, iso31661,
+      const DeepCollectionEquality().hash(_releaseDates));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ReleasesCopyWith<_$_Releases> get copyWith =>
+      __$$_ReleasesCopyWithImpl<_$_Releases>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ReleasesToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Releases implements Releases {
+  const factory _Releases(
+      {@JsonKey(name: 'iso_3166_1') required final String iso31661,
+      required final List<ReleaseDateResult> releaseDates}) = _$_Releases;
+
+  factory _Releases.fromJson(Map<String, dynamic> json) = _$_Releases.fromJson;
+
+  @override // ignore: invalid_annotation_target
+  @JsonKey(name: 'iso_3166_1')
+  String get iso31661;
+  @override
+  List<ReleaseDateResult> get releaseDates;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ReleasesCopyWith<_$_Releases> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ReleaseDateResult _$ReleaseDateResultFromJson(Map<String, dynamic> json) {
+  return _ReleaseDateResult.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ReleaseDateResult {
+  String get releaseDate => throw _privateConstructorUsedError;
+  String get certification => throw _privateConstructorUsedError;
+  String? get note => throw _privateConstructorUsedError;
+  int get type => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ReleaseDateResultCopyWith<ReleaseDateResult> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ReleaseDateResultCopyWith<$Res> {
+  factory $ReleaseDateResultCopyWith(
+          ReleaseDateResult value, $Res Function(ReleaseDateResult) then) =
+      _$ReleaseDateResultCopyWithImpl<$Res, ReleaseDateResult>;
+  @useResult
+  $Res call({String releaseDate, String certification, String? note, int type});
+}
+
+/// @nodoc
+class _$ReleaseDateResultCopyWithImpl<$Res, $Val extends ReleaseDateResult>
+    implements $ReleaseDateResultCopyWith<$Res> {
+  _$ReleaseDateResultCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? releaseDate = null,
+    Object? certification = null,
+    Object? note = freezed,
+    Object? type = null,
+  }) {
+    return _then(_value.copyWith(
+      releaseDate: null == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      certification: null == certification
+          ? _value.certification
+          : certification // ignore: cast_nullable_to_non_nullable
+              as String,
+      note: freezed == note
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ReleaseDateResultCopyWith<$Res>
+    implements $ReleaseDateResultCopyWith<$Res> {
+  factory _$$_ReleaseDateResultCopyWith(_$_ReleaseDateResult value,
+          $Res Function(_$_ReleaseDateResult) then) =
+      __$$_ReleaseDateResultCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String releaseDate, String certification, String? note, int type});
+}
+
+/// @nodoc
+class __$$_ReleaseDateResultCopyWithImpl<$Res>
+    extends _$ReleaseDateResultCopyWithImpl<$Res, _$_ReleaseDateResult>
+    implements _$$_ReleaseDateResultCopyWith<$Res> {
+  __$$_ReleaseDateResultCopyWithImpl(
+      _$_ReleaseDateResult _value, $Res Function(_$_ReleaseDateResult) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? releaseDate = null,
+    Object? certification = null,
+    Object? note = freezed,
+    Object? type = null,
+  }) {
+    return _then(_$_ReleaseDateResult(
+      releaseDate: null == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      certification: null == certification
+          ? _value.certification
+          : certification // ignore: cast_nullable_to_non_nullable
+              as String,
+      note: freezed == note
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$_ReleaseDateResult implements _ReleaseDateResult {
+  const _$_ReleaseDateResult(
+      {required this.releaseDate,
+      required this.certification,
+      required this.note,
+      required this.type});
+
+  factory _$_ReleaseDateResult.fromJson(Map<String, dynamic> json) =>
+      _$$_ReleaseDateResultFromJson(json);
+
+  @override
+  final String releaseDate;
+  @override
+  final String certification;
+  @override
+  final String? note;
+  @override
+  final int type;
+
+  @override
+  String toString() {
+    return 'ReleaseDateResult(releaseDate: $releaseDate, certification: $certification, note: $note, type: $type)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ReleaseDateResult &&
+            (identical(other.releaseDate, releaseDate) ||
+                other.releaseDate == releaseDate) &&
+            (identical(other.certification, certification) ||
+                other.certification == certification) &&
+            (identical(other.note, note) || other.note == note) &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, releaseDate, certification, note, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ReleaseDateResultCopyWith<_$_ReleaseDateResult> get copyWith =>
+      __$$_ReleaseDateResultCopyWithImpl<_$_ReleaseDateResult>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ReleaseDateResultToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ReleaseDateResult implements ReleaseDateResult {
+  const factory _ReleaseDateResult(
+      {required final String releaseDate,
+      required final String certification,
+      required final String? note,
+      required final int type}) = _$_ReleaseDateResult;
+
+  factory _ReleaseDateResult.fromJson(Map<String, dynamic> json) =
+      _$_ReleaseDateResult.fromJson;
+
+  @override
+  String get releaseDate;
+  @override
+  String get certification;
+  @override
+  String? get note;
+  @override
+  int get type;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ReleaseDateResultCopyWith<_$_ReleaseDateResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

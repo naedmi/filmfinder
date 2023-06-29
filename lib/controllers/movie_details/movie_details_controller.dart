@@ -20,7 +20,7 @@ class MovieDetailsControllerImpl extends MovieDetailsController {
         movieDetailsApiService(MovieParams(
             movieID: arg,
             language: language,
-            appendToResponse: 'watch/providers,credits')));
+            appendToResponse: 'watch/providers,credits,release_dates')));
     return movieDetails;
   }
 }

@@ -51,7 +51,8 @@
   "details": {
     "votes": "votes",
     "top_actors": "Top Actors",
-    "attribution": "provided by "
+    "attribution": "provided by ",
+    "providers": "No providers available"
   },
   "exit": {
     "question": "Are you sure?",
