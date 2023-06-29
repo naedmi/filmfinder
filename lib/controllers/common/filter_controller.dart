@@ -2,8 +2,6 @@ import 'package:filmfinder/models/common/filter.dart';
 import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// **************************************************************************
-
 /// Provider *****************************************************************
 abstract class FilterProviderController extends Notifier<FilterProviderModel> {
   void addProvider(int key, (String, String) value);

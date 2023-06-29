@@ -1,4 +1,3 @@
-import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
@@ -27,12 +26,7 @@ abstract class ListController extends AutoDisposeNotifier<MovieList> {
 }
 
 class ListControllerImpl extends ListController {
-  late MovieList _movieList;
   late LocalPersistenceService _localPersistenceService;
-
-  void initList() {
-    _movieList = _movieList.copyWith(movies: getAllMovies());
-  }
 
   @override
   List<MovieResult> getAllMovies() {
@@ -105,8 +99,7 @@ class ListControllerImpl extends ListController {
   bool contains(int id) => _localPersistenceService.contains(id);
 
   void update() {
-    ref.read(providers.movieListProvider.notifier).state =
-        _movieList.copyWith(movies: getAllMovies());
+    state = state.copyWith(movies: getAllMovies());
   }
 
   // TODO: add list ordering
@@ -118,8 +111,6 @@ class ListControllerImpl extends ListController {
   @override
   MovieList build() {
     _localPersistenceService = ref.watch(localPersistenceProvider);
-    _movieList = ref.watch(providers.movieListProvider);
-    initList();
-    return _movieList;
+    return MovieList(movies: getAllMovies());
   }
 }

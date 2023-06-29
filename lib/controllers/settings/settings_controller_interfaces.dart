@@ -2,8 +2,6 @@ import 'package:filmfinder/models/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// **************************************************************************
-
 /// DarkMode *****************************************************************
 
 abstract class SettingsDarkModeController

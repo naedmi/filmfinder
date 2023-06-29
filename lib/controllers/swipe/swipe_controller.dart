@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:filmfinder/controllers/providers.dart';
-import 'package:filmfinder/controllers/swipe/swipe_providers.dart';
 import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/common/discover_params.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
@@ -13,6 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class SwipeController
     extends AutoDisposeAsyncNotifier<List<AsyncValue<MovieDetails>>> {
+  /// [index] starts at 1 here.
   void swipe(int index);
 }
 
@@ -23,13 +23,13 @@ class SwipeControllerImpl extends SwipeController {
 
   @override
   void swipe(int index) async {
-    final StateController<int> currentPage = ref.read(pageProvider.notifier);
+    final StateController<int> currentPage =
+        ref.read(providers.pageProvider.notifier);
     if (state is! AsyncData<List<AsyncValue<MovieDetails>>>) return;
 
     if (index >= responses.results.length - nonVideoResults) {
       currentPage.state++;
     }
-    state = AsyncData<List<AsyncValue<MovieDetails>>>(_loadNext());
   }
 
   @override

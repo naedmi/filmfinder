@@ -3,8 +3,6 @@ import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 
-/// **************************************************************************
-
 /// DarkMode *****************************************************************
 
 class SettingsDarkModeControllerImpl extends SettingsDarkModeController {
