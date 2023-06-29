@@ -19,7 +19,7 @@ import 'package:remixicon/remixicon.dart';
 
 class BottomNavigationWidget extends ConsumerWidget {
   final ScrollController? controller;
-  final AsyncValue<String> movieId;
+  final String movieId;
 
   const BottomNavigationWidget({
     Key? key,
@@ -59,13 +59,12 @@ class BottomNavigationWidget extends ConsumerWidget {
             IconButton(
                 onPressed: () {
                   listController.movieList.movies.any((MovieResult movie) =>
-                          movie.id == int.tryParse(movieId.asData!.value))
-                      ? listController
-                          .removeMovie(int.parse(movieId.asData!.value))
-                      : listController.addMovieFromId(movieId.asData!.value);
+                          movie.id == int.tryParse(movieId))
+                      ? listController.removeMovie(int.parse(movieId))
+                      : listController.addMovieFromId(movieId);
                 },
                 icon: listController.movieList.movies.any((MovieResult movie) =>
-                        movie.id == int.tryParse(movieId.asData?.value ?? ''))
+                        movie.id == int.tryParse(movieId))
                     ? const Icon(Remix.check_line)
                     : const Icon(Remix.add_circle_line)),
           ],
@@ -143,7 +142,7 @@ class SimpleBottomBarScaffold extends StatelessWidget {
   final ScrollController? controller;
   final bool showMiddleButton;
   final bool hideBottomBar;
-  final AsyncValue<String> movieId;
+  final String movieId;
 
   const SimpleBottomBarScaffold(
       {super.key,

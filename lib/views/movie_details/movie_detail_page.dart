@@ -104,7 +104,7 @@ class MovieDetailsPage extends ConsumerWidget {
           loading: () => const LoadingCardWidget(),
           error: (Object error, StackTrace stackTrace) =>
               ErrorCardWidget(error: error, stackTrace: stackTrace)),
-      movieId: AsyncValue<String>.data(movieId),
+      movieId: movieId,
     );
   }
 }

@@ -8,7 +8,6 @@ import 'package:filmfinder/services/list/local_persistence_service.dart';
 import 'package:filmfinder/services/movie_details/movie_details_service.dart';
 import 'package:filmfinder/views/common/error_card_widget.dart';
 import 'package:filmfinder/views/common/loading_card_widget.dart';
-import 'package:filmfinder/views/settings/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class ListController {
