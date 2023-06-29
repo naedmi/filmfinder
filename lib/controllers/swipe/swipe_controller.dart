@@ -19,11 +19,14 @@ abstract class SwipeController
 class SwipeControllerImpl extends SwipeController {
   late DefaultResponse responses;
   late String language;
+  late StateController<String> currentMovieId;
   int nonVideoResults = 0;
 
   @override
   void swipe(int index) async {
     final StateController<int> currentPage = ref.read(pageProvider.notifier);
+    currentMovieId.state = responses.results[index].id.toString();
+
     if (state is! AsyncData<List<AsyncValue<MovieDetails>>>) return;
 
     if (index >= responses.results.length - nonVideoResults) {
@@ -40,6 +43,8 @@ class SwipeControllerImpl extends SwipeController {
     responses = await ref.watch(discoverApiService(
             DiscoverParams(language: language, page: currentPage))
         .future);
+    currentMovieId = ref.read(movieIdProvider.notifier);
+    currentMovieId.state = responses.results[0].id.toString();
 
     return _loadNext();
   }
