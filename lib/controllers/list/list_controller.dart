@@ -25,9 +25,9 @@ abstract class ListController {
 
   void addMovie(MovieResult res);
 
-  void addMovieFromDetails(MovieDetails details);
+  void addMovieByDetails(MovieDetails details);
 
-  void addMovieFromId(String id);
+  void addMovieById(String id);
 
   void removeMovie(int id);
 
@@ -64,7 +64,7 @@ class ListControllerImpl extends ListController {
   }
 
   @override
-  void addMovieFromDetails(MovieDetails details) {
+  void addMovieByDetails(MovieDetails details) {
     final MovieResult movie = MovieResult(
         adult: details.adult,
         backdropPath: details.backdropPath,
@@ -86,7 +86,7 @@ class ListControllerImpl extends ListController {
   }
 
   @override
-  void addMovieFromId(String id) {
+  void addMovieById(String id) {
     AsyncValue<MovieDetails> movieDetails = ref.watch(movieDetailsApiService(
         MovieParams(
             movieID: int.parse(id),
@@ -95,7 +95,7 @@ class ListControllerImpl extends ListController {
 
     movieDetails.when(
       data: (MovieDetails details) {
-        addMovieFromDetails(details);
+        addMovieByDetails(details);
       },
       loading: () => const LoadingCardWidget(),
       error: (Object error, StackTrace? stackTrace) => ErrorCardWidget(
