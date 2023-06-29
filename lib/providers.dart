@@ -79,11 +79,6 @@ class Providers {
     return const MovieList();
   });
 
-  final StateProvider<AsyncValue<String>> swipeMovieIdProvider =
-      StateProvider<AsyncValue<String>>((Ref ref) {
-    return const AsyncValue<String>.loading();
-  });
-
   final AutoDisposeStateProvider<LandingController> landingControllerProvider =
       StateProvider.autoDispose<LandingController>(
           (AutoDisposeStateProviderRef<LandingController> ref) {
