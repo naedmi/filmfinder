@@ -9,6 +9,7 @@ import 'package:filmfinder/views/common/navigation_widget_main_details.dart';
 import 'package:filmfinder/views/common/result_poster_widget.dart';
 import 'package:filmfinder/views/common/tooltip_rating_widget.dart';
 import 'package:filmfinder/views/movie_details/actor_widget.dart';
+import 'package:filmfinder/views/movie_details/certification_widget.dart';
 import 'package:filmfinder/views/movie_details/provider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,15 +40,35 @@ class MovieDetailsPage extends ConsumerWidget {
                             id: details.id,
                             posterPath: details.posterPath,
                             category: fromCategory,
+                            enableTap: false,
                           )
                         ],
                       ),
-                    const SizedBox(height: padding),
+                    const SizedBox(height: paddingSmall),
                     // Display the movie title
                     Center(
                       child: Text(
                         details.title,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    ),
+                    const SizedBox(height: paddingSmall),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            _getYearFromDate(details.releaseDate),
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          CertificationWidget(
+                            releaseDateQuery: details.releaseDates,
+                          ),
+                          Text(
+                            _formatRuntime(details.runtime),
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(height: padding),
@@ -86,17 +107,21 @@ class MovieDetailsPage extends ConsumerWidget {
                         ),
                       ],
                     ),
-
                     const SizedBox(height: padding),
                     // Display the movie overview
                     Text(
                       details.overview,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    const SizedBox(height: paddingBig),
-                    MovieProvidersWidget(
-                        watchProviders: details.watchProviders),
-                    const SizedBox(height: padding),
+                    const SizedBox(height: paddingSmall),
+                    const Divider(),
+                    Padding(
+                      padding: const EdgeInsets.all(paddingTiny),
+                      child: MovieProvidersWidget(
+                          watchProviders: details.watchProviders),
+                    ),
+                    const Divider(),
+                    const SizedBox(height: paddingSmall),
                     FilmActorsList(actors: details.credits?.cast)
                   ],
                 ),
@@ -106,5 +131,18 @@ class MovieDetailsPage extends ConsumerWidget {
               ErrorCardWidget(error: error, stackTrace: stackTrace)),
       movieId: movieId,
     );
+  }
+
+  String _getYearFromDate(String date) {
+    final DateTime parsedDate = DateTime.parse(date);
+    return parsedDate.year.toString();
+  }
+
+  String _formatRuntime(int runtime) {
+    final int hours = runtime ~/ 60;
+    final int minutes = runtime % 60;
+    final String hoursString = hours > 0 ? '${hours}h ' : '';
+    final String minutesString = minutes > 0 ? '${minutes}min' : '';
+    return '$hoursString$minutesString';
   }
 }
