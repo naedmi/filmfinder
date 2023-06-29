@@ -13,6 +13,7 @@ import 'package:filmfinder/models/watch_provider/movie_provider_params.dart';
 import 'package:filmfinder/models/watch_provider/movie_provider_response.dart';
 import 'package:filmfinder/services/watch_provider/watch_provider_api_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/views/common/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -298,6 +299,7 @@ class ProviderConsumer extends ConsumerWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     discoverController.refreshProviders();
+                    savedToast();
                   },
                   child: const Text('filter.apply').tr(),
                 ),
@@ -386,6 +388,7 @@ class GenreConsumer extends ConsumerWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     discoverController.refreshGenres();
+                    savedToast();
                   },
                   child: const Text('filter.apply').tr(),
                 ),
