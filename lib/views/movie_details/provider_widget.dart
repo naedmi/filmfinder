@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/models/watch_provider/movie_provider_response.dart';
-import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';

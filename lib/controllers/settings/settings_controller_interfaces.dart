@@ -2,14 +2,10 @@ import 'package:filmfinder/models/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// **************************************************************************
-
 /// DarkMode *****************************************************************
 
 abstract class SettingsDarkModeController
-    extends StateNotifier<SettingsDarkModeModel> {
-  SettingsDarkModeController(SettingsDarkModeModel state) : super(state);
-
+    extends Notifier<SettingsDarkModeModel> {
   void switchDarkMode();
 }
 
@@ -18,9 +14,7 @@ abstract class SettingsDarkModeController
 /// Language *****************************************************************
 
 abstract class SettingsLanguageController
-    extends StateNotifier<SettingsLanguageModel> {
-  SettingsLanguageController(SettingsLanguageModel state) : super(state);
-
+    extends Notifier<SettingsLanguageModel> {
   void setLanguage(String lang, BuildContext context);
 }
 

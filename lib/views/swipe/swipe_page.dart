@@ -1,5 +1,5 @@
+import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/controllers/swipe/swipe_controller.dart';
-import 'package:filmfinder/controllers/swipe/swipe_providers.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/views/common/error_card_widget.dart';
 import 'package:filmfinder/views/common/loading_card_widget.dart';
@@ -14,9 +14,9 @@ class SwipePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<List<AsyncValue<MovieDetails>>> swipeController =
-        ref.watch(swipeControllerProvider);
+        ref.watch(providers.swipeControllerProvider);
     final SwipeController swipeNotifier =
-        ref.read(swipeControllerProvider.notifier);
+        ref.read(providers.swipeControllerProvider.notifier);
     return SimpleBottomBarScaffold(
       hideBottomBar:
           MediaQuery.of(context).orientation == Orientation.landscape,

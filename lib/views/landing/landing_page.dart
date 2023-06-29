@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/landing/landing_controller.dart';
+import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/landing/landing_category.dart';
-import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/about_widget.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/error_card_widget.dart';
@@ -21,8 +21,10 @@ class LandingPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final LandingController controller =
+    final List<Future<LandingCategory>> categoryList =
         ref.watch(providers.landingControllerProvider);
+    final LandingController controller =
+        ref.read(providers.landingControllerProvider.notifier);
     return MainBottomBarScaffold(
         controller: _scrollController,
         appBar: AppBar(
@@ -92,8 +94,7 @@ class LandingPage extends ConsumerWidget {
             controller: _scrollController,
             shrinkWrap: true,
             children: <Widget>[
-              for (Future<LandingCategory> landingCategory
-                  in controller.landingCategories)
+              for (Future<LandingCategory> landingCategory in categoryList)
                 OverviewRowWidget(landingCategory: landingCategory),
               const SizedBox(height: paddingBig),
             ],

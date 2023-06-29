@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:filmfinder/controllers/movie_details/movie_details_controller.dart';
+import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
-import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/error_card_widget.dart';
 import 'package:filmfinder/views/common/loading_card_widget.dart';
@@ -22,12 +21,12 @@ class MovieDetailsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final MovieDetailsController movieDetailsController =
+    final AsyncValue<MovieDetails> movieDetails =
         ref.watch(providers.movieDetailsProvider(int.parse(movieId)));
 
     return SimpleBottomBarScaffold(
       showMiddleButton: false,
-      body: movieDetailsController.movieDetails.when(
+      body: movieDetails.when(
           data: (MovieDetails details) => Container(
                 padding: const EdgeInsets.all(padding),
                 child: ListView(

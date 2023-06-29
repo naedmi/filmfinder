@@ -1,5 +1,11 @@
 import 'package:filmfinder/models/common/movie_result.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+final Provider<LocalPersistenceService> localPersistenceProvider =
+    Provider<LocalPersistenceService>(
+        (ProviderRef<LocalPersistenceService> _) =>
+            LocalPersistenceServiceHive());
 
 abstract class LocalPersistenceService {
   List<MovieResult> getAllMovies();

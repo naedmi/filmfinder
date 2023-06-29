@@ -1,6 +1,6 @@
 import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
-import 'package:filmfinder/providers.dart';
+import 'package:filmfinder/services/common/dio_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final AutoDisposeFutureProviderFamily<DefaultResponse, SearchFilter>
@@ -13,7 +13,7 @@ Future<DefaultResponse> searchApiServiceImpl(
     return const DefaultResponse();
   }
 
-  dynamic response = await ref.watch(providers.dioProvider).get(
+  dynamic response = await ref.watch(dioProvider).get(
         'https://api.themoviedb.org/3/search/${filter.type}?'
         'query=${filter.query}'
         '&language=${filter.language}'
