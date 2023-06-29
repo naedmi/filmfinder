@@ -61,7 +61,7 @@ class BottomNavigationWidget extends ConsumerWidget {
                   listController.movieList.movies.any((MovieResult movie) =>
                           movie.id == int.tryParse(movieId))
                       ? listController.removeMovie(int.parse(movieId))
-                      : listController.addMovieFromId(movieId);
+                      : listController.addMovieById(movieId);
                 },
                 icon: listController.movieList.movies.any((MovieResult movie) =>
                         movie.id == int.tryParse(movieId))

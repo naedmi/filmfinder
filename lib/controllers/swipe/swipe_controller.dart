@@ -25,7 +25,7 @@ class SwipeControllerImpl extends SwipeController {
   @override
   void swipe(int index) async {
     final StateController<int> currentPage = ref.read(pageProvider.notifier);
-    currentMovieId.state = responses.results[index].id.toString();
+    currentMovieId.state = responses.results.first.id.toString();
 
     if (state is! AsyncData<List<AsyncValue<MovieDetails>>>) return;
 
@@ -44,7 +44,7 @@ class SwipeControllerImpl extends SwipeController {
             DiscoverParams(language: language, page: currentPage))
         .future);
     currentMovieId = ref.read(movieIdProvider.notifier);
-    currentMovieId.state = responses.results[0].id.toString();
+    currentMovieId.state = responses.results.first.id.toString();
 
     return _loadNext();
   }
