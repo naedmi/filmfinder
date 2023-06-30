@@ -61,6 +61,9 @@
     "no": "No"
   },
   "filter": {
+    "selectAll": "Select All",
+    "deselectAll": "Deselect All",
+    "apply": "Apply",
     "provider": {
       "title": "Provider"
     },
