@@ -62,13 +62,13 @@ class BottomNavigationWidget extends ConsumerWidget {
             const MiddleButton(),
             IconButton(
               onPressed: () {
-                movieList.movies.any(
-                        (MovieResult movie) => movie.id == int.parse(movieId))
+                movieList.movies.any((MovieResult movie) =>
+                        movie.id == int.tryParse(movieId))
                     ? listController.removeMovie(int.parse(movieId))
-                    : listController.addMovieFromId(movieId);
+                    : listController.addMovieById(movieId);
               },
               icon: movieList.movies.any(
-                      (MovieResult movie) => movie.id == int.parse(movieId))
+                      (MovieResult movie) => movie.id == int.tryParse(movieId))
                   ? const Icon(
                       Remix.check_line,
                     )

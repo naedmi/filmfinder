@@ -127,7 +127,7 @@ class SearchResultWidget extends ConsumerWidget {
                                   );
                                 }
                               },
-                              child: movieList.movies.contains(res)
+                              child: listController.contains(res.id)
                                   ? const Icon(
                                       Remix.heart_fill,
                                     )

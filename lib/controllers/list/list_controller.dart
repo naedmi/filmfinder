@@ -14,9 +14,9 @@ abstract class ListController extends AutoDisposeNotifier<MovieList> {
 
   void addMovie(MovieResult res);
 
-  void addMovieFromDetails(MovieDetails details);
+  void addMovieByDetails(MovieDetails details);
 
-  void addMovieFromId(String id);
+  void addMovieById(String id);
 
   void removeMovie(int id);
 
@@ -44,7 +44,7 @@ class ListControllerImpl extends ListController {
   }
 
   @override
-  void addMovieFromDetails(MovieDetails details) {
+  void addMovieByDetails(MovieDetails details) {
     final MovieResult movie = MovieResult(
         adult: details.adult,
         backdropPath: details.backdropPath,
@@ -66,21 +66,14 @@ class ListControllerImpl extends ListController {
   }
 
   @override
-  void addMovieFromId(String id) {
+  void addMovieById(String id) {
     AsyncValue<MovieDetails> movieDetails = ref.watch(movieDetailsApiService(
         MovieParams(
             movieID: int.parse(id),
             language: FilmfinderPreferences.getLanguage(),
             appendToResponse: 'watch/providers,credits')));
 
-    movieDetails.when(
-        data: (MovieDetails details) {
-          addMovieFromDetails(details);
-        },
-        loading: () {},
-        error: (Object error, StackTrace? stackTrace) {
-          // TODO: handle error
-        });
+    movieDetails.whenData((MovieDetails details) => addMovieByDetails(details));
   }
 
   @override
