@@ -312,7 +312,7 @@ class SearchPage extends ConsumerWidget {
                   padding: const EdgeInsets.only(
                       left: padding, right: padding, bottom: paddingBig * 2),
                   itemBuilder: (BuildContext context, int index) =>
-                      SearchResultWidget(res: res.results[index]),
+                      ResultWidget(res: res.results[index]),
                   itemCount: res.results.length,
                   separatorBuilder: (BuildContext context, int index) =>
                       const Divider(),

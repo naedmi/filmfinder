@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
 
-class SearchResultWidget extends ConsumerWidget {
+class ResultWidget extends ConsumerWidget {
   final MovieResult res;
 
-  const SearchResultWidget({Key? key, required this.res}) : super(key: key);
+  const ResultWidget({Key? key, required this.res}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
