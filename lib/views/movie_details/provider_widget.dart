@@ -1,14 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/models/watch_provider/movie_provider_response.dart';
-import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:remixicon/remixicon.dart';
 
 class ProviderLogoWidget extends ConsumerWidget {
   final WatchProviders? watchProviders;
@@ -48,19 +49,19 @@ class ProviderLogoWidget extends ConsumerWidget {
             .toList(),
       );
     }
-    return Wrap(
-      spacing: paddingSmall,
-      runSpacing: paddingTiny,
-      children: List<Widget>.generate(
-        4,
-        (_) => Container(
-          width: providerLogoSize,
-          height: providerLogoSize,
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(paddingSmall),
+    return Padding(
+      padding: const EdgeInsets.all(paddingSmall),
+      child: Column(
+        children: <Widget>[
+          const Icon(Remix.emotion_sad_line),
+          Center(
+            child: Text(
+              'details.providers'.tr(),
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -82,24 +83,21 @@ class MovieProvidersWidget extends ConsumerWidget {
         const SizedBox(height: paddingTiny),
         Align(
           alignment: Alignment.center,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: padding),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'details.attribution'.tr(),
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.secondary),
-                ),
-                SvgPicture.asset(
-                  darkModeModel.darkMode
-                      ? 'assets/images/jw_logo_color.svg'
-                      : 'assets/images/jw_logo_black.svg',
-                  height: 10,
-                ),
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'details.attribution'.tr(),
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.secondary),
+              ),
+              SvgPicture.asset(
+                darkModeModel.darkMode
+                    ? 'assets/images/jw_logo_color.svg'
+                    : 'assets/images/jw_logo_black.svg',
+                height: 10,
+              ),
+            ],
           ),
         ),
       ],

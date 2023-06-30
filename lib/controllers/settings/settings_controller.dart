@@ -3,21 +3,18 @@ import 'package:filmfinder/models/settings/settings.dart';
 import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 
-/// **************************************************************************
-
 /// DarkMode *****************************************************************
 
 class SettingsDarkModeControllerImpl extends SettingsDarkModeController {
-  SettingsDarkModeControllerImpl({
-    SettingsDarkModeModel? model,
-  }) : super(model ??
-            SettingsDarkModeModel(
-                darkMode: FilmfinderPreferences.getDarkMode()));
-
   @override
   void switchDarkMode() {
     FilmfinderPreferences.setDarkMode(!FilmfinderPreferences.getDarkMode());
     state = state.copyWith(darkMode: FilmfinderPreferences.getDarkMode());
+  }
+
+  @override
+  SettingsDarkModeModel build() {
+    return SettingsDarkModeModel(darkMode: FilmfinderPreferences.getDarkMode());
   }
 }
 
@@ -26,16 +23,15 @@ class SettingsDarkModeControllerImpl extends SettingsDarkModeController {
 /// Language *****************************************************************
 
 class SettingsLanguageControllerImpl extends SettingsLanguageController {
-  SettingsLanguageControllerImpl({
-    SettingsLanguageModel? model,
-  }) : super(model ??
-            SettingsLanguageModel(
-                language: FilmfinderPreferences.getLanguage()));
-
   @override
   void setLanguage(String lang, BuildContext context) {
     FilmfinderPreferences.setLanguage(lang);
     state = state.copyWith(language: FilmfinderPreferences.getLanguage());
+  }
+
+  @override
+  SettingsLanguageModel build() {
+    return SettingsLanguageModel(language: FilmfinderPreferences.getLanguage());
   }
 }
 

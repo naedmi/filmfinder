@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+/// Argument should be the video id.
 abstract class VideoController
     extends AutoDisposeFamilyNotifier<VideoControllerState, String> {
   void toggleMute();

@@ -1,6 +1,6 @@
+import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/common/default_response.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
-import 'package:filmfinder/providers.dart';
 import 'package:filmfinder/services/search/search_api_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
