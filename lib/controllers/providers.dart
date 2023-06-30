@@ -129,6 +129,9 @@ class Providers {
   final StateProvider<int> pageProvider =
       StateProvider<int>((StateProviderRef<int> ref) => 1);
 
+  final StateProvider<String> movieIdProvider =
+      StateProvider<String>((StateProviderRef<String> ref) => '');
+
   final AutoDisposeNotifierProviderFamily<VideoController, VideoControllerState,
           String> videoControllerProvider =
       NotifierProvider.autoDispose

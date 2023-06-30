@@ -13,8 +13,10 @@ import 'package:filmfinder/models/watch_provider/movie_provider_params.dart';
 import 'package:filmfinder/models/watch_provider/movie_provider_response.dart';
 import 'package:filmfinder/services/watch_provider/watch_provider_api_service.dart';
 import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/views/common/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -60,13 +62,13 @@ class BottomNavigationWidget extends ConsumerWidget {
             const MiddleButton(),
             IconButton(
               onPressed: () {
-                movieList.movies.any(
-                        (MovieResult movie) => movie.id == int.parse(movieId))
+                movieList.movies.any((MovieResult movie) =>
+                        movie.id == int.tryParse(movieId))
                     ? listController.removeMovie(int.parse(movieId))
-                    : listController.addMovieFromId(movieId);
+                    : listController.addMovieById(movieId);
               },
               icon: movieList.movies.any(
-                      (MovieResult movie) => movie.id == int.parse(movieId))
+                      (MovieResult movie) => movie.id == int.tryParse(movieId))
                   ? const Icon(
                       Remix.check_line,
                     )
@@ -109,15 +111,16 @@ class MiddleButton extends ConsumerWidget {
                         ),
                         onTap: () {
                           if (filterOptions.keys.toList()[index] ==
-                              'Provider') {
+                              'filter.provider.title'.tr()) {
                             showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
+                                //return const ProviderConsumer();
                                 return const ProviderConsumer();
                               },
                             );
                           } else if (filterOptions.keys.toList()[index] ==
-                              'Genre') {
+                              'filter.genre.title'.tr()) {
                             showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
@@ -203,8 +206,8 @@ class LogoName extends StatelessWidget {
               const Center(child: CircularProgressIndicator()),
           errorWidget: (BuildContext context, String url, _) =>
               const Icon(Remix.error_warning_line),
-          width: 30,
-          height: 30,
+          width: providerLogoSizeSmall,
+          height: providerLogoSizeSmall,
         ),
         const SizedBox(
           width: padding,
@@ -236,115 +239,195 @@ class IconName extends StatelessWidget {
   }
 }
 
-class ProviderConsumer extends StatelessWidget {
+class ProviderConsumer extends ConsumerWidget {
   const ProviderConsumer({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, _) {
-        final FilterProviderController filterProviderController =
-            ref.read(providers.filterProviderControllerProvider.notifier);
-        final FilterProviderModel filterProviderModel =
-            ref.watch(providers.filterProviderControllerProvider);
-        final SettingsLanguageModel languageModel =
-            ref.watch(providers.settingsLanguageControllerProvider);
-        final DiscoverController discoverController =
-            ref.read(providers.discoverControllerProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final FilterProviderController filterProviderController =
+        ref.read(providers.filterProviderControllerProvider.notifier);
+    final FilterProviderModel filterProviderModel =
+        ref.watch(providers.filterProviderControllerProvider);
+    final DiscoverController discoverController =
+        ref.read(providers.discoverControllerProvider.notifier);
+    final SettingsDarkModeModel darkModeModel =
+        ref.watch(providers.settingsControllerProvider);
 
-        final AsyncValue<MovieProviderResponse> movieProviders =
-            ref.watch(watchProviderApiService(MovieProviderParams(
-          language: languageModel.language.split('-')[0],
-          watchRegion: languageModel.language.split('-')[1],
-        )));
-        List<MovieWatchProvider> movieProviderList = <MovieWatchProvider>[];
-        movieProviders.whenData(
-            (MovieProviderResponse value) => movieProviderList = value.results);
+    final AsyncValue<MovieProviderResponse> movieProviders =
+        ref.watch(watchProviderApiService(MovieProviderParams(
+      language: Localizations.localeOf(context).languageCode.toString(),
+      watchRegion: Localizations.localeOf(context).countryCode.toString(),
+    )));
+    List<MovieWatchProvider> movieProviderList = <MovieWatchProvider>[];
+    movieProviders.whenData(
+        (MovieProviderResponse value) => movieProviderList = value.results);
 
-        return ListView.separated(
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(padding),
-          itemCount: movieProviderList.length,
-          itemBuilder: (BuildContext context, int index) {
-            final int clickedProviderKey = movieProviderList[index].providerId;
-
-            return ListTile(
-              horizontalTitleGap: padding,
-              trailing: filterProviderModel.providers.keys
-                      .contains(clickedProviderKey)
-                  ? const Icon(Remix.check_line)
-                  : null,
-              title: LogoName(
-                logo: movieProviderList[index].logoPath,
-                provName: movieProviderList[index].providerName,
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(paddingSmall),
+          child: SvgPicture.asset(
+            darkModeModel.darkMode
+                ? justWatchImagePathLight
+                : justWatchImagePathDark,
+            height: justWatchImageHeight,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(paddingSmall),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (filterProviderModel.providers.length ==
+                        movieProviderList.length) {
+                      filterProviderController.clearProviders();
+                    } else {
+                      filterProviderController
+                          .selectAllProviders(movieProviderList);
+                    }
+                  },
+                  child: movieProviderList.length ==
+                          filterProviderModel.providers.length
+                      ? const Text('filter.deselectAll').tr()
+                      : const Text('filter.selectAll').tr(),
+                ),
               ),
-              onTap: () {
-                if (filterProviderModel.providers.keys
-                    .contains(clickedProviderKey)) {
-                  filterProviderController.removeProvider(clickedProviderKey);
-                } else {
-                  filterProviderController.addProvider(clickedProviderKey, (
-                    movieProviderList[index].providerName,
-                    movieProviderList[index].logoPath
-                  ));
-                  discoverController.refreshProviders();
-                }
-              },
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-        );
-      },
+              const SizedBox(width: 8.0),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    discoverController.refreshProviders();
+                    savedToast();
+                  },
+                  child: const Text('filter.apply').tr(),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView.separated(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(padding),
+            itemCount: movieProviderList.length,
+            itemBuilder: (BuildContext context, int index) {
+              final int clickedProviderKey =
+                  movieProviderList[index].providerId;
+
+              return ListTile(
+                horizontalTitleGap: padding,
+                trailing: filterProviderModel.providers.keys
+                        .contains(clickedProviderKey)
+                    ? const Icon(Remix.check_line)
+                    : null,
+                title: LogoName(
+                  logo: movieProviderList[index].logoPath,
+                  provName: movieProviderList[index].providerName,
+                ),
+                onTap: () {
+                  if (filterProviderModel.providers.keys
+                      .contains(clickedProviderKey)) {
+                    filterProviderController.removeProvider(clickedProviderKey);
+                  } else {
+                    filterProviderController.addProvider(
+                      clickedProviderKey,
+                      (
+                        movieProviderList[index].providerName,
+                        movieProviderList[index].logoPath,
+                      ),
+                    );
+                  }
+                },
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(),
+          ),
+        ),
+      ],
     );
   }
 }
 
-class GenreConsumer extends StatelessWidget {
+class GenreConsumer extends ConsumerWidget {
   const GenreConsumer({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, _) {
-        final FilterGenreController filterGenreController =
-            ref.read(providers.filterGenreControllerProvider.notifier);
-        final FilterGenreModel filterGenreModel =
-            ref.watch(providers.filterGenreControllerProvider);
-        final DiscoverController discoverController =
-            ref.read(providers.discoverControllerProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final FilterGenreController filterGenreController =
+        ref.read(providers.filterGenreControllerProvider.notifier);
+    final FilterGenreModel filterGenreModel =
+        ref.watch(providers.filterGenreControllerProvider);
+    final DiscoverController discoverController =
+        ref.read(providers.discoverControllerProvider.notifier);
 
-        return ListView.separated(
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(padding),
-          itemCount: genreMap.length,
-          itemBuilder: (BuildContext context, int index) {
-            final int clickedGenreKey = genreMap.keys.toList()[index];
-
-            return ListTile(
-              horizontalTitleGap: padding,
-              trailing: filterGenreModel.genres.keys.contains(clickedGenreKey)
-                  ? const Icon(Remix.check_line)
-                  : null,
-              title: IconName(
-                logo: genreMap[genreMap.keys.toList()[index]]!.$2,
-                provName: genreMap[genreMap.keys.toList()[index]]!.$1,
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(paddingSmall),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (filterGenreModel.genres.length == genreMap.length) {
+                      filterGenreController.clearGenres();
+                    } else {
+                      filterGenreController.selectAllGenres();
+                    }
+                  },
+                  child: filterGenreModel.genres.length == genreMap.length
+                      ? const Text('filter.deselectAll').tr()
+                      : const Text('filter.selectAll').tr(),
+                ),
               ),
-              onTap: () {
-                if (filterGenreModel.genres.keys.contains(clickedGenreKey)) {
-                  filterGenreController.removeGenre(clickedGenreKey);
-                } else {
-                  filterGenreController.addGenre(clickedGenreKey,
-                      genreMap[genreMap.keys.toList()[index]]!.$1);
-                }
-                discoverController.refreshGenres();
-              },
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-        );
-      },
+              const SizedBox(width: 8.0),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    discoverController.refreshGenres();
+                    savedToast();
+                  },
+                  child: const Text('filter.apply').tr(),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView.separated(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(padding),
+            itemCount: genreMap.length,
+            itemBuilder: (BuildContext context, int index) {
+              final int clickedGenreKey = genreMap.keys.toList()[index];
+
+              return ListTile(
+                horizontalTitleGap: padding,
+                trailing: filterGenreModel.genres.keys.contains(clickedGenreKey)
+                    ? const Icon(Remix.check_line)
+                    : null,
+                title: IconName(
+                  logo: genreMap[genreMap.keys.toList()[index]]!.$2,
+                  provName: genreMap[genreMap.keys.toList()[index]]!.$1,
+                ),
+                onTap: () {
+                  if (filterGenreModel.genres.keys.contains(clickedGenreKey)) {
+                    filterGenreController.removeGenre(clickedGenreKey);
+                  } else {
+                    filterGenreController.addGenre(clickedGenreKey,
+                        genreMap[genreMap.keys.toList()[index]]!.$1);
+                  }
+                },
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(),
+          ),
+        ),
+      ],
     );
   }
 }

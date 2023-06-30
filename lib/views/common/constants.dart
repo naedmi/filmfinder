@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -212,9 +213,9 @@ const int animationDelay = 250;
 
 /// Filter *******************************************************************
 
-const Map<String, IconData> filterOptions = <String, IconData>{
-  'Provider': Remix.tv_line,
-  'Genre': Remix.movie_line,
+Map<String, IconData> filterOptions = <String, IconData>{
+  'filter.provider.title'.tr(): Remix.tv_line,
+  'filter.genre.title'.tr(): Remix.movie_line,
 };
 
 Map<int, (String, IconData)> genreMap = <int, (String, IconData)>{
@@ -238,5 +239,10 @@ Map<int, (String, IconData)> genreMap = <int, (String, IconData)>{
   10752: ('filter.genre.war', Remix.sword_line),
   37: ('filter.genre.western', Remix.sword_line),
 };
+
+const String justWatchImagePathLight = 'assets/images/jw_logo_color.svg';
+const String justWatchImagePathDark = 'assets/images/jw_logo_black.svg';
+const double justWatchImageHeight = 10;
+const double providerLogoSizeSmall = 30;
 
 /// **************************************************************************

@@ -61,8 +61,11 @@
     "no": "Nein"
   },
   "filter": {
+    "selectAll": "Alle auswählen",
+    "deselectAll": "Alle abwählen",
+    "apply": "Anwenden",
     "provider": {
-      "title": "Provider"
+      "title": "Anbieter"
     },
     "genre": {
       "title": "Genre",

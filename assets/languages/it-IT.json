@@ -61,6 +61,9 @@
         "no": "No"
     },
     "filter": {
+        "selectAll": "Seleziona tutto",
+        "deselectAll": "Deseleziona Tutto",
+        "apply": "Applica",
         "provider": {
             "title": "Fornitore"
         },
