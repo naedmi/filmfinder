@@ -52,7 +52,7 @@ class ListPage extends ConsumerWidget {
               padding: const EdgeInsets.only(
                   left: padding, right: padding, bottom: paddingBig * 2),
               itemBuilder: (BuildContext context, int index) =>
-                  SearchResultWidget(res: movieList.movies[index]),
+                  ResultWidget(res: movieList.movies[index]),
               itemCount: listController.getAllMovies().length,
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(),

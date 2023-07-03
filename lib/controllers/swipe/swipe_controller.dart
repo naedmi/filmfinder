@@ -26,7 +26,7 @@ class SwipeControllerImpl extends SwipeController {
   void swipe(int index) async {
     final StateController<int> currentPage =
         ref.read(providers.pageProvider.notifier);
-    currentMovieId.state = responses.results.first.id.toString();
+    currentMovieId.state = responses.results.elementAt(index).id.toString();
 
     if (state is! AsyncData<List<AsyncValue<MovieDetails>>>) return;
 
