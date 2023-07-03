@@ -50,7 +50,9 @@ class ListPage extends ConsumerWidget {
           : ListView.separated(
               physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.only(
-                  left: padding, right: padding, bottom: paddingBig * 2),
+                  left: padding,
+                  right: padding,
+                  bottom: paddingBig * 2 + padding * 2),
               itemBuilder: (BuildContext context, int index) =>
                   ResultWidget(res: movieList.movies[index]),
               itemCount: listController.getAllMovies().length,

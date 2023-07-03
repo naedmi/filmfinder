@@ -13,7 +13,7 @@ class SwipePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<AsyncValue<MovieDetails>>> swipeController =
+    final AsyncValue<List<MovieDetails>> swipeController =
         ref.watch(providers.swipeControllerProvider);
     final SwipeController swipeNotifier =
         ref.read(providers.swipeControllerProvider.notifier);
@@ -22,7 +22,7 @@ class SwipePage extends ConsumerWidget {
           MediaQuery.of(context).orientation == Orientation.landscape,
       body: Center(
         child: swipeController.when(
-            data: (List<AsyncValue<MovieDetails>> movies) {
+            data: (List<MovieDetails> movies) {
               return PageView(
                 onPageChanged: (int index) {
                   swipeNotifier.swipe(index);
@@ -30,17 +30,9 @@ class SwipePage extends ConsumerWidget {
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 children: <Widget>[
-                  for (AsyncValue<MovieDetails> movie in movies)
-                    movie.when(
-                      data: (MovieDetails details) => SingleSwipeWidget(
-                        movie: details,
-                      ),
-                      error: (Object error, StackTrace? stackTrace) =>
-                          ErrorCardWidget(
-                        error: error,
-                        stackTrace: stackTrace,
-                      ),
-                      loading: () => const LoadingCardWidget(),
+                  for (MovieDetails movie in movies)
+                    SingleSwipeWidget(
+                      movie: movie,
                     ),
                   const LoadingCardWidget(),
                 ],

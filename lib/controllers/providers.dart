@@ -118,10 +118,10 @@ class Providers {
 
   /// Swipe ********************************************************************
 
-  final AutoDisposeAsyncNotifierProvider<SwipeController,
-          List<AsyncValue<MovieDetails>>> swipeControllerProvider =
-      AsyncNotifierProvider.autoDispose<SwipeController,
-          List<AsyncValue<MovieDetails>>>(() => SwipeControllerImpl());
+  final AutoDisposeAsyncNotifierProvider<SwipeController, List<MovieDetails>>
+      swipeControllerProvider =
+      AsyncNotifierProvider.autoDispose<SwipeController, List<MovieDetails>>(
+          () => SwipeControllerImpl());
 
   /// Tracks the current page of the swipe page view.
   ///
