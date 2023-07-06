@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$FilterProviderModel {
   Map<int, (String, String)> get providers =>
       throw _privateConstructorUsedError;
+  String get language => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FilterProviderModelCopyWith<FilterProviderModel> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $FilterProviderModelCopyWith<$Res> {
           FilterProviderModel value, $Res Function(FilterProviderModel) then) =
       _$FilterProviderModelCopyWithImpl<$Res, FilterProviderModel>;
   @useResult
-  $Res call({Map<int, (String, String)> providers});
+  $Res call({Map<int, (String, String)> providers, String language});
 }
 
 /// @nodoc
@@ -47,12 +48,17 @@ class _$FilterProviderModelCopyWithImpl<$Res, $Val extends FilterProviderModel>
   @override
   $Res call({
     Object? providers = null,
+    Object? language = null,
   }) {
     return _then(_value.copyWith(
       providers: null == providers
           ? _value.providers
           : providers // ignore: cast_nullable_to_non_nullable
               as Map<int, (String, String)>,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -65,7 +71,7 @@ abstract class _$$_FilterProviderModelCopyWith<$Res>
       __$$_FilterProviderModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<int, (String, String)> providers});
+  $Res call({Map<int, (String, String)> providers, String language});
 }
 
 /// @nodoc
@@ -80,12 +86,17 @@ class __$$_FilterProviderModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? providers = null,
+    Object? language = null,
   }) {
     return _then(_$_FilterProviderModel(
       providers: null == providers
           ? _value._providers
           : providers // ignore: cast_nullable_to_non_nullable
               as Map<int, (String, String)>,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -95,7 +106,8 @@ class __$$_FilterProviderModelCopyWithImpl<$Res>
 class _$_FilterProviderModel implements _FilterProviderModel {
   _$_FilterProviderModel(
       {final Map<int, (String, String)> providers =
-          const <int, (String, String)>{}})
+          const <int, (String, String)>{},
+      this.language = 'en-US'})
       : _providers = providers;
 
   final Map<int, (String, String)> _providers;
@@ -108,8 +120,12 @@ class _$_FilterProviderModel implements _FilterProviderModel {
   }
 
   @override
+  @JsonKey()
+  final String language;
+
+  @override
   String toString() {
-    return 'FilterProviderModel(providers: $providers)';
+    return 'FilterProviderModel(providers: $providers, language: $language)';
   }
 
   @override
@@ -118,12 +134,14 @@ class _$_FilterProviderModel implements _FilterProviderModel {
         (other.runtimeType == runtimeType &&
             other is _$_FilterProviderModel &&
             const DeepCollectionEquality()
-                .equals(other._providers, _providers));
+                .equals(other._providers, _providers) &&
+            (identical(other.language, language) ||
+                other.language == language));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_providers));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_providers), language);
 
   @JsonKey(ignore: true)
   @override
@@ -134,11 +152,14 @@ class _$_FilterProviderModel implements _FilterProviderModel {
 }
 
 abstract class _FilterProviderModel implements FilterProviderModel {
-  factory _FilterProviderModel({final Map<int, (String, String)> providers}) =
-      _$_FilterProviderModel;
+  factory _FilterProviderModel(
+      {final Map<int, (String, String)> providers,
+      final String language}) = _$_FilterProviderModel;
 
   @override
   Map<int, (String, String)> get providers;
+  @override
+  String get language;
   @override
   @JsonKey(ignore: true)
   _$$_FilterProviderModelCopyWith<_$_FilterProviderModel> get copyWith =>
