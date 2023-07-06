@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -214,8 +213,8 @@ const int animationDelay = 250;
 /// Filter *******************************************************************
 
 Map<String, IconData> filterOptions = <String, IconData>{
-  'filter.provider.title'.tr(): Remix.tv_line,
-  'filter.genre.title'.tr(): Remix.movie_line,
+  'filter.provider.title': Remix.tv_line,
+  'filter.genre.title': Remix.movie_line,
 };
 
 Map<int, (String, IconData)> genreMap = <int, (String, IconData)>{

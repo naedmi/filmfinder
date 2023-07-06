@@ -81,11 +81,11 @@ class BottomNavigationWidget extends ConsumerWidget {
   }
 }
 
-class MiddleButton extends ConsumerWidget {
+class MiddleButton extends StatelessWidget {
   const MiddleButton({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final bool isSwipe = GoRouter.of(context).location == routeSwipe;
     if (isSwipe) {
       return SizedBox(
@@ -107,20 +107,17 @@ class MiddleButton extends ConsumerWidget {
                         title: IconName(
                           logo: filterOptions[
                               filterOptions.keys.toList()[index]]!,
-                          provName: filterOptions.keys.toList()[index],
+                          provName: filterOptions.keys.toList()[index].tr(),
                         ),
                         onTap: () {
-                          if (filterOptions.keys.toList()[index] ==
-                              'filter.provider.title'.tr()) {
+                          if (index == 0) {
                             showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
-                                //return const ProviderConsumer();
                                 return const ProviderConsumer();
                               },
                             );
-                          } else if (filterOptions.keys.toList()[index] ==
-                              'filter.genre.title'.tr()) {
+                          } else if (index == 1) {
                             showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {

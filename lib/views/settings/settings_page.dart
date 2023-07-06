@@ -106,7 +106,8 @@ class Settings extends ConsumerWidget {
                                   supportedLanguages.keys.toList()[index]
                               ? const Icon(Remix.check_line)
                               : null,
-                          title: Text(supportedLanguages.keys.toList()[index]),
+                          title:
+                              Text(supportedLanguages.values.toList()[index]),
                           onTap: () {
                             String key =
                                 supportedLanguages.keys.toList()[index];
