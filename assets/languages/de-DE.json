@@ -64,6 +64,7 @@
     "selectAll": "Alle auswählen",
     "deselectAll": "Alle abwählen",
     "apply": "Anwenden",
+    "language": "Sprache",
     "provider": {
       "title": "Anbieter"
     },

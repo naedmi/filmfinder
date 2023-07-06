@@ -17,11 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LandingTrendingParams {
   AvailableTrendingType get trendingType => throw _privateConstructorUsedError;
-
   int get page => throw _privateConstructorUsedError;
-
   String get language => throw _privateConstructorUsedError;
-
   String? get region => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -34,7 +31,6 @@ abstract class $LandingTrendingParamsCopyWith<$Res> {
   factory $LandingTrendingParamsCopyWith(LandingTrendingParams value,
           $Res Function(LandingTrendingParams) then) =
       _$LandingTrendingParamsCopyWithImpl<$Res, LandingTrendingParams>;
-
   @useResult
   $Res call(
       {AvailableTrendingType trendingType,
@@ -51,7 +47,6 @@ class _$LandingTrendingParamsCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -90,7 +85,6 @@ abstract class _$$_LandingTrendingParamsCopyWith<$Res>
   factory _$$_LandingTrendingParamsCopyWith(_$_LandingTrendingParams value,
           $Res Function(_$_LandingTrendingParams) then) =
       __$$_LandingTrendingParamsCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -188,21 +182,16 @@ abstract class _LandingTrendingParams extends LandingTrendingParams {
       final int page,
       required final String language,
       final String? region}) = _$_LandingTrendingParams;
-
   const _LandingTrendingParams._() : super._();
 
   @override
   AvailableTrendingType get trendingType;
-
   @override
   int get page;
-
   @override
   String get language;
-
   @override
   String? get region;
-
   @override
   @JsonKey(ignore: true)
   _$$_LandingTrendingParamsCopyWith<_$_LandingTrendingParams> get copyWith =>
@@ -212,11 +201,8 @@ abstract class _LandingTrendingParams extends LandingTrendingParams {
 /// @nodoc
 mixin _$LandingCategoryParams {
   AvailableLandingCategory get category => throw _privateConstructorUsedError;
-
   int get page => throw _privateConstructorUsedError;
-
   String get language => throw _privateConstructorUsedError;
-
   String? get region => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -229,7 +215,6 @@ abstract class $LandingCategoryParamsCopyWith<$Res> {
   factory $LandingCategoryParamsCopyWith(LandingCategoryParams value,
           $Res Function(LandingCategoryParams) then) =
       _$LandingCategoryParamsCopyWithImpl<$Res, LandingCategoryParams>;
-
   @useResult
   $Res call(
       {AvailableLandingCategory category,
@@ -246,7 +231,6 @@ class _$LandingCategoryParamsCopyWithImpl<$Res,
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -285,7 +269,6 @@ abstract class _$$_LandingCategoryParamsCopyWith<$Res>
   factory _$$_LandingCategoryParamsCopyWith(_$_LandingCategoryParams value,
           $Res Function(_$_LandingCategoryParams) then) =
       __$$_LandingCategoryParamsCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -383,21 +366,16 @@ abstract class _LandingCategoryParams extends LandingCategoryParams {
       final int page,
       required final String language,
       final String? region}) = _$_LandingCategoryParams;
-
   const _LandingCategoryParams._() : super._();
 
   @override
   AvailableLandingCategory get category;
-
   @override
   int get page;
-
   @override
   String get language;
-
   @override
   String? get region;
-
   @override
   @JsonKey(ignore: true)
   _$$_LandingCategoryParamsCopyWith<_$_LandingCategoryParams> get copyWith =>

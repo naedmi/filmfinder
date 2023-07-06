@@ -293,6 +293,12 @@ class ProviderConsumer extends ConsumerWidget {
               ),
               const SizedBox(width: 8.0),
               Expanded(
+                  child: ElevatedButton(
+                onPressed: () {},
+                child: const Text('filter.language').tr(),
+              )),
+              const SizedBox(width: 8.0),
+              Expanded(
                 child: ElevatedButton(
                   onPressed: () {
                     discoverController.refreshProviders();

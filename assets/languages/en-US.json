@@ -64,6 +64,7 @@
     "selectAll": "Select All",
     "deselectAll": "Deselect All",
     "apply": "Apply",
+    "language": "Language",
     "provider": {
       "title": "Provider"
     },
