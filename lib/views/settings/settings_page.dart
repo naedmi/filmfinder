@@ -9,7 +9,6 @@ import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/navigation_widget.dart';
 import 'package:filmfinder/views/common/toast.dart';
 import 'package:filmfinder/views/settings/settings_widget.dart';
-import 'package:filmfinder/views/settings/user_profile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
@@ -34,7 +33,6 @@ class SettingsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              UserProfile(),
               Divider(),
               Settings(),
             ],
