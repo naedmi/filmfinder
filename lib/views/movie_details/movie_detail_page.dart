@@ -95,17 +95,32 @@ class MovieDetailsPage extends ConsumerWidget {
                           <Widget>[],
                     ),
                     const SizedBox(height: padding),
-                    // Display the movie star rating
-                    Wrap(
-                      spacing: paddingSmall,
+                    Row(
                       children: <Widget>[
                         TooltipRatingWidget(
                           voteAverage: details.voteAverage,
                         ),
+                        const SizedBox(width: paddingSmall),
                         Text(
                           '${details.voteCount} ${"details.votes".tr()}',
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
+                        const Spacer(),
+                        if (details.homepage != null &&
+                            details.homepage!.isNotEmpty)
+                          SizedBox(
+                            height: padding,
+                            child: IconButton(
+                                enableFeedback: true,
+                                onPressed: () async {
+                                  final Uri url = Uri.parse(details.homepage!);
+                                  await launchUrl(url,
+                                      mode: LaunchMode
+                                          .externalNonBrowserApplication);
+                                },
+                                padding: const EdgeInsets.only(bottom: padding),
+                                icon: const Icon(Remix.external_link_line)),
+                          ),
                       ],
                     ),
                     const SizedBox(height: padding),
@@ -114,17 +129,6 @@ class MovieDetailsPage extends ConsumerWidget {
                       details.overview,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    const SizedBox(height: paddingSmall),
-                    if (details.homepage != null &&
-                        details.homepage!.isNotEmpty)
-                      IconButton(
-                          enableFeedback: true,
-                          onPressed: () async {
-                            final Uri url = Uri.parse(details.homepage!);
-                            await launchUrl(url,
-                                mode: LaunchMode.externalNonBrowserApplication);
-                          },
-                          icon: const Icon(Remix.external_link_line)),
                     const SizedBox(height: paddingSmall),
                     const Divider(),
                     Padding(
