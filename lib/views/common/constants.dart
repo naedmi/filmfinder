@@ -96,11 +96,20 @@ const String about = 'About';
 //first is fallback option
 const Map<String, String> supportedLanguages = <String, String>{
   'en-US': 'English',
-  'de-DE': 'German',
-  'fr-FR': 'French',
-  'es-ES': 'Spanish',
-  'it-IT': 'Italian',
-  'ja-JP': 'Japanese'
+  'de-DE': 'Deutsch',
+  'fr-FR': 'Français',
+  'es-ES': 'Español',
+  'it-IT': 'Italiano',
+  'ja-JP': '日本語'
+};
+
+const Map<String, String> supportedCountries = <String, String>{
+  'en-US': 'common.countries.england',
+  'de-DE': 'common.countries.germany',
+  'fr-FR': 'common.countries.france',
+  'es-ES': 'common.countries.spain',
+  'it-IT': 'common.countries.italy',
+  'ja-JP': 'common.countries.japan'
 };
 
 const Map<String, Locale> supportedLocales = <String, Locale>{

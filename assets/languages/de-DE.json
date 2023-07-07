@@ -3,7 +3,15 @@
     "rating": "{} / 10 Sterne",
     "votes": "{} Stimmen",
     "add": "Zur Liste hinzufügen",
-    "remove": "Aus der Liste entfernen"
+    "remove": "Aus der Liste entfernen",
+    "countries": {
+      "germany": "Deutschland",
+      "england": "England",
+      "france": "Frankreich",
+      "italy": "Italien",
+      "spain": "Spanien",
+      "japan": "Japan"
+    }
   },
   "settings": {
     "header": "Einstellungen",
@@ -64,7 +72,7 @@
     "selectAll": "Alle auswählen",
     "deselectAll": "Alle abwählen",
     "apply": "Anwenden",
-    "language": "Sprache",
+    "language": "Land",
     "provider": {
       "title": "Anbieter"
     },

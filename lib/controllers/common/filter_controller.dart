@@ -56,8 +56,9 @@ class FilterProviderControllerImpl extends FilterProviderController {
   }
 
   @override
-  void setLanguage(String language) {
-    FilmfinderPreferences.setProvidersLanguage(language);
+  void setLanguage(String value) {
+    FilmfinderPreferences.setProvidersLanguage(value);
+    clearProviders();
     state = state.copyWith(
         providers: FilmfinderPreferences.getProviders(),
         language: FilmfinderPreferences.getProvidersLanguage());

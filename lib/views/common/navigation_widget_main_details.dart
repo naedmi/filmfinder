@@ -252,22 +252,75 @@ class ProviderConsumer extends ConsumerWidget {
 
     final AsyncValue<MovieProviderResponse> movieProviders =
         ref.watch(watchProviderApiService(MovieProviderParams(
-      language: Localizations.localeOf(context).languageCode.toString(),
-      watchRegion: Localizations.localeOf(context).countryCode.toString(),
+      language: filterProviderModel.language.split('-')[0],
+      watchRegion: filterProviderModel.language.split('-')[1],
     )));
     List<MovieWatchProvider> movieProviderList = <MovieWatchProvider>[];
     movieProviders.whenData(
         (MovieProviderResponse value) => movieProviderList = value.results);
-
     return Column(
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(paddingSmall),
-          child: SvgPicture.asset(
-            darkModeModel.darkMode
-                ? justWatchImagePathLight
-                : justWatchImagePathDark,
-            height: justWatchImageHeight,
+          child: Row(
+            children: [
+              Expanded(
+                child: SvgPicture.asset(
+                  darkModeModel.darkMode
+                      ? justWatchImagePathLight
+                      : justWatchImagePathDark,
+                  height: justWatchImageHeight,
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  children: [
+                    Text(
+                      'filter.language'.tr(),
+                    ),
+                    Text(supportedCountries[filterProviderModel.language]!.tr())
+                  ],
+                ),
+              ),
+              Expanded(
+                child: IconButton(
+                  icon: const Icon(Remix.global_line),
+                  onPressed: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return ListView.separated(
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(padding),
+                            itemCount: supportedLanguages.keys.toList().length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                ListTile(
+                              horizontalTitleGap: padding,
+                              trailing: filterProviderModel.language ==
+                                      supportedLanguages.keys.toList()[index]
+                                  ? const Icon(Remix.check_line)
+                                  : null,
+                              title: Text(
+                                  supportedLanguages.values.toList()[index]),
+                              onTap: () {
+                                String key =
+                                    supportedLanguages.keys.toList()[index];
+                                String? languageCountryCode =
+                                    supportedLanguages.keys.toList()[index];
+                                filterProviderController
+                                    .setLanguage(languageCountryCode);
+                                Navigator.pop(context);
+                              },
+                            ),
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    const Divider(),
+                          );
+                        });
+                  },
+                ),
+              )
+            ],
           ),
         ),
         Padding(
@@ -291,12 +344,6 @@ class ProviderConsumer extends ConsumerWidget {
                       : const Text('filter.selectAll').tr(),
                 ),
               ),
-              const SizedBox(width: 8.0),
-              Expanded(
-                  child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('filter.language').tr(),
-              )),
               const SizedBox(width: 8.0),
               Expanded(
                 child: ElevatedButton(
