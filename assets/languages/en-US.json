@@ -43,7 +43,8 @@
     "empty": "Your list is empty.",
     "remove": {
       "title": "Remove from list",
-      "text": "Are you sure you want to remove this movie from your list?",
+      "text": "Are you sure you want to remove {} from your list?",
+      "alt_title": "this movie",
       "confirmation": "Confirmation",
       "cancel": "Cancel",
       "confirm": "Remove"

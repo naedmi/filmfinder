@@ -43,7 +43,8 @@
     "empty": "Deine Liste ist leer.",
     "remove": {
       "title": "Aus der Liste entfernen",
-      "text": "Möchtest du diesen Film wirklich aus deiner Liste entfernen?",
+      "text": "Möchtest du {} wirklich aus deiner Liste entfernen?",
+      "alt_title": "diesen Film",
       "confirmation": "Bestätigung",
       "cancel": "Abbrechen",
       "confirm": "Entfernen"

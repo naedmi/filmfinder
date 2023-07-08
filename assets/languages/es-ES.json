@@ -1,7 +1,7 @@
 {
     "common": {
-        "rating": "10 estrellas",
-        "votes": " votos",
+        "rating": "{} / 10 estrellas",
+        "votes": "{} votos",
         "add": "A\u00f1adir a la lista",
         "remove": "Remover de la lista",
         "countries": {
@@ -43,7 +43,8 @@
         "empty": "La lista esta vac\u00eda.",
         "remove": {
             "title": "Remover de la lista",
-            "text": "\u00bfEst\u00e1 seguro de que desea eliminar esta pel\u00edcula de su lista?",
+            "text": "\u00bfEst\u00e1 seguro de que desea eliminar {} de su lista?",
+            "alt_title": "esta pel\u00edcula",
             "confirmation": "Confirmaci\u00f3n",
             "cancel": "Cancelar",
             "confirm": "Eliminar"
@@ -54,7 +55,7 @@
         "hint": "Buscar",
         "empty_results": "No se encontraron resultados",
         "empty_query": "Introduzca algo a buscar",
-        "page_indicator": "P\u00e1gina  de "
+        "page_indicator": "P\u00e1gina {} de {}"
     },
     "details": {
         "votes": "Votos",
