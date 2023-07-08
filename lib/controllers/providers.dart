@@ -16,6 +16,7 @@ import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/models/search/search_filter.dart';
 import 'package:filmfinder/models/settings/settings.dart';
+import 'package:filmfinder/models/swipe/video_controller_args.dart';
 import 'package:filmfinder/models/swipe/video_controller_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -133,9 +134,9 @@ class Providers {
       StateProvider<String>((StateProviderRef<String> ref) => '');
 
   final AutoDisposeNotifierProviderFamily<VideoController, VideoControllerState,
-          String> videoControllerProvider =
+          VideoControllerArgs> videoControllerProvider =
       NotifierProvider.autoDispose
-          .family<VideoController, VideoControllerState, String>(
+          .family<VideoController, VideoControllerState, VideoControllerArgs>(
               () => VideoControllerImpl());
 
   /// **************************************************************************

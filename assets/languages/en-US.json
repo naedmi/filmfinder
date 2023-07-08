@@ -3,7 +3,15 @@
     "rating": "{} / 10 stars",
     "votes": "{} votes",
     "add": "Add to list",
-    "remove": "Remove from list"
+    "remove": "Remove from list",
+    "countries": {
+      "germany": "Germany",
+      "england": "USA",
+      "france": "France",
+      "italy": "Italy",
+      "spain": "Spain",
+      "japan": "Japan"
+    }
   },
   "settings": {
     "header": "Settings",
@@ -64,6 +72,7 @@
     "selectAll": "Select All",
     "deselectAll": "Deselect All",
     "apply": "Apply",
+    "language": "Country",
     "provider": {
       "title": "Provider"
     },

@@ -13,25 +13,33 @@ abstract class FilterProviderController extends Notifier<FilterProviderModel> {
   void clearProviders();
 
   void selectAllProviders(List<MovieWatchProvider> movieProviderList);
+
+  void setLanguage(String value);
 }
 
 class FilterProviderControllerImpl extends FilterProviderController {
   @override
   void addProvider(int key, (String, String) value) {
     FilmfinderPreferences.addProvider(key, value);
-    state = state.copyWith(providers: FilmfinderPreferences.getProviders());
+    state = state.copyWith(
+        providers: FilmfinderPreferences.getProviders(),
+        language: FilmfinderPreferences.getProvidersLanguage());
   }
 
   @override
   void removeProvider(int key) {
     FilmfinderPreferences.removeProvider(key);
-    state = state.copyWith(providers: FilmfinderPreferences.getProviders());
+    state = state.copyWith(
+        providers: FilmfinderPreferences.getProviders(),
+        language: FilmfinderPreferences.getProvidersLanguage());
   }
 
   @override
   void clearProviders() {
     FilmfinderPreferences.clearProviders();
-    state = state.copyWith(providers: FilmfinderPreferences.getProviders());
+    state = state.copyWith(
+        providers: FilmfinderPreferences.getProviders(),
+        language: FilmfinderPreferences.getProvidersLanguage());
   }
 
   @override
@@ -42,12 +50,25 @@ class FilterProviderControllerImpl extends FilterProviderController {
           (provider.providerName, provider.logoPath);
     }
     FilmfinderPreferences.setProviders(tmpProviders);
-    state = state.copyWith(providers: FilmfinderPreferences.getProviders());
+    state = state.copyWith(
+        providers: FilmfinderPreferences.getProviders(),
+        language: FilmfinderPreferences.getProvidersLanguage());
+  }
+
+  @override
+  void setLanguage(String value) {
+    FilmfinderPreferences.setProvidersLanguage(value);
+    clearProviders();
+    state = state.copyWith(
+        providers: FilmfinderPreferences.getProviders(),
+        language: FilmfinderPreferences.getProvidersLanguage());
   }
 
   @override
   FilterProviderModel build() {
-    return FilterProviderModel(providers: FilmfinderPreferences.getProviders());
+    return FilterProviderModel(
+        providers: FilmfinderPreferences.getProviders(),
+        language: FilmfinderPreferences.getProvidersLanguage());
   }
 }
 

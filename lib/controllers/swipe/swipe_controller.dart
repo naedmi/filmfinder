@@ -54,6 +54,12 @@ class SwipeControllerImpl extends SwipeController {
           .future);
     });
     final List<MovieDetails> finalDetails = (await Future.wait(fetchDetails))
+        .map((MovieDetails details) => details.copyWith(
+            videos: details.videos!.copyWith(
+                results: details.videos!.results!
+                    .where((VideoResult video) =>
+                        video.type == 'Trailer' && video.site == 'YouTube')
+                    .toList())))
         .where((MovieDetails details) => details.videos!.results!.isNotEmpty)
         .toList();
     nonVideoResults = responses.results.length - finalDetails.length;

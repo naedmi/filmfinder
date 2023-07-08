@@ -57,27 +57,23 @@ final GoRouter goRouter = GoRouter(
 
 // Keeps the app in portrait mode after exiting video player
 class GoRouterObserver extends NavigatorObserver {
-  @override
-  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+  void _correctOrientation(Route<dynamic> route) {
     if (MediaQuery.of(route.navigator!.context).orientation ==
         Orientation.landscape) {
       SystemChrome.setPreferredOrientations(<DeviceOrientation>[
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ]);
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     }
   }
 
   @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    _correctOrientation(route);
+  }
+
+  @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    if (MediaQuery.of(route.navigator!.context).orientation ==
-        Orientation.landscape) {
-      SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    }
+    _correctOrientation(route);
   }
 }

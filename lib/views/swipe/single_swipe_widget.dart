@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/controllers/swipe/video_controller.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
+import 'package:filmfinder/models/swipe/video_controller_args.dart';
 import 'package:filmfinder/models/swipe/video_controller_state.dart';
 import 'package:filmfinder/views/common/constants.dart';
 import 'package:filmfinder/views/common/tooltip_rating_widget.dart';
@@ -19,8 +20,11 @@ class SingleSwipeWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AutoDisposeFamilyNotifierProvider<VideoController,
-            VideoControllerState, String> provider =
-        providers.videoControllerProvider(movie.videos!.results!.first.key!);
+            VideoControllerState, VideoControllerArgs> provider =
+        providers.videoControllerProvider(VideoControllerArgs(
+            isFullscreen:
+                MediaQuery.of(context).orientation == Orientation.landscape,
+            videoId: movie.videos!.results!.first.key!));
     final VideoControllerState controllerState = ref.watch(provider);
     final VideoController videoController = ref.read(provider.notifier);
     return OrientationBuilder(

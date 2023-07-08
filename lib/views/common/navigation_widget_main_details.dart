@@ -81,11 +81,11 @@ class BottomNavigationWidget extends ConsumerWidget {
   }
 }
 
-class MiddleButton extends ConsumerWidget {
+class MiddleButton extends StatelessWidget {
   const MiddleButton({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final bool isSwipe = GoRouter.of(context).location == routeSwipe;
     if (isSwipe) {
       return SizedBox(
@@ -107,20 +107,17 @@ class MiddleButton extends ConsumerWidget {
                         title: IconName(
                           logo: filterOptions[
                               filterOptions.keys.toList()[index]]!,
-                          provName: filterOptions.keys.toList()[index],
+                          provName: filterOptions.keys.toList()[index].tr(),
                         ),
                         onTap: () {
-                          if (filterOptions.keys.toList()[index] ==
-                              'filter.provider.title'.tr()) {
+                          if (index == 0) {
                             showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
-                                //return const ProviderConsumer();
                                 return const ProviderConsumer();
                               },
                             );
-                          } else if (filterOptions.keys.toList()[index] ==
-                              'filter.genre.title'.tr()) {
+                          } else if (index == 1) {
                             showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
@@ -255,22 +252,74 @@ class ProviderConsumer extends ConsumerWidget {
 
     final AsyncValue<MovieProviderResponse> movieProviders =
         ref.watch(watchProviderApiService(MovieProviderParams(
-      language: Localizations.localeOf(context).languageCode.toString(),
-      watchRegion: Localizations.localeOf(context).countryCode.toString(),
+      language: filterProviderModel.language.split('-')[0],
+      watchRegion: filterProviderModel.language.split('-')[1],
     )));
     List<MovieWatchProvider> movieProviderList = <MovieWatchProvider>[];
     movieProviders.whenData(
         (MovieProviderResponse value) => movieProviderList = value.results);
-
     return Column(
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(paddingSmall),
-          child: SvgPicture.asset(
-            darkModeModel.darkMode
-                ? justWatchImagePathLight
-                : justWatchImagePathDark,
-            height: justWatchImageHeight,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: SvgPicture.asset(
+                  darkModeModel.darkMode
+                      ? justWatchImagePathLight
+                      : justWatchImagePathDark,
+                  height: justWatchImageHeight,
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'filter.language'.tr(),
+                    ),
+                    Text(supportedCountries[filterProviderModel.language]!.tr())
+                  ],
+                ),
+              ),
+              Expanded(
+                child: IconButton(
+                  icon: const Icon(Remix.global_line),
+                  onPressed: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return ListView.separated(
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(padding),
+                            itemCount: supportedLanguages.keys.toList().length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                ListTile(
+                              horizontalTitleGap: padding,
+                              trailing: filterProviderModel.language ==
+                                      supportedCountries.keys.toList()[index]
+                                  ? const Icon(Remix.check_line)
+                                  : null,
+                              title: Text(supportedCountries.values
+                                  .toList()[index]
+                                  .tr()),
+                              onTap: () {
+                                String? languageCountryCode =
+                                    supportedLanguages.keys.toList()[index];
+                                filterProviderController
+                                    .setLanguage(languageCountryCode);
+                                Navigator.pop(context);
+                              },
+                            ),
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    const Divider(),
+                          );
+                        });
+                  },
+                ),
+              )
+            ],
           ),
         ),
         Padding(

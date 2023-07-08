@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -97,11 +96,20 @@ const String about = 'About';
 //first is fallback option
 const Map<String, String> supportedLanguages = <String, String>{
   'en-US': 'English',
-  'de-DE': 'German',
-  'fr-FR': 'French',
-  'es-ES': 'Spanish',
-  'it-IT': 'Italian',
-  'ja-JP': 'Japanese'
+  'de-DE': 'Deutsch',
+  'fr-FR': 'Français',
+  'es-ES': 'Español',
+  'it-IT': 'Italiano',
+  'ja-JP': '日本語'
+};
+
+const Map<String, String> supportedCountries = <String, String>{
+  'en-US': 'common.countries.england',
+  'de-DE': 'common.countries.germany',
+  'fr-FR': 'common.countries.france',
+  'es-ES': 'common.countries.spain',
+  'it-IT': 'common.countries.italy',
+  'ja-JP': 'common.countries.japan'
 };
 
 const Map<String, Locale> supportedLocales = <String, Locale>{
@@ -214,8 +222,8 @@ const int animationDelay = 250;
 /// Filter *******************************************************************
 
 Map<String, IconData> filterOptions = <String, IconData>{
-  'filter.provider.title'.tr(): Remix.tv_line,
-  'filter.genre.title'.tr(): Remix.movie_line,
+  'filter.provider.title': Remix.tv_line,
+  'filter.genre.title': Remix.movie_line,
 };
 
 Map<int, (String, IconData)> genreMap = <int, (String, IconData)>{
