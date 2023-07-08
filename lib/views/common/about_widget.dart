@@ -11,7 +11,7 @@ void showAboutFilmfinder(BuildContext context) {
         height: 50,
       ),
       applicationName: 'filmfinder',
-      applicationVersion: '0.0.1',
+      applicationVersion: '1.0.0',
       children: <Widget>[
         Text('settings.about.text'.tr()),
         Align(
