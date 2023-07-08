@@ -19,6 +19,8 @@ mixin _$FilterProviderModel {
   Map<int, (String, String)> get providers =>
       throw _privateConstructorUsedError;
 
+  String get language => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $FilterProviderModelCopyWith<FilterProviderModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -29,8 +31,9 @@ abstract class $FilterProviderModelCopyWith<$Res> {
   factory $FilterProviderModelCopyWith(
           FilterProviderModel value, $Res Function(FilterProviderModel) then) =
       _$FilterProviderModelCopyWithImpl<$Res, FilterProviderModel>;
+
   @useResult
-  $Res call({Map<int, (String, String)> providers});
+  $Res call({Map<int, (String, String)> providers, String language});
 }
 
 /// @nodoc
@@ -40,6 +43,7 @@ class _$FilterProviderModelCopyWithImpl<$Res, $Val extends FilterProviderModel>
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -47,12 +51,17 @@ class _$FilterProviderModelCopyWithImpl<$Res, $Val extends FilterProviderModel>
   @override
   $Res call({
     Object? providers = null,
+    Object? language = null,
   }) {
     return _then(_value.copyWith(
       providers: null == providers
           ? _value.providers
           : providers // ignore: cast_nullable_to_non_nullable
               as Map<int, (String, String)>,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -63,9 +72,10 @@ abstract class _$$_FilterProviderModelCopyWith<$Res>
   factory _$$_FilterProviderModelCopyWith(_$_FilterProviderModel value,
           $Res Function(_$_FilterProviderModel) then) =
       __$$_FilterProviderModelCopyWithImpl<$Res>;
+
   @override
   @useResult
-  $Res call({Map<int, (String, String)> providers});
+  $Res call({Map<int, (String, String)> providers, String language});
 }
 
 /// @nodoc
@@ -80,12 +90,17 @@ class __$$_FilterProviderModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? providers = null,
+    Object? language = null,
   }) {
     return _then(_$_FilterProviderModel(
       providers: null == providers
           ? _value._providers
           : providers // ignore: cast_nullable_to_non_nullable
               as Map<int, (String, String)>,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -95,10 +110,12 @@ class __$$_FilterProviderModelCopyWithImpl<$Res>
 class _$_FilterProviderModel implements _FilterProviderModel {
   _$_FilterProviderModel(
       {final Map<int, (String, String)> providers =
-          const <int, (String, String)>{}})
+          const <int, (String, String)>{},
+      this.language = 'en-US'})
       : _providers = providers;
 
   final Map<int, (String, String)> _providers;
+
   @override
   @JsonKey()
   Map<int, (String, String)> get providers {
@@ -108,8 +125,12 @@ class _$_FilterProviderModel implements _FilterProviderModel {
   }
 
   @override
+  @JsonKey()
+  final String language;
+
+  @override
   String toString() {
-    return 'FilterProviderModel(providers: $providers)';
+    return 'FilterProviderModel(providers: $providers, language: $language)';
   }
 
   @override
@@ -118,12 +139,14 @@ class _$_FilterProviderModel implements _FilterProviderModel {
         (other.runtimeType == runtimeType &&
             other is _$_FilterProviderModel &&
             const DeepCollectionEquality()
-                .equals(other._providers, _providers));
+                .equals(other._providers, _providers) &&
+            (identical(other.language, language) ||
+                other.language == language));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_providers));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_providers), language);
 
   @JsonKey(ignore: true)
   @override
@@ -134,11 +157,16 @@ class _$_FilterProviderModel implements _FilterProviderModel {
 }
 
 abstract class _FilterProviderModel implements FilterProviderModel {
-  factory _FilterProviderModel({final Map<int, (String, String)> providers}) =
-      _$_FilterProviderModel;
+  factory _FilterProviderModel(
+      {final Map<int, (String, String)> providers,
+      final String language}) = _$_FilterProviderModel;
 
   @override
   Map<int, (String, String)> get providers;
+
+  @override
+  String get language;
+
   @override
   @JsonKey(ignore: true)
   _$$_FilterProviderModelCopyWith<_$_FilterProviderModel> get copyWith =>
@@ -159,6 +187,7 @@ abstract class $FilterGenreModelCopyWith<$Res> {
   factory $FilterGenreModelCopyWith(
           FilterGenreModel value, $Res Function(FilterGenreModel) then) =
       _$FilterGenreModelCopyWithImpl<$Res, FilterGenreModel>;
+
   @useResult
   $Res call({Map<int, String> genres});
 }
@@ -170,6 +199,7 @@ class _$FilterGenreModelCopyWithImpl<$Res, $Val extends FilterGenreModel>
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -193,6 +223,7 @@ abstract class _$$_FilterGenreModelCopyWith<$Res>
   factory _$$_FilterGenreModelCopyWith(
           _$_FilterGenreModel value, $Res Function(_$_FilterGenreModel) then) =
       __$$_FilterGenreModelCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({Map<int, String> genres});
@@ -227,6 +258,7 @@ class _$_FilterGenreModel implements _FilterGenreModel {
       : _genres = genres;
 
   final Map<int, String> _genres;
+
   @override
   @JsonKey()
   Map<int, String> get genres {
@@ -265,6 +297,7 @@ abstract class _FilterGenreModel implements FilterGenreModel {
 
   @override
   Map<int, String> get genres;
+
   @override
   @JsonKey(ignore: true)
   _$$_FilterGenreModelCopyWith<_$_FilterGenreModel> get copyWith =>

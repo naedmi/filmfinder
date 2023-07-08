@@ -10,6 +10,7 @@ part 'filter.freezed.dart';
 class FilterProviderModel with _$FilterProviderModel {
   factory FilterProviderModel({
     @Default(<int, (String, String)>{}) Map<int, (String, String)> providers,
+    @Default('en-US') String language,
   }) = _FilterProviderModel;
 }
 

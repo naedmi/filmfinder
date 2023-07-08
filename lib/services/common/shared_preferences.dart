@@ -54,6 +54,14 @@ class FilmfinderPreferences {
     _preferences.remove('providers');
   }
 
+  static void setProvidersLanguage(String value) {
+    _preferences.setString('providersLanguage', value);
+  }
+
+  static String getProvidersLanguage() {
+    return _preferences.getString('providersLanguage') ?? 'en-US';
+  }
+
   static void setGenres(Map<int, String> genres) {
     List<String> tmpGenres = <String>[];
     for (int key in genres.keys) {
