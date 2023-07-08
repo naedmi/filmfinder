@@ -81,7 +81,7 @@ const double elevation = paddingSmall;
 
 /// **************************************************************************
 
-/// SettingsPage **************************************************************
+/// SettingsPage *************************************************************
 
 const double settingFontSize = 20;
 const double settingIconSizeMultiplicator = 1.4;
@@ -89,11 +89,8 @@ const double settingIconSize = settingFontSize * settingIconSizeMultiplicator;
 const double settingSwitchSize = 0.9;
 const double settingHeight = settingFontSize * 2;
 const double settingRoundBoxSize = 15;
-const String darkMode = 'Dark Theme';
-const String parentalControl = 'Parental Control';
-const String language = 'Language';
-const String about = 'About';
-//first is fallback option
+
+// first is fallback option
 const Map<String, String> supportedLanguages = <String, String>{
   'en-US': 'English',
   'de-DE': 'Deutsch',
@@ -121,8 +118,6 @@ const Map<String, Locale> supportedLocales = <String, Locale>{
   'ja-JP': Locale('ja', 'JP')
 };
 const String langPath = 'assets/languages';
-//StringList
-const List<String> filterSettings = <String>['Adult', 'Provider'];
 
 /// **************************************************************************
 
@@ -245,7 +240,7 @@ Map<int, (String, IconData)> genreMap = <int, (String, IconData)>{
   10770: ('filter.genre.tv_movie', Remix.tv_2_line),
   53: ('filter.genre.thriller', Remix.ghost_line),
   10752: ('filter.genre.war', Remix.sword_line),
-  37: ('filter.genre.western', Remix.sword_line),
+  37: ('filter.genre.western', Remix.cactus_line),
 };
 
 const String justWatchImagePathLight = 'assets/images/jw_logo_color.svg';
