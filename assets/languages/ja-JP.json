@@ -16,7 +16,6 @@
   "settings": {
     "header": "\u8a2d\u5b9a",
     "color": "\u30c0\u30fc\u30af\u30c6\u30fc\u30de",
-    "parental_control": "\u30da\u30a2\u30ec\u30f3\u30bf\u30eb\u30b3\u30f3\u30c8\u30ed\u30fc\u30eb",
     "lang": "\u8a00\u8a9e",
     "about": {
       "header": "\u8a73\u7d30",
@@ -60,7 +59,7 @@
   "details": {
     "votes": "\u6295\u7968",
     "top_actors": "\u30c8\u30c3\u30d7\u4ff3\u512a",
-    "attribution": "DIAN\u63d0\u4f9b",
+    "attribution": "\u63d0\u4f9b ",
     "providers": "\u5229\u7528\u53ef\u80fd\u306a\u30d7\u30ed\u30d0\u30a4\u30c0\u30fc\u304c\u3042\u308a\u307e\u305b\u3093"
   },
   "exit": {

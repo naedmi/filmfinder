@@ -16,21 +16,20 @@
   "settings": {
     "header": "Impostazioni",
     "color": "Tema scuro",
-    "parental_control": "Parental Control",
     "lang": "Lingua",
     "about": {
       "header": "Info",
       "text": "Filmfinder \u00e8 un'applicazione gratuita che ti consente di cercare e scoprire film.",
       "attribution": "Tutti i dati e le informazioni sui film sono forniti da The Movie Database (TMDB).\nFilmfinder non \u00e8 approvato o certificato da TMDB."
     },
-    "save_msg": "impostazioni salvate.",
+    "save_msg": "Impostazioni salvate.",
     "login": "Accesso"
   },
   "landing": {
     "category": {
       "now_playing": "In riproduzione",
       "popular": "Apprezzato",
-      "top_rated": "\u0422\u043e\u043f \u0420\u0435\u0439\u0442\u0438\u043d\u0433",
+      "top_rated": "Migliore valutazione",
       "upcoming": "Prossimo",
       "trending": {
         "day": "Tendenza di oggi",
@@ -60,7 +59,7 @@
   "details": {
     "votes": "voti",
     "top_actors": "Migliori attori",
-    "attribution": "forniti da",
+    "attribution": "forniti da ",
     "providers": "Nessun provider disponibile"
   },
   "exit": {
