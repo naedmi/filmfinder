@@ -1,7 +1,7 @@
 {
     "common": {
-        "rating": "10 \u00e9toiles",
-        "votes": "Votes",
+        "rating": "{} / 10 \u00e9toiles",
+        "votes": "{} Votes",
         "add": "Ajouter \u00e0 la liste",
         "remove": "Retirer de la liste",
         "countries": {
@@ -43,7 +43,8 @@
         "empty": "Votre liste est vide.",
         "remove": {
             "title": "Retirer de la liste",
-            "text": "\u00cates-vous s\u00fbr de vouloir supprimer ce film de votre liste\u00a0?",
+            "text": "\u00cates-vous s\u00fbr de vouloir supprimer {} de votre liste\u00a0?",
+            "alt_title": "ce film",
             "confirmation": "Confirmer la migration",
             "cancel": "Annuler",
             "confirm": "Supprimer"
@@ -54,7 +55,7 @@
         "hint": "Recherche",
         "empty_results": "Aucun r\u00e9sultat trouv\u00e9",
         "empty_query": "Saisissez le texte \u00e0 chercher ici",
-        "page_indicator": "Page  de "
+        "page_indicator": "Page {} de {}"
     },
     "details": {
         "votes": "votes",

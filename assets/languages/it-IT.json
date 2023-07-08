@@ -1,7 +1,7 @@
 {
     "common": {
-        "rating": "10 stelle",
-        "votes": "Votazioni",
+        "rating": "{} / 10 stelle",
+        "votes": "{} Votazioni",
         "add": "Aggiungi a elenco",
         "remove": "Rimuovi",
         "countries": {
@@ -43,7 +43,8 @@
         "empty": "La tua lista \u00e8 vuota. ",
         "remove": {
             "title": "Rimuovi",
-            "text": "Sei sicuro di voler rimuovere questo film dall'elenco?",
+            "text": "Sei sicuro di voler rimuovere {} dall'elenco?",
+            "alt_title": "questo film",
             "confirmation": "Conferma",
             "cancel": "Annulla",
             "confirm": "Rimuovi"
@@ -54,7 +55,7 @@
         "hint": "Cerca",
         "empty_results": "Nessun risultato trovato",
         "empty_query": "Inserisci qualcosa da cercare...",
-        "page_indicator": "Pagina  di "
+        "page_indicator": "Pagina {} di {}"
     },
     "details": {
         "votes": "voti",
@@ -91,7 +92,7 @@
             "horror": "Orrore",
             "music": "Musica",
             "mystery": "Mystery",
-            "romance": "Romanzi rosa",
+            "romance": "Romantico",
             "science_fiction": "Fantascienza",
             "tv_movie": "Film TV",
             "thriller": "Thriller",
