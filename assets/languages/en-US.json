@@ -1,0 +1,102 @@
+{
+  "common": {
+    "rating": "{} / 10 stars",
+    "votes": "{} votes",
+    "add": "Add to list",
+    "remove": "Remove from list",
+    "countries": {
+      "germany": "Germany",
+      "england": "USA",
+      "france": "France",
+      "italy": "Italy",
+      "spain": "Spain",
+      "japan": "Japan"
+    }
+  },
+  "settings": {
+    "header": "Settings",
+    "color": "Dark Theme",
+    "lang": "Language",
+    "about": {
+      "header": "About",
+      "text": "Filmfinder is a free application that allows you to search and discover movies.",
+      "attribution": "All data and information about movies is provided by The Movie Database (TMDB).\nFilmfinder is not endorsed or certified by TMDB."
+    },
+    "save_msg": "Settings saved",
+    "login": "Login"
+  },
+  "landing": {
+    "category": {
+      "now_playing": "Now Playing",
+      "popular": "Popular",
+      "top_rated": "Top Rated",
+      "upcoming": "Upcoming",
+      "trending": {
+        "day": "Trending Today",
+        "week": "Trending Weekly"
+      }
+    }
+  },
+  "list": {
+    "header": "My List",
+    "empty": "Your list is empty.",
+    "remove": {
+      "title": "Remove from list",
+      "text": "Are you sure you want to remove {} from your list?",
+      "alt_title": "this movie",
+      "confirmation": "Confirmation",
+      "cancel": "Cancel",
+      "confirm": "Remove"
+    }
+  },
+  "search": {
+    "year": "Year",
+    "hint": "Search",
+    "empty_results": "No results found",
+    "empty_query": "Enter something to search...",
+    "page_indicator": "Page {} of {}"
+  },
+  "details": {
+    "votes": "votes",
+    "top_actors": "Top Actors",
+    "attribution": "provided by ",
+    "providers": "No providers available"
+  },
+  "exit": {
+    "question": "Are you sure?",
+    "text": "We hate to see you leave...",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "filter": {
+    "selectAll": "Select All",
+    "deselectAll": "Deselect All",
+    "apply": "Apply",
+    "language": "Country",
+    "provider": {
+      "title": "Provider"
+    },
+    "genre": {
+      "title": "Genre",
+      "action": "Action",
+      "adventure": "Adventure",
+      "animation": "Animation",
+      "comedy": "Comedy",
+      "crime": "Crime",
+      "documentary": "Documentary",
+      "drama": "Drama",
+      "family": "Family",
+      "fantasy": "Fantasy",
+      "history": "History",
+      "horror": "Horror",
+      "music": "Music",
+      "mystery": "Mystery",
+      "romance": "Romance",
+      "science_fiction": "Science Fiction",
+      "tv_movie": "TV Movie",
+      "thriller": "Thriller",
+      "war": "War",
+      "western": "Western"
+    }
+  }
+}

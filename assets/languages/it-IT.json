@@ -1,0 +1,102 @@
+{
+  "common": {
+    "rating": "{} / 10 stelle",
+    "votes": "{} Votazioni",
+    "add": "Aggiungi a elenco",
+    "remove": "Rimuovi",
+    "countries": {
+      "germany": "Germania",
+      "england": "Stati Uniti",
+      "france": "Francia",
+      "italy": "Italia",
+      "spain": "Spagna.",
+      "japan": "Giappone"
+    }
+  },
+  "settings": {
+    "header": "Impostazioni",
+    "color": "Tema scuro",
+    "lang": "Lingua",
+    "about": {
+      "header": "Info",
+      "text": "Filmfinder \u00e8 un'applicazione gratuita che ti consente di cercare e scoprire film.",
+      "attribution": "Tutti i dati e le informazioni sui film sono forniti da The Movie Database (TMDB).\nFilmfinder non \u00e8 approvato o certificato da TMDB."
+    },
+    "save_msg": "Impostazioni salvate.",
+    "login": "Accesso"
+  },
+  "landing": {
+    "category": {
+      "now_playing": "In riproduzione",
+      "popular": "Apprezzato",
+      "top_rated": "Migliore valutazione",
+      "upcoming": "Prossimo",
+      "trending": {
+        "day": "Tendenza di oggi",
+        "week": "Tendenze settimanali"
+      }
+    }
+  },
+  "list": {
+    "header": "La mia lista",
+    "empty": "La tua lista \u00e8 vuota. ",
+    "remove": {
+      "title": "Rimuovi",
+      "text": "Sei sicuro di voler rimuovere {} dall'elenco?",
+      "alt_title": "questo film",
+      "confirmation": "Conferma",
+      "cancel": "Annulla",
+      "confirm": "Rimuovi"
+    }
+  },
+  "search": {
+    "year": "Anno",
+    "hint": "Cerca",
+    "empty_results": "Nessun risultato trovato",
+    "empty_query": "Inserisci qualcosa da cercare...",
+    "page_indicator": "Pagina {} di {}"
+  },
+  "details": {
+    "votes": "voti",
+    "top_actors": "Migliori attori",
+    "attribution": "forniti da ",
+    "providers": "Nessun provider disponibile"
+  },
+  "exit": {
+    "question": "Confermi?",
+    "text": "Ci dispiace vederti andar via...",
+    "yes": "S\u00ec",
+    "no": "No"
+  },
+  "filter": {
+    "selectAll": "Seleziona tutto",
+    "deselectAll": "Deseleziona Tutto",
+    "apply": "Applica",
+    "language": "Paese",
+    "provider": {
+      "title": "Fornitore"
+    },
+    "genre": {
+      "title": "Genere",
+      "action": "Azione",
+      "adventure": "Avventura",
+      "animation": "Animazione",
+      "comedy": "Commedia",
+      "crime": "Crimine",
+      "documentary": "Documentari",
+      "drama": "Teatro",
+      "family": "Familiare",
+      "fantasy": "Fantasy",
+      "history": "Cronologia",
+      "horror": "Orrore",
+      "music": "Musica",
+      "mystery": "Mystery",
+      "romance": "Romantico",
+      "science_fiction": "Fantascienza",
+      "tv_movie": "Film TV",
+      "thriller": "Thriller",
+      "war": "Guerra",
+      "western": "Occidentale"
+    }
+  }
+}

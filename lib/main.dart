@@ -1,96 +1,73 @@
-import 'package:filmfinder/view/landing_page.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:filmfinder/controllers/providers.dart';
+import 'package:filmfinder/go_router.dart';
+import 'package:filmfinder/models/common/movie_result.dart';
+import 'package:filmfinder/models/settings/settings.dart';
+import 'package:filmfinder/services/common/constants.dart';
+import 'package:filmfinder/services/common/logger_provider_service.dart';
+import 'package:filmfinder/services/common/shared_preferences.dart';
+import 'package:filmfinder/views/common/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  await FilmfinderPreferences.init();
+  await dotenv.load();
+  initHive();
+  await EasyLocalization.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  runApp(
+    EasyLocalization(
+      supportedLocales: supportedLocales.values.toList(),
+      path: langPath,
+      child: ProviderScope(
+        observers: <ProviderObserver>[LoggerService()],
+        child: const MyApp(),
+      ),
+    ),
+  );
+  FlutterError.demangleStackTrace = (StackTrace stack) {
+    if (stack is stack_trace.Trace) return stack.vmTrace;
+    if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;
+    return stack;
+  };
 }
 
-class MyApp extends StatelessWidget {
+void initHive() async {
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(0)) {
+    Hive.registerAdapter(MovieAdapter());
+  }
+  await Hive.openBox<MovieResult>(hiveBox);
+}
+
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: FlexThemeData.light(
-        scheme: FlexScheme.deepBlue,
-        subThemesData: const FlexSubThemesData(
-          interactionEffects: false,
-          tintedDisabledControls: false,
-          inputDecoratorBorderType: FlexInputBorderType.underline,
-          inputDecoratorUnfocusedBorderIsColored: false,
-          tooltipRadius: 4,
-          tooltipSchemeColor: SchemeColor.inverseSurface,
-          tooltipOpacity: 0.9,
-          snackBarElevation: 6,
-          snackBarBackgroundSchemeColor: SchemeColor.inverseSurface,
-          navigationBarSelectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationBarUnselectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationBarMutedUnselectedLabel: false,
-          navigationBarSelectedIconSchemeColor: SchemeColor.onSurface,
-          navigationBarUnselectedIconSchemeColor: SchemeColor.onSurface,
-          navigationBarMutedUnselectedIcon: false,
-          navigationBarIndicatorSchemeColor: SchemeColor.secondaryContainer,
-          navigationBarIndicatorOpacity: 1.00,
-          navigationRailSelectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationRailUnselectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationRailMutedUnselectedLabel: false,
-          navigationRailSelectedIconSchemeColor: SchemeColor.onSurface,
-          navigationRailUnselectedIconSchemeColor: SchemeColor.onSurface,
-          navigationRailMutedUnselectedIcon: false,
-          navigationRailIndicatorSchemeColor: SchemeColor.secondaryContainer,
-          navigationRailIndicatorOpacity: 1.00,
-          navigationRailBackgroundSchemeColor: SchemeColor.surface,
-          navigationRailLabelType: NavigationRailLabelType.none,
-        ),
-        keyColors: const FlexKeyColors(),
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        useMaterial3: true,
-        swapLegacyOnMaterial3: true,
-        fontFamily: GoogleFonts.notoSans().fontFamily,
-      ),
-      darkTheme: FlexThemeData.dark(
-        scheme: FlexScheme.deepBlue,
-        subThemesData: const FlexSubThemesData(
-          interactionEffects: false,
-          tintedDisabledControls: false,
-          inputDecoratorBorderType: FlexInputBorderType.underline,
-          inputDecoratorUnfocusedBorderIsColored: false,
-          tooltipRadius: 4,
-          tooltipSchemeColor: SchemeColor.inverseSurface,
-          tooltipOpacity: 0.9,
-          snackBarElevation: 6,
-          snackBarBackgroundSchemeColor: SchemeColor.inverseSurface,
-          navigationBarSelectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationBarUnselectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationBarMutedUnselectedLabel: false,
-          navigationBarSelectedIconSchemeColor: SchemeColor.onSurface,
-          navigationBarUnselectedIconSchemeColor: SchemeColor.onSurface,
-          navigationBarMutedUnselectedIcon: false,
-          navigationBarIndicatorSchemeColor: SchemeColor.secondaryContainer,
-          navigationBarIndicatorOpacity: 1.00,
-          navigationRailSelectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationRailUnselectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationRailMutedUnselectedLabel: false,
-          navigationRailSelectedIconSchemeColor: SchemeColor.onSurface,
-          navigationRailUnselectedIconSchemeColor: SchemeColor.onSurface,
-          navigationRailMutedUnselectedIcon: false,
-          navigationRailIndicatorSchemeColor: SchemeColor.secondaryContainer,
-          navigationRailIndicatorOpacity: 1.00,
-          navigationRailBackgroundSchemeColor: SchemeColor.surface,
-          navigationRailLabelType: NavigationRailLabelType.none,
-        ),
-        keyColors: const FlexKeyColors(),
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        useMaterial3: true,
-        swapLegacyOnMaterial3: true,
-        fontFamily: GoogleFonts.notoSans().fontFamily,
-      ),
-      themeMode: ThemeMode.system,
-      home: const LandingPage(),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final SettingsDarkModeModel darkModeModel =
+        ref.watch(providers.settingsControllerProvider);
+    SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]); // Force portrait mode
+    return MaterialApp.router(
+      // Language settings
+      locale: context.locale,
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
+      routerConfig: goRouter,
+      title: 'filmfinder',
+      theme: theme,
+      darkTheme: darkTheme,
+      themeMode: darkModeModel.darkMode ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
     );
   }
