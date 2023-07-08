@@ -263,7 +263,7 @@ class ProviderConsumer extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.all(paddingSmall),
           child: Row(
-            children: [
+            children: <Widget>[
               Expanded(
                 child: SvgPicture.asset(
                   darkModeModel.darkMode
@@ -274,7 +274,7 @@ class ProviderConsumer extends ConsumerWidget {
               ),
               Expanded(
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     Text(
                       'filter.language'.tr(),
                     ),
@@ -297,14 +297,13 @@ class ProviderConsumer extends ConsumerWidget {
                                 ListTile(
                               horizontalTitleGap: padding,
                               trailing: filterProviderModel.language ==
-                                      supportedLanguages.keys.toList()[index]
+                                      supportedCountries.keys.toList()[index]
                                   ? const Icon(Remix.check_line)
                                   : null,
-                              title: Text(
-                                  supportedLanguages.values.toList()[index]),
+                              title: Text(supportedCountries.values
+                                  .toList()[index]
+                                  .tr()),
                               onTap: () {
-                                String key =
-                                    supportedLanguages.keys.toList()[index];
                                 String? languageCountryCode =
                                     supportedLanguages.keys.toList()[index];
                                 filterProviderController
