@@ -61,11 +61,11 @@ class BottomNavigationWidget extends ConsumerWidget {
             ),
             const MiddleButton(),
             IconButton(
-              onPressed: () {
+              onPressed: () async {
                 movieList.movies.any((MovieResult movie) =>
                         movie.id == int.tryParse(movieId))
-                    ? listController.removeMovie(int.parse(movieId))
-                    : listController.addMovieById(movieId);
+                    ? await listController.removeMovie(int.parse(movieId))
+                    : await listController.addMovieById(movieId);
               },
               icon: movieList.movies.any(
                       (MovieResult movie) => movie.id == int.tryParse(movieId))

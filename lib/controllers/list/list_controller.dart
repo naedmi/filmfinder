@@ -12,11 +12,11 @@ abstract class ListController extends AutoDisposeNotifier<MovieList> {
 
   void addMovie(MovieResult res);
 
-  void addMovieByDetails(MovieDetails details);
+  Future<void> addMovieByDetails(MovieDetails details);
 
-  void addMovieById(String id);
+  Future<void> addMovieById(String id);
 
-  void removeMovie(int id);
+  Future<void> removeMovie(int id);
 
   void clearAll();
 
@@ -36,13 +36,13 @@ class ListControllerImpl extends ListController {
       _localPersistenceService.getMovieDetails(id);
 
   @override
-  void addMovie(MovieResult res) {
-    _localPersistenceService.addMovie(movie: res);
+  Future<void> addMovie(MovieResult res) async {
+    await _localPersistenceService.addMovie(movie: res);
     update();
   }
 
   @override
-  void addMovieByDetails(MovieDetails details) {
+  Future<void> addMovieByDetails(MovieDetails details) async {
     final MovieResult movie = MovieResult(
         adult: details.adult,
         backdropPath: details.backdropPath,
@@ -59,21 +59,22 @@ class ListControllerImpl extends ListController {
         voteAverage: details.voteAverage,
         voteCount: details.voteCount);
 
-    _localPersistenceService.addMovie(movie: movie);
+    await _localPersistenceService.addMovie(movie: movie);
     update();
   }
 
   @override
-  void addMovieById(String id) async {
+  Future<void> addMovieById(String id) async {
     final AsyncValue<MovieDetails> movieDetails =
         ref.watch(providers.movieDetailsProvider(int.parse(id)));
 
-    movieDetails.whenData((MovieDetails details) => addMovieByDetails(details));
+    movieDetails.whenData(
+        (MovieDetails details) async => await addMovieByDetails(details));
   }
 
   @override
-  void removeMovie(int id) {
-    _localPersistenceService.removeMovie(id);
+  Future<void> removeMovie(int id) async {
+    await _localPersistenceService.removeMovie(id);
     update();
   }
 

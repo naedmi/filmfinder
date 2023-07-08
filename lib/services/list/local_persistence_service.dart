@@ -12,9 +12,9 @@ abstract class LocalPersistenceService {
 
   String? getMovieDetails(String id);
 
-  void addMovie({required MovieResult movie});
+  Future<void> addMovie({required MovieResult movie});
 
-  void removeMovie(int id);
+  Future<void> removeMovie(int id);
 
   void clearAll();
 
@@ -40,12 +40,12 @@ class LocalPersistenceServiceHive implements LocalPersistenceService {
   String? getMovieDetails(String id) => _movies.get(id)?.overview;
 
   @override
-  void addMovie({required MovieResult movie}) {
+  Future<void> addMovie({required MovieResult movie}) async {
     _movies.put(movie.id, movie);
   }
 
   @override
-  void removeMovie(int id) {
+  Future<void> removeMovie(int id) async {
     _movies.delete(id);
   }
 
