@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
@@ -115,8 +117,10 @@ class MovieDetailsPage extends ConsumerWidget {
                                 onPressed: () async {
                                   final Uri url = Uri.parse(details.homepage!);
                                   await launchUrl(url,
-                                      mode: LaunchMode
-                                          .externalNonBrowserApplication);
+                                      mode: Platform.isIOS
+                                          ? LaunchMode.externalApplication
+                                          : LaunchMode
+                                              .externalNonBrowserApplication);
                                 },
                                 padding: const EdgeInsets.only(bottom: padding),
                                 icon: const Icon(Remix.external_link_line)),
