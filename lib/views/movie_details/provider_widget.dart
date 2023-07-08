@@ -32,17 +32,20 @@ class ProviderLogoWidget extends ConsumerWidget {
         spacing: paddingSmall,
         runSpacing: paddingTiny,
         children: freeProviders
-            .map((MovieWatchProvider provider) => Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: paddingTiny, vertical: paddingTiny),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(paddingSmall),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          'https://image.tmdb.org/t/p/w500${provider.logoPath}',
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
+            .map((MovieWatchProvider provider) => Tooltip(
+                  message: provider.providerName,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: paddingTiny, vertical: paddingTiny),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(paddingSmall),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            'https://image.tmdb.org/t/p/w500${provider.logoPath}',
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ))

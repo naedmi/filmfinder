@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
@@ -12,6 +14,8 @@ import 'package:filmfinder/views/movie_details/certification_widget.dart';
 import 'package:filmfinder/views/movie_details/provider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:remixicon/remixicon.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MovieDetailsPage extends ConsumerWidget {
   final String movieId;
@@ -93,17 +97,34 @@ class MovieDetailsPage extends ConsumerWidget {
                           <Widget>[],
                     ),
                     const SizedBox(height: padding),
-                    // Display the movie star rating
-                    Wrap(
-                      spacing: paddingSmall,
+                    Row(
                       children: <Widget>[
                         TooltipRatingWidget(
                           voteAverage: details.voteAverage,
                         ),
+                        const SizedBox(width: paddingSmall),
                         Text(
                           '${details.voteCount} ${"details.votes".tr()}',
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
+                        const Spacer(),
+                        if (details.homepage != null &&
+                            details.homepage!.isNotEmpty)
+                          SizedBox(
+                            height: padding,
+                            child: IconButton(
+                                enableFeedback: true,
+                                onPressed: () async {
+                                  final Uri url = Uri.parse(details.homepage!);
+                                  await launchUrl(url,
+                                      mode: Platform.isIOS
+                                          ? LaunchMode.externalApplication
+                                          : LaunchMode
+                                              .externalNonBrowserApplication);
+                                },
+                                padding: const EdgeInsets.only(bottom: padding),
+                                icon: const Icon(Remix.external_link_line)),
+                          ),
                       ],
                     ),
                     const SizedBox(height: padding),
