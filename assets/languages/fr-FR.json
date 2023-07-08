@@ -1,102 +1,102 @@
 {
-    "common": {
-        "rating": "10 \u00e9toiles",
-        "votes": "Votes",
-        "add": "Ajouter \u00e0 la liste",
-        "remove": "Retirer de la liste",
-        "countries": {
-            "germany": "Allemagne",
-            "england": "\u00c9tats-Unis",
-            "france": "France",
-            "italy": "Italie",
-            "spain": "Espagne",
-            "japan": "Japon"
-        }
-    },
-    "settings": {
-        "header": "R\u00e9glages",
-        "color": "Th\u00e8me sombre",
-        "parental_control": "Contr\u00f4le parental",
-        "lang": "Langue",
-        "about": {
-            "header": "\u00c0 propos de",
-            "text": "Filmfinder est une application gratuite qui vous permet de rechercher et de d\u00e9couvrir des films.",
-            "attribution": "Toutes les donn\u00e9es et informations sur les films sont fournies par The Movie Database (TMDB).\nFilmfinder n'est pas approuv\u00e9 ou certifi\u00e9 par TMDB."
-        },
-        "save_msg": "param\u00e8tres enregistr\u00e9s",
-        "login": "Identifiant (login)"
-    },
-    "landing": {
-        "category": {
-            "now_playing": "En cours",
-            "popular": "Populaire",
-            "top_rated": "Mieux not\u00e9s",
-            "upcoming": "\u00c0 venir",
-            "trending": {
-                "day": "Tendances d'aujourd'hui",
-                "week": "Tendance hebdomadaire"
-            }
-        }
-    },
-    "list": {
-        "header": "Ma liste \u00ab\u00a0\u00e0 regarder plus tard\u00a0\u00bb",
-        "empty": "Votre liste est vide.",
-        "remove": {
-            "title": "Retirer de la liste",
-            "text": "\u00cates-vous s\u00fbr de vouloir supprimer ce film de votre liste\u00a0?",
-            "confirmation": "Confirmer la migration",
-            "cancel": "Annuler",
-            "confirm": "Supprimer"
-        }
-    },
-    "search": {
-        "year": "Ann\u00e9e",
-        "hint": "Recherche",
-        "empty_results": "Aucun r\u00e9sultat trouv\u00e9",
-        "empty_query": "Saisissez le texte \u00e0 chercher ici",
-        "page_indicator": "Page  de "
-    },
-    "details": {
-        "votes": "votes",
-        "top_actors": "top 100 acteurs",
-        "attribution": "fournit par",
-        "providers": "Aucun fournisseur disponible. "
-    },
-    "exit": {
-        "question": "\u00cates-vous s\u00fbr\u00b7e\u00a0?",
-        "text": "Nous d\u00e9testons vous voir partir...",
-        "yes": "Oui",
-        "no": "Non"
-    },
-    "filter": {
-        "selectAll": "Tout s\u00e9lectionner",
-        "deselectAll": "D\u00e9s\u00e9lectionner tout",
-        "apply": "Appliquer",
-        "language": "Pays",
-        "provider": {
-            "title": "Fournisseur"
-        },
-        "genre": {
-            "title": "Genre",
-            "action": "Action",
-            "adventure": "Aventure",
-            "animation": "Animation",
-            "comedy": "Com\u00e9die",
-            "crime": "Crime",
-            "documentary": "Documentaire",
-            "drama": "Dramatisation",
-            "family": "Famille",
-            "fantasy": "Fantastique",
-            "history": "Ant\u00e9c\u00e9dents",
-            "horror": "Mordre",
-            "music": "Musique",
-            "mystery": "Sammy",
-            "romance": "Temp\u00eate",
-            "science_fiction": "Science-fiction",
-            "tv_movie": "T\u00e9l\u00e9film",
-            "thriller": "Thriller",
-            "war": "Guerre",
-            "western": "Ouest"
-        }
+  "common": {
+    "rating": "{} / 10 \u00e9toiles",
+    "votes": "{} Votes",
+    "add": "Ajouter \u00e0 la liste",
+    "remove": "Retirer de la liste",
+    "countries": {
+      "germany": "Allemagne",
+      "england": "\u00c9tats-Unis",
+      "france": "France",
+      "italy": "Italie",
+      "spain": "Espagne",
+      "japan": "Japon"
     }
+  },
+  "settings": {
+    "header": "R\u00e9glages",
+    "color": "Th\u00e8me sombre",
+    "lang": "Langue",
+    "about": {
+      "header": "\u00c0 propos de",
+      "text": "Filmfinder est une application gratuite qui vous permet de rechercher et de d\u00e9couvrir des films.",
+      "attribution": "Toutes les donn\u00e9es et informations sur les films sont fournies par The Movie Database (TMDB).\nFilmfinder n'est pas approuv\u00e9 ou certifi\u00e9 par TMDB."
+    },
+    "save_msg": "Param\u00e8tres enregistr\u00e9s",
+    "login": "Identifiant (login)"
+  },
+  "landing": {
+    "category": {
+      "now_playing": "En cours",
+      "popular": "Populaire",
+      "top_rated": "Mieux not\u00e9s",
+      "upcoming": "\u00c0 venir",
+      "trending": {
+        "day": "Tendances d'aujourd'hui",
+        "week": "Tendance hebdomadaire"
+      }
+    }
+  },
+  "list": {
+    "header": "Ma liste",
+    "empty": "Votre liste est vide.",
+    "remove": {
+      "title": "Retirer de la liste",
+      "text": "\u00cates-vous s\u00fbr de vouloir supprimer {} de votre liste?",
+      "alt_title": "ce film",
+      "confirmation": "Confirmer la migration",
+      "cancel": "Annuler",
+      "confirm": "Supprimer"
+    }
+  },
+  "search": {
+    "year": "Ann\u00e9e",
+    "hint": "Recherche",
+    "empty_results": "Aucun r\u00e9sultat trouv\u00e9",
+    "empty_query": "Saisissez le texte \u00e0 chercher ici",
+    "page_indicator": "Page {} de {}"
+  },
+  "details": {
+    "votes": "votes",
+    "top_actors": "Top acteurs",
+    "attribution": "fournit par ",
+    "providers": "Aucun fournisseur disponible"
+  },
+  "exit": {
+    "question": "\u00cates-vous s\u00fbre?",
+    "text": "Nous d\u00e9testons vous voir partir...",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "filter": {
+    "selectAll": "Tout s\u00e9lectionner",
+    "deselectAll": "D\u00e9s\u00e9lectionner tout",
+    "apply": "Appliquer",
+    "language": "Pays",
+    "provider": {
+      "title": "Fournisseur"
+    },
+    "genre": {
+      "title": "Genre",
+      "action": "Action",
+      "adventure": "Aventure",
+      "animation": "Animation",
+      "comedy": "Com\u00e9die",
+      "crime": "Crime",
+      "documentary": "Documentaire",
+      "drama": "Dramatisation",
+      "family": "Famille",
+      "fantasy": "Fantastique",
+      "history": "Ant\u00e9c\u00e9dents",
+      "horror": "Mordre",
+      "music": "Musique",
+      "mystery": "Sammy",
+      "romance": "Temp\u00eate",
+      "science_fiction": "Science-fiction",
+      "tv_movie": "T\u00e9l\u00e9film",
+      "thriller": "Thriller",
+      "war": "Guerre",
+      "western": "Ouest sauvage"
+    }
+  }
 }

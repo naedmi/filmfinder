@@ -101,7 +101,11 @@ class ResultWidget extends ConsumerWidget {
                                       return AlertDialog(
                                         title: Text(
                                             'list.remove.confirmation'.tr()),
-                                        content: Text('list.remove.text'.tr()),
+                                        content: Text('list.remove.text'.tr(
+                                            args: <String>[
+                                              res.title ??
+                                                  'list.remove.alt_title'.tr()
+                                            ])),
                                         actions: <Widget>[
                                           TextButton(
                                             child:

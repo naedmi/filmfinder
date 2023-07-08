@@ -16,14 +16,13 @@
   "settings": {
     "header": "Settings",
     "color": "Dark Theme",
-    "parental_control": "Parental Control",
     "lang": "Language",
     "about": {
       "header": "About",
       "text": "Filmfinder is a free application that allows you to search and discover movies.",
       "attribution": "All data and information about movies is provided by The Movie Database (TMDB).\nFilmfinder is not endorsed or certified by TMDB."
     },
-    "save_msg": "settings saved",
+    "save_msg": "Settings saved",
     "login": "Login"
   },
   "landing": {
@@ -43,7 +42,8 @@
     "empty": "Your list is empty.",
     "remove": {
       "title": "Remove from list",
-      "text": "Are you sure you want to remove this movie from your list?",
+      "text": "Are you sure you want to remove {} from your list?",
+      "alt_title": "this movie",
       "confirmation": "Confirmation",
       "cancel": "Cancel",
       "confirm": "Remove"
