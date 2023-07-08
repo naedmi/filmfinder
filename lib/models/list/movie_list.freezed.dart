@@ -21,8 +21,6 @@ MovieList _$MovieListFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MovieList {
   List<MovieResult> get movies => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
-  bool get hasError => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +33,7 @@ abstract class $MovieListCopyWith<$Res> {
   factory $MovieListCopyWith(MovieList value, $Res Function(MovieList) then) =
       _$MovieListCopyWithImpl<$Res, MovieList>;
   @useResult
-  $Res call({List<MovieResult> movies, bool isLoading, bool hasError});
+  $Res call({List<MovieResult> movies});
 }
 
 /// @nodoc
@@ -52,22 +50,12 @@ class _$MovieListCopyWithImpl<$Res, $Val extends MovieList>
   @override
   $Res call({
     Object? movies = null,
-    Object? isLoading = null,
-    Object? hasError = null,
   }) {
     return _then(_value.copyWith(
       movies: null == movies
           ? _value.movies
           : movies // ignore: cast_nullable_to_non_nullable
               as List<MovieResult>,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasError: null == hasError
-          ? _value.hasError
-          : hasError // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -79,7 +67,7 @@ abstract class _$$_MovieListCopyWith<$Res> implements $MovieListCopyWith<$Res> {
       __$$_MovieListCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<MovieResult> movies, bool isLoading, bool hasError});
+  $Res call({List<MovieResult> movies});
 }
 
 /// @nodoc
@@ -94,22 +82,12 @@ class __$$_MovieListCopyWithImpl<$Res>
   @override
   $Res call({
     Object? movies = null,
-    Object? isLoading = null,
-    Object? hasError = null,
   }) {
     return _then(_$_MovieList(
       movies: null == movies
           ? _value._movies
           : movies // ignore: cast_nullable_to_non_nullable
               as List<MovieResult>,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasError: null == hasError
-          ? _value.hasError
-          : hasError // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -117,10 +95,7 @@ class __$$_MovieListCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_MovieList implements _MovieList {
-  const _$_MovieList(
-      {final List<MovieResult> movies = const <MovieResult>[],
-      this.isLoading = false,
-      this.hasError = false})
+  const _$_MovieList({final List<MovieResult> movies = const <MovieResult>[]})
       : _movies = movies;
 
   factory _$_MovieList.fromJson(Map<String, dynamic> json) =>
@@ -136,15 +111,8 @@ class _$_MovieList implements _MovieList {
   }
 
   @override
-  @JsonKey()
-  final bool isLoading;
-  @override
-  @JsonKey()
-  final bool hasError;
-
-  @override
   String toString() {
-    return 'MovieList(movies: $movies, isLoading: $isLoading, hasError: $hasError)';
+    return 'MovieList(movies: $movies)';
   }
 
   @override
@@ -152,17 +120,13 @@ class _$_MovieList implements _MovieList {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MovieList &&
-            const DeepCollectionEquality().equals(other._movies, _movies) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.hasError, hasError) ||
-                other.hasError == hasError));
+            const DeepCollectionEquality().equals(other._movies, _movies));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_movies), isLoading, hasError);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_movies));
 
   @JsonKey(ignore: true)
   @override
@@ -179,20 +143,13 @@ class _$_MovieList implements _MovieList {
 }
 
 abstract class _MovieList implements MovieList {
-  const factory _MovieList(
-      {final List<MovieResult> movies,
-      final bool isLoading,
-      final bool hasError}) = _$_MovieList;
+  const factory _MovieList({final List<MovieResult> movies}) = _$_MovieList;
 
   factory _MovieList.fromJson(Map<String, dynamic> json) =
       _$_MovieList.fromJson;
 
   @override
   List<MovieResult> get movies;
-  @override
-  bool get isLoading;
-  @override
-  bool get hasError;
   @override
   @JsonKey(ignore: true)
   _$$_MovieListCopyWith<_$_MovieList> get copyWith =>

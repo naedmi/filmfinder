@@ -1,8 +1,8 @@
+import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
 import 'package:filmfinder/models/movie_details/movie_params.dart';
-import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:filmfinder/services/list/local_persistence_service.dart';
 import 'package:filmfinder/services/movie_details/movie_details_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,11 +14,11 @@ abstract class ListController extends AutoDisposeNotifier<MovieList> {
 
   void addMovie(MovieResult res);
 
-  void addMovieByDetails(MovieDetails details);
+  Future<void> addMovieByDetails(MovieDetails details);
 
-  void addMovieById(String id);
+  Future<void> addMovieById(String id);
 
-  void removeMovie(int id);
+  Future<void> removeMovie(int id);
 
   void clearAll();
 
@@ -38,13 +38,13 @@ class ListControllerImpl extends ListController {
       _localPersistenceService.getMovieDetails(id);
 
   @override
-  void addMovie(MovieResult res) {
-    _localPersistenceService.addMovie(movie: res);
+  Future<void> addMovie(MovieResult res) async {
+    await _localPersistenceService.addMovie(movie: res);
     update();
   }
 
   @override
-  void addMovieByDetails(MovieDetails details) {
+  Future<void> addMovieByDetails(MovieDetails details) async {
     final MovieResult movie = MovieResult(
         adult: details.adult,
         backdropPath: details.backdropPath,
@@ -61,24 +61,29 @@ class ListControllerImpl extends ListController {
         voteAverage: details.voteAverage,
         voteCount: details.voteCount);
 
-    _localPersistenceService.addMovie(movie: movie);
+    await _localPersistenceService.addMovie(movie: movie);
     update();
   }
 
   @override
-  void addMovieById(String id) {
-    AsyncValue<MovieDetails> movieDetails = ref.watch(movieDetailsApiService(
-        MovieParams(
-            movieID: int.parse(id),
-            language: FilmfinderPreferences.getLanguage(),
-            appendToResponse: 'watch/providers,credits')));
+  Future<void> addMovieById(String id) async {
+    int? idInt = int.tryParse(id);
+    if (idInt == null) return;
+    final String language =
+        ref.read(providers.settingsLanguageControllerProvider).language;
+    final Future<MovieDetails> movieDetails = ref.watch(movieDetailsApiService(
+            MovieParams(
+                movieID: idInt,
+                language: language,
+                appendToResponse: 'watch/providers,credits,release_dates'))
+        .future);
 
-    movieDetails.whenData((MovieDetails details) => addMovieByDetails(details));
+    addMovieByDetails(await movieDetails);
   }
 
   @override
-  void removeMovie(int id) {
-    _localPersistenceService.removeMovie(id);
+  Future<void> removeMovie(int id) async {
+    await _localPersistenceService.removeMovie(id);
     update();
   }
 
@@ -93,12 +98,6 @@ class ListControllerImpl extends ListController {
 
   void update() {
     state = state.copyWith(movies: getAllMovies());
-  }
-
-  // TODO: add list ordering
-  List<MovieResult> sortMoviesByTitle(List<MovieResult> movies) {
-    // movies.sort((Movie a, Movie b) => a.title.compareTo(b.title));
-    return movies;
   }
 
   @override

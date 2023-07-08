@@ -6,11 +6,8 @@ part 'movie_list.g.dart';
 
 @freezed
 class MovieList with _$MovieList {
-  const factory MovieList({
-    @Default(<MovieResult>[]) List<MovieResult> movies,
-    @Default(false) bool isLoading,
-    @Default(false) bool hasError,
-  }) = _MovieList;
+  const factory MovieList(
+      {@Default(<MovieResult>[]) List<MovieResult> movies}) = _MovieList;
 
   factory MovieList.fromJson(Map<String, dynamic> json) =>
       _$MovieListFromJson(json);

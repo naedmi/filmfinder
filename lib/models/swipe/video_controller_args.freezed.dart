@@ -17,11 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$VideoControllerArgs {
   String get videoId => throw _privateConstructorUsedError;
-
   int get startAt => throw _privateConstructorUsedError;
-
   bool get isMute => throw _privateConstructorUsedError;
-
   bool get isFullscreen => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -34,7 +31,6 @@ abstract class $VideoControllerArgsCopyWith<$Res> {
   factory $VideoControllerArgsCopyWith(
           VideoControllerArgs value, $Res Function(VideoControllerArgs) then) =
       _$VideoControllerArgsCopyWithImpl<$Res, VideoControllerArgs>;
-
   @useResult
   $Res call({String videoId, int startAt, bool isMute, bool isFullscreen});
 }
@@ -46,7 +42,6 @@ class _$VideoControllerArgsCopyWithImpl<$Res, $Val extends VideoControllerArgs>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -85,7 +80,6 @@ abstract class _$$_VideoControllerArgsCopyWith<$Res>
   factory _$$_VideoControllerArgsCopyWith(_$_VideoControllerArgs value,
           $Res Function(_$_VideoControllerArgs) then) =
       __$$_VideoControllerArgsCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({String videoId, int startAt, bool isMute, bool isFullscreen});
@@ -187,16 +181,12 @@ abstract class _VideoControllerArgs implements VideoControllerArgs {
 
   @override
   String get videoId;
-
   @override
   int get startAt;
-
   @override
   bool get isMute;
-
   @override
   bool get isFullscreen;
-
   @override
   @JsonKey(ignore: true)
   _$$_VideoControllerArgsCopyWith<_$_VideoControllerArgs> get copyWith =>

@@ -24,7 +24,7 @@ class CertificationWidget extends StatelessWidget {
     if (countryRelease?.iso31661 != '' &&
         countryRelease!.releaseDates.isNotEmpty) {
       return Row(
-        children: [
+        children: <Widget>[
           const SizedBox(width: paddingTiny),
           _CircleSeparator(),
           const SizedBox(width: paddingTiny),
@@ -39,7 +39,7 @@ class CertificationWidget extends StatelessWidget {
       );
     } else {
       return Row(
-        children: [
+        children: <Widget>[
           const SizedBox(width: paddingTiny),
           _CircleSeparator(),
           const SizedBox(width: paddingTiny),
