@@ -631,7 +631,7 @@ abstract class _MovieDetails implements MovieDetails {
       final Videos? videos,
       final Credits? credits,
       @JsonKey(name: 'watch/providers')
-      final WatchProviders? watchProviders}) = _$_MovieDetails;
+          final WatchProviders? watchProviders}) = _$_MovieDetails;
 
   factory _MovieDetails.fromJson(Map<String, dynamic> json) =
       _$_MovieDetails.fromJson;
