@@ -2,7 +2,9 @@ import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/models/list/movie_list.dart';
 import 'package:filmfinder/models/movie_details/movie_details.dart';
+import 'package:filmfinder/models/movie_details/movie_params.dart';
 import 'package:filmfinder/services/list/local_persistence_service.dart';
+import 'package:filmfinder/services/movie_details/movie_details_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class ListController extends AutoDisposeNotifier<MovieList> {
@@ -65,11 +67,18 @@ class ListControllerImpl extends ListController {
 
   @override
   Future<void> addMovieById(String id) async {
-    final AsyncValue<MovieDetails> movieDetails =
-        ref.watch(providers.movieDetailsProvider(int.parse(id)));
+    int? idInt = int.tryParse(id);
+    if (idInt == null) return;
+    final String language =
+        ref.read(providers.settingsLanguageControllerProvider).language;
+    final Future<MovieDetails> movieDetails = ref.watch(movieDetailsApiService(
+            MovieParams(
+                movieID: idInt,
+                language: language,
+                appendToResponse: 'watch/providers,credits,release_dates'))
+        .future);
 
-    movieDetails.whenData(
-        (MovieDetails details) async => await addMovieByDetails(details));
+    addMovieByDetails(await movieDetails);
   }
 
   @override
