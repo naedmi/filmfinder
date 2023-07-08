@@ -1,4 +1,5 @@
 import 'package:filmfinder/models/common/movie_result.dart';
+import 'package:filmfinder/services/common/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -25,7 +26,7 @@ class LocalPersistenceServiceHive implements LocalPersistenceService {
   late final Box<MovieResult> _movies;
 
   LocalPersistenceServiceHive() {
-    _movies = Hive.box<MovieResult>('fav_movies');
+    _movies = Hive.box<MovieResult>(hiveBox);
   }
 
   @override

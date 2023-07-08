@@ -1,4 +1,4 @@
-import 'package:filmfinder/views/common/constants.dart';
+import 'package:filmfinder/services/common/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FilmfinderPreferences {

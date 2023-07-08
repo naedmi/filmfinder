@@ -3,6 +3,7 @@ import 'package:filmfinder/controllers/providers.dart';
 import 'package:filmfinder/go_router.dart';
 import 'package:filmfinder/models/common/movie_result.dart';
 import 'package:filmfinder/models/settings/settings.dart';
+import 'package:filmfinder/services/common/constants.dart';
 import 'package:filmfinder/services/common/logger_provider_service.dart';
 import 'package:filmfinder/services/common/shared_preferences.dart';
 import 'package:filmfinder/views/common/constants.dart';
@@ -43,7 +44,7 @@ void initHive() async {
   if (!Hive.isAdapterRegistered(0)) {
     Hive.registerAdapter(MovieAdapter());
   }
-  await Hive.openBox<MovieResult>('fav_movies');
+  await Hive.openBox<MovieResult>(hiveBox);
 }
 
 class MyApp extends ConsumerWidget {
