@@ -22,7 +22,7 @@ class SettingWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SettingWidgetState createState() => _SettingWidgetState();
+  State<SettingWidget> createState() => _SettingWidgetState();
 }
 
 class _SettingWidgetState extends State<SettingWidget> {

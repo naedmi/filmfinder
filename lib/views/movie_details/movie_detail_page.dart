@@ -75,7 +75,7 @@ class MovieDetailsPage extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: padding),
-                    //Display the genres as rounded boxes
+                    // Display the genres as rounded boxes
                     Wrap(
                       spacing: paddingSmall,
                       runSpacing: paddingTiny,

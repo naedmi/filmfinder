@@ -10,9 +10,7 @@ class UserProfile extends StatelessWidget {
       child: SizedBox(
         width: 150,
         child: ElevatedButton(
-          onPressed: () {
-            //toDo add login functionality
-          },
+          onPressed: () {},
           child: const Text('settings.login').tr(context: context),
         ),
       ),
