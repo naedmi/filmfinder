@@ -1,11 +1,12 @@
+import 'package:filmfinder/models/swipe/video_controller_args.dart';
 import 'package:filmfinder/models/swipe/video_controller_state.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 /// Argument should be the video id.
-abstract class VideoController
-    extends AutoDisposeFamilyNotifier<VideoControllerState, String> {
+abstract class VideoController extends AutoDisposeFamilyNotifier<
+    VideoControllerState, VideoControllerArgs> {
   void toggleMute();
 
   void toggleFullscreen();
@@ -21,20 +22,28 @@ class VideoControllerImpl extends VideoController {
   @override
   void toggleFullscreen() {
     state.controller.toggleFullScreenMode();
-    if (state.isFullscreen) {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    if (!state.isFullscreen) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     } else {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: <SystemUiOverlay>[
+            SystemUiOverlay.top,
+            SystemUiOverlay.bottom,
+          ]);
+      SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
     }
     state = state.copyWith(isFullscreen: !state.isFullscreen, isMute: false);
   }
 
   @override
-  VideoControllerState build(String arg) {
+  VideoControllerState build(VideoControllerArgs arg) {
     return VideoControllerState(
         controller: YoutubePlayerController(
-          initialVideoId: arg,
-          flags: const YoutubePlayerFlags(
+          initialVideoId: arg.videoId,
+          flags: YoutubePlayerFlags(
             autoPlay: true,
             mute: false,
             enableCaption: false,
@@ -43,11 +52,11 @@ class VideoControllerImpl extends VideoController {
             forceHD: false,
             hideControls: false,
             hideThumbnail: true,
-            startAt: 0,
+            startAt: arg.startAt,
             disableDragSeek: false,
           ),
         ),
-        isMute: false,
-        isFullscreen: false);
+        isMute: arg.isMute,
+        isFullscreen: arg.isFullscreen);
   }
 }
