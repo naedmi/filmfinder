@@ -26,7 +26,7 @@ class ErrorCardWidget extends StatelessWidget {
 
   Card _buildErrorCardWidget() {
     return Card(
-        child: error is DioError
+        child: error is DioException
             ? const Padding(
                 padding: EdgeInsets.all(padding),
                 child: Icon(Remix.wifi_off_line, size: defaultLoadingSize),
