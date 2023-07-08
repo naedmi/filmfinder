@@ -16,14 +16,13 @@
   "settings": {
     "header": "R\u00e9glages",
     "color": "Th\u00e8me sombre",
-    "parental_control": "Contr\u00f4le parental",
     "lang": "Langue",
     "about": {
       "header": "\u00c0 propos de",
       "text": "Filmfinder est une application gratuite qui vous permet de rechercher et de d\u00e9couvrir des films.",
       "attribution": "Toutes les donn\u00e9es et informations sur les films sont fournies par The Movie Database (TMDB).\nFilmfinder n'est pas approuv\u00e9 ou certifi\u00e9 par TMDB."
     },
-    "save_msg": "param\u00e8tres enregistr\u00e9s",
+    "save_msg": "Param\u00e8tres enregistr\u00e9s",
     "login": "Identifiant (login)"
   },
   "landing": {
@@ -39,11 +38,11 @@
     }
   },
   "list": {
-    "header": "Ma liste \u00ab\u00a0\u00e0 regarder plus tard\u00a0\u00bb",
+    "header": "Ma liste",
     "empty": "Votre liste est vide.",
     "remove": {
       "title": "Retirer de la liste",
-      "text": "\u00cates-vous s\u00fbr de vouloir supprimer {} de votre liste\u00a0?",
+      "text": "\u00cates-vous s\u00fbr de vouloir supprimer {} de votre liste?",
       "alt_title": "ce film",
       "confirmation": "Confirmer la migration",
       "cancel": "Annuler",
@@ -59,12 +58,12 @@
   },
   "details": {
     "votes": "votes",
-    "top_actors": "top 100 acteurs",
-    "attribution": "fournit par",
-    "providers": "Aucun fournisseur disponible. "
+    "top_actors": "Top acteurs",
+    "attribution": "fournit par ",
+    "providers": "Aucun fournisseur disponible"
   },
   "exit": {
-    "question": "\u00cates-vous s\u00fbr\u00b7e\u00a0?",
+    "question": "\u00cates-vous s\u00fbre?",
     "text": "Nous d\u00e9testons vous voir partir...",
     "yes": "Oui",
     "no": "Non"
@@ -97,7 +96,7 @@
       "tv_movie": "T\u00e9l\u00e9film",
       "thriller": "Thriller",
       "war": "Guerre",
-      "western": "Ouest"
+      "western": "Ouest sauvage"
     }
   }
 }
