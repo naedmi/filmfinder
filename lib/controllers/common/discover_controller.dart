@@ -19,6 +19,7 @@ class DiscoverControllerImpl extends DiscoverController {
   @override
   void refreshProviders() {
     state = state.copyWith(
+        watchRegion: FilmfinderPreferences.getProvidersLanguage().split('-')[1],
         withWatchProviders: FilmfinderPreferences.getProviderQueryString());
   }
 
@@ -32,7 +33,7 @@ class DiscoverControllerImpl extends DiscoverController {
         language: language,
         page: currentPage,
         // split('-')[1] is the region code - e.g. 'en-US' -> 'US'
-        watchRegion: language.split('-')[1],
+        watchRegion: FilmfinderPreferences.getProvidersLanguage().split('-')[1],
         withGenres: FilmfinderPreferences.getGenreQueryString(),
         withWatchProviders: FilmfinderPreferences.getProviderQueryString());
   }
